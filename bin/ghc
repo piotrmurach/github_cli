@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+lib_dir = File.expand_path("../../lib", __FILE__)
+$LOAD_PATH.unshift lib_dir if File.directory?(lib_dir)
+
+require "github_cli"
+GithubCli::CLI.start
