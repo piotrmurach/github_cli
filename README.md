@@ -1,6 +1,7 @@
 # GithubCli
 
-TODO: Write a gem description
+CLI-based access to GitHub API v3 that works hand-in-hand with 'github_api' gem.
+This gem does not work yet at this stage, stay tuned.
 
 ## Installation
 
@@ -18,7 +19,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run it:
+
+  $ ghc <command> <args>
 
 ## Contributing
 
@@ -27,3 +30,7 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## Copyright
+
+Copyright (c) 2012 Piotr Murach. See LICENSE for further details.
