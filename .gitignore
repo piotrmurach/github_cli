@@ -1,0 +1,9 @@
+coverage
+rdoc
+doc
+.yardoc
+.bundle
+pkg
+*.swp
+log
+*.sqlite3
