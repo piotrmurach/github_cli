@@ -61,3 +61,4 @@ PLATFORMS
 DEPENDENCIES
   aruba
   github_cli!
+  rspec
