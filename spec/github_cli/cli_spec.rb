@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe GithubCli::CLI do
+describe GithubCLI::CLI do
 
 end
