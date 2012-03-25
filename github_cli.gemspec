@@ -13,10 +13,10 @@ Gem::Specification.new do |gem|
   gem.test_files    = `git ls-files -- {spec,features}/*`.split("\n")
   gem.name          = "github_cli"
   gem.require_paths = ["lib"]
-  gem.version       = GithubCli::VERSION
+  gem.version       = GithubCLI::VERSION
 
-  gem.add_dependency 'github_api', '~> 0.4.7'
-  gem.add_dependency 'thor', '~> 0.14'
+  gem.add_dependency 'github_api', '~> 0.4.8'
+  gem.add_dependency 'thor'
 
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'aruba'
