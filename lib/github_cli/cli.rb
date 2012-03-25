@@ -24,8 +24,6 @@ module GithubCLI
 
 Github CLI client
 
-Usage: ghc [global options] command [command options]
-
       TEXT
     end
 
