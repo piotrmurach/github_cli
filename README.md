@@ -1,6 +1,8 @@
 # GithubCli
+[![Build Status](https://secure.travis-ci.org/peter-murach/github_cli.png?branch=master)][travis] [![Dependency Status](https://gemnasium.com/peter-murach/github_cli.png?travis)][gemnasium]
 
 CLI-based access to GitHub API v3 that works hand-in-hand with 'github_api' gem.
+
 This gem does not work yet at this stage, stay tuned.
 
 ## Installation
@@ -21,7 +23,9 @@ Or install it yourself as:
 
 Run it:
 
-  $ ghc <command> <args>
+```shell
+$ ghc
+```
 
 ## Contributing
 
