@@ -36,9 +36,19 @@ Github CLI client
                  :banner => "Enable verbose output mode."
 
 
-    desc 'init <config-name>', 'Initialize configuration file'
+    desc 'init <config-name>', 'Generates a configuration file in your home directory'
+    long_desc <<-DESC
+      Init generates
+    DESC
+    method_option :force, :type => :boolean, :aliases => "-f",
+                  :banner => "Overwrite configuration file. "
     def init(config_name=nil)
-      say "#{options[:config]}"
+      if !options[:force] || File.exists?(options[:config])
+        GithubCLI.ui.error "Not overwritting existing config file #{options[:config]}, use --force to override."
+        exit 1
+      end
+
+
     end
 
     desc 'ls <pattern>', 'List all available commands limited by pattern'
