@@ -7,8 +7,8 @@ module GithubCLI
 
     namespace :repo
 
-    option :orgs, :type => :boolean,
-           :desc => 'List repositories for <organization>'
+    method_option :orgs, :type => :boolean,
+                  :desc => 'List repositories for <organization>'
     desc 'list', 'Listing all repositories'
     def list
       say 'listing'

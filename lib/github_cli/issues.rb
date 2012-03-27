@@ -7,7 +7,7 @@ module GithubCLI
 
     namespace :issue
 
-    option :params, :type => :hash
+    method_option :params, :type => :hash
     desc 'list', 'Listing all issues'
     long_desc <<-TEXT
       ghc issue list --params filter:'assigned', state:'open'
@@ -28,20 +28,20 @@ module GithubCLI
       say "listing #{options[:params]}"
     end
 
-    option :number, :type => :numeric, :required => true
     desc 'get <user>,<repo>', 'Get a single issue'
+    method_option :number, :type => :numeric, :required => true
     def get(user, repo)
       say "#{user}"
     end
 
-    option :params, :type => :hash
     desc 'create <user>,<repo>', 'Create an issue.'
+    method_option :params, :type => :hash
     def create(user, repo)
       say 'creating...'
     end
 
-    option :params, :type => :hash
     desc 'edit <user>,<repo>', 'Edit an issue.'
+    method_option :params, :type => :hash
     def edit(user, repo)
       say 'editing...'
     end
