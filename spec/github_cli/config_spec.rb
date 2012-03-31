@@ -12,11 +12,37 @@ describe GithubCLI::Config do
       GithubCLI.config.should be_a GithubCLI::Config
     end
 
-    it 'saves config to yaml format' do
-      attrs = stub
-      File.stub(:open).and_yield filename
-      YAML.should_receive(:dump).with(attrs, filename)
-      config.save attrs
+    context '#save' do
+      let(:attrs) { {} }
+      let(:cmd) { stub(:cmd, :namespace => 'repo', :name => 'create') }
+
+      before do
+        GithubCLI::Command.stub(:all) { [cmd] }
+      end
+
+      it 'saves config to yaml format' do
+        File.stub(:open).and_yield filename
+        YAML.should_receive(:dump).with(attrs, filename)
+        config.save attrs
+      end
+
+      it 'retrieves api commands' do
+        config.save attrs
+        attrs.should have_key described_class::COMMAND_KEY
+        attrs[described_class::COMMAND_KEY].should have_key 'repo-create'
+      end
+
+      it 'skips commands with no namespace' do
+        cmd.stub(:namespace) { '' }
+        config.save attrs
+        attrs[described_class::COMMAND_KEY].should be_empty
+      end
+
+      it 'skips help commands' do
+        cmd.stub(:name) { 'help' }
+        config.save attrs
+        attrs[described_class::COMMAND_KEY].should be_empty
+      end
     end
 
     it "loads empty hash if config doesn't exist" do
