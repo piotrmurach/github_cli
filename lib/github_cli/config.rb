@@ -11,20 +11,29 @@ module GithubCLI
 
     # TODO: All commands go in there as well
     def save(config)
-      File.open(@filename, 'w', 0600) do |file|
+      File.open(path, 'w', 0600) do |file|
         YAML.dump(config, file)
       end
     end
 
     def load
-      File.open(@filename, 'r') do |file|
-        YAML.load(file)
+      if File.exists? path
+        File.open(path, 'r') do |file|
+          YAML.load(file)
+        end
+      else
+        {}
       end
     end
 
-    def global_config_file
-      "#{ENV['HOME']}/#{@filename}"
+    def path
+      require 'pathname'
+      if Pathname.new(@filename).absolute?
+        @filename
+      else
+        File.join Thor::Util.user_home, "/#{@filename}"
+      end
     end
 
-  end
+  end # Config
 end # GithubCLI
