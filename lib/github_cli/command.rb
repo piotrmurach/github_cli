@@ -40,14 +40,5 @@ module GithubCLI
       klass.namespace.split(':').last
     end
 
-    # Print out all commands in a easy list view.
-    def self.print_all
-      GithubCLI.ui.info 'Commands:'
-      Command.all.each do |cmd|
-        GithubCLI.ui.info "    ghc #{cmd.namespace} #{cmd.usage}"
-      end
-      nil
-    end
-
   end # Command
 end # GithubCLI
