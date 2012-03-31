@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe GithubCLI::API do
   context '#github_api' do
-    before(:each) { described_class.class_variable_set :@@api, nil }
+    before(:each) { described_class.send(:class_variable_set, :@@api, nil) }
 
     it 'sets up github api connection' do
       github_instance = stub
