@@ -1,3 +1,4 @@
+@executable
 Feature: The GHC Executable
 
   As a developer who wants to interact with GitHub API v3
