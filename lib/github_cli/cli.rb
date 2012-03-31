@@ -1,9 +1,5 @@
 # encoding: utf-8
 
-require "github_cli/command_template"
-require "github_cli/repositories"
-require "github_cli/issues"
-
 module GithubCLI
   class CLI < ::Thor
     include Thor::Actions
@@ -20,9 +16,10 @@ Github CLI client
       GithubCLi.ui.debug! if options["verbose"]
     end
 
-    map "repo" => :repository,
+    map "repository" => :repo,
         "is" => :issue,
-        "-v" => :version
+        "-v" => :version,
+        "ls" => :list
 
     class_option :config, :type => :string,
                  :desc => "Configuration file.",
@@ -63,20 +60,23 @@ Github CLI client
       GithubCLI.ui.confirm "Writing new configuration file to #{config.path}"
     end
 
-    desc 'ls <pattern>', 'List all available commands limited by pattern'
-    def ls(pattern=nil)
-      say Thor::Base.subclasses.find { |klass| puts klass }
+    desc 'list <pattern>', 'List all available commands limited by pattern'
+    def list(pattern="")
+      pattern = /^#{pattern}.*$/i
+      Terminal.print_commands pattern
     end
 
-    desc "repository <command>", "manage repositories"
-    subcommand "repository", GithubCLI::Repositories
+    desc "repo <command>", "manage repositories"
+    subcommand "repo", GithubCLI::Repositories
 
     desc "issue <command>", "manage issues"
     subcommand "issue", GithubCLI::Issues
 
+    desc "label <command>", "manage labels"
+    subcommand "label", GithubCLI::Labels
+
     desc 'version', 'Display Github CLI version.'
     def version
-      require 'github_cli/version'
       say "Github CLI #{GithubCLI::VERSION}"
     end
 
