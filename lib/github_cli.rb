@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+require 'yaml'
 require 'thor'
 require 'thor/group'
 require 'github_api'
@@ -18,7 +19,7 @@ module GithubCLI
   autoload :UI,           'github_cli/ui'
 
   class << self
-    attr_writer :ui
+    attr_writer :ui, :config
 
     def ui
       @ui ||= UI.new
