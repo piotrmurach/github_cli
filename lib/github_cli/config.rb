@@ -9,8 +9,13 @@ module GithubCLI
       @options = options
     end
 
-    # TODO: All commands go in there as well
     def save(config)
+      config[COMMAND_KEY] = {}
+      Command.all.each do |cmd|
+        if !cmd.namespace.empty? && cmd.name != 'help'
+          config[COMMAND_KEY]["#{cmd.namespace}-#{cmd.name}"] = { }
+        end
+      end
       File.open(path, 'w', 0600) do |file|
         YAML.dump(config, file)
       end
