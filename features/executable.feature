@@ -13,7 +13,7 @@ Feature: The GHC Executable
     Github CLI client
 
     Tasks:
-      ghc help [TASK]           # Describe available tasks or one specific task
+      ghc help [TASK]
     """
     Examples:
       | command |
