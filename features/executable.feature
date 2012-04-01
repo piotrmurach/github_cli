@@ -10,9 +10,6 @@ Feature: The GHC Executable
     Then the exit status should be 0
     And the output should contain:
     """
-    Github CLI client
-
-    Tasks:
       ghc help [TASK]
     """
     Examples:
@@ -29,3 +26,5 @@ Feature: The GHC Executable
       | command |
       | repo    |
       | issue   |
+      | blob    |
+      | tree    |
