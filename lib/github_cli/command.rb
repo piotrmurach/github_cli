@@ -3,7 +3,7 @@
 module GithubCLI
   class Command < Thor
 
-    API_CLASSES = %w( c_l_i repo issue label )
+    API_CLASSES = %w( c_l_i repo issue label tree blob )
 
     HELP_COMMAND = 'help'
 
