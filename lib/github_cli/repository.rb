@@ -1,19 +1,46 @@
 # encoding: utf-8
 
 module GithubCLI
-  class Repository
+  class Repository < API
 
-    def initialize
-    end
+    class << self
 
-    def self.all
-    end
+      def all(params)
+        github_api.repos.repos params
+      end
 
-    def self.get(id)
+      def get(user, repo, params)
+        github_api.repos.get_repo user, repo, params
+      end
 
-    end
+      def create
+        github_api.repos.create_repo user, repo, params
+      end
 
-    def self.create()
+      def edit
+        github_api.repos.edit_repo user, repo, params
+      end
+
+      def branches(user, repo, params)
+        github_api.repos.branches user, repo, params
+      end
+
+      def contributors(user, repo, params)
+        github_api.repos.contributors user, repo, params
+      end
+
+      def languages(user, repo, params)
+        github_api.repos.languages user, repo, params
+      end
+
+      def tags(user, repo, params)
+        github_api.repos.tags user, repo, params
+      end
+
+      def teams(user, repo, params)
+        github_api.repos.teams user, repo, params
+      end
+
     end
 
   end # Repository
