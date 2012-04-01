@@ -4,9 +4,29 @@ module GithubCLI
   class Config
     COMMAND_KEY = 'commands'
 
-    def initialize(config_filename, options={})
-      @filename = config_filename
-      @options = options
+    def initialize(config_filename=nil)
+      @filename = config_filename || '.githubrc'
+    end
+
+    def []=(key, value)
+      set_key(key, value)
+      @data = nil
+    end
+
+    def [](key)
+      data[key] || data[COMMAND_KEY][key]
+    end
+
+    def fetch(key, default=nil)
+      data[key] || default || raise(IndexError.new("key #{key} not found"))
+    end
+
+    def delete(key)
+      @data.delete(key)
+    end
+
+    def data
+      @data ||= self.load
     end
 
     def save(config)
@@ -22,13 +42,13 @@ module GithubCLI
     end
 
     def load
+      yaml = {}
       if File.exists? path
-        File.open(path, 'r') do |file|
+        yaml = File.open(path, 'r') do |file|
           YAML.load(file)
         end
-      else
-        {}
       end
+      yaml
     end
 
     def path
@@ -38,6 +58,15 @@ module GithubCLI
       else
         File.join Thor::Util.user_home, "/#{@filename}"
       end
+    end
+
+    def set_key(key, value)
+      unless data[key] == value
+        data[key] = value
+        data.delete(key) if value.nil?
+        save data.to_yaml
+      end
+      value
     end
 
   end # Config

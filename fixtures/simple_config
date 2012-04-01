@@ -4,5 +4,5 @@ host:
 user:
 repo:
 commands:
-  issue-list: {}
+  issue-list: { inputs: 'ticket' }
   issue-get: {}

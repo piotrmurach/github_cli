@@ -7,9 +7,35 @@ describe GithubCLI::Config do
   context 'global' do
     let(:config) { GithubCLI::Config.new filename }
 
+    before do
+      File.stub(:open) { YAML.load fixture('simple_config') }
+    end
+
     it 'returns config type' do
       GithubCLI.config = GithubCLI::Config.new filename
       GithubCLI.config.should be_a GithubCLI::Config
+    end
+
+    context 'array access' do
+      it 'searches in commands' do
+        config['issue-list'].should == { 'inputs' => 'ticket' }
+      end
+    end
+
+    context '#fetch' do
+      it 'finds value' do
+        config.fetch('oauth_token').should == 'ad7f9asdf97as98df7as9fd7'
+      end
+
+      it 'uses default value' do
+        config.fetch('unkown', 11).should == 11
+      end
+
+      it 'raises error' do
+        expect {
+          config.fetch('unkown')
+        }.to raise_error(IndexError)
+      end
     end
 
     context '#save' do
