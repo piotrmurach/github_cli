@@ -1,0 +1,8 @@
+---
+oauth_token: ad7f9asdf97as98df7as9fd7
+host:
+user:
+repo:
+commands:
+  issue-list: {}
+  issue-get: {}
