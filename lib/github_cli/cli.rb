@@ -22,7 +22,7 @@ Github CLI client
         "ls" => :list
 
     class_option :config, :type => :string,
-                 :desc => "Configuration file.",
+                 :desc => "Configuration file.", :banner => "Config file name",
                  :default => ".githubrc"
     class_option :oauth, :type => :string, :aliases => '-a',
                  :desc => 'Authentication token.',
@@ -66,14 +66,20 @@ Github CLI client
       Terminal.print_commands pattern
     end
 
-    desc "repo <command>", "manage repositories"
+    desc "blob <command>", "leverage Blobs API"
+    subcommand "blob", GithubCLI::Blobs
+
+    desc "repo <command>", "leverage Repositories API"
     subcommand "repo", GithubCLI::Repositories
 
-    desc "issue <command>", "manage issues"
+    desc "issue <command>", "leverage Issues API"
     subcommand "issue", GithubCLI::Issues
 
-    desc "label <command>", "manage labels"
+    desc "label <command>", "leverage Labels API"
     subcommand "label", GithubCLI::Labels
+
+    desc "tree <command>", "leverage Trees API"
+    subcommand "tree", GithubCLI::Trees
 
     desc 'version', 'Display Github CLI version.'
     def version

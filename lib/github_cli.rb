@@ -10,12 +10,15 @@ module GithubCLI
   autoload :Config,       'github_cli/config'
   autoload :CLI,          'github_cli/cli'
   autoload :Terminal,     'github_cli/terminal'
+  autoload :Blob,         'github_cli/blob'
+  autoload :Blobs,        'github_cli/blobs'
+  autoload :Tree,         'github_cli/tree'
+  autoload :Trees,        'github_cli/trees'
   autoload :Repositories, 'github_cli/repositories'
   autoload :UI,           'github_cli/ui'
 
   require "github_cli/api"
   require "github_cli/repository"
-  require "github_cli/repositories"
   require "github_cli/issues"
   require "github_cli/labels"
   require "github_cli/command"
