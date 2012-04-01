@@ -1,4 +1,4 @@
-# GithubCli
+# GithubCLI
 [![Build Status](https://secure.travis-ci.org/peter-murach/github_cli.png?branch=master)][travis] [![Dependency Status](https://gemnasium.com/peter-murach/github_cli.png?travis)][gemnasium]
 
 [travis]: http://travis-ci.org/peter-murach/github_cli
@@ -28,6 +28,25 @@ Run it:
 
 ```shell
 $ ghc
+```
+
+### Initialize a configuration file
+
+The first step is to create a configuration file:
+
+```shell
+$ ghc init
+```
+
+This will setup a `.githubrc` configuration file in your home directory with
+all the global settings.
+
+### Getting a list of commands
+
+You can list all GitHub APIs comamnds:
+
+```shell
+$ ghc list
 ```
 
 ## Contributing
