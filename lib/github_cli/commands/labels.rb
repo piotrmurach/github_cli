@@ -3,7 +3,7 @@
 require 'github_cli/command'
 
 module GithubCLI
-  class Labels < Command
+  class Commands::Labels < Command
 
     namespace :label
 

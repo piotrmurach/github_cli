@@ -3,7 +3,7 @@
 require 'github_cli/command'
 
 module GithubCLI
-  class Repositories < Command
+  class Commands::Repositories < Command
 
     namespace :repo
 

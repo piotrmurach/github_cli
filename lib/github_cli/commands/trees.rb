@@ -3,7 +3,7 @@
 require 'github_cli/command'
 
 module GithubCLI
-  class Trees < Command
+  class Commands::Trees < Command
 
     namespace :tree
 

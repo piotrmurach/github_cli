@@ -3,7 +3,7 @@
 require 'github_cli/command'
 
 module GithubCLI
-  class Issues < Command
+  class Commands::Issues < Command
 
     namespace :issue
 

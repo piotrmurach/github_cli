@@ -63,22 +63,23 @@ module GithubCLI
     end
 
     desc "blob <command>", "leverage Blobs API"
-    subcommand "blob", GithubCLI::Blobs
+    subcommand "blob", GithubCLI::Commands::Blobs
 
     desc "repo <command>", "leverage Repositories API"
-    subcommand "repo", GithubCLI::Repositories
+    subcommand "repo", GithubCLI::Commands::Repositories
 
     desc "issue <command>", "leverage Issues API"
-    subcommand "issue", GithubCLI::Issues
+    subcommand "issue", GithubCLI::Commands::Issues
 
     desc "label <command>", "leverage Labels API"
-    subcommand "label", GithubCLI::Labels
+    subcommand "label", GithubCLI::Commands::Labels
 
     desc "tree <command>", "leverage Trees API"
-    subcommand "tree", GithubCLI::Trees
+    subcommand "tree", GithubCLI::Commands::Trees
 
     desc 'version', 'Display Github CLI version.'
     def version
+      puts "#{GithubCLI.config['oauth_token']}"
       say "Github CLI #{GithubCLI::VERSION}"
     end
 

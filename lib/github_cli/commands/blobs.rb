@@ -3,7 +3,7 @@
 require 'github_cli/command'
 
 module GithubCLI
-  class Blobs < Command
+  class Commands::Blobs < Command
 
     namespace :blob
 
