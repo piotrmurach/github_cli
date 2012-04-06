@@ -19,6 +19,14 @@ module GithubCLI
       def print_command(cmd, usage_text='usage')
         GithubCLI.ui.info "    ghc #{cmd.namespace} #{cmd.usage}"
       end
+
+      def print_program_name
+        GithubCLI.ui.info <<-TEXT
+
+  #{GithubCLI.program_name}
+
+        TEXT
+      end
     end
 
   end # Terminal

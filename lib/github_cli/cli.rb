@@ -6,14 +6,10 @@ module GithubCLI
 
     def initialize(*args)
       super
-      say <<-TEXT
-
-Github CLI client
-
-      TEXT
       the_shell = (options["no-color"] ? Thor::Shell::Basic.new : shell)
       GithubCLI.ui = UI.new(the_shell)
       GithubCLi.ui.debug! if options["verbose"]
+      Terminal.print_program_name
     end
 
     map "repository" => :repo,
