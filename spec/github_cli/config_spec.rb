@@ -2,10 +2,11 @@ require 'spec_helper'
 
 describe GithubCLI::Config do
   let(:filename) { '.githubrc' }
+  let(:config_name) { 'simple_config' }
   let(:path) { "/users/#{filename}" }
 
   context 'global' do
-    let(:config) { GithubCLI::Config.new filename }
+    let(:config) { GithubCLI::Config.new fixture_path(config_name) }
 
     before do
       File.stub(:open) { YAML.load fixture('simple_config') }
@@ -24,6 +25,7 @@ describe GithubCLI::Config do
 
     context '#fetch' do
       it 'finds value' do
+        puts "LOAD: #{config.load}"
         config.fetch('oauth_token').should == 'ad7f9asdf97as98df7as9fd7'
       end
 
@@ -89,6 +91,7 @@ describe GithubCLI::Config do
     end
 
     it 'expands relative path' do
+      config = GithubCLI::Config.new
       config.path.should == "#{ENV['HOME']}/#{filename}"
     end
   end

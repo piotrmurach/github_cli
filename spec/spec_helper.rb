@@ -11,5 +11,9 @@ RSpec.configure do |config|
 end
 
 def fixture(name)
-  File.read(File.join(File.dirname(__FILE__), '..', 'fixtures', name))
+  File.read File.expand_path File.join(File.dirname(__FILE__), '..', 'fixtures', name)
+end
+
+def fixture_path(name)
+  File.expand_path File.join(File.dirname(__FILE__), '..', 'fixtures', name)
 end
