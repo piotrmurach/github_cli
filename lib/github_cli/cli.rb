@@ -62,19 +62,22 @@ module GithubCLI
       Terminal.print_commands pattern
     end
 
-    desc "blob <command>", "leverage Blobs API"
+    desc "blob <command>", "Leverage Blobs API"
     subcommand "blob", GithubCLI::Commands::Blobs
 
-    desc "repo <command>", "leverage Repositories API"
+    desc "repo <command>", "Leverage Repositories API"
     subcommand "repo", GithubCLI::Commands::Repositories
 
-    desc "issue <command>", "leverage Issues API"
+    desc "issue <command>", "Leverage Issues API"
     subcommand "issue", GithubCLI::Commands::Issues
 
-    desc "label <command>", "leverage Labels API"
+    desc "label <command>", "Leverage Labels API"
     subcommand "label", GithubCLI::Commands::Labels
 
-    desc "tree <command>", "leverage Trees API"
+    desc "tag <command>", "Leverage Tags API"
+    subcommand "tag", GithubCLI::Commands::Tags
+
+    desc "tree <command>", "Leverage Trees API"
     subcommand "tree", GithubCLI::Commands::Trees
 
     desc 'version', 'Display Github CLI version.'
