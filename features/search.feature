@@ -24,3 +24,10 @@ Feature: Github API Commands Search
       | pattern |
       | re      |
       | repo    |
+
+  Scenario: No Match
+    When I run `ghc list bla`
+    Then the output should contain:
+    """
+    ghc: 'bla' is not a ghc command. See 'ghc --help'.
+    """

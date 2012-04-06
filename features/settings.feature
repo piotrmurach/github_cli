@@ -41,5 +41,4 @@ Feature: Global Settings
     Writing new configuration file to /tmp/fakehome/myname
     """
 
-
   Scenario: Check for presence of yaml attribute

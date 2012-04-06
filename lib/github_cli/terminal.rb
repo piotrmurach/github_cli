@@ -10,14 +10,32 @@ module GithubCLI
       attr_accessor :size
 
       def print_commands(pattern=nil)
-        GithubCLI.ui.info 'Commands:'
-        Command.all.each do |cmd|
-          print_command cmd if pattern && cmd.namespace =~ pattern
+        GithubCLI.ui.info "Commands:"
+
+        commands = Command.all.select do |cmd|
+          cmd if pattern && cmd.namespace =~ pattern
+        end.map do |cmd|
+          build_command cmd
+        end
+
+        if !commands.empty?
+          GithubCLI.ui.print_table commands, :truncate => true
+        else
+          print_command_not_found pattern.to_s.gsub(/\W|/, '')[3..-1]
         end
       end
 
-      def print_command(cmd, usage_text='usage')
-        GithubCLI.ui.info "    ghc #{cmd.namespace} #{cmd.usage}"
+      def build_command(cmd, indent=3)
+        prefix = " " * indent
+        if cmd.namespace.empty?
+          ["#{prefix + cmd.usage}", cmd.desc]
+        else
+          ["#{prefix + cmd.namespace} #{cmd.usage}", cmd.desc]
+        end
+      end
+
+      def print_command_not_found(cmd)
+        GithubCLI.ui.info "ghc: '#{cmd}' is not a ghc command. See 'ghc --help'."
       end
 
       def print_program_name
