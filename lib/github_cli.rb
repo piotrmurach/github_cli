@@ -14,8 +14,9 @@ module GithubCLI
   autoload :API,       'github_cli/api'
   autoload :Terminal,  'github_cli/terminal'
   autoload :Commands,  'github_cli/commands'
-  autoload :Blob,      'github_cli/blob'
   autoload :UI,        'github_cli/ui'
+
+  require 'github_cli/apis'
 
   extend DSL
 
