@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require 'github_cli/command'
-
 module GithubCLI
   class Commands::Labels < Command
 
