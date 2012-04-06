@@ -25,7 +25,6 @@ describe GithubCLI::Config do
 
     context '#fetch' do
       it 'finds value' do
-        puts "LOAD: #{config.load}"
         config.fetch('oauth_token').should == 'ad7f9asdf97as98df7as9fd7'
       end
 
