@@ -7,6 +7,7 @@ require 'github_api'
 require 'github_cli/version'
 
 module GithubCLI
+  autoload :DSL,          'github_cli/dsl'
   autoload :Config,       'github_cli/config'
   autoload :CLI,          'github_cli/cli'
   autoload :Terminal,     'github_cli/terminal'
@@ -22,6 +23,10 @@ module GithubCLI
   require "github_cli/issues"
   require "github_cli/labels"
   require "github_cli/command"
+
+  extend DSL
+
+  program_name 'Github CLI client'
 
   class << self
     attr_writer :ui, :config
