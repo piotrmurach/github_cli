@@ -14,5 +14,5 @@ module GithubCLI
       end
     end
 
-  end # Repository
+  end # Blob
 end # GithubCLI
