@@ -4,7 +4,7 @@ describe GithubCLI::Command do
 
   context '#all' do
     let(:task) { stub(:task, :name => 'create').as_null_object }
-    let(:klass) { GithubCLI::Repositories }
+    let(:klass) { GithubCLI::Commands::Repositories }
 
     before do
       task.stub(:last) { task }
