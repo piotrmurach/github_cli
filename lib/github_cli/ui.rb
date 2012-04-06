@@ -31,5 +31,9 @@ module GithubCLI
     def debug!
       @debug = true
     end
+
+    def print_table(table, options={})
+      @shell.print_table table, options
+    end
   end # UI
 end # GithubCLI
