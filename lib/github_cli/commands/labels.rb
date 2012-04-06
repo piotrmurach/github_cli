@@ -20,7 +20,7 @@ module GithubCLI
     end
 
     method_option :name, :type => :string, :required => true
-    desc 'update <user>, <repo>', 'Create a label.'
+    desc 'update <user>, <repo>', 'Update a label.'
     method_option :params, :type => :hash
     def update(user, repo)
     end
