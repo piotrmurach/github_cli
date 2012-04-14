@@ -10,6 +10,8 @@ end
 
 %w[
   blob
+  commit
+  reference
   repository
   tag
   tree

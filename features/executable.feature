@@ -29,3 +29,4 @@ Feature: The GHC Executable
       | blob    |
       | tree    |
       | ref     |
+      | commit  |
