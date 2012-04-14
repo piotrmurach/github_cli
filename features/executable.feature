@@ -28,3 +28,4 @@ Feature: The GHC Executable
       | issue   |
       | blob    |
       | tree    |
+      | ref     |

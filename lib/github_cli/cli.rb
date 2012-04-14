@@ -13,6 +13,7 @@ module GithubCLI
     end
 
     map "repository" => :repo,
+        "reference"  => :ref,
         "is" => :issue,
         "-v" => :version,
         "ls" => :list
@@ -64,6 +65,9 @@ module GithubCLI
 
     desc "blob <command>", "Leverage Blobs API"
     subcommand "blob", GithubCLI::Commands::Blobs
+
+    desc "ref <command>", "Leverage References API"
+    subcommand "ref", GithubCLI::Commands::References
 
     desc "repo <command>", "Leverage Repositories API"
     subcommand "repo", GithubCLI::Commands::Repositories

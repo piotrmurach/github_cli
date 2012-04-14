@@ -6,6 +6,7 @@ module GithubCLI
     autoload :Issues,       'github_cli/commands/issues'
     autoload :Labels,       'github_cli/commands/labels'
     autoload :Repositories, 'github_cli/commands/repositories'
+    autoload :References,   'github_cli/commands/references'
     autoload :Tags,         'github_cli/commands/tags'
     autoload :Trees,        'github_cli/commands/trees'
   end # Commands
