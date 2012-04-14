@@ -1,10 +1,12 @@
 # encoding: utf-8
 
 require 'yaml'
+require 'pathname'
 require 'thor'
 require 'thor/group'
 require 'github_api'
 require 'github_cli/version'
+require 'github_cli/errors'
 
 module GithubCLI
   autoload :DSL,       'github_cli/dsl'
