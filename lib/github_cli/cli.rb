@@ -66,17 +66,20 @@ module GithubCLI
     desc "blob <command>", "Leverage Blobs API"
     subcommand "blob", GithubCLI::Commands::Blobs
 
-    desc "ref <command>", "Leverage References API"
-    subcommand "ref", GithubCLI::Commands::References
-
-    desc "repo <command>", "Leverage Repositories API"
-    subcommand "repo", GithubCLI::Commands::Repositories
-
     desc "issue <command>", "Leverage Issues API"
     subcommand "issue", GithubCLI::Commands::Issues
 
     desc "label <command>", "Leverage Labels API"
     subcommand "label", GithubCLI::Commands::Labels
+
+    desc "pull <command>", "Leverage Pull Requests API"
+    subcommand "pull", GithubCLI::Commands::PullRequests
+
+    desc "ref <command>", "Leverage References API"
+    subcommand "ref", GithubCLI::Commands::References
+
+    desc "repo <command>", "Leverage Repositories API"
+    subcommand "repo", GithubCLI::Commands::Repositories
 
     desc "tag <command>", "Leverage Tags API"
     subcommand "tag", GithubCLI::Commands::Tags

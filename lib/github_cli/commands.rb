@@ -6,6 +6,7 @@ module GithubCLI
     autoload :Commits,      'github_cli/commands/commits'
     autoload :Issues,       'github_cli/commands/issues'
     autoload :Labels,       'github_cli/commands/labels'
+    autoload :PullRequests, 'github_cli/commands/pull_requests'
     autoload :References,   'github_cli/commands/references'
     autoload :Repositories, 'github_cli/commands/repositories'
     autoload :Tags,         'github_cli/commands/tags'
