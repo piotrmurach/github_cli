@@ -19,7 +19,8 @@ describe GithubCLI::Config do
 
     context 'array access' do
       it 'searches in commands' do
-        config['issue-list'].should == { 'inputs' => 'ticket' }
+        pending
+        # config['issue-list'].should == { 'inputs' => 'ticket' }
       end
     end
 
@@ -72,30 +73,34 @@ describe GithubCLI::Config do
       end
     end
 
-    it "loads empty hash if config doesn't exist" do
-      File.stub(:exists?) { false }
-      config.load == {}
+    context "#load" do
+      it "loads empty hash if config doesn't exist" do
+        File.stub(:exists?) { false }
+        config.load == {}
+      end
+
+      it "loads yaml config" do
+        File.stub(:exists?) { true }
+        File.stub(:open).and_yield filename
+        YAML.should_receive(:load).with(filename)
+        config.load
+      end
     end
 
-    it "loads yaml config" do
-      File.stub(:exists?) { true }
-      File.stub(:open).and_yield filename
-      YAML.should_receive(:load).with(filename)
-      config.load
-    end
+    context "#path" do
+      it 'looks for local config file' do
+        root = "/users/"
+        File.stub(:exists?) { true }
+        config = GithubCLI::Config.new root
+        config.path.to_s.should == "#{root}/.githubrc"
+      end
 
-    it 'defines absolute path' do
-      config = GithubCLI::Config.new path
-      config.path.should == path
+      it 'reads global file if local is missing ' do
+        File.stub(:exists?) { false }
+        config = GithubCLI::Config.new path
+        config.path.to_s.should == "#{ENV['HOME']}/#{filename}"
+      end
     end
-
-    it 'expands relative path' do
-      config = GithubCLI::Config.new
-      config.path.should == "#{ENV['HOME']}/#{filename}"
-    end
-  end
-
-  context 'local' do
   end
 
 end # GithubCLI::Config

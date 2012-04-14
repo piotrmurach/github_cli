@@ -61,7 +61,7 @@ module GithubCLI
     def path
       if File.exists?(local_options_file)
         local_options_file
-      else File.exists? global_options_file
+      else
         global_options_file
       end
     end
