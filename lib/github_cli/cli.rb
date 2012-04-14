@@ -30,7 +30,7 @@ module GithubCLI
                  :banner => "Enable verbose output mode."
 
 
-    desc 'init <config-name>', 'Generates a configuration file in your home directory'
+    desc 'init', 'Generates a configuration file in your home directory'
     long_desc <<-DESC
       Initializes a configuration file where you can set default options for
       interacting with GitHub API. Both global and per-command options can be
@@ -46,15 +46,15 @@ module GithubCLI
         @config_filename = filename
       end
 
-      config = Config.new(@config_filename)
-      if File.exists?(config.path) && !options[:force]
-        GithubCLI.ui.error "Not overwritting existing config file #{config.path}, use --force to override."
+      # config = Config.new(@config_filename)
+      if File.exists?(GithubCLI.config.path) && !options[:force]
+        GithubCLI.ui.error "Not overwritting existing config file #{GithubCLI.config.path}, use --force to override."
         exit 1
       end
 
       oauth_token = ask "Please specify your GitHub Authentication Token (register on github.com to get it):"
-      config.save({'oauth_token' => oauth_token})
-      GithubCLI.ui.confirm "Writing new configuration file to #{config.path}"
+      GithubCLI.config.save({'oauth_token' => oauth_token, 'basic_auth' => nil })
+      GithubCLI.ui.confirm "Writing new configuration file to #{GithubCLI.config.path}"
     end
 
     desc 'list <pattern>', 'List all available commands limited by pattern'
@@ -89,7 +89,6 @@ module GithubCLI
 
     desc 'version', 'Display Github CLI version.'
     def version
-      puts "#{GithubCLI.config['oauth_token']}"
       say "Github CLI #{GithubCLI::VERSION}"
     end
 

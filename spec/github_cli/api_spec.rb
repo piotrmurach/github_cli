@@ -5,7 +5,7 @@ describe GithubCLI::API do
     before(:each) { described_class.send(:class_variable_set, :@@api, nil) }
 
     it 'sets up github api connection' do
-      github_instance = stub
+      github_instance = stub.as_null_object
       Github.should_receive(:new).and_return github_instance
       described_class.github_api.should == github_instance
     end

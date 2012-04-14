@@ -16,6 +16,7 @@ module GithubCLI
   autoload :API,       'github_cli/api'
   autoload :Terminal,  'github_cli/terminal'
   autoload :Commands,  'github_cli/commands'
+  autoload :Helpers,   'github_cli/helpers'
   autoload :UI,        'github_cli/ui'
 
   require 'github_cli/apis'
@@ -31,8 +32,16 @@ module GithubCLI
       @ui ||= UI.new
     end
 
+    def default_configfile
+      Helpers.default_configfile
+    end
+
+    def root
+      default_configfile.expand_path
+    end
+
     def config
-      @config ||= GithubCLI::Config.new
+      @config ||= GithubCLI::Config.new root
     end
 
     def commands
