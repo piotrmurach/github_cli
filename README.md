@@ -49,6 +49,18 @@ You can list all GitHub APIs comamnds:
 $ ghc list
 ```
 
+### API
+
+Interact with git data:
+
+```shell
+$ ghc blob
+$ ghc commit
+$ ghc ref
+$ ghc tag
+$ ghc tree
+```
+
 ## Contributing
 
 1. Fork it
