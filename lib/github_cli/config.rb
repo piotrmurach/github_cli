@@ -3,9 +3,12 @@
 module GithubCLI
   class Config
     COMMAND_KEY = 'commands'
+    COMMAND_HELP = 'help'
 
-    def initialize(config_filename=nil)
-      @filename = config_filename || '.githubrc'
+    def initialize(root)
+      @root = root
+      @local_config  = local_options_file
+      @global_config = global_options_file
     end
 
     def []=(key, value)
@@ -14,7 +17,7 @@ module GithubCLI
     end
 
     def [](key)
-      data[key] || data[COMMAND_KEY][key]
+      data[key] #|| data[COMMAND_KEY][key]
     end
 
     def fetch(key, default=nil)
@@ -29,10 +32,14 @@ module GithubCLI
       @data ||= self.load
     end
 
+    def keys
+      data.keys
+    end
+
     def save(config)
       config[COMMAND_KEY] = {}
       Command.all.each do |cmd|
-        if !cmd.namespace.empty? && cmd.name != 'help'
+        if !cmd.namespace.empty? && cmd.name != COMMAND_HELP
           config[COMMAND_KEY]["#{cmd.namespace}-#{cmd.name}"] = { }
         end
       end
@@ -52,11 +59,25 @@ module GithubCLI
     end
 
     def path
-      require 'pathname'
-      if Pathname.new(@filename).absolute?
-        @filename
-      else
-        File.join Thor::Util.user_home, "/#{@filename}"
+      if File.exists?(local_options_file)
+        local_options_file
+      else File.exists? global_options_file
+        global_options_file
+      end
+    end
+
+  private
+
+    def local_options_file
+      Pathname.new "#{@root}/.githubrc"
+    end
+
+    def global_options_file
+      begin
+        Pathname.new File.join(Thor::Util.user_home, ".githubrc")
+      rescue ArgumentError
+        GithubCLI.ui.warn "Unable to find ~/.githubrc because the HOME environment variable is not set"
+        nil
       end
     end
 
