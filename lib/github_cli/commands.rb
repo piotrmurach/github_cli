@@ -4,6 +4,7 @@ module GithubCLI
   module Commands
     autoload :Blobs,        'github_cli/commands/blobs'
     autoload :Commits,      'github_cli/commands/commits'
+    autoload :Forks,        'github_cli/commands/forks'
     autoload :Issues,       'github_cli/commands/issues'
     autoload :Labels,       'github_cli/commands/labels'
     autoload :PullRequests, 'github_cli/commands/pull_requests'

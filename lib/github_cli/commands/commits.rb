@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module GithubCLI
-  class Commands::Tags < Command
+  class Commands::Commits < Command
 
     namespace :commit
 

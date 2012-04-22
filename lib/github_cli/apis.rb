@@ -11,6 +11,8 @@ end
 %w[
   blob
   commit
+  fork
+  pull_request
   reference
   repository
   tag

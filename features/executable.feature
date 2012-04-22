@@ -30,3 +30,5 @@ Feature: The GHC Executable
       | tree    |
       | ref     |
       | pull    |
+      | fork    |
+      | commit  |

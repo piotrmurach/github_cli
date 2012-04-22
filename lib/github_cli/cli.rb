@@ -66,6 +66,12 @@ module GithubCLI
     desc "blob <command>", "Leverage Blobs API"
     subcommand "blob", GithubCLI::Commands::Blobs
 
+    desc "commit <command>", "Leverage Commits API"
+    subcommand "commit", GithubCLI::Commands::Commits
+
+    desc "fork <command>", "Leverage Forks API"
+    subcommand "fork", GithubCLI::Commands::Forks
+
     desc "issue <command>", "Leverage Issues API"
     subcommand "issue", GithubCLI::Commands::Issues
 

@@ -3,7 +3,7 @@
 module GithubCLI
   class Command < Thor
 
-    API_CLASSES = %w( c_l_i repo issue label tree blob reference pull )
+    API_CLASSES = %w( c_l_i repo issue label tree blob reference pull commit fork )
 
     HELP_COMMAND = 'help'
 
