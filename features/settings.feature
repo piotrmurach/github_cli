@@ -32,13 +32,4 @@ Feature: Global Settings
     Please specify your GitHub Authentication Token (register on github.com to get it):
     """
 
-  Scenario: Installs Custom Configuration File
-    When I run `ghc init myname` interactively
-      And I type "token"
-    Then a file named "/tmp/fakehome/myname" should exist
-    And the output should contain:
-    """
-    Writing new configuration file to /tmp/fakehome/myname
-    """
-
   Scenario: Check for presence of yaml attribute
