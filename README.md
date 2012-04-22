@@ -61,6 +61,22 @@ $ ghc tag
 $ ghc tree
 ```
 
+Interact with issues:
+
+```shell
+$ ghc issue
+$ ghc label
+```
+
+Interact with repositories:
+
+```shell
+$ ghc repo
+$ ghc download
+$ ghc fork
+$ ghc keys
+```
+
 ## Contributing
 
 1. Fork it
