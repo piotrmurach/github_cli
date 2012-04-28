@@ -23,12 +23,14 @@ Feature: The GHC Executable
     And the output should contain "ghc <command>"
 
     Examples:
-      | command |
-      | repo    |
-      | issue   |
-      | blob    |
-      | tree    |
-      | ref     |
-      | pull    |
-      | fork    |
-      | commit  |
+      | command  |
+      | repo     |
+      | issue    |
+      | blob     |
+      | tree     |
+      | ref      |
+      | pull     |
+      | fork     |
+      | commit   |
+      | download |
+      | key      |

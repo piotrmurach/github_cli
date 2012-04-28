@@ -21,5 +21,11 @@ module GithubCLI
     def self.configure_api
     end
 
+    class All
+      def initialize
+        github_api
+      end
+    end
+
   end # API
 end # GithubCLI

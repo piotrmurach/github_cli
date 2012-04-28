@@ -69,11 +69,14 @@ module GithubCLI
     desc "commit <command>", "Leverage Commits API"
     subcommand "commit", GithubCLI::Commands::Commits
 
-    desc "download <command>", "Leverage Commits API"
+    desc "download <command>", "Leverage Downloads API"
     subcommand "download", GithubCLI::Commands::Downloads
 
     desc "fork <command>", "Leverage Forks API"
     subcommand "fork", GithubCLI::Commands::Forks
+
+    desc "hook <command>", "Leverage Hooks API"
+    subcommand "hook", GithubCLI::Commands::Hooks
 
     desc "issue <command>", "Leverage Issues API"
     subcommand "issue", GithubCLI::Commands::Issues

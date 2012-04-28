@@ -17,7 +17,7 @@ module GithubCLI
     end
 
     def [](key)
-      data[key] #|| data[COMMAND_KEY][key]
+      data[key] #|| (data.nil? ? nil : data[COMMAND_KEY][key])
     end
 
     def fetch(key, default=nil)
