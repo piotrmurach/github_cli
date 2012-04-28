@@ -49,6 +49,12 @@ You can list all GitHub APIs comamnds:
 $ ghc list
 ```
 
+to limit returned results pass `pattern`
+
+```shell
+$ ghc list re*   # Returns all commands matching the pattern
+```
+
 ### API
 
 Interact with git data:
@@ -74,7 +80,9 @@ Interact with repositories:
 $ ghc repo
 $ ghc download
 $ ghc fork
-$ ghc keys
+$ ghc hook
+$ ghc key
+$ ghc watching
 ```
 
 ## Contributing
