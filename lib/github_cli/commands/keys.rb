@@ -15,7 +15,7 @@ module GithubCLI
     desc 'get <user> <repo> <id>', 'Get a key'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additional request parameters e.i per_page:100'
-    def list(user, repo, id)
+    def get(user, repo, id)
       Key.get user, repo, id, options[:params]
     end
 
