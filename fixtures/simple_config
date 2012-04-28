@@ -1,5 +1,6 @@
 ---
 oauth_token: ad7f9asdf97as98df7as9fd7
+basic_auth: 'login:password'
 host:
 user:
 repo:

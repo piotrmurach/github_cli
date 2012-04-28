@@ -14,6 +14,6 @@ def fixture(name)
   File.read File.expand_path File.join(File.dirname(__FILE__), '..', 'fixtures', name)
 end
 
-def fixture_path(name)
+def fixture_path(name='')
   File.expand_path File.join(File.dirname(__FILE__), '..', 'fixtures', name)
 end

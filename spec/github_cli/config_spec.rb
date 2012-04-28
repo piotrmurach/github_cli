@@ -5,8 +5,14 @@ describe GithubCLI::Config do
   let(:config_name) { 'simple_config' }
   let(:path) { "/users/#{filename}" }
 
+  before :all do
+    unless File.exists?(fixture_path('.githubrc'))
+      File.symlink(fixture_path(config_name), fixture_path('.githubrc'))
+    end
+  end
+
   context 'global' do
-    let(:config) { GithubCLI::Config.new fixture_path(config_name) }
+    let(:config) { GithubCLI::Config.new fixture_path }
 
     before do
       File.stub(:open) { YAML.load fixture('simple_config') }
