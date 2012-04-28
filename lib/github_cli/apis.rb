@@ -11,6 +11,7 @@ end
 %w[
   blob
   commit
+  download
   fork
   key
   label
