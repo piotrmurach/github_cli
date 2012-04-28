@@ -12,6 +12,8 @@ end
   blob
   commit
   fork
+  key
+  label
   pull_request
   reference
   repository

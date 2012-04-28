@@ -75,6 +75,9 @@ module GithubCLI
     desc "issue <command>", "Leverage Issues API"
     subcommand "issue", GithubCLI::Commands::Issues
 
+    desc "key <command>", "Leverage Keys API"
+    subcommand "key", GithubCLI::Commands::Keys
+
     desc "label <command>", "Leverage Labels API"
     subcommand "label", GithubCLI::Commands::Labels
 

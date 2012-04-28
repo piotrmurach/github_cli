@@ -6,6 +6,7 @@ module GithubCLI
     autoload :Commits,      'github_cli/commands/commits'
     autoload :Forks,        'github_cli/commands/forks'
     autoload :Issues,       'github_cli/commands/issues'
+    autoload :Keys,         'github_cli/commands/keys'
     autoload :Labels,       'github_cli/commands/labels'
     autoload :PullRequests, 'github_cli/commands/pull_requests'
     autoload :References,   'github_cli/commands/references'

@@ -34,7 +34,7 @@ module GithubCLI
       end
 
       def remove(user, repo, number, name=nil, params)
-        github_api,issues.remove_label user, repo, number, name, params
+        github_api.issues.remove_label user, repo, number, name, params
       end
 
       def replace(user, repo, number, *args)
