@@ -20,6 +20,7 @@ end
   repository
   tag
   tree
+  watching
 ].each do |api|
   require_api api
 end

@@ -42,5 +42,8 @@ module GithubCLI
     desc "tree <command>", "Leverage Trees API"
     subcommand "tree", GithubCLI::Commands::Trees
 
+    desc "watch <command>", "Leverage Watching API"
+    subcommand "watch", GithubCLI::Commands::Watching
+
   end # CLI
 end # GithubCLI
