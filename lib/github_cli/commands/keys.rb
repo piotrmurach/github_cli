@@ -20,6 +20,12 @@ module GithubCLI
     end
 
     desc 'create <user> <repo>', 'Create a new key'
+    long_desc <<-DESC
+      Inputs
+
+      title - Required string. \n
+      key - Required string.
+    DESC
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
@@ -27,6 +33,12 @@ module GithubCLI
     end
 
     desc 'edit <user> <repo> <id>', 'Edit a key'
+    long_desc <<-DESC
+      Inputs
+
+      title - Required string. \n
+      key - Required string.
+    DESC
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def edit(user, repo, id)

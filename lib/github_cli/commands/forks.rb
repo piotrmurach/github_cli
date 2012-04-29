@@ -8,8 +8,10 @@ module GithubCLI
     desc 'list <user> <repo>', 'Lists forks'
     long_desc <<-DESC
       List repository forks
+
       Parameters
-        sort - newest, oldest, watchers, default: newest
+
+      sort - newest, oldest, watchers, default: newest
     DESC
     method_option :sort, :type => :string, :aliases => ["-s"],
                   :desc => 'Sort by newest, oldest or watchers',
@@ -23,7 +25,7 @@ module GithubCLI
       Fork.all user, repo, options[:params]
     end
 
-    desc 'create <user> <repo>', 'Create a new Blob'
+    desc 'create <user> <repo>', 'Create a new fork'
     method_option :org, :type => :string,
                   :desc => ' Organization login. The repository will be forked into this organization.'
     method_option :params, :type => :hash, :default => {},

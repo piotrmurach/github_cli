@@ -23,10 +23,10 @@ module GithubCLI
     long_desc <<-DESC
       Inputs
 
-        name - Required string - the name of the service that is being called.\n
-        config - Required hash - A Hash containing key/value pairs to provide settings for this hook. \n
-        events - Optional array - Determines what events the hook is triggered for. Default: ["push"] \n
-        active - Optional boolean - Determines whether the hook is actually triggered on pushes. \n
+      name - Required string - the name of the service that is being called.\n
+      config - Required hash - A Hash containing key/value pairs to provide settings for this hook. \n
+      events - Optional array - Determines what events the hook is triggered for. Default: ["push"] \n
+      active - Optional boolean - Determines whether the hook is actually triggered on pushes.
     DESC
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
@@ -38,12 +38,12 @@ module GithubCLI
     long_desc <<-DESC
       Inputs
 
-        name - Required string - the name of the service that is being called. \n
-        config - Required hash - A Hash containing key/value pairs to provide settings for this hook. \n
-        events - Optional array - Determines what events the hook is triggered for. This replaces the entire array of events. Default: ["push"]. \n
-        add_events - Optional array - Determines a list of events to be added to the list of events that the Hook triggers for. \n
-        remove_events - Optional array - Determines a list of events to be removed from the list of events that the Hook triggers for. \n
-        active - Optional boolean - Determines whether the hook is actually triggered on pushes. \n
+      name - Required string - the name of the service that is being called. \n
+      config - Required hash - A Hash containing key/value pairs to provide settings for this hook. \n
+      events - Optional array - Determines what events the hook is triggered for. This replaces the entire array of events. Default: ["push"]. \n
+      add_events - Optional array - Determines a list of events to be added to the list of events that the Hook triggers for. \n
+      remove_events - Optional array - Determines a list of events to be removed from the list of events that the Hook triggers for. \n
+      active - Optional boolean - Determines whether the hook is actually triggered on pushes. \n
     DESC
     def edit(user, repo, id)
       Hook.edit user, repo, id, options[:params]
