@@ -6,11 +6,11 @@ module GithubCLI
     class << self
 
       def get(user, repo, sha, params)
-        github_api.git_data.commit user, repo, params
+        github_api.git_data.commits.get user, repo, params
       end
 
       def create(user, repo, params)
-        github_api.repos.create_commit user, repo, params
+        github_api.git_data.commits.create user, repo, params
       end
     end
 

@@ -13,6 +13,12 @@ module GithubCLI
     end
 
     desc 'create <user> <repo>', 'Create a new Blob'
+    long_desc <<-DESC
+      Inputs
+
+        content - String of content \n
+        encoding - String containing encoding utf-8 or base64
+    DESC
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
