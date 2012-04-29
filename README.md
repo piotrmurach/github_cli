@@ -39,7 +39,8 @@ $ ghc init
 ```
 
 This will setup a `.githubrc` configuration file in your home directory with
-all the global settings.
+all the global settings. During the install process you will be prompted for your
+`authentication token`.
 
 ### Getting a list of commands
 
@@ -83,6 +84,20 @@ $ ghc fork
 $ ghc hook
 $ ghc key
 $ ghc watching
+```
+
+### Examples
+
+You can create repository by supplying required parameters
+
+```shell
+ghc repo create --params=name:'octocat' description:'Test repo for kitty.'
+```
+
+To find out which options are required type
+
+```shell
+ghc repo help create
 ```
 
 ## Contributing
