@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 module GithubCLI
-  class CLI < ::Thor
+  class CLI < Thor
     include Thor::Actions
     require 'github_cli/subcommands'
 

@@ -14,7 +14,7 @@ module GithubCLI
       end
 
       def create(params)
-        github_api.repos.create user, repo, params
+        github_api.repos.create params
       end
 
       def edit(user, repo, params)
