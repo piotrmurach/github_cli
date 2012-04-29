@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-environment_id="ruby-1.9.3-p0@github_cli"
+environment_id="ruby-1.9.2-p290@github_cli"
 
 #
 # First we attempt to load the desired environment directly from the environment
