@@ -31,6 +31,21 @@ module GithubCLI
     end
 
     desc 'create', 'Create a new repository for the authenticated user.'
+    long_desc <<-DESC
+      Create a new repository for the autheticated user.
+
+      Parameters
+
+        name - Required string \n
+        description - Optional string \n
+        homepage - Optional string \n
+        private - Optional boolean - true to create a private repository, false to create a public one \n
+        has_issues - Optional boolean - true to enable issues for this repository, false to disable them \n
+        has_wiki - Optional boolean - true to enable the wiki for this repository, false to disable it. Default is true \n
+        has_downloads Optional boolean - true to enable downloads for this repository \n
+        org Optional string - The organisation in which this repository will be created \n
+        team_id - Optional number - The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization \n
+    DESC
     method_option :org, :type => :string, :aliases => ["-o"],
                   :desc => 'Create repository in <organization>',
                   :banner => '<organization>'
@@ -40,10 +55,23 @@ module GithubCLI
       if options[:org]
         options[:params]['org'] = options[:org]
       end
-      Repository.create user, repo, options[:params]
+      Repository.create options[:params]
     end
 
     desc 'edit <user> <repo>', 'Edit <repo> for an <user>.'
+    long_desc <<-DESC
+      Create a new repository for the autheticated user.
+
+      Parameters
+
+        name - Required string \n
+        description - Optional string \n
+        homepage - Optional string \n
+        private - Optional boolean - true to create a private repository, false to create a public one \n
+        has_issues - Optional boolean - true to enable issues for this repository, false to disable them \n
+        has_wiki - Optional boolean - true to enable the wiki for this repository, false to disable it. Default is true \n
+        has_downloads Optional boolean - true to enable downloads for this repository \n
+    DESC
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def edit(user, repo)

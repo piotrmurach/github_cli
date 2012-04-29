@@ -6,19 +6,19 @@ module GithubCLI
     class << self
 
       def all(params)
-        github_api.repos.repos(params)
+        github_api.repos.list params
       end
 
       def get(user, repo, params)
-        github_api.repos.get_repo user, repo, params
+        github_api.repos.get user, repo, params
       end
 
-      def create(user, repo, params)
-        github_api.repos.create_repo user, repo, params
+      def create(params)
+        github_api.repos.create user, repo, params
       end
 
-      def edit
-        github_api.repos.edit_repo user, repo, params
+      def edit(user, repo, params)
+        github_api.repos.edit user, repo, params
       end
 
       def branches(user, repo, params)
