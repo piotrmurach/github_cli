@@ -6,8 +6,6 @@
 
 CLI-based access to GitHub API v3 that works hand-in-hand with 'github_api' gem.
 
-This gem does not work yet at this stage, stay tuned.
-
 ## Installation
 
 Add this line to your application's Gemfile:
