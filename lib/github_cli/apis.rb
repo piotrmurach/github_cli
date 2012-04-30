@@ -9,6 +9,7 @@ else
 end
 
 %w[
+  authorization
   blob
   commit
   download

@@ -3,6 +3,9 @@
 module GithubCLI
   class CLI
 
+    desc "auth <command>", "Leverage Authorizations API"
+    subcommand "auth", GithubCLI::Commands::Authorizations
+
     desc "blob <command>", "Leverage Blobs API"
     subcommand "blob", GithubCLI::Commands::Blobs
 

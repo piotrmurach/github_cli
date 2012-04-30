@@ -24,6 +24,7 @@ Feature: The GHC Executable
 
     Examples:
       | command  |
+      | auth     |
       | repo     |
       | issue    |
       | blob     |
