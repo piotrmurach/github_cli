@@ -11,6 +11,7 @@ end
 %w[
   authorization
   blob
+  collaborator
   commit
   download
   fork

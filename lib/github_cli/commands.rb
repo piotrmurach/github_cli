@@ -4,6 +4,7 @@ module GithubCLI
   module Commands
     autoload :Authorizations, 'github_cli/commands/authorizations'
     autoload :Blobs,          'github_cli/commands/blobs'
+    autoload :Collaborators,  'github_cli/commands/collaborators'
     autoload :Commits,        'github_cli/commands/commits'
     autoload :Downloads,      'github_cli/commands/downloads'
     autoload :Forks,          'github_cli/commands/forks'

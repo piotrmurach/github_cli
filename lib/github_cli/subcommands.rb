@@ -9,6 +9,9 @@ module GithubCLI
     desc "blob <command>", "Leverage Blobs API"
     subcommand "blob", GithubCLI::Commands::Blobs
 
+    desc "collab <command>", "Leverage Collaborators API"
+    subcommand "collab", GithubCLI::Commands::Collaborators
+
     desc "commit <command>", "Leverage Commits API"
     subcommand "commit", GithubCLI::Commands::Commits
 
