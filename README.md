@@ -77,11 +77,18 @@ Interact with repositories:
 
 ```shell
 $ ghc repo
+$ ghc collab
 $ ghc download
 $ ghc fork
 $ ghc hook
 $ ghc key
 $ ghc watching
+```
+
+Interact with authorizations:
+
+```shell
+$ ghc auth
 ```
 
 ### Examples
