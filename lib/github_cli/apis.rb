@@ -15,6 +15,8 @@ end
   commit
   download
   fork
+  gist
+  hook
   key
   label
   pull_request

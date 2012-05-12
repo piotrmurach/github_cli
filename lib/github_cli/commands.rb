@@ -8,6 +8,7 @@ module GithubCLI
     autoload :Commits,        'github_cli/commands/commits'
     autoload :Downloads,      'github_cli/commands/downloads'
     autoload :Forks,          'github_cli/commands/forks'
+    autoload :Gists,          'github_cli/commands/gists'
     autoload :Hooks,          'github_cli/commands/hooks'
     autoload :Issues,         'github_cli/commands/issues'
     autoload :Keys,           'github_cli/commands/keys'

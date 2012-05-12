@@ -21,6 +21,9 @@ module GithubCLI
     desc "fork <command>", "Leverage Forks API"
     subcommand "fork", GithubCLI::Commands::Forks
 
+    desc "gist <command>", "Leverage Gists API"
+    subcommand "gist", GithubCLI::Commands::Gists
+
     desc "hook <command>", "Leverage Hooks API"
     subcommand "hook", GithubCLI::Commands::Hooks
 
