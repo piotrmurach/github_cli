@@ -2,6 +2,7 @@
 
 module GithubCLI
   class Command < Thor
+    include Thor::Actions
 
     API_CLASSES = %w(
       c_l_i
@@ -14,6 +15,24 @@ module GithubCLI
     HELP_COMMAND = 'help'
 
     class Comm < Struct.new(:namespace, :name, :desc, :usage); end
+
+
+    def self.output_formats
+      {
+        'csv' => nil,
+        'json' => nil,
+        'pretty' => nil,
+        'table' => nil
+      }
+    end
+
+    map "ls" => :list,
+        "del" => :delete
+
+    class_option :format, :type => :string, :aliases => '-f',
+                 :default => 'table',
+                 :banner => output_formats.keys.join('|'),
+                 :desc => "Format of the output"
 
     def self.banner(task, namespace=true, subcommand=true)
       "#{basename} #{task.formatted_usage(self, true, subcommand)}"
