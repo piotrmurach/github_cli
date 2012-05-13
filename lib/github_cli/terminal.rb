@@ -9,6 +9,30 @@ module GithubCLI
     class << self
       attr_accessor :size
 
+      def render_output(response, options={})
+        case options[:format].to_s
+        when 'table'
+          output = {}
+          GithubCLI::Util.flatten_hash(response.to_hash, output)
+          GithubCLI.ui.print_table(
+            output.keys.zip(GithubCLI::Util.convert_values(output.values))
+          )
+        when 'json'
+          'json output'
+        when 'csv'
+          'csv output'
+        else
+          raise UnknownFormatError, options[:format]
+        end
+      end
+
+      # Render status code
+      def render_status
+      end
+
+      def render_header
+      end
+
       def print_commands(pattern=nil)
         GithubCLI.ui.info "Commands:"
 
