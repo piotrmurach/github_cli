@@ -3,4 +3,16 @@ lib_dir = File.expand_path("../../lib", __FILE__)
 $LOAD_PATH.unshift lib_dir if File.directory?(lib_dir)
 
 require "github_cli"
-GithubCLI::CLI.start
+begin
+  GithubCLI::CLI.start
+rescue Interrupt => e
+  GithubCLI.ui.error "\nQuitting..."
+  GithubCLI.ui.debug e.backtrace.join("\n")
+  exit 1
+rescue SystemExit => e
+  exit e.status
+rescue Exception => e
+  GithubCLI.ui.error "Fatal error has occurred." + e.message
+  GithubCLI.ui.debug e.backtrace.join("\n")
+  exit 1
+end
