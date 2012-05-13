@@ -9,14 +9,14 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def list(user, repo)
-      Label.all user, repo, options[:params]
+      Label.all user, repo, options[:params], options[:format]
     end
 
     desc 'get <user> <repo> <name>', 'Get a single label.'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def get(user, repo, name)
-      Label.get user, repo, name, options[:params]
+      Label.get user, repo, name, options[:params], options[:format]
     end
 
     desc 'create <user> <repo>', 'Create a label.'
@@ -28,28 +28,28 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
-      Label.create user, repo, options[:params]
+      Label.create user, repo, options[:params], options[:format]
     end
 
     desc 'update <user> <repo> <name>', 'Update a label.'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def update(user, repo, name)
-      Label.update user, repo, name, options[:params]
+      Label.update user, repo, name, options[:params], options[:format]
     end
 
     desc 'delete <user> <repo> <name>', 'Delete a label.'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def delete(user, repo, name)
-      Label.delete user, repo, name, options[:params]
+      Label.delete user, repo, name, options[:params], options[:format]
     end
 
     desc 'issue <user> <repo> <number>', 'List labels on an issue.'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def issue(user, repo, number)
-      Label.issue user, repo, number, options[:params]
+      Label.issue user, repo, number, options[:params], options[:format]
     end
 
     desc 'add <user> <repo> <number>', 'Add labels to an issue.'
@@ -67,7 +67,7 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def remove(user, repo, number)
-      Label.issue user, repo, number, options[:name], options[:params]
+      Label.issue user, repo, number, options[:name], options[:params], options[:format]
     end
 
     desc 'replace <user> <repo> <number>', 'Replace all labels for an issue.'
@@ -83,7 +83,7 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def milestone(user, repo, number)
-      Label.milestone user, repo, number, options[:params]
+      Label.milestone user, repo, number, options[:params], options[:format]
     end
 
   end # Labels

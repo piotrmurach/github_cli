@@ -22,7 +22,7 @@ module GithubCLI
       if options[:sort]
         options[:params]['sort'] = options[:sort]
       end
-      Fork.all user, repo, options[:params]
+      Fork.all user, repo, options[:params], options[:format]
     end
 
     desc 'create <user> <repo>', 'Create a new fork'
@@ -34,7 +34,7 @@ module GithubCLI
       if options[:org]
         options[:params]['org'] = options[:org]
       end
-      Fork.create user, repo, options[:params]
+      Fork.create user, repo, options[:params], options[:format]
     end
 
   end # Forks

@@ -9,14 +9,14 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additional request parameters e.i per_page:100'
     def list(user, repo)
-      Download.all user, repo, options[:params]
+      Download.all user, repo, options[:params], options[:format]
     end
 
     desc 'get <user> <repo> <id>', 'Get a download'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additional request parameters e.i per_page:100'
     def get(user, repo, id)
-      Download.get user, repo, id, options[:params]
+      Download.get user, repo, id, options[:params], options[:format]
     end
 
     desc 'create <user> <repo>', 'Create a new download resource'
@@ -36,7 +36,7 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
-      Download.create user, repo, options[:params]
+      Download.create user, repo, options[:params], options[:format]
     end
 
     desc 'upload <resource> <filename>', 'Upload resource to s3'
@@ -53,14 +53,14 @@ module GithubCLI
         filename - Required filename, a path to a file location. \n
     DESC
     def upload(resource, filename)
-      Download.upload resource, filename
+      Download.upload resource, filename, options[:format]
     end
 
     desc 'delete <user> <repo> <id>', 'Delete a download'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def delete(user, repo, id)
-      Download.delete user, repo, id, options[:params]
+      Download.delete user, repo, id, options[:params], options[:format]
     end
 
   end # Downloads

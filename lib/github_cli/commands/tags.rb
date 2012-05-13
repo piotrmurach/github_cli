@@ -11,7 +11,7 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def get(user, repo, sha)
-      Tag.get user, repo, sha, options[:params]
+      Tag.get user, repo, sha, options[:params], options[:format]
     end
 
     desc 'create <user> <repo>', 'Create a Tag Object'
@@ -35,7 +35,7 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
-      Tag.create user, repo, options[:params]
+      Tag.create user, repo, options[:params], options[:format]
     end
 
   end # Tag

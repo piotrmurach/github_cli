@@ -5,24 +5,34 @@ module GithubCLI
 
     class << self
 
-      def all(user, repo, params)
-        github_api.repos.downloads.list user, repo, params
+      def all(user, repo, params, format)
+        output format do
+          github_api.repos.downloads.list user, repo, params
+        end
       end
 
-      def get(user, repo, id, params)
-        github_api.repos.downloads.get user, repo, id, params
+      def get(user, repo, id, params, format)
+        output format do
+          github_api.repos.downloads.get user, repo, id, params
+        end
       end
 
-      def create(user, repo, params)
-        github_api.repos.downloads.create user, repo, params
+      def create(user, repo, params, format)
+        output format do
+          github_api.repos.downloads.create user, repo, params
+        end
       end
 
-      def upload(resource, filename)
-        github_api.repos.downloads.upload resource, filename
+      def upload(resource, filename, format)
+        output format do
+          github_api.repos.downloads.upload resource, filename
+        end
       end
 
-      def delete(user, repo, id, params)
-        github_api.repos.downloads.delete user, repo, id, params
+      def delete(user, repo, id, params, format)
+        output format do
+          github_api.repos.downloads.delete user, repo, id, params
+        end
       end
     end
 

@@ -5,12 +5,16 @@ module GithubCLI
 
     class << self
 
-      def get(user, repo, sha, params)
-        github_api.git_data.trees.get user, repo, sha, params
+      def get(user, repo, sha, params, format)
+        output format do
+          github_api.git_data.trees.get user, repo, sha, params
+        end
       end
 
-      def create(user, repo, params)
-        github_api.git_data.trees.create user, repo, params
+      def create(user, repo, params, format)
+        output format do
+          github_api.git_data.trees.create user, repo, params
+        end
       end
     end
 

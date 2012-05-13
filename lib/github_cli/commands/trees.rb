@@ -14,7 +14,7 @@ module GithubCLI
       if options[:recursive]
         options[:params]['recursive'] = true
       end
-      Tree.get user, repo, sha, options[:params]
+      Tree.get user, repo, sha, options[:params], options[:format]
     end
 
     desc 'create <user> <repo>', 'Create a new Tree'
@@ -37,7 +37,7 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
-      Tree.create user, repo, options[:params]
+      Tree.create user, repo, options[:params], options[:format]
     end
 
   end # Blobs

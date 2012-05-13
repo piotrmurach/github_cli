@@ -11,14 +11,14 @@ module GithubCLI
                   :desc => 'Additonal request parameters e.i per_page:100'
     def list(user, repo)
       ref =  options[:ref] ? options[:ref] : nil
-      Reference.list user, repo, ref, options[:params]
+      Reference.list user, repo, ref, options[:params], options[:format]
     end
 
     desc 'get <user> <repo> <ref>', 'Get a Reference'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def get(user, repo, ref)
-      Reference.get user, repo, ref, options[:params]
+      Reference.get user, repo, ref, options[:params], options[:format]
     end
 
     desc 'create <user> <repo>', 'Create a new Reference'
@@ -31,7 +31,7 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
-      Reference.create user, repo, options[:params]
+      Reference.create user, repo, options[:params], options[:format]
     end
 
     desc 'update <user> <repo> <ref>', 'Update a Reference'
@@ -44,14 +44,14 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def update(user, repo, ref)
-      Reference.update user, repo, ref, options[:params]
+      Reference.update user, repo, ref, options[:params], options[:format]
     end
 
     desc 'delete <user> <repo> <ref>', 'Delete a Reference'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def delete(user, repo, ref)
-      Reference.delete user, repo, ref, options[:params]
+      Reference.delete user, repo, ref, options[:params], options[:format]
     end
 
   end # References

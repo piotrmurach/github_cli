@@ -5,12 +5,16 @@ module GithubCLI
 
     class << self
 
-      def all(user, repo, params)
-        github_api.repos.forks.list user, repo, params
+      def all(user, repo, params, format)
+        output format do
+          github_api.repos.forks.list user, repo, params
+        end
       end
 
-      def create(user, repo, params)
-        github_api.repos.forks.create user, repo, params
+      def create(user, repo, params, format)
+        output format do
+          github_api.repos.forks.create user, repo, params
+        end
       end
     end
 

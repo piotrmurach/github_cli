@@ -9,7 +9,7 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def get(user, repo, sha)
-      Blob.get user, repo, sha, options[:params]
+      Blob.get user, repo, sha, options[:params], options[:format]
     end
 
     desc 'create <user> <repo>', 'Create a new Blob'
@@ -22,7 +22,7 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
-      Blob.create user, repo, options[:params]
+      Blob.create user, repo, options[:params], options[:format]
     end
 
   end # Blobs

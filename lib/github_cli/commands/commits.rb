@@ -9,7 +9,7 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def get(user, repo, sha)
-      Commit.get user, repo, sha, options[:params]
+      Commit.get user, repo, sha, options[:params], options[:format]
     end
 
     desc 'create <user> <repo>', 'Create a Commit'
@@ -34,7 +34,7 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
-      Commit.create user, repo, options[:params]
+      Commit.create user, repo, options[:params], options[:format]
     end
 
   end # Commit

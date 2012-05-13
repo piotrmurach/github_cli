@@ -5,24 +5,34 @@ module GithubCLI
 
     class << self
 
-      def list(user, repo, ref, params)
-        github_api.git_data.references.list user, repo, ref, params
+      def list(user, repo, ref, params, format)
+        output format do
+          github_api.git_data.references.list user, repo, ref, params
+        end
       end
 
-      def get(user, repo, ref, params)
-        github_api.git_data.references.get user, repo, ref, params
+      def get(user, repo, ref, params, format)
+        output format do
+          github_api.git_data.references.get user, repo, ref, params
+        end
       end
 
-      def create(user, repo, params)
-        github_api.git_data.references.create user, repo, params
+      def create(user, repo, params, format)
+        output format do
+          github_api.git_data.references.create user, repo, params
+        end
       end
 
-      def update(user, repo, ref, params)
-        github_api.git_data.references.update user, repo, ref, params
+      def update(user, repo, ref, params, format)
+        output format do
+          github_api.git_data.references.update user, repo, ref, params
+        end
       end
 
-      def delete(user, repo, ref, params)
-        github_api.git_data.references.delete user, repo, ref, params
+      def delete(user, repo, ref, params, format)
+        output format do
+          github_api.git_data.references.delete user, repo, ref, params
+        end
       end
     end
 

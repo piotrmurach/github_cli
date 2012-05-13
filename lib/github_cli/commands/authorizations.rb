@@ -9,14 +9,14 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additional request parameters e.i per_page:100'
     def list
-      Authorization.all options[:params]
+      Authorization.all options[:params], options[:formats]
     end
 
     desc 'get <id>', 'Get a single authorization'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additional request parameters e.i per_page:100'
     def get(id)
-      Authorization.get id, options[:params]
+      Authorization.get id, options[:params], options[:format]
     end
 
     desc 'create <user> <repo>', 'Create a new authorization'
@@ -30,7 +30,7 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def create
-      Authorization.create options[:params]
+      Authorization.create options[:params], options[:format]
     end
 
     desc 'update <id>', 'Update an existing authorization'
@@ -44,14 +44,14 @@ module GithubCLI
       note_url - Optional string - A URL to remind you what the OAuth token is for.
     DESC
     def update(id)
-      Authorization.update id, options[:params]
+      Authorization.update id, options[:params], options[:format]
     end
 
     desc 'delete <id>', 'Delete an authorization'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def delete(id)
-      Authorization.delete id, options[:params]
+      Authorization.delete id, options[:params], options[:format]
     end
 
   end # Authorizations

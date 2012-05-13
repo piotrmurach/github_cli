@@ -9,28 +9,28 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additional request parameters e.i per_page:100'
     def list(user, repo)
-      Collaborator.all user, repo, options[:params]
+      Collaborator.all user, repo, options[:params], options[:format]
     end
 
     desc 'add <user> <repo> <collab>', 'Add a collaborator'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additional request parameters e.i per_page:100'
     def add(user, repo, collab)
-      Collaborator.add user, repo, collab, options[:params]
+      Collaborator.add user, repo, collab, options[:params], options[:format]
     end
 
     desc 'collab <user> <repo> <collab>', 'Checks if user is a collaborator on a given repo'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additional request parameters e.i per_page:100'
     def collab(user, repo, collab)
-      Collaborator.collaborator? user, repo, collab, options[:params]
+      Collaborator.collaborator? user, repo, collab, options[:params], options[:format]
     end
 
     desc 'remove <user> <repo> <id>', 'Remove a collaborator'
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additonal request parameters e.i per_page:100'
     def remove(user, repo, collab)
-      Collaborator.remove user, repo, collab, options[:params]
+      Collaborator.remove user, repo, collab, options[:params]. options[:format]
     end
 
   end # Collaborators

@@ -55,7 +55,7 @@ module GithubCLI
       if options[:org]
         options[:params]['org'] = options[:org]
       end
-      Repository.create options[:params]
+      Repository.create options[:params], options[:format]
     end
 
     desc 'edit <user> <repo>', 'Edit <repo> for an <user>.'
@@ -75,42 +75,42 @@ module GithubCLI
     method_option :params, :type => :hash, :default => {}, :aliases => '-p',
                   :desc => 'Additonal request parameters e.i per_page:100'
     def edit(user, repo)
-      Repository.edit user, repo, options[:params]
+      Repository.edit user, repo, options[:params], options[:format]
     end
 
     desc 'branches <user> <repo>', 'List branches'
     method_option :params, :type => :hash, :default => {}, :aliases => '-p',
                   :desc => 'Additonal request parameters e.i per_page:100'
     def branches(user, repo)
-      Repository.branches user, repo, options[:params]
+      Repository.branches user, repo, options[:params], options[:format]
     end
 
     desc 'contribs <user> <repo>', 'List contributors'
     method_option :params, :type => :hash, :default => {}, :aliases => '-p',
                   :desc => 'Additonal request parameters e.i per_page:100'
     def contribs(user, repo)
-      Repository.contributors user, repo, options[:params]
+      Repository.contributors user, repo, options[:params], options[:format]
     end
 
     desc 'languages <user> <repo>', 'Listing all languages'
     method_option :params, :type => :hash, :default => {}, :aliases => '-p',
                   :desc => 'Additonal request parameters e.i per_page:100'
     def languages(user, repo)
-      Repository.languages user, repo, options[:params]
+      Repository.languages user, repo, options[:params], options[:format]
     end
 
     desc 'tags <user> <repo>', 'Listing all tags'
     method_option :params, :type => :hash, :default => {}, :aliases => '-p',
                   :desc => 'Additonal request parameters e.i per_page:100'
     def tags(user, repo)
-      Repository.tags user, repo, options[:params]
+      Repository.tags user, repo, options[:params], options[:format]
     end
 
     desc 'teams <user> <repo>', 'Listing all teams'
     method_option :params, :type => :hash, :default => {}, :aliases => '-p',
                   :desc => 'Additonal request parameters e.i per_page:100'
     def teams(user, repo)
-      Repository.teams user, repo, options[:params]
+      Repository.teams user, repo, options[:params], options[:format]
     end
 
   end # Repositories
