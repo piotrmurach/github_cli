@@ -23,15 +23,7 @@ module GithubCLI
 
     def self.output(format=:table, &block)
       response =  block.call
-      case response
-      when Array
-        response.each do |item|
-          GithubCLI::Terminal.render_output item, :format => format
-          puts
-        end
-      else
-        GithubCLI::Terminal.render_output response, :format => format
-      end
+      GithubCLI::Terminal.render_output response, :format => format
     end
 
     class All
