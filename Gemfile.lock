@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    github_cli (0.2.1)
+    github_cli (0.3.0)
       github_api (~> 0.5)
       thor
 
