@@ -10,24 +10,25 @@ module GithubCLI
       attr_accessor :size
 
       def render_output(response, options={})
+        render_status response
         case options[:format].to_s
         when 'table'
-          output = {}
-          GithubCLI::Util.flatten_hash(response.to_hash, output)
-          GithubCLI.ui.print_table(
-            output.keys.zip(GithubCLI::Util.convert_values(output.values))
-          )
+          formatter = Formatters::Table.new(response)
+          formatter.format
+        when 'csv'
+          formatter = Formatters::CSV.new(response)
+          formatter.format
         when 'json'
           'json output'
-        when 'csv'
-          'csv output'
         else
           raise UnknownFormatError, options[:format]
         end
       end
 
       # Render status code
-      def render_status
+      def render_status(response)
+        puts "Response Status: #{response.status}"
+        puts
       end
 
       def render_header
