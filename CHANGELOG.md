@@ -1,3 +1,12 @@
+0.3.0 (May 13, 2012)
+
+* Add output formatting.
+* Add gists api commands.
+* Add collaborators api commands.
+* Add issues api commands.
+* Add error handling for the executable.
+* Setup feature testing environment.
+
 0.2.1 (April 30, 2012)
 
 * Add authorizations api commands.
