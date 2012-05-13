@@ -85,10 +85,32 @@ $ ghc key
 $ ghc watching
 ```
 
+Interact with gists:
+
+```shell
+$ ghc gist
+```
+
 Interact with authorizations:
 
 ```shell
 $ ghc auth
+```
+
+### Output Format
+
+The API responses can be formattaed as `csv`, `json`, `pretty`, `table`.
+
+By default responses are in tabular format. Run the following
+
+```shell
+ghc repo get peter-murach github_cli
+```
+
+To get `csv` formatting for easy command piping do
+
+```shell
+ghc repo ls -u wycats --format=csv
 ```
 
 ### Examples
