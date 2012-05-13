@@ -18,6 +18,7 @@ module GithubCLI
   autoload :Commands,  'github_cli/commands'
   autoload :Helpers,   'github_cli/helpers'
   autoload :UI,        'github_cli/ui'
+  autoload :Util,      'github_cli/util'
 
   require 'github_cli/apis'
 
