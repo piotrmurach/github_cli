@@ -26,4 +26,12 @@ module GithubCLI
     status_code 12
   end
 
+  class UnknownFormatError < GithubCLIError
+    status_code 13
+
+    def initialize(format)
+      super %{Unrecognized formatting options: #{format} }
+    end
+  end
+
 end # GithubCLI
