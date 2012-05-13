@@ -17,6 +17,7 @@ end
   fork
   gist
   hook
+  issue
   key
   label
   pull_request
