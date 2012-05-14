@@ -6,8 +6,8 @@ module GithubCLI
 
     API_CLASSES = %w(
       c_l_i
-      repo download key fork
-      issue label
+      repo download key fork hook watch collab
+      issue label milestone
       tag tree blob reference commit
       pull
     )
