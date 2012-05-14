@@ -71,6 +71,7 @@ Interact with issues:
 ```shell
 $ ghc issue
 $ ghc label
+$ ghc milestone
 ```
 
 Interact with repositories:
