@@ -20,6 +20,7 @@ end
   issue
   key
   label
+  milestone
   pull_request
   reference
   repository

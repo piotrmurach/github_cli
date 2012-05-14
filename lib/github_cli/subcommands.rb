@@ -36,6 +36,9 @@ module GithubCLI
     desc "label <command>", "Leverage Labels API"
     subcommand "label", GithubCLI::Commands::Labels
 
+    desc "milestone <command>", "Leverage Milestones API"
+    subcommand "milestone", GithubCLI::Commands::Milestones
+
     desc "pull <command>", "Leverage Pull Requests API"
     subcommand "pull", GithubCLI::Commands::PullRequests
 
