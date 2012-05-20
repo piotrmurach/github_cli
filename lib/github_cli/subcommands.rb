@@ -18,6 +18,9 @@ module GithubCLI
     desc "download <command>", "Leverage Downloads API"
     subcommand "download", GithubCLI::Commands::Downloads
 
+    desc "email <command>", "Leverage Emails API"
+    subcommand "email", GithubCLI::Commands::Emails
+
     desc "fork <command>", "Leverage Forks API"
     subcommand "fork", GithubCLI::Commands::Forks
 

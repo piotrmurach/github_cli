@@ -14,6 +14,7 @@ end
   collaborator
   commit
   download
+  email
   fork
   gist
   hook

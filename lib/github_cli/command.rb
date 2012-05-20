@@ -10,6 +10,7 @@ module GithubCLI
       issue label milestone
       tag tree blob reference commit
       pull
+      email
     )
 
     HELP_COMMAND = 'help'
@@ -27,6 +28,7 @@ module GithubCLI
     end
 
     map "ls" => :list,
+        "all" => :list,
         "del" => :delete
 
     class_option :format, :type => :string, :aliases => '-f',
