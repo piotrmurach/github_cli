@@ -4,7 +4,8 @@ describe GithubCLI::Helpers do
   subject { described_class }
 
   it 'throws error if config file does not exist' do
-    subject.stub(:find_configfile) { nil }
+    pending
+    subject.stub(:find_configfile).and_return nil
     expect {
       subject.default_configfile
     }.to raise_error(GithubCLI::ConfigFileNotFound)

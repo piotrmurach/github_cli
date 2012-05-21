@@ -5,16 +5,11 @@ describe GithubCLI::Config do
   let(:config_name) { 'simple_config' }
   let(:path) { "/users/#{filename}" }
 
-  before :all do
-    unless File.exists?(fixture_path('.githubrc'))
-      File.symlink(fixture_path(config_name), fixture_path('.githubrc'))
-    end
-  end
-
   context 'global' do
     let(:config) { GithubCLI::Config.new fixture_path }
 
     before do
+      config.stub(:global_options_file) { fixture_path(config_name) }
       File.stub(:open) { YAML.load fixture('simple_config') }
     end
 
@@ -24,9 +19,16 @@ describe GithubCLI::Config do
     end
 
     context 'array access' do
+      it 'returns value for the key' do
+        config['basic_auth'].should == 'login:password'
+      end
+
       it 'searches in commands' do
-        pending
-        # config['issue-list'].should == { 'inputs' => 'ticket' }
+        config['issue-list'].should == { 'inputs' => 'ticket' }
+      end
+
+      it 'returns nil for missing key' do
+        config['non-existent'].should be_nil
       end
     end
 
@@ -107,6 +109,9 @@ describe GithubCLI::Config do
         config.path.to_s.should == "#{ENV['HOME']}/#{filename}"
       end
     end
+  end
+
+  context 'local' do
   end
 
 end # GithubCLI::Config
