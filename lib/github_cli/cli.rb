@@ -30,7 +30,6 @@ module GithubCLI
     class_option :verbose, :type => :boolean,
                  :banner => "Enable verbose output mode."
 
-
     desc 'init', 'Generates a configuration file in your home directory'
     long_desc <<-DESC
       Initializes a configuration file where you can set default options for
