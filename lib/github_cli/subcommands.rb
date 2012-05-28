@@ -21,6 +21,9 @@ module GithubCLI
     desc "email <command>", "Leverage Emails API"
     subcommand "email", GithubCLI::Commands::Emails
 
+    desc "event <command>", "Leverage Events API"
+    subcommand "event", GithubCLI::Commands::Events
+
     desc "fork <command>", "Leverage Forks API"
     subcommand "fork", GithubCLI::Commands::Forks
 
