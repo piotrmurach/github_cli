@@ -1,3 +1,11 @@
+0.3.1 (May 30, 2012)
+
+* Add milestone api commands.
+* Add emails api commands.
+* Add events api commands.
+* Fix bug with configuration access.
+* Add thor extensions.
+
 0.3.0 (May 13, 2012)
 
 * Add output formatting.
