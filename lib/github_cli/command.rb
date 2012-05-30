@@ -11,12 +11,12 @@ module GithubCLI
       tag tree blob reference commit
       pull
       email
+      event
     )
 
     HELP_COMMAND = 'help'
 
     class Comm < Struct.new(:namespace, :name, :desc, :usage); end
-
 
     def self.output_formats
       {
