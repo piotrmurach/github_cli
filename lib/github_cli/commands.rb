@@ -9,6 +9,7 @@ module GithubCLI
     autoload :Downloads,      'github_cli/commands/downloads'
     autoload :Emails,         'github_cli/commands/emails'
     autoload :Events,         'github_cli/commands/events'
+    autoload :Followers,      'github_cli/commands/followers'
     autoload :Forks,          'github_cli/commands/forks'
     autoload :Gists,          'github_cli/commands/gists'
     autoload :Hooks,          'github_cli/commands/hooks'

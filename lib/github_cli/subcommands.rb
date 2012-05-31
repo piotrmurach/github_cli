@@ -24,6 +24,9 @@ module GithubCLI
     desc "event <command>", "Leverage Events API"
     subcommand "event", GithubCLI::Commands::Events
 
+    desc "follower <command>", "Leverage Followers API"
+    subcommand "follower", GithubCLI::Commands::Followers
+
     desc "fork <command>", "Leverage Forks API"
     subcommand "fork", GithubCLI::Commands::Forks
 

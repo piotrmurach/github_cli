@@ -10,7 +10,7 @@ module GithubCLI
       issue label milestone
       tag tree blob reference commit
       pull
-      email
+      email follower
       event
     )
 

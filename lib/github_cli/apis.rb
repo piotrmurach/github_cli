@@ -15,6 +15,7 @@ end
   commit
   download
   email
+  follower
   fork
   gist
   hook
