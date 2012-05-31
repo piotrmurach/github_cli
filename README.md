@@ -92,6 +92,13 @@ Interact with gists:
 $ ghc gist
 ```
 
+Interact with users:
+
+```shell
+$ ghc email
+$ ghc follower
+```
+
 Interact with authorizations:
 
 ```shell
