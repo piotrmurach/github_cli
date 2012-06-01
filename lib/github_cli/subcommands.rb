@@ -48,6 +48,9 @@ module GithubCLI
     desc "milestone <command>", "Leverage Milestones API"
     subcommand "milestone", GithubCLI::Commands::Milestones
 
+    desc "org <command>", "Leverage Organizations API"
+    subcommand "org", GithubCLI::Commands::Organizations
+
     desc "pull <command>", "Leverage Pull Requests API"
     subcommand "pull", GithubCLI::Commands::PullRequests
 

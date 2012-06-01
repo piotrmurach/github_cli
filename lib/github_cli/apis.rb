@@ -23,6 +23,7 @@ end
   key
   label
   milestone
+  organization
   pull_request
   reference
   repository

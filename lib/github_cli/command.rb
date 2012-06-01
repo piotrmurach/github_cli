@@ -11,6 +11,7 @@ module GithubCLI
       tag tree blob reference commit
       pull
       user email follower
+      org
       event
     )
 
