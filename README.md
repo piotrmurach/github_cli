@@ -1,4 +1,5 @@
-# GithubCLI <img src="https://github.com/peter-murach/github_cli/blob/master/ghc_logo.png" align="right" />
+# GithubCLI<img src="https://github.com/peter-murach/github_cli/raw/master/ghc_logo.png" align="right" />
+[![Build Status](https://secure.travis-ci.org/peter-murach/github_cli.png?branch=master)][travis] [![Dependency Status](https://gemnasium.com/peter-murach/github_cli.png?travis)][gemnasium]
 
 [travis]: http://travis-ci.org/peter-murach/github_cli
 [gemnasium]: https://gemnasium.com/peter-murach/github_cli

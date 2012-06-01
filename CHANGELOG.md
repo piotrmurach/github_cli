@@ -1,3 +1,10 @@
+0.3.2 (June xx, 2012)
+
+* Add user followers api commands.
+* Add user api commands.
+* Add organizations api commands.
+* Add gem logo.
+
 0.3.1 (May 30, 2012)
 
 * Add milestone api commands.
