@@ -28,6 +28,7 @@ end
   repository
   tag
   tree
+  user
   watching
 ].each do |api|
   require_api api

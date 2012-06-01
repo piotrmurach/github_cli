@@ -22,6 +22,7 @@ module GithubCLI
     autoload :Repositories,   'github_cli/commands/repositories'
     autoload :Tags,           'github_cli/commands/tags'
     autoload :Trees,          'github_cli/commands/trees'
+    autoload :Users,          'github_cli/commands/users'
     autoload :Watching,       'github_cli/commands/watching'
   end # Commands
 end # GithubCLI
