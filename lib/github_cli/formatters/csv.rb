@@ -25,13 +25,13 @@ module GithubCLI
       def render_headers(response)
         output = {}
         GithubCLI::Util.flatten_hash(response.to_hash, output)
-        puts "Index," + output.keys.join(',')
+        $stdout.puts "Index," + output.keys.join(',')
       end
 
       def render_line(index, item)
         output = {}
         GithubCLI::Util.flatten_hash(item.to_hash, output)
-        printf "%d,%s", index, output.values.join(',')
+        $stdout.printf "%d,%s", index, output.values.join(',')
       end
 
     end # CSV
