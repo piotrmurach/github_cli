@@ -11,6 +11,7 @@ module GithubCLI
 
       def render_output(response, options={})
         render_status response
+        pager.page
         case options[:format].to_s
         when 'table'
           formatter = Formatters::Table.new(response)
@@ -23,6 +24,10 @@ module GithubCLI
         else
           raise UnknownFormatError, options[:format]
         end
+      end
+
+      def pager
+        @pager ||= Pager.new
       end
 
       # Render status code

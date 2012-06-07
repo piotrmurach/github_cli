@@ -17,6 +17,7 @@ module GithubCLI
   autoload :API,       'github_cli/api'
   autoload :Terminal,  'github_cli/terminal'
   autoload :System,    'github_cli/system'
+  autoload :Pager,     'github_cli/pager'
   autoload :Commands,  'github_cli/commands'
   autoload :Helpers,   'github_cli/helpers'
   autoload :Formatters,'github_cli/formatters'
