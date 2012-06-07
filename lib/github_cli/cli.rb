@@ -27,11 +27,14 @@ module GithubCLI
                  :desc => 'Authentication token.',
                  :banner => 'Set authentication token'
     class_option "no-color", :type => :boolean,
-                 :banner => "Disable colorization in output."
+                 :desc => "Disable colorization in output."
     class_option "no-pager", :type => :boolean,
-                 :banner => "Disable pagination of the output."
+                 :desc => "Disable pagination of the output."
+    class_option :pager, :type => :string, :aliases => '-p',
+                 :desc => "Command to be used for paging. Command can have options after it i.e. 'less -r'. Defaults to common pagers i.e. less if detected.",
+                 :banner => "less, more etc..."
     class_option :verbose, :type => :boolean,
-                 :banner => "Enable verbose output mode."
+                 :desc => "Enable verbose output mode."
 
     desc 'init', 'Generates a configuration file in your home directory'
     long_desc <<-DESC
