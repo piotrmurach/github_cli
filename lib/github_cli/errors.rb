@@ -13,7 +13,7 @@ module GithubCLI
     status_code 10
 
     def initialize
-      super %{Configuration file corrupt or missing}
+      super %{ Configuration file corrupt or missing }
     end
   end
 
@@ -30,7 +30,7 @@ module GithubCLI
     status_code 13
 
     def initialize(format)
-      super %{Unrecognized formatting options: #{format} }
+      super %{ Unrecognized formatting options: #{format} }
     end
   end
 
