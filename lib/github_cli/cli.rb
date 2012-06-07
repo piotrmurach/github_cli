@@ -10,6 +10,7 @@ module GithubCLI
       the_shell = (options["no-color"] ? Thor::Shell::Basic.new : shell)
       GithubCLI.ui = UI.new(the_shell)
       GithubCLi.ui.debug! if options["verbose"]
+      options["no-pager"] ? Pager.disable : Pager.enable
       Terminal.print_program_name
     end
 
@@ -27,6 +28,8 @@ module GithubCLI
                  :banner => 'Set authentication token'
     class_option "no-color", :type => :boolean,
                  :banner => "Disable colorization in output."
+    class_option "no-pager", :type => :boolean,
+                 :banner => "Disable pagination of the output."
     class_option :verbose, :type => :boolean,
                  :banner => "Enable verbose output mode."
 

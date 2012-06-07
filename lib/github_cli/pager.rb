@@ -16,6 +16,18 @@ module GithubCLI
         end
       end
 
+      # Indicates if pager is enabled
+      def enabled?
+        @enabled && true
+      end
+
+      def enable
+        @enabled = true
+      end
+
+      def disable
+        @enabled = false
+      end
     end
 
     def initialize(options={})
