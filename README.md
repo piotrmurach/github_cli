@@ -104,6 +104,8 @@ Interact with organizations:
 
 ```shell
 $ ghc org
+$ ghc member
+$ ghc team
 ```
 
 Interact with authorizations:
