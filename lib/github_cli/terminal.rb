@@ -41,8 +41,10 @@ module GithubCLI
 
       # Render status code
       def render_status(response)
-        puts "Response Status: #{response.status}"
-        puts
+        if response.respond_to? :status
+          puts "Response Status: #{response.status}"
+          puts
+        end
       end
 
       def render_header
