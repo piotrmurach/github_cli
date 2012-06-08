@@ -15,8 +15,10 @@ module GithubCLI
             render_vertical item
             $stdout.puts
           end
-        else
+        when Hash
           render_vertical @response
+        else
+          $stdout.puts @response
         end
       end
 

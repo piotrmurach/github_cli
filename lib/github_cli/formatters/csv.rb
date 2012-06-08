@@ -16,9 +16,11 @@ module GithubCLI
             render_line indx, item
             $stdout.puts
           end
-        else
+        when Hash
           render_headers @response
           render_line 1, @response
+        else
+          $stdout.puts @response
         end
       end
 
