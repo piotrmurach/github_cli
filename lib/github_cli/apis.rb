@@ -29,6 +29,7 @@ end
   reference
   repository
   tag
+  team
   tree
   user
   watching

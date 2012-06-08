@@ -66,6 +66,9 @@ module GithubCLI
     desc "tag <command>", "Leverage Tags API"
     subcommand "tag", GithubCLI::Commands::Tags
 
+    desc "team <command>", "Leverage Teams API"
+    subcommand "team", GithubCLI::Commands::Teams
+
     desc "tree <command>", "Leverage Trees API"
     subcommand "tree", GithubCLI::Commands::Trees
 
