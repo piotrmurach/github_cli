@@ -16,6 +16,7 @@ module GithubCLI
     autoload :Issues,         'github_cli/commands/issues'
     autoload :Keys,           'github_cli/commands/keys'
     autoload :Labels,         'github_cli/commands/labels'
+    autoload :Members,        'github_cli/commands/members'
     autoload :Milestones,     'github_cli/commands/milestones'
     autoload :Organizations,  'github_cli/commands/organizations'
     autoload :PullRequests,   'github_cli/commands/pull_requests'

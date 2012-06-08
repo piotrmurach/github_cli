@@ -22,6 +22,7 @@ end
   issue
   key
   label
+  member
   milestone
   organization
   pull_request

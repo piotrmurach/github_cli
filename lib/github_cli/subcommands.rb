@@ -45,6 +45,9 @@ module GithubCLI
     desc "label <command>", "Leverage Labels API"
     subcommand "label", GithubCLI::Commands::Labels
 
+    desc "member <command>", "Leverage Members API"
+    subcommand "member", GithubCLI::Commands::Members
+
     desc "milestone <command>", "Leverage Milestones API"
     subcommand "milestone", GithubCLI::Commands::Milestones
 
