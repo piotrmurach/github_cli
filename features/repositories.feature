@@ -5,5 +5,5 @@ Feature: Repository Commands
   I have access to commands
 
   Scenario: List repositories
-    When I run `ghc repo list --user=wycats`
+    When I run `ghc repo ls --user=wycats`
     Then the exit status should be 0

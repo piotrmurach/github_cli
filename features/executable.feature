@@ -6,16 +6,16 @@ Feature: The GHC Executable
   I have access to command line interface
 
   Scenario Outline: Getting Help for Commands
-    When I run `ghc <command>`
+    When I run `ghc <cmd>`
     Then the exit status should be 0
     And the output should contain:
     """
-      ghc help [TASK]
+      ghc help <command>
     """
     Examples:
-      | command |
-      |         |
-      | help    |
+      | cmd  |
+      |      |
+      | help |
 
   Scenario Outline: Getting Subcommands
     When I run `ghc <command>`
@@ -23,15 +23,26 @@ Feature: The GHC Executable
     And the output should contain "ghc <command>"
 
     Examples:
-      | command  |
-      | auth     |
-      | repo     |
-      | issue    |
-      | blob     |
-      | tree     |
-      | ref      |
-      | pull     |
-      | fork     |
-      | commit   |
-      | download |
-      | key      |
+      | command   |
+      | auth      |
+      | blob      |
+      | commit    |
+      | download  |
+      | email     |
+      | event     |
+      | follower  |
+      | fork      |
+      | gist      |
+      | hook      |
+      | issue     |
+      | key       |
+      | label     |
+      | member    |
+      | milestone |
+      | org       |
+      | pull      |
+      | ref       |
+      | repo      |
+      | tree      |
+      | user      |
+      | watch     |
