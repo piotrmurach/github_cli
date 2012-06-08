@@ -9,9 +9,12 @@ module GithubCLI
     long_desc <<-DESC
       List all users who are members of an organization. A member is a user
       that belongs to at least 1 team in the organization.
+
       If the authenticated user is also a member of this organization then
       both concealed and public members will be returned.
       Otherwise only public members are returned.
+
+      Members of an organization can choose to have their membership publicized or not.
     DESC
     method_option :public, :type => :boolean, :default => false,
                   :desc => 'List public members'
@@ -39,6 +42,10 @@ module GithubCLI
     end
 
     desc 'delete <org> <user>', 'Remove a member from an organization'
+    long_desc <<-DESC
+      Removing a user from this list will remove them from all teams and they
+      will no longer have any access to the organization’s repositories.
+    DESC
     method_option :params, :type => :hash, :default => {},
                   :desc => 'Additional request parameters e.i per_page:100'
     def delete(org, user)
