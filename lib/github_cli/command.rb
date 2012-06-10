@@ -37,35 +37,47 @@ module GithubCLI
                  :banner => output_formats.keys.join('|'),
                  :desc => "Format of the output"
 
-    def self.banner(task, namespace=true, subcommand=true)
-      "#{basename} #{task.formatted_usage(self, true, subcommand)}"
-    end
+    class << self
 
-    def self.all
-      commands = []
-      Base.subclasses.each do |klass|
-        namespace = extract_namespace(klass)
-        next unless is_api_command?(namespace)
-        namespace = "" if namespace.index API_CLASSES.first
-
-        klass.tasks.each do |task|
-          next if task.last.name.index HELP_COMMAND
-          commands << Comm.new(namespace,
-                               task.last.name,
-                               task.last.description,
-                               task.last.usage)
-        end
+      def banner(task, namespace=true, subcommand=true)
+        "#{basename} #{task.formatted_usage(self, true, subcommand)}"
       end
-      commands
-    end
 
-    def self.is_api_command?(klass)
-      return false unless API_CLASSES.include?(klass.to_s)
-      return true
-    end
+      def all
+        commands = []
+        Thor::Base.subclasses.each do |klass|
+          namespace = extract_namespace(klass)
+          next unless is_api_command?(namespace)
+          namespace = "" if namespace.index API_CLASSES.first
 
-    def self.extract_namespace(klass)
-      klass.namespace.split(':').last
+          klass.tasks.each do |task|
+            next if task.last.name.index HELP_COMMAND
+            commands << Comm.new(namespace,
+                                task.last.name,
+                                task.last.description,
+                                task.last.usage)
+          end
+        end
+        commands
+      end
+
+      def is_api_command?(klass)
+        return false unless API_CLASSES.include?(klass.to_s)
+        return true
+      end
+
+      def extract_namespace(klass)
+        klass.namespace.split(':').last
+      end
+
+      def command_to_show(command)
+        command_token = Command.all.find do |cmd|
+          end_index = command.index('<').nil? ? -1 : command.index('<')
+          !cmd.namespace.empty? && command[0..end_index].include?(cmd.namespace)
+        end
+        command_token ? command_token.namespace : '<command>'
+      end
+
     end
 
   end # Command
