@@ -12,6 +12,8 @@ class Thor
       end
       list.sort!{ |a,b| a[0] <=> b[0] }
 
+      GithubCLI::Terminal.print_usage global_flags, GithubCLI::Command.command_to_show(list[0][0])
+
       shell.say "Commands:"
       shell.print_table(list, :indent => 2, :truncate => true)
       shell.say

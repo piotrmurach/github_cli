@@ -11,7 +11,6 @@ module GithubCLI
       GithubCLI.ui = UI.new(the_shell)
       GithubCLi.ui.debug! if options["verbose"]
       options["no-pager"] ? Pager.disable : Pager.enable
-      Terminal.print_program_name
     end
 
     map "repository" => :repo,

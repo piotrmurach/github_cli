@@ -79,10 +79,12 @@ module GithubCLI
         GithubCLI.ui.info "ghc: '#{cmd}' is not a ghc command. See 'ghc --help'."
       end
 
-      def print_program_name
+      def print_usage(flags, command='<command>')
         GithubCLI.ui.info <<-TEXT
 
-  #{GithubCLI.program_name}
+#{GithubCLI.program_name}
+
+Usage: ghc #{flags} #{command} <subcommand> [<args>]
 
         TEXT
       end
