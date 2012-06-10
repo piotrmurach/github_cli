@@ -18,6 +18,19 @@ class Thor
       class_options_help(shell)
     end
 
+    # String representation of all available global flags
+    def global_flags
+      return if class_options.empty?
+
+      all_options = ''
+      class_options.each do |key, val|
+        all_options << '[' + val.switch_name
+        all_options <<  (!val.aliases.empty? ? ('|' + val.aliases.join('|')) : '')
+        all_options <<  '] '
+      end
+      all_options
+    end
+
     def subcommand_help(cmd)
       desc "help <command>", "Describe subcommands or one specific subcommand"
       class_eval <<-RUBY
