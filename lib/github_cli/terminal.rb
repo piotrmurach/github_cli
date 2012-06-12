@@ -3,11 +3,21 @@
 module GithubCLI
   # Responsible for display and size detection.
   class Terminal
-    DEFAULT_WIDTH = 120
+    DEFAULT_WIDTH  = 80
     DEFAULT_HEIGHT = 40
 
     class << self
-      attr_accessor :size
+      def default_width
+        DEFAULT_WIDTH
+      end
+
+      def width
+        GithubCLI.ui.terminal_width
+      end
+
+      def new_line
+        $stdout.print "\n"
+      end
 
       def render_output(response, options={})
         render_status response
@@ -84,10 +94,41 @@ module GithubCLI
 
 #{GithubCLI.program_name}
 
-Usage: ghc #{flags} #{command} <subcommand> [<args>]
+Usage: ghc #{format_usage(flags, command, :indent => 11)}
 
         TEXT
       end
+
+      # Options
+      # indent - Indent the line with by indent value. Assumes that the first
+      #          the first line is already filled in with other padding.
+      # length - Line length, otherwise the default terminal width is assumed.
+      def format_usage(flags, command, options={})
+        synopsis = "#{flags} #{command} <subcommand> [<args>]"
+        indent = options[:indent] || 0
+        padding = sprintf("%#{indent}s",'')
+        wrap synopsis, indent, padding
+      end
+
+      # Wraps text at the given line length using given indent value.
+      def wrap(text, indent, padding)
+        if text.length > default_width - indent
+          paragraphs = []
+          line = ''
+          text.split(/\s+/).map(&:chomp).reject(&:empty?).each do |fragment|
+            if line.length < default_width - indent
+              line << fragment + ' '
+            else
+              paragraphs << line
+              line = padding + fragment + ' '
+            end
+          end
+          paragraphs << line
+          text = paragraphs.join("\n")
+        end
+        text
+      end
+
     end
 
   end # Terminal
