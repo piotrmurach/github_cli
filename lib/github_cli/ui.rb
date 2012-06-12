@@ -35,5 +35,13 @@ module GithubCLI
     def print_table(table, options={})
       @shell.print_table table, options
     end
+
+    def print_wrapped(message, options={})
+      @shell.print_wrapped message, options
+    end
+
+    def terminal_width
+      @shell.terminal_width
+    end
   end # UI
 end # GithubCLI
