@@ -12,7 +12,7 @@ rescue Interrupt => e
 rescue SystemExit => e
   exit e.status
 rescue Exception => e
-  GithubCLI.ui.error "Fatal error has occurred." + e.message
+  GithubCLI.ui.error "Fatal error has occurred. " + e.message
   GithubCLI.ui.debug e.backtrace.join("\n")
   exit 1
 end

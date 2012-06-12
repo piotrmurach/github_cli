@@ -20,6 +20,7 @@ module GithubCLI
   autoload :Pager,     'github_cli/pager'
   autoload :Commands,  'github_cli/commands'
   autoload :Helpers,   'github_cli/helpers'
+  autoload :Formatter, 'github_cli/formatter'
   autoload :Formatters,'github_cli/formatters'
   autoload :UI,        'github_cli/ui'
   autoload :Util,      'github_cli/util'

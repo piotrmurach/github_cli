@@ -23,7 +23,7 @@ module GithubCLI
 
     def self.output(format=:table, &block)
       response =  block.call
-      GithubCLI::Terminal.render_output response, :format => format
+      GithubCLI::Formatter.render_output response, :format => format
     end
 
     class All

@@ -7,6 +7,7 @@ module GithubCLI
     DEFAULT_HEIGHT = 40
 
     class << self
+
       def default_width
         DEFAULT_WIDTH
       end
@@ -15,25 +16,13 @@ module GithubCLI
         GithubCLI.ui.terminal_width
       end
 
-      def new_line
-        $stdout.print "\n"
+      def line(text)
+        $stdout.print text
       end
 
-      def render_output(response, options={})
-        render_status response
-        paged_output
-        case options[:format].to_s
-        when 'table'
-          formatter = Formatters::Table.new(response)
-          formatter.format
-        when 'csv'
-          formatter = Formatters::CSV.new(response)
-          formatter.format
-        when 'json'
-          'json output'
-        else
-          raise UnknownFormatError, options[:format]
-        end
+      def newline
+        $stdout.print "\n"
+        nil
       end
 
       def paged_output
@@ -47,17 +36,6 @@ module GithubCLI
 
       def pager
         @pager ||= Pager.new
-      end
-
-      # Render status code
-      def render_status(response)
-        if response.respond_to? :status
-          puts "Response Status: #{response.status}"
-          puts
-        end
-      end
-
-      def render_header
       end
 
       def print_commands(pattern=nil)
