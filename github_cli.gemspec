@@ -5,7 +5,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ["Piotr Murach"]
   gem.email         = ["pmurach@gmail.com"]
   gem.description   = %q{CLI-based access to GitHub API v3}
-  gem.summary       = %q{CLI-based access to GitHub API v3}
+  gem.summary       = %q{github_cli is a set of tools that provide full command line access to GitHub API v3}
   gem.homepage      = "http://github.com/peter-murach/github_cli"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
