@@ -85,16 +85,17 @@ Usage: ghc #{format_usage(flags, command, :indent => 11)}
         synopsis = "#{flags} #{command} <subcommand> [<args>]"
         indent = options[:indent] || 0
         padding = sprintf("%#{indent}s",'')
-        wrap synopsis, indent, padding
+        length  = options[:length] || default_width
+        wrap synopsis, length, indent, padding
       end
 
       # Wraps text at the given line length using given indent value.
-      def wrap(text, indent, padding)
-        if text.length > default_width - indent
+      def wrap(text, length, indent=0, padding=0)
+        if text.length > length - indent
           paragraphs = []
           line = ''
           text.split(/\s+/).map(&:chomp).reject(&:empty?).each do |fragment|
-            if line.length < default_width - indent
+            if line.length < length - indent
               line << fragment + ' '
             else
               paragraphs << line
