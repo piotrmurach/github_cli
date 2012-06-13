@@ -11,20 +11,20 @@ module GithubCLI
       def format
         case @response
         when Array
-          @response.each do |item|
+          @response.each_with_index do |item, indx|
+            GithubCLI.ui.confirm "##{indx + 1}"
             render_vertical item
-            $stdout.puts
+            Terminal.newline
           end
         when Hash
           render_vertical @response
         else
-          $stdout.puts @response
+          Terminal.line "#{@response}\n"
         end
       end
 
       def render_vertical(item)
-        output = {}
-        GithubCLI::Util.flatten_hash(item.to_hash, output)
+        output = GithubCLI::Util.flatten_hash(item.to_hash)
         GithubCLI.ui.print_table(
           output.keys.zip(GithubCLI::Util.convert_values(output.values))
         )
