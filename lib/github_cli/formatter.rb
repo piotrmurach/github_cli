@@ -5,34 +5,40 @@ module GithubCLI
   # It delegates to other objects like Formatter::Table
   # to perform actual rendering.
   class Formatter
+    attr_reader :response, :format
 
-    class << self
+    def initialize(response, options={})
+      @response = response
+      @format   = options[:format]
+    end
 
-      def render_output(response, options={})
-        render_status response
-        Terminal.paged_output
-        case options[:format].to_s
-        when 'table'
-          formatter = Formatters::Table.new(response)
-          formatter.format
-        when 'csv'
-          formatter = Formatters::CSV.new(response)
-          formatter.format
-        when 'json'
-          'json output'
-        else
-          raise UnknownFormatError, options[:format]
-        end
+    def render_output
+      render_status
+      Terminal.paged_output
+      determine_output_formatter
+    end
+
+    def determine_output_formatter
+      case format.to_s
+      when 'table'
+        formatter = Formatters::Table.new(response)
+        formatter.format
+      when 'csv'
+        formatter = Formatters::CSV.new(response)
+        formatter.format
+      when 'json'
+        'json output'
+      else
+        raise UnknownFormatError, format
       end
+    end
 
-      # Render status code
-      def render_status(response)
-        if response.respond_to? :status
-          Terminal.line "Response Status: #{response.status}\n"
-          Terminal.newline
-        end
+    # Render status code
+    def render_status
+      if response.respond_to? :status
+        Terminal.line "Response Status: #{response.status}\n"
+        Terminal.newline
       end
-
     end
 
   end # Formatter
