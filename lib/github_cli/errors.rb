@@ -8,6 +8,10 @@ module GithubCLI
     end
   end
 
+  class ApiError < GithubCLIError
+    status_code 5
+  end
+
   # Raised when a configuration file is corrupt or missing.
   class ConfigFileNotFound < GithubCLIError
     status_code 10
@@ -33,5 +37,6 @@ module GithubCLI
       super %{ Unrecognized formatting options: #{format} }
     end
   end
+
 
 end # GithubCLI
