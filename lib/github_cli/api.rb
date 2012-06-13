@@ -9,23 +9,22 @@ module GithubCLI
     class << self
 
       def github_api
-        if @@api
-          @@api
-        else
-          @@api = Github.new
-          @@api.oauth_token = GithubCLI.config['oauth_token']
-          @@api.basic_auth  = GithubCLI.config['basic_auth']
-          @@api
+        @@api ||= begin
+          @@api = configure_api
         end
       end
 
       def configure_api
+        @@api = Github.new
+        @@api.oauth_token = GithubCLI.config['oauth_token']
+        @@api.basic_auth  = GithubCLI.config['basic_auth']
+        @@api
       end
 
       def output(format=:table, &block)
         response =  block.call
         formatter = Formatter.new response, :format => format
-        formatter.render_output # response, :format => format
+        formatter.render_output
       end
 
     end
