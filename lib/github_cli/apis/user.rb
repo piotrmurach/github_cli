@@ -7,7 +7,7 @@ module GithubCLI
 
       def get(user, params, format)
         output format do
-          github_api.users.get user, params
+          github_api.users.get params.update(:user => user)
         end
       end
 
