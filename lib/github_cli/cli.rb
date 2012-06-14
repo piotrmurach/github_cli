@@ -16,7 +16,7 @@ module GithubCLI
     map "repository" => :repo,
         "reference"  => :ref,
         "is" => :issue,
-        "-v" => :version,
+        "--version" => :version,
         "ls" => :list
 
     class_option :config, :type => :string,
@@ -34,6 +34,8 @@ module GithubCLI
                  :banner => "less, more etc..."
     class_option :verbose, :type => :boolean,
                  :desc => "Enable verbose output mode."
+    class_option :version, :type => :boolean,
+                 :desc => "Show program version"
 
     desc 'init', 'Generates a configuration file in your home directory'
     long_desc <<-DESC
