@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module GithubCLI
   module Util
     extend self
@@ -32,6 +34,42 @@ module GithubCLI
       when Array then value.map(&:to_s)
       else value.to_s
       end
+    end
+
+    # Shortens string
+    # :trailing - trailing character in place of cutout string
+    def truncate(string, width, options={})
+      trailing = options[:trailing] || '…'
+
+      chars = string.to_s.chars.to_a
+      if chars.length < width && chars.length > 3
+        chars.join
+      elsif chars.length > 3
+        (chars[0, width - 1].join) + trailing
+      end
+    end
+
+    # Pads a string
+    # padder - padding character
+    # align  - align :left, :right, :center
+    def pad(string, width, options={})
+      padder = options[:padder] || ' '
+      align  = options[:align] || :left
+
+      chars = string.chars.to_a
+      if chars.length < width
+        string = case :"#{align}"
+        when :left
+          string + (padder * (width - chars.length))
+        when :right
+          (padder * (width - chars.length)) + string
+        when :center
+          right = ((pad_length = width - chars.length).to_f / 2).ceil
+          left = pad_length - right
+          (padder * left) + string + (padder * right)
+        end
+      end
+      string
     end
   end
 end # GithubCLI
