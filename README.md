@@ -116,7 +116,7 @@ $ ghc auth
 
 ### Output Format
 
-The API responses can be formattaed as `csv`, `json`, `pretty`, `table`.
+The API responses can be formatted as `csv`, `json`, `pretty`, `table`.
 
 By default responses are in tabular format. Run the following
 
@@ -124,11 +124,23 @@ By default responses are in tabular format. Run the following
 ghc repo get peter-murach github_cli
 ```
 
+Tables are available in `horizontal` and `vertical` mode. To enforce table display pass `-h` and `-v` respectively. Otherwise a default orientation will be picked depending on the request made and terminal size.
+
 To get `csv` formatting for easy command piping do
 
 ```shell
 ghc repo ls -u wycats --format=csv
 ```
+
+### Output Paging
+
+By default all responses are paged. You can switch off paging by supplying `no-pager` flag.
+
+```shell
+ghc --no-pager user ls -u wycats
+```
+
+Also you can supply you preferred `pager`, otherwise the paging program is taken from environment variable PAGER if defined or defaults to "less".
 
 ### Examples
 
