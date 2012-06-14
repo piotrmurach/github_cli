@@ -45,7 +45,7 @@ module GithubCLI
       if chars.length < width && chars.length > 3
         chars.join
       elsif chars.length > 3
-        (chars[0, width - 1].join) + trailing
+        (chars[0, width - trailing.length].join) + trailing
       end
     end
 
@@ -56,7 +56,7 @@ module GithubCLI
       padder = options[:padder] || ' '
       align  = options[:align] || :left
 
-      chars = string.chars.to_a
+      chars = string.to_s.chars.to_a
       if chars.length < width
         string = case :"#{align}"
         when :left
