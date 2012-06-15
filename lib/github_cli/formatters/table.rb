@@ -56,6 +56,41 @@ module GithubCLI
         OpenStruct.new OPTIONS[:style]
       end
 
+      # Builds output array from response hash
+      #
+      def build_output
+        case response
+        when Array
+          case transform
+          when :horizontal
+            array = [flatten_hash(response[0].to_hash).keys]
+            response.each do |item|
+              array << convert_values(flatten_hash(item.to_hash).values)
+            end
+            array
+          when :vertical
+            response.inject([]) do |array, item|
+              output = flatten_hash(item.to_hash)
+              rows = output.keys.zip(convert_values(output.values))
+              rows.each {|row| array << row }
+              @total_records = rows.size
+              array
+            end
+          end
+        when Hash
+          output = flatten_hash(response)
+          case transform
+          when :horizontal
+            array = [output.keys]
+            array << convert_values(output.values)
+          when :vertical
+            output.keys.zip(convert_values(output.values))
+          end
+        else
+          [response]
+        end
+      end
+
       def column_widths
         @column_widths ||= begin
           array = case transform
