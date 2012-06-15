@@ -1,9 +1,23 @@
-0.3.2 (June xx, 2012)
+0.4.0 (June 15, 2012)
 
-* Add user followers api commands.
 * Add user api commands.
+* Add user followers api commands.
 * Add organizations api commands.
+* Add organization members api commands.
+* Add organization teams api commands.
 * Add gem logo.
+* Add system configuration utilities.
+* Add response pager to automatically paginate long output with ability to switch
+  it off as well as specify custom pager command.
+* Fix issue with output formatting when simple string response is returned.
+* Add interface feature tests.
+* Add printing of command usage information.
+* Refactor utility methods.
+* Add new formatter for the output rendering.
+* Refactor table & csv output, add vertical & horizontal table rendering.
+* Add utility methods for string truncation and padding.
+* Add ability to output to editor.
+* Update gem dependecies and gem summary.
 
 0.3.1 (May 30, 2012)
 
