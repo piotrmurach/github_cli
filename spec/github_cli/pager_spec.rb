@@ -5,7 +5,7 @@ describe GithubCLI::Pager do
   context '#pager_command' do
     it 'chooses default pagers if none present' do
       GithubCLI::System.stub(:command?) { true }
-      described_class.pager_command.should == 'less'
+      described_class.pager_command.to_s.should =~ /less/
     end
 
     it 'permits custom commands' do

@@ -11,7 +11,7 @@ module GithubCLI
             ENV['GIT_PAGER'], `git config --get-all core.pager`.split.first,
             ENV['PAGER'], 'less -isr', 'more', 'cat', 'pager'
           ]
-          commands = cmds.empty? ? commands : cmds
+          commands = cmds + commands
           commands.compact.uniq.find { |cmd| System.command? cmd }
         end
       end
