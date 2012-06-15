@@ -39,11 +39,14 @@ module GithubCLI
 
       attr_reader :response, :transform, :output_array, :total_records
 
-      def_delegators :@output_array, :each, :<<
+      # Subset of safe methods that both Array and Hash implement
+      def_delegators(:@output_array, :[], :assoc, :each, :empty?, :flatten,
+        :include?, :index, :inspect, :length, :select, :size, :to_a, :values_at,
+        :pretty_print, :rassoc)
 
       def initialize(response, options={})
         @total_records = 1
-        @transform     = options[:transform] || :horizontal
+        @transform     = options[:transform] || :vertical
         @response      = response
         @output_array  = build_output
       end
