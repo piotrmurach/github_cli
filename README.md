@@ -118,13 +118,17 @@ $ ghc auth
 
 The API responses can be formatted as `csv`, `json`, `pretty`, `table`.
 
-By default responses are in tabular format. Run the following
+By default responses are in tabular format. Tables are available in `horizontal` and `vertical` mode. To enforce table display pass `:h` and `:v` respectively. Otherwise a default orientation will be picked depending on the request made and terminal size.
 
 ```shell
-ghc repo get peter-murach github_cli
-```
+ghc user get -u peter-murach --format=table:h
 
-Tables are available in `horizontal` and `vertical` mode. To enforce table display pass `-h` and `-v` respectively. Otherwise a default orientation will be picked depending on the request made and terminal size.
+┏━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳
+┃ type     ┃ login    ┃ public_… ┃ blog     ┃ hireable ┃ followe… ┃ followi… ┃ location ┃ html_url ┃ name     ┃
+┣━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋
+┃ User     ┃ peter-m… ┃ 14       ┃ peter-m… ┃ false    ┃ 18       ┃ 52       ┃ Sheffie… ┃ https:/… ┃ Piotr M… ┃
+┗━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻
+```
 
 To get `csv` formatting for easy command piping do
 
