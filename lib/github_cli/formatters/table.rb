@@ -99,63 +99,59 @@ module GithubCLI
         @column_widths ||= begin
           array = case transform
           when :horizontal
-            output = flatten_hash(response)
-            field_len = ((Terminal.width - (output.keys.length)).to_f / output.keys.length.to_f).round
-            Array.new(output.size, field_len)
+            field_len = (
+              (Terminal.width - (output_array[0].size)).to_f / output_array[0].size.to_f
+            ).round
+            Array.new(output_array[0].size, field_len)
           when :vertical
-            output = flatten_hash(response)
-            field_len = ((Terminal.width - 2).to_f / 2.to_f).round
-            Array.new(2, field_len)
+            start = 0
+            maximas = []
+            colcount = output_array.max{ |a,b| a.size <=> b.size }.size
+
+            start.upto(colcount - 1) do |index|
+              maxima = output_array.map do |row|
+                row[index] ? (style.padding_left+ row[index].to_s.size + style.padding_right) : 0
+              end.max
+              maximas << maxima
+            end
+            maximas
           end
           array
         end
       end
 
+      def column_width(index)
+        width = column_widths[index] || 0
+      end
+
+      def columns
+        column_widths.size
+      end
+
       def total_width
-        column_widths.reduce(0, :+).round + column_widths.size + 1
+        column_widths.reduce(0, :+).round + column_widths.size + border.right.length
       end
 
       def format
         case response
         when Array
-          case transform
-          when :horizontal
-            render_top_line
-            render_row flatten_hash(response[0].to_hash).keys
-            response.each_with_index do |item, indx|
-              render_middle_line
-              output = flatten_hash(item.to_hash)
-              render_row convert_values(output.values)
+          render_top_line
+          output_array.each_with_index do |row, indx|
+            render_row row
+            if (output_array.size - 1 != indx) && ((indx + 1) % total_records == 0)
               render_middle_line
             end
-            render_bottom_line
-          when :vertical
-            render_top_line
-            response.each_with_index do |item, indx|
-              output = flatten_hash(item.to_hash)
-              output.keys.zip(convert_values(output.values)).each do |row|
-                render_row row
-              end
-              render_middle_line
-            end
-            render_bottom_line
           end
+          render_bottom_line
         when Hash
-          output = flatten_hash(response)
-          case transform
-          when :horizontal
-            render_top_line
-            render_row output.keys
-            render_middle_line
-            render_row convert_values(output.values)
-            render_bottom_line
-          when :vertical
-            render_top_line
-            output.keys.zip(convert_values(output.values)).each do |row|
-              render_row row
+          render_top_line
+          output_array.each_with_index do |row, indx|
+            render_row row
+            if transform == :horizontal && output_array.size - 1 != indx
+              render_middle_line
             end
-            render_bottom_line
           end
+          render_bottom_line
         else
           Terminal.line "#{response}\n"
         end
