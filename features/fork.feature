@@ -1,8 +1,10 @@
 Feature: ghc fork
 
   Scenario: Available commands
+
     When I run `ghc fork`
-    Then the output should contain "ghc fork create"
+    Then the exit status should be 0
+      And the output should contain "ghc fork create"
       And the output should contain "ghc fork list"
 
 #   Scenario: List forks

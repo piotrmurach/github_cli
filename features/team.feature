@@ -2,7 +2,8 @@ Feature: ghc team
 
   Scenario: Available commands
     When I run `ghc team`
-    Then the output should contain "ghc team add_member"
+    Then the exit status should be 0
+      And the output should contain "ghc team add_member"
       And the output should contain "ghc team add_repo"
       And the output should contain "ghc team create"
       And the output should contain "ghc team delete"

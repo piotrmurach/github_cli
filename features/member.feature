@@ -1,8 +1,10 @@
 Feature: ghc member
 
   Scenario: Available commands
+
     When I run `ghc member`
-    Then the output should contain "ghc member delete"
+    Then the exit status should be 0
+      And the output should contain "ghc member delete"
       And the output should contain "ghc member list"
       And the output should contain "ghc member member"
       And the output should contain "ghc member publicize"
