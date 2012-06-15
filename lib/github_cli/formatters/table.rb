@@ -46,9 +46,13 @@ module GithubCLI
 
       def initialize(response, options={})
         @total_records = 1
-        @transform     = options[:transform] || :vertical
+        @transform     = determine_layout(options[:transform])
         @response      = response
         @output_array  = build_output
+      end
+
+      def determine_layout(layout)
+        ( !layout.nil? && layout.index('h') ) ? :horizontal : :vertical
       end
 
       def options
@@ -190,7 +194,7 @@ module GithubCLI
             line = line[0...width] + right
           end
         end
-        print line + "\n"
+        Terminal.line line + "\n"
       end
 
       def render_top_line
@@ -250,7 +254,7 @@ module GithubCLI
         fields.each_with_index do |field, indx|
           columns << render_cell(field, indx)
         end
-        print border.left + columns.join + "\n"
+        Terminal.line border.left + columns.join + "\n"
       end
 
     end # Table
