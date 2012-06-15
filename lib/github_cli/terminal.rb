@@ -39,6 +39,8 @@ module GithubCLI
       end
 
       def print_commands(pattern=nil)
+        Terminal.line "\n" + GithubCLI.program_name + "\n"
+        Terminal.newline
         GithubCLI.ui.info "Commands:"
 
         commands = Command.all.select do |cmd|

@@ -43,6 +43,9 @@ Feature: The GHC Executable
       | pull      |
       | ref       |
       | repo      |
+      | tag       |
+      | team      |
       | tree      |
       | user      |
       | watch     |
+

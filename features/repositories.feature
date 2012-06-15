@@ -1,9 +1,17 @@
-@repositories
-Feature: Repository Commands
+Feature: gh repository
 
-  As a developer who wants to interact with GitHub Repository API
-  I have access to commands
+  Scenario: Available commands
+    When I run `ghc repo`
+    Then the output should contain "ghc repo branches"
+      And the output should contain "ghc repo contribs"
+      And the output should contain "ghc repo create"
+      And the output should contain "ghc repo edit"
+      And the output should contain "ghc repo get"
+      And the output should contain "ghc repo list"
+      And the output should contain "ghc repo languages"
+      And the output should contain "ghc repo tags"
+      And the output should contain "ghc repo teams"
 
-  Scenario: List repositories
-    When I run `ghc repo ls --user=wycats`
-    Then the exit status should be 0
+#   Scenario: List repositories
+#     When I run `ghc repo ls --user=wycats`
+#     Then the exit status should be 0

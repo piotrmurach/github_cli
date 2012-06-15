@@ -1,21 +1,17 @@
 Feature: ghc team
 
-  Scenario Outline: Available commands
+  Scenario: Available commands
     When I run `ghc team`
-    Then the output should contain "ghc team <command>"
-
-    Examples:
-      | command       |
-      | add_member    |
-      | add_repo      |
-      | create        |
-      | delete        |
-      | edit          |
-      | get           |
-      | list          |
-      | list_member   |
-      | list_repo     |
-      | member        |
-      | remove_member |
-      | remove_repo   |
-      | repo          |
+    Then the output should contain "ghc team add_member"
+      And the output should contain "ghc team add_repo"
+      And the output should contain "ghc team create"
+      And the output should contain "ghc team delete"
+      And the output should contain "ghc team edit"
+      And the output should contain "ghc team get"
+      And the output should contain "ghc team list"
+      And the output should contain "ghc team list_member"
+      And the output should contain "ghc team list_repo"
+      And the output should contain "ghc team member"
+      And the output should contain "ghc team remove_member"
+      And the output should contain "ghc team remove_repo"
+      And the output should contain "ghc team repo"
