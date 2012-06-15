@@ -11,7 +11,7 @@ module GithubCLI
       extend Forwardable
 
       OPTIONS = {
-        :chars => {
+        :border => {
           'top'          => '━',
           'top_mid'      => '┳',
           'top_left'     => '┏',
@@ -29,19 +29,23 @@ module GithubCLI
         },
         :truncate => '…',
         :style => {
-          'padding_left'  => 1,
-          'padding_right' => 1,
+          :padding_left   => 1,
+          :padding_right  => 1,
           :align          => :left,
           :head           => ['cyan'],
           :compact        => false
         }
       }
 
-      attr_reader :response, :transform
+      attr_reader :response, :transform, :output_array, :total_records
+
+      def_delegators :@output_array, :each, :<<
 
       def initialize(response, options={})
-        @transform = options[:transform] || :vertical
-        @response = response
+        @total_records = 1
+        @transform     = options[:transform] || :horizontal
+        @response      = response
+        @output_array  = build_output
       end
 
       def options
@@ -49,7 +53,7 @@ module GithubCLI
       end
 
       def border
-        OpenStruct.new OPTIONS[:chars]
+        OpenStruct.new OPTIONS[:border]
       end
 
       def style
