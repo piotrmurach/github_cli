@@ -53,6 +53,7 @@ module GithubCLI
     # padder - padding character
     # align  - align :left, :right, :center
     def pad(string, width, options={})
+      supported = [:left, :right, :center]
       padder = options[:padder] || ' '
       align  = options[:align] || :left
 
@@ -67,6 +68,8 @@ module GithubCLI
           right = ((pad_length = width - chars.length).to_f / 2).ceil
           left = pad_length - right
           (padder * left) + string + (padder * right)
+        else
+          raise ArgumentError, "Alignment must be one of: #{supported.join(' ')}"
         end
       end
       string
