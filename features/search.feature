@@ -1,33 +1,10 @@
-@search
-Feature: Github API Commands Search
+Feature: ghc search
 
-  As a developer who wants to search for commands that leverage GitHub APIs
-  When I use interface provided by GHC
-  I have ability to list commands by search criteria
+  Scenario: Available commands
 
-  Scenario: Listing
-    When I run `ghc list`
+    When I run `ghc search`
     Then the exit status should be 0
-    And the output should contain:
-    """
-    Github CLI client
-
-    Commands:
-    """
-
-  Scenario Outline: Pattern Matching
-    When I run `ghc list <pattern>`
-    Then the output should contain "repo"
-    And the output should not contain "issue"
-
-    Examples:
-      | pattern |
-      | re      |
-      | repo    |
-
-  Scenario: No Match
-    When I run `ghc list bla`
-    Then the output should contain:
-    """
-    ghc: 'bla' is not a ghc command. See 'ghc --help'.
-    """
+      And the output should contain "ghc search email"
+      And the output should contain "ghc search issue"
+      And the output should contain "ghc search repo"
+      And the output should contain "ghc search user"

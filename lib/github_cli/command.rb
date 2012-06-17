@@ -13,6 +13,7 @@ module GithubCLI
       user email follower
       org member team
       event
+      search
     )
 
     HELP_COMMAND = 'help'

@@ -28,6 +28,7 @@ end
   pull_request
   reference
   repository
+  search
   tag
   team
   tree

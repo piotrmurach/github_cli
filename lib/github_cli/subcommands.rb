@@ -63,6 +63,9 @@ module GithubCLI
     desc "repo <command>", "Leverage Repositories API"
     subcommand "repo", GithubCLI::Commands::Repositories
 
+    desc "search <command>", "Leverage Search API"
+    subcommand "search", GithubCLI::Commands::Search
+
     desc "tag <command>", "Leverage Tags API"
     subcommand "tag", GithubCLI::Commands::Tags
 
