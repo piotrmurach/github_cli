@@ -114,6 +114,12 @@ Interact with authorizations:
 $ ghc auth
 ```
 
+Interact with search:
+
+```shell
+$ ghc search
+```
+
 ### Output Format
 
 The API responses can be formatted as `csv`, `json`, `pretty`, `table`.
