@@ -12,8 +12,6 @@ module GithubCLI
     method_option :starred, :type => :boolean, :aliases => ["-s"],
                   :default => false,
                   :desc => 'List the authenticated users starred gists'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def list
       Gist.starred if options[:starred]
 
@@ -24,15 +22,11 @@ module GithubCLI
     end
 
     desc 'get <id>', 'Get a single gist'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def get(id)
       Gist.get id, options[:params], options[:format]
     end
 
     desc 'create', 'Create a gist'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     long_desc <<-DESC
       Create a gist
 
@@ -48,8 +42,6 @@ module GithubCLI
     end
 
     desc 'edit <id>', 'Edit a gist'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     long_desc <<-DESC
       Edit a gist
 
@@ -65,36 +57,26 @@ module GithubCLI
     end
 
     desc 'star <id>', 'Star a gist'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def star(id)
       Gist.star id, options[:params], options[:format]
     end
 
     desc 'unstar <id>', 'Unstar a gist'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def unstar(id)
       Gist.unstar id, options[:params], options[:format]
     end
 
     desc 'starred <id>', 'Check if a gist is starred'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def starred(id)
       Gist.starred? id, options[:params], options[:format]
     end
 
     desc 'fork <id>', 'Fork a gist'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def fork(id)
       Gist.fork id, options[:params], options[:format]
     end
 
     desc 'delete <id>', 'Delete a gist'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def delete(id)
       Gist.delete id, options[:params], options[:format]
     end
