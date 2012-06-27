@@ -22,8 +22,6 @@ module GithubCLI
         direction - asc, desc, default: desc \n
         since - Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ \n
     DESC
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def list
       Issue.all options[:params], options[:format]
     end
@@ -47,15 +45,11 @@ module GithubCLI
         direction - asc, desc, default: desc\n
         since - Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ\n
     DESC
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def repo(user, repo)
       Issue.all user, repo, options[:params], options[:format]
     end
 
     desc 'get <user> <repo> <id>', 'Get a single issue'
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def get(user, repo, id)
       Issue.get user, repo, id, options[:params], options[:format]
     end
@@ -70,8 +64,6 @@ module GithubCLI
         milestone - Optional number - Milestone to associate this issue with\n
         labels - Optional array of strings - Labels to associate with this issue
     DESC
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
       Issue.create user, repo, options[:params], options[:format]
     end
@@ -87,8 +79,6 @@ module GithubCLI
         milestone - Optional number - Milestone to associate this issue with\n
         labels - Optional array of strings - Labels to associate with this issue
     DESC
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def edit(user, repo, id)
       Issue.edit user, repo, id, options[:params], options[:format]
     end

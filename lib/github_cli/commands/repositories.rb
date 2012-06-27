@@ -12,8 +12,6 @@ module GithubCLI
     method_option :user, :type => :string, :aliases => ["-u"],
                   :desc => 'List repositories for <user>',
                   :banner => '<user>'
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def list
       if options[:org]
         options[:params]['org'] = options[:org]
@@ -24,8 +22,6 @@ module GithubCLI
     end
 
     desc 'get <user> <repo>', 'Get a repository'
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def get(user, repo)
       Repository.get user, repo, options[:params], options[:format]
     end
@@ -49,8 +45,6 @@ module GithubCLI
     method_option :org, :type => :string, :aliases => ["-o"],
                   :desc => 'Create repository in <organization>',
                   :banner => '<organization>'
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def create
       if options[:org]
         options[:params]['org'] = options[:org]
@@ -72,43 +66,31 @@ module GithubCLI
         has_wiki - Optional boolean - true to enable the wiki for this repository, false to disable it. Default is true \n
         has_downloads Optional boolean - true to enable downloads for this repository \n
     DESC
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def edit(user, repo)
       Repository.edit user, repo, options[:params], options[:format]
     end
 
     desc 'branches <user> <repo>', 'List branches'
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def branches(user, repo)
       Repository.branches user, repo, options[:params], options[:format]
     end
 
     desc 'contribs <user> <repo>', 'List contributors'
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def contribs(user, repo)
       Repository.contributors user, repo, options[:params], options[:format]
     end
 
     desc 'languages <user> <repo>', 'Listing all languages'
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def languages(user, repo)
       Repository.languages user, repo, options[:params], options[:format]
     end
 
     desc 'tags <user> <repo>', 'Listing all tags'
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def tags(user, repo)
       Repository.tags user, repo, options[:params], options[:format]
     end
 
     desc 'teams <user> <repo>', 'Listing all teams'
-    method_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def teams(user, repo)
       Repository.teams user, repo, options[:params], options[:format]
     end

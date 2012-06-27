@@ -6,15 +6,11 @@ module GithubCLI
     namespace :team
 
     desc 'list <org>', "List teams"
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def list(org)
       Team.all org, options[:params], options[:format]
     end
 
     desc 'get <id>', "Get a team"
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def get(id)
       Team.get id, options[:params], options[:format]
     end
@@ -32,8 +28,6 @@ module GithubCLI
       * push - team members can pull and push, but not administor this repositores.\n
       * admin - team members can pull, push and administor these repositories.\n
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def create(org)
       Team.create org, options[:params], options[:format]
     end
@@ -50,8 +44,6 @@ module GithubCLI
       * push - team members can pull and push, but not administor this repositores.\n
       * admin - team members can pull, push and administor these repositories.\n
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def edit(id)
       Team.edit id, options[:params], options[:format]
     end
@@ -60,15 +52,11 @@ module GithubCLI
     long_desc <<-DESC
       In order to delete a team, the authenticated user must be an owner of the org that the team is associated with.
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def delete(id)
       Team.delete id, options[:params], options[:format]
     end
 
     desc 'list_member <id>', "List team <id> members"
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def list_member(id)
       Team.all_member id, options[:params], options[:format]
     end
@@ -77,8 +65,6 @@ module GithubCLI
     long_desc <<-DESC
       In order to get if a user is a member of a team, the authenticated user must be a member of the team.
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def member(id, user)
       Team.member id, user, options[:params], options[:format]
     end
@@ -87,8 +73,6 @@ module GithubCLI
     long_desc <<-DESC
       In order to add a user to a team, the authenticated user must have ‘admin’ permissions to the team or be an owner of the org that the team is associated with.
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def add_member(id, user)
       Team.add_member id, user, options[:params], options[:format]
     end
@@ -100,22 +84,16 @@ module GithubCLI
       is associated with. NOTE: This does not delete the user, it just remove
       them from the team.
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def remove_member(id, user)
       Team.remove_member id, user, options[:params], options[:format]
     end
 
     desc 'list_repo <id>', "List team <id> repositories"
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def list_repo(id)
       Team.all_repo id, options[:params], options[:format]
     end
 
     desc 'repo <id> <user> <repo>', 'Check if <repo> is managed by <id> team'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def repo(id, user, repo)
       Team.repo id, user, repo, options[:params], options[:format]
     end
@@ -126,8 +104,6 @@ module GithubCLI
       of the org that the team is associated with. Also, the repo must be owned
       by the organization, or a direct for of a repo owned by the organization.
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def add_repo(id, user, repo)
       Team.add_repo id, user, repo, options[:params], options[:format]
     end
@@ -138,8 +114,6 @@ module GithubCLI
       owner of the org that the team is associated with. NOTE: This does not
       delete the repo, it just removes it from the team.
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def remove_repo(id, user, repo)
       Team.remove_repo id, user, repo, options[:params], options[:format]
     end

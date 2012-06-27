@@ -6,15 +6,11 @@ module GithubCLI
     namespace :download
 
     desc 'list <user> <repo>', 'Lists downloads'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def list(user, repo)
       Download.all user, repo, options[:params], options[:format]
     end
 
     desc 'get <user> <repo> <id>', 'Get a download'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def get(user, repo, id)
       Download.get user, repo, id, options[:params], options[:format]
     end
@@ -33,8 +29,6 @@ module GithubCLI
         description - Optional string \n
         content_type - Optional string \n
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
       Download.create user, repo, options[:params], options[:format]
     end
@@ -57,8 +51,6 @@ module GithubCLI
     end
 
     desc 'delete <user> <repo> <id>', 'Delete a download'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def delete(user, repo, id)
       Download.delete user, repo, id, options[:params], options[:format]
     end

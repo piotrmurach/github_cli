@@ -8,8 +8,6 @@ module GithubCLI
     desc 'get <user> <repo> <sha>', 'Get a Tree'
     method_option :recursive, :type => :boolean, :aliases => ["-r"],
                   :desc => 'get a tree recursively'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def get(user, repo, sha)
       if options[:recursive]
         options[:params]['recursive'] = true
@@ -34,8 +32,6 @@ module GithubCLI
       tree.sha - String of SHA1 checksum ID of the object in the tree
       tree.content - String of content you want this file to have - GitHub will write this blob out and use the SHA for this entry. Use either this or tree.sha
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
       Tree.create user, repo, options[:params], options[:format]
     end

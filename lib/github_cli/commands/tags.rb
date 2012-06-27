@@ -8,8 +8,6 @@ module GithubCLI
     desc 'get <user> <repo> <sha>', 'Get a Tag'
     method_option :recursive, :type => :boolean, :aliases => ["-r"],
                   :desc => 'get a tree recursively'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def get(user, repo, sha)
       Tag.get user, repo, sha, options[:params], options[:format]
     end
@@ -32,8 +30,6 @@ module GithubCLI
       tagger.email - String of the email of the author of the tag \n
       tagger.date - Timestamp of when this object was tagged \n
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
       Tag.create user, repo, options[:params], options[:format]
     end

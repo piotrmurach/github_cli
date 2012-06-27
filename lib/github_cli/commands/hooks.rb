@@ -6,15 +6,11 @@ module GithubCLI
     namespace :hook
 
     desc 'list <user> <repo>', 'Lists hooks'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def list(user, repo)
       Hook.all user, repo, options[:params], options[:format]
     end
 
     desc 'get <user> <repo> <id>', 'Get a hook'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def get(user, repo, id)
       Hook.get user, repo, id, options[:params], options[:format]
     end
@@ -28,8 +24,6 @@ module GithubCLI
       events - Optional array - Determines what events the hook is triggered for. Default: ["push"] \n
       active - Optional boolean - Determines whether the hook is actually triggered on pushes.
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
       Hook.create user, repo, options[:params], options[:format]
     end
@@ -50,15 +44,11 @@ module GithubCLI
     end
 
     desc 'test <user> <repo> <id>', 'Test a hook'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def test(user, repo, id)
       Hook.test user, repo, id, options[:params], options[:format]
     end
 
     desc 'delete <user> <repo> <id>', 'Delete a hook'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def delete(user, repo, id)
       Hook.delete user, repo, id, options[:params], options[:format]
     end

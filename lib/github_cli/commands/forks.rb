@@ -16,8 +16,6 @@ module GithubCLI
     method_option :sort, :type => :string, :aliases => ["-s"],
                   :desc => 'Sort by newest, oldest or watchers',
                   :banner => '<sort-category>'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
     def list(user, repo)
       if options[:sort]
         options[:params]['sort'] = options[:sort]
@@ -28,8 +26,6 @@ module GithubCLI
     desc 'create <user> <repo>', 'Create a new fork'
     method_option :org, :type => :string,
                   :desc => ' Organization login. The repository will be forked into this organization.'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def create(user, repo)
       if options[:org]
         options[:params]['org'] = options[:org]
