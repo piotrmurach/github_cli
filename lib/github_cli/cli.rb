@@ -13,11 +13,15 @@ module GithubCLI
       options["no-pager"] ? Pager.disable : Pager.enable
     end
 
-    map "repository" => :repo,
-        "reference"  => :ref,
-        "is" => :issue,
-        "--version" => :version,
-        "ls" => :list
+    ALIASES = {
+      'repository' => 'repo',
+      'reference'  => 'ref',
+      'is'         => :issue,
+      '--version'  => 'version',
+      'ls'         => 'list'
+    }
+
+    map ALIASES
 
     class_option :config, :type => :string,
                  :desc => "Configuration file.", :banner => "Config file name",
