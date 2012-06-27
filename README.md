@@ -1,8 +1,9 @@
 # GithubCLI<img src="https://github.com/peter-murach/github_cli/raw/master/ghc_logo.png" align="right" />
-[![Build Status](https://secure.travis-ci.org/peter-murach/github_cli.png?branch=master)][travis] [![Dependency Status](https://gemnasium.com/peter-murach/github_cli.png?travis)][gemnasium]
+[![Build Status](https://secure.travis-ci.org/peter-murach/github_cli.png?branch=master)][travis] [![Dependency Status](https://gemnasium.com/peter-murach/github_cli.png?travis)][gemnasium] [![Code Climate](https://codeclimate.com/badge.png)][codeclimate]
 
 [travis]: http://travis-ci.org/peter-murach/github_cli
 [gemnasium]: https://gemnasium.com/peter-murach/github_cli
+[codeclimate]: https://codeclimate.com/github/peter-murach/github_cli
 
 CLI-based access to GitHub API v3 that works hand-in-hand with 'github_api' gem.
 
