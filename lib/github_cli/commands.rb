@@ -6,6 +6,7 @@ module GithubCLI
     autoload :Blobs,          'github_cli/commands/blobs'
     autoload :Collaborators,  'github_cli/commands/collaborators'
     autoload :Commits,        'github_cli/commands/commits'
+    autoload :Contents,       'github_cli/commands/contents'
     autoload :Downloads,      'github_cli/commands/downloads'
     autoload :Emails,         'github_cli/commands/emails'
     autoload :Events,         'github_cli/commands/events'

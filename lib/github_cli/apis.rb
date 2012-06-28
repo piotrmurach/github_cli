@@ -13,6 +13,7 @@ end
   blob
   collaborator
   commit
+  content
   download
   email
   follower

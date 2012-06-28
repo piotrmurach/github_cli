@@ -15,6 +15,9 @@ module GithubCLI
     desc "commit <command>", "Leverage Commits API"
     subcommand "commit", GithubCLI::Commands::Commits
 
+    desc "content <command>", "Leverage Contents API"
+    subcommand "content", GithubCLI::Commands::Contents
+
     desc "download <command>", "Leverage Downloads API"
     subcommand "download", GithubCLI::Commands::Downloads
 
