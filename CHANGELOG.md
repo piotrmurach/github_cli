@@ -1,3 +1,10 @@
+0.4.1 (June 28, 2012)
+
+* Add search api commands.
+* Add repo content api commands.
+* Remove params from all commands up to command.
+* Add more feature tests for the command interface.
+
 0.4.0 (June 15, 2012)
 
 * Add user api commands.
