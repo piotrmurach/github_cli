@@ -9,6 +9,7 @@ require 'github_cli/thor_ext'
 require 'github_cli/version'
 require 'github_cli/errors'
 
+# Base module which adds Github API to the command line
 module GithubCLI
   autoload :DSL,       'github_cli/dsl'
   autoload :Config,    'github_cli/config'
@@ -26,6 +27,8 @@ module GithubCLI
   autoload :Util,      'github_cli/util'
 
   require 'github_cli/apis'
+  require 'github_cli/command/completion'
+  require 'github_cli/command/usage'
 
   extend DSL
 
