@@ -29,6 +29,7 @@ module GithubCLI
   require 'github_cli/apis'
   require 'github_cli/command/completion'
   require 'github_cli/command/usage'
+  require 'github_cli/command/arguments'
 
   extend DSL
 
