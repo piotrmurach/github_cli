@@ -73,6 +73,7 @@ Interact with issues:
 $ ghc issue
 $ ghc label
 $ ghc milestone
+$ ghc comment
 ```
 
 Interact with repositories:
@@ -80,6 +81,7 @@ Interact with repositories:
 ```shell
 $ ghc repo
 $ ghc collab
+$ ghc content
 $ ghc download
 $ ghc fork
 $ ghc hook
