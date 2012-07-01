@@ -74,6 +74,8 @@ module GithubCLI
         klass.namespace.split(':').last
       end
 
+      # Decide whether to show specific command or placeholder
+      #
       def command_to_show(command)
         command_token = Command.all.find do |cmd|
           end_index = command.index('<').nil? ? -1 : command.index('<')
