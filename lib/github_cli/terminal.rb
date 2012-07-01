@@ -45,26 +45,25 @@ module GithubCLI
         end
       end
 
-      def print_commands(pattern=nil)
-        Terminal.line "\n" + GithubCLI.program_name + "\n"
-        Terminal.newline
-        GithubCLI.ui.info "Commands:"
-
-        commands = find_commands(pattern).map { |cmd| build_command_output cmd }
-
-        if !commands.empty?
-          GithubCLI.ui.print_table commands, :truncate => true
-        else
-          print_cmmand_not_found pattern.to_s.gsub(/\W|/, '')[3..-1]
-        end
-      end
-
       def build_command_output(cmd, indent=3)
         prefix = " " * indent
         if cmd.namespace.empty?
           ["#{prefix + cmd.usage}", cmd.desc]
         else
           ["#{prefix + cmd.namespace} #{cmd.usage}", cmd.desc]
+        end
+      end
+
+      def print_commands(pattern=nil)
+        Terminal.line "\n" + GithubCLI.program_name + "\n\n"
+
+        commands = find_commands(pattern).map { |cmd| build_command_output cmd }
+
+        if !commands.empty?
+          GithubCLI.ui.info "Commands:"
+          GithubCLI.ui.print_table commands, :truncate => true
+        else
+          print_command_not_found pattern.to_s.gsub(/\W|/, '')[3..-1]
         end
       end
 
