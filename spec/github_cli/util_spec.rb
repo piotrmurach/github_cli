@@ -44,4 +44,16 @@ describe GithubCLI::Util do
       subject.convert_value(values).should eq(["123", "baz", "2.3"])
     end
   end
+
+  describe '#longest_common_prefix' do
+    it 'finds common prefix' do
+      a = 'tribe'; b = 'tree'
+      subject.longest_common_prefix(a,b).should == "tr"
+    end
+
+    it 'fails to find common prefix' do
+      a = 'foo'; b = 'bar'
+      subject.longest_common_prefix(a,b).should be_empty
+    end
+  end
 end # GithubCLI::Util

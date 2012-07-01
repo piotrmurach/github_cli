@@ -4,6 +4,8 @@ module GithubCLI
   module Util
     extend self
 
+    # Converts deeply nested hash into only one level structure
+    #
     def flatten_hash(prefix=nil, hash)
       new_hash ||= {}
       hash.each do |key, val|
@@ -26,6 +28,8 @@ module GithubCLI
       end
     end
 
+    # Attempts to convert value object to string
+    #
     def convert_value(value)
       case value
       when true  then "true"
@@ -38,6 +42,7 @@ module GithubCLI
 
     # Shortens string
     # :trailing - trailing character in place of cutout string
+    #
     def truncate(string, width, options={})
       trailing = options[:trailing] || '…'
 
@@ -52,6 +57,7 @@ module GithubCLI
     # Pads a string
     # padder - padding character
     # align  - align :left, :right, :center
+    #
     def pad(string, width, options={})
       supported = [:left, :right, :center]
       padder = options[:padder] || ' '
@@ -73,6 +79,12 @@ module GithubCLI
         end
       end
       string
+    end
+
+    # Compares two string to find common prefix
+    #
+    def longest_common_prefix(string_1, string_2)
+      ("#{string_1}\0#{string_2}").match(/^(.*).*\0\1/i).to_a[1]
     end
   end
 end # GithubCLI
