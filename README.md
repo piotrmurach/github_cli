@@ -41,6 +41,28 @@ This will setup a `.githubrc` configuration file in your home directory with
 all the global settings. During the install process you will be prompted for your
 `authentication token`.
 
+### Arguments
+
+The required arguments come first as per command description, then follow the optional arguments inside a `params` flag.
+
+You can create repository by supplying parameters in the following way:
+
+```shell
+ghc repo create octokit --params=description:'Test repo for kitty.'
+```
+
+To create repository inside organization:
+
+```shell
+ghc repo create github/octokit --params=description:'Test repo for kitty.'
+```
+
+To find out which options are required and optional type:
+
+```shell
+ghc repo help create
+```
+
 ### Getting a list of commands
 
 You can list all GitHub APIs comamnds:
@@ -54,6 +76,38 @@ to limit returned results pass `pattern`
 ```shell
 $ ghc list re*   # Returns all commands matching the pattern
 ```
+
+### Output Format
+
+The API responses can be formatted as `csv`, `json`, `pretty`, `table`.
+
+By default responses are in tabular format. Tables are available in `horizontal` and `vertical` mode. To enforce table display pass `:h` and `:v` respectively. Otherwise a default orientation will be picked depending on the request made and terminal size.
+
+```shell
+ghc user get -u peter-murach --format=table:h
+
+┏━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳
+┃ type     ┃ login    ┃ public_… ┃ blog     ┃ hireable ┃ followe… ┃ followi… ┃ location ┃ html_url ┃ name     ┃
+┣━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋
+┃ User     ┃ peter-m… ┃ 14       ┃ peter-m… ┃ false    ┃ 18       ┃ 52       ┃ Sheffie… ┃ https:/… ┃ Piotr M… ┃
+┗━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻
+```
+
+To get `csv` formatting for easy command piping do
+
+```shell
+ghc repo ls -u wycats --format=csv
+```
+
+### Output Paging
+
+By default all responses are paged. You can switch off paging by supplying `no-pager` flag.
+
+```shell
+ghc --no-pager user ls -u wycats
+```
+
+Also you can supply you preferred `pager`, otherwise the paging program is taken from environment variable PAGER if defined or defaults to "less".
 
 ### API
 
@@ -121,52 +175,6 @@ Interact with search:
 
 ```shell
 $ ghc search
-```
-
-### Output Format
-
-The API responses can be formatted as `csv`, `json`, `pretty`, `table`.
-
-By default responses are in tabular format. Tables are available in `horizontal` and `vertical` mode. To enforce table display pass `:h` and `:v` respectively. Otherwise a default orientation will be picked depending on the request made and terminal size.
-
-```shell
-ghc user get -u peter-murach --format=table:h
-
-┏━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳
-┃ type     ┃ login    ┃ public_… ┃ blog     ┃ hireable ┃ followe… ┃ followi… ┃ location ┃ html_url ┃ name     ┃
-┣━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋
-┃ User     ┃ peter-m… ┃ 14       ┃ peter-m… ┃ false    ┃ 18       ┃ 52       ┃ Sheffie… ┃ https:/… ┃ Piotr M… ┃
-┗━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻
-```
-
-To get `csv` formatting for easy command piping do
-
-```shell
-ghc repo ls -u wycats --format=csv
-```
-
-### Output Paging
-
-By default all responses are paged. You can switch off paging by supplying `no-pager` flag.
-
-```shell
-ghc --no-pager user ls -u wycats
-```
-
-Also you can supply you preferred `pager`, otherwise the paging program is taken from environment variable PAGER if defined or defaults to "less".
-
-### Examples
-
-You can create repository by supplying required parameters
-
-```shell
-ghc repo create --params=name:'octocat' description:'Test repo for kitty.'
-```
-
-To find out which options are required type
-
-```shell
-ghc repo help create
 ```
 
 ## Contributing
