@@ -4,6 +4,11 @@ branches:
   only: master
 notifications:
   email:false
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+    - jruby
+    - rbx-19mode
 rvm:
   - 1.9.2
   - 1.9.3
