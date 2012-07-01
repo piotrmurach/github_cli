@@ -4,6 +4,7 @@ module GithubCLI
   class Commands::Repositories < Command
 
     namespace :repo
+    # TODO: format_type options[:format]
 
     desc 'list', 'Lists all repositories'
     method_option :org, :type => :string, :aliases => ["-o"],
@@ -26,13 +27,12 @@ module GithubCLI
       Repository.get user, repo, options[:params], options[:format]
     end
 
-    desc 'create', 'Create a new repository for the authenticated user.'
+    desc 'create [<org>/]<name>', 'Create a new repository <name> for the authenticated user.'
     long_desc <<-DESC
       Create a new repository for the autheticated user.
 
       Parameters
 
-        name - Required string \n
         description - Optional string \n
         homepage - Optional string \n
         private - Optional boolean - true to create a private repository, false to create a public one \n
@@ -45,10 +45,11 @@ module GithubCLI
     method_option :org, :type => :string, :aliases => ["-o"],
                   :desc => 'Create repository in <organization>',
                   :banner => '<organization>'
-    def create
-      if options[:org]
-        options[:params]['org'] = options[:org]
-      end
+    def create(args)
+      org, options[:params]['name'] = Arguments.new(args).parse
+      options[:params]['org'] = org if org
+      options[:params]['org'] = options[:org] if options[:org]
+
       Repository.create options[:params], options[:format]
     end
 
