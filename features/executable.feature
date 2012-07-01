@@ -18,17 +18,6 @@ Feature: The GHC Executable
       |      |
       | help |
 
-  Scenario: Getting Usage for Commands
-
-    When I run `ghc`
-    Then the exit status should be 0
-    And the output should contain "Usage: ghc"
-      And the output should contain "[--config]"
-      And the output should contain "[--no-color]"
-      And the output should contain "[--no-pager]"
-      And the output should contain "[--version]"
-      And the output should contain "[--verbose]"
-
   Scenario Outline: Getting Subcommands
 
     When I run `ghc <command>`
