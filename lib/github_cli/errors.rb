@@ -12,6 +12,10 @@ module GithubCLI
     status_code 5
   end
 
+  class RequiredArgumentMissingError < GithubCLIError
+    status_code 6
+  end
+
   # Raised when a configuration file is corrupt or missing.
   class ConfigFileNotFound < GithubCLIError
     status_code 10
