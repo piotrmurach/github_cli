@@ -2,10 +2,13 @@
 
 module GithubCLI
   class Config
-    COMMAND_KEY = 'commands'
+
+    COMMAND_KEY  = 'commands'
     COMMAND_HELP = 'help'
 
-    def initialize(root)
+    attr_reader :root
+
+    def initialize(root, options={})
       @root = root
       @local_config  = local_options_file
       @global_config = global_options_file
@@ -69,7 +72,7 @@ module GithubCLI
   private
 
     def local_options_file
-      Pathname.new "#{@root}/.githubrc"
+      Pathname.new "#{root}/.githubrc"
     end
 
     def global_options_file
@@ -88,6 +91,10 @@ module GithubCLI
         save data.to_yaml
       end
       value
+    end
+
+    def inspect
+      "#{self.class.inspect} @root=#{root}"
     end
 
   end # Config

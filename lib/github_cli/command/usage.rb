@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 module GithubCLI
   # Responsible for manipulating commands usage string.
   class Command
@@ -54,7 +56,7 @@ module GithubCLI
         text
       end
 
-      # Returns a concise string representation of Completion instance
+      # Returns a concise string representation of Usage instance
       #
       def inspect
         "#<#{self.class.inspect} @command=#{command.inspect} @flags=#{flags.inspect}"
