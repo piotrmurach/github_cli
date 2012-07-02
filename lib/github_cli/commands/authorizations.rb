@@ -6,29 +6,31 @@ module GithubCLI
     namespace :auth
 
     desc 'list', 'Lists your authorizations'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
+    long_desc <<-DESC
+      You can only list your own tokens, and only through Basic Authentication.
+    DESC
     def list
       Authorization.all options[:params], options[:formats]
     end
 
     desc 'get <id>', 'Get a single authorization'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additional request parameters e.i per_page:100'
+    long_desc <<-DESC
+      You can only access your own token, and only through Basic Authentication.
+    DESC
     def get(id)
       Authorization.get id, options[:params], options[:format]
     end
 
-    desc 'create <user> <repo>', 'Create a new authorization'
+    desc 'create', 'Create a new authorization'
     long_desc <<-DESC
+      You can only create your own token, and only through Basic Authentication.\n
+
       Inputs
 
       scopes - Optional array - A list of scopes that this authorization is in.\n
       note - Optional string - A note to remind you what the OAuth token is for.\n
       note_url - Optional string - A URL to remind you what the OAuth token is for.
     DESC
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def create
       Authorization.create options[:params], options[:format]
     end
@@ -48,8 +50,6 @@ module GithubCLI
     end
 
     desc 'delete <id>', 'Delete an authorization'
-    method_option :params, :type => :hash, :default => {},
-                  :desc => 'Additonal request parameters e.i per_page:100'
     def delete(id)
       Authorization.delete id, options[:params], options[:format]
     end
