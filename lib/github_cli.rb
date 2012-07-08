@@ -33,7 +33,7 @@ module GithubCLI
 
   extend DSL
 
-  program_name 'Github CLI client'
+  program_name 'GitHub API v3 CLI client'
 
   class << self
     attr_writer :ui, :config
