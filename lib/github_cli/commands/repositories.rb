@@ -6,7 +6,7 @@ module GithubCLI
     namespace :repo
     # TODO: format_type options[:format]
 
-    desc 'list', 'Lists all repositories'
+    desc 'list', 'Lists all repositories for the authenticated user'
     method_option :org, :type => :string, :aliases => ["-o"],
                   :desc => 'List repositories for <organization>',
                   :banner => '<organization>'
