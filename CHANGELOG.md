@@ -1,3 +1,14 @@
+0.4.2 (July 12, 2012)
+
+* Add 'did you mean' help for mistyped commands.
+* Add utility function for finding common prefix.
+* Extract command usage and completion classes.
+* Fix bug with all commands listing.
+* Add arguments parser for required and optional arguments.
+* Add non-required argument parsing to repository creation.
+* Add new error type for required arguments.
+* Fix bug with creating authorizations.
+
 0.4.1 (June 28, 2012)
 
 * Add search api commands.
