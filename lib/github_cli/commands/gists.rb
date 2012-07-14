@@ -13,12 +13,14 @@ module GithubCLI
                   :default => false,
                   :desc => 'List the authenticated users starred gists'
     def list
-      Gist.starred if options[:starred]
-
-      if options[:user]
-        options[:params]['user'] = options[:user]
+      if options[:starred]
+        Gist.starred options[:params], options[:format]
+      else
+        if options[:user]
+          options[:params]['user'] = options[:user]
+        end
+        Gist.all options[:params], options[:format]
       end
-      Gist.all options[:params], options[:format]
     end
 
     desc 'get <id>', 'Get a single gist'
