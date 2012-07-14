@@ -22,7 +22,7 @@ module GithubCLI
 
     desc 'remove <user> <repo> <id>', 'Remove a collaborator'
     def remove(user, repo, collab)
-      Collaborator.remove user, repo, collab, options[:params]. options[:format]
+      Collaborator.remove user, repo, collab, options[:params], options[:format]
     end
 
   end # Collaborators
