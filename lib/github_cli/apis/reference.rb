@@ -5,9 +5,9 @@ module GithubCLI
 
     class << self
 
-      def list(user, repo, ref, params, format)
+      def list(user, repo, params, format)
         output format do
-          github_api.git_data.references.list user, repo, ref, params
+          github_api.git_data.references.list user, repo, params
         end
       end
 

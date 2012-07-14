@@ -5,14 +5,14 @@ module GithubCLI
 
     namespace :pull
 
-    desc 'get <user> <repo> <number>', 'Get a Pull Request'
-    def get(user, repo, number)
-      PullRequest.get user, repo, number, options[:params], options[:format]
-    end
-
     desc 'list <user> <repo>', 'List all Pull Requests'
     def list(user, repo)
       PullRequest.list user, repo, options[:params], options[:format]
+    end
+
+    desc 'get <user> <repo> <number>', 'Get a Pull Request'
+    def get(user, repo, number)
+      PullRequest.get user, repo, number, options[:params], options[:format]
     end
 
     desc 'create <user> <repo>', 'Create a new Pull Request'

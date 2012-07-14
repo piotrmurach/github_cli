@@ -5,27 +5,27 @@ module GithubCLI
 
     class << self
 
-      def get(user, repo, number, params, format)
+      def list(user, repo, params, format)
         output format do
-          github_api.pull_requests.pull_request user, repo, number, params
+          github_api.pull_requests.list user, repo, params
         end
       end
 
-      def list(user, repo, ref, params, format)
+      def get(user, repo, number, params, format)
         output format do
-          github_api.pull_requests.pull_requests user, repo, ref, params
+          github_api.pull_requests.get user, repo, number, params
         end
       end
 
       def create(user, repo, params, format)
         output format do
-          github_api.pull_requests.create_request user, repo, params
+          github_api.pull_requests.create user, repo, params
         end
       end
 
       def update(user, repo, number, params, format)
         output format do
-          github_api.pull_requests.update_request user, repo, number, params
+          github_api.pull_requests.update user, repo, number, params
         end
       end
 
@@ -43,7 +43,7 @@ module GithubCLI
 
       def merged(user, repo, number, params, format)
         output format do
-          github_api.pull_requests.merged user, repo, number, params
+          github_api.pull_requests.merged? user, repo, number, params
         end
       end
 
