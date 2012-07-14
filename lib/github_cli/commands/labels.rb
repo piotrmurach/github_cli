@@ -40,25 +40,20 @@ module GithubCLI
       Label.issue user, repo, number, options[:params], options[:format]
     end
 
-    desc 'add <user> <repo> <number>', 'Add labels to an issue.'
-    method_option :labels, :type => :string,
-                  :desc => 'Labels to be added to this issue.'
-    def add(user, repo, number)
-      Label.add user, repo, number, options[:labels], options[:params]
+    desc 'add <user> <repo> <issue_id> <label>[<label>...]', 'Add labels to <issue_id>.'
+    def add(user, repo, issue_id, *args)
+      Label.add user, repo, issue_id, *args, options[:params], options[:format]
     end
 
-    desc 'remove <user> <repo> <number>', 'List labels on an issue.'
-    method_option :name, :type => :string, :default => nil,
-                  :desc => 'Label name'
+    desc 'remove <user> <repo> [<label_id>/]<issue_id>', 'Remove <label_id> from an <issue_id>'
     def remove(user, repo, number)
-      Label.issue user, repo, number, options[:name], options[:params], options[:format]
+      label_id, issue_id  = Arguments.new(number).parse
+      Label.remove user, repo, issue_id, label_id, options[:params], options[:format]
     end
 
-    desc 'replace <user> <repo> <number>', 'Replace all labels for an issue.'
-    method_option :labels, :type => :string,
-                  :desc => 'Labels to be replace in this issue.'
-    def replace(user, repo, number)
-      Label.replace user, repo, number, options[:labels], options[:params]
+    desc 'replace <user> <repo> <issue_id> <label>[<label>...]', 'Replace all labels for an <issue_id>.'
+    def replace(user, repo, issue_id, *args)
+      Label.replace user, repo, issue_id, *args, options[:params], options[:format]
     end
 
     desc 'milestone <user> <repo> <number>', 'Get labels for every issue in a milestone.'

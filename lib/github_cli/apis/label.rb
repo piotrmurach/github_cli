@@ -5,65 +5,63 @@ module GithubCLI
 
     class << self
 
-      def all(params, format)
+      def all(user, repo, params, format)
         output format do
-          github_api.issues.labels params
+          github_api.issues.labels.list user, repo, params
         end
       end
 
       def get(user, repo, name, params, format)
         output format do
-          github_api.issues.get_label user, repo, name, params
+          github_api.issues.labels.get user, repo, name, params
         end
       end
 
       def create(user, repo, params, format)
         output format do
-          github_api.issues.create_label user, repo, params
+          github_api.issues.labels.create user, repo, params
         end
       end
 
       def update(user, repo, name, params, format)
         output format do
-          github_api.issues.update_label user, repo, params
+          github_api.issues.labels.update user, repo, name, params
         end
       end
 
       def delete(user, repo, name, params, format)
         output format do
-          github_api.issues.delete_label user, repo, name, params
+          github_api.issues.labels.delete user, repo, name, params
         end
       end
 
-      def issue(user, repo, number, params, format)
+      def issue(user, repo, issue_id, params, format)
         output format do
-          github_api.issues.labels_for user, repo, number, params
+          github_api.issues.labels.issue user, repo, issue_id, params
         end
       end
 
-      def add(user, repo, number, *args)
-        # TODO extract params from args
-        output :table do
-          github_api.issues.add_labels user, repo, args
-        end
-      end
-
-      def remove(user, repo, number, name=nil, params, format)
+      def add(user, repo, issue_id, *args, params, format)
         output format do
-          github_api.issues.remove_label user, repo, number, name, params
+          github_api.issues.labels.add user, repo, issue_id, *args, params
         end
       end
 
-      def replace(user, repo, number, *args)
-        # TODO extract params from args
-        output :table do
-          github_api.issues.replace_labels user, repo, number, args
+      def remove(user, repo, issue_id, label_id, params, format)
+        output format do
+          github_api.issues.labels.remove user, repo, issue_id, label_id, params
+        end
+      end
+
+      def replace(user, repo, issue_id, *args, params, format)
+        output format do
+          github_api.issues.labels.replace user, repo, issue_id, *args, params
         end
       end
 
       def milestone(user, repo, number, params, format)
         output format do
-          gitub_api.issues.milestone_labels user, repo, number, params
+          github_api.issues.labels.milestone user, repo, number, params
         end
       end
     end
