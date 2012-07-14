@@ -16,6 +16,7 @@ end
   content
   download
   email
+  event
   follower
   fork
   gist
