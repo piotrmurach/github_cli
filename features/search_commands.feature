@@ -10,7 +10,7 @@ Feature: Github API Commands Search
     Then the exit status should be 0
     And the output should contain:
     """
-    Github CLI client
+    GitHub API v3 CLI client
 
     Commands:
     """

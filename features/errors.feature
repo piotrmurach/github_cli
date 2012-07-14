@@ -1,5 +1,6 @@
 Feature: ghc errors notification
 
+  @wip
   Scenario: Unknown formatting option
 
     When I run `ghc repo list -u wycats --format=unknown`
