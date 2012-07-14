@@ -7,7 +7,7 @@ module GithubCLI
 
       def get(user, repo, sha, params, format)
         output format do
-          github_api.git_data.tags.get user, repo, params
+          github_api.git_data.tags.get user, repo, sha, params
         end
       end
 
