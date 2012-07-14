@@ -5,11 +5,13 @@ module GithubCLI
 
     namespace :ref
 
-    desc 'list <user> <repo> <ref>', 'List all References'
+    desc 'list <user> <repo>', 'List all References'
     method_option :ref, :type => :string, :banner => 'branch reference'
     def list(user, repo)
-      ref =  options[:ref] ? options[:ref] : nil
-      Reference.list user, repo, ref, options[:params], options[:format]
+      if options[:ref]
+        options[:params]['ref'] = options[:ref]
+      end
+      Reference.list user, repo, options[:params], options[:format]
     end
 
     desc 'get <user> <repo> <ref>', 'Get a Reference'
