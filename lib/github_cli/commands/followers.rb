@@ -23,7 +23,7 @@ module GithubCLI
 
     desc 'follower <user>', 'Check if you are following a user'
     def follower(user)
-      Follower.following? user, options[:params], options[:format]
+      Follower.follower user, options[:params], options[:format]
     end
 
     desc 'follow <user>', 'Follow a user'
