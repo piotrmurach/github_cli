@@ -6,11 +6,11 @@ module GithubCLI
     namespace :email
 
     desc 'list', 'Lists email addresses for the authenticated user'
-    def list()
+    def list
       Email.all options[:params], options[:format]
     end
 
-    desc 'add <email(s)>...', 'Add email address(es) for the authenticated user'
+    desc 'add <email>[<email>...]', 'Add email address(es) for the authenticated user'
     long_desc <<-DESC
       You can include a single email address or an array of addresses
     DESC
@@ -18,7 +18,7 @@ module GithubCLI
       Email.add emails, options[:params], options[:format]
     end
 
-    desc 'delete <email(s)>...', 'Delete email address(es) for the authenticated user'
+    desc 'delete <email>[<email>...]', 'Delete email address(es) for the authenticated user'
     long_desc <<-DESC
       You can include a single email address or an array of addresses
     DESC
