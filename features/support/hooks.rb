@@ -1,7 +1,7 @@
 require 'fileutils'
 
 Before do
-  @aruba_timeout_seconds = 5
+  @aruba_timeout_seconds = 10
   @real_home = ENV['HOME']
   fake_home = File.join('/tmp', 'fakehome')
   FileUtils.rm_rf fake_home if File.exists? fake_home

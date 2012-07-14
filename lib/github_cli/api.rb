@@ -4,9 +4,13 @@ module GithubCLI
   # The API class is the main entry point for creating GithubCLI APIs.
   class API
 
+    ENDPOINT = ''
+
     @@api = nil
 
     class << self
+
+      attr_reader :config
 
       def github_api
         @@api ||= begin
@@ -18,6 +22,10 @@ module GithubCLI
         @@api = Github.new
         @@api.oauth_token = GithubCLI.config['oauth_token']
         @@api.basic_auth  = GithubCLI.config['basic_auth']
+        puts "#{ENV['TEST_HOST']}"
+        if ENV['TEST_HOST']
+          @@api.endpoint = 'http://' + ENV['TEST_HOST']
+        end
         @@api
       end
 
