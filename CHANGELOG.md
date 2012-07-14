@@ -1,3 +1,16 @@
+0.4.3 (July 14, 2012)
+
+* Add communist gem dependency.
+* Fix bug with getting blob data and add blob api feature tests.
+* Fix bug with getting commit data and add commit api feature tests.
+* Fix bug with removing collaborator and add feature tests.
+* Add content, download, email api commands feature tests.
+* Fix bug with missing event api inclusion and add feature tests.
+* Fix bug with checkig if user is a follower and add feature tests.
+* Fix bug with listing starred gists and add gist api feature tests.
+* Add hook api commands feature tests.
+* Fix bugs with labels api coammands using old github_api gem method calls.
+
 0.4.2 (July 12, 2012)
 
 * Add 'did you mean' help for mistyped commands.
