@@ -5,12 +5,13 @@ module GithubCLI
 
     namespace :org
 
-    desc 'list', 'List public and private organizations for the authenticated user'
+    desc 'list [--user=<name>]', 'List public and private organizations for the authenticated user'
     method_option :user, :type => :string, :aliases => ["-u"],
                   :desc => 'List all public organizations for a user',
                   :banner => '<user>'
     def list
-      Organization.list options[:user], options[:params], options[:format]
+      options[:params]['user'] = options[:user] if options[:user]
+      Organization.list options[:params], options[:format]
     end
 
     desc 'get <org>', 'Get properties for a single organization'
@@ -27,9 +28,13 @@ module GithubCLI
       email - Optional string\n
       location - Optional string\n
       name - Optional string\n
+
+      Example
+
+      ghc org edit rails --params=name:github company:GitHub email:support@github.com
     DESC
     def edit(org)
-      Oraanization.edit org, options[:params], options[:format]
+      Organization.edit org, options[:params], options[:format]
     end
 
   end # Organizations

@@ -5,9 +5,9 @@ module GithubCLI
 
     class << self
 
-      def list(user, params, format)
+      def list(params, format)
         output format do
-          github_api.orgs.list user, params
+          github_api.orgs.list params
         end
       end
 
