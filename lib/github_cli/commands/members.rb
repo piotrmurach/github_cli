@@ -5,7 +5,7 @@ module GithubCLI
 
     namespace :member
 
-    desc 'list <org>', "Lists an organization members"
+    desc 'list [--public] <org>', "Lists an organization members"
     long_desc <<-DESC
       List all users who are members of an organization. A member is a user
       that belongs to at least 1 team in the organization.
@@ -26,7 +26,7 @@ module GithubCLI
       end
     end
 
-    desc 'member <org> <user>', 'Checks if user is a member of an organization'
+    desc 'member [--public] <org> <user>', 'Checks if user is a member of an organization'
     method_option :public, :type => :boolean, :default => false,
                   :desc => 'Get if a user is a public member of an organization'
     def member(org, user)
