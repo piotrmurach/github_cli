@@ -13,7 +13,7 @@ module GithubCLI
 
       def all_repo(user, repo, params, format)
         output format do
-          github_api.issues.list_repo user, reop, params
+          github_api.issues.list_repo user, repo, params
         end
       end
 

@@ -46,10 +46,10 @@ module GithubCLI
         since - Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ\n
     DESC
     def repo(user, repo)
-      Issue.all user, repo, options[:params], options[:format]
+      Issue.all_repo user, repo, options[:params], options[:format]
     end
 
-    desc 'get <user> <repo> <id>', 'Get a single issue'
+    desc 'get <user> <repo> <issue-id>', 'Get a single issue'
     def get(user, repo, id)
       Issue.get user, repo, id, options[:params], options[:format]
     end
@@ -63,12 +63,16 @@ module GithubCLI
         assignee - Optional string - Login for the user that this issue should be assigned to.\n
         milestone - Optional number - Milestone to associate this issue with\n
         labels - Optional array of strings - Labels to associate with this issue
+
+      Example
+
+      ghc issue create wycats thor --params=title:'Found a bug'
     DESC
     def create(user, repo)
       Issue.create user, repo, options[:params], options[:format]
     end
 
-    desc 'edit <user> <repo> <id>', 'Edit an issue.'
+    desc 'edit <user> <repo> <issue-id>', 'Edit an issue.'
     long_desc <<-DESC
       Parameters
 
@@ -78,6 +82,10 @@ module GithubCLI
         state - Optional string - State of the issue: open or closed.
         milestone - Optional number - Milestone to associate this issue with\n
         labels - Optional array of strings - Labels to associate with this issue
+
+      Example
+
+      ghc issue edit wycats thor 1 --params=title:'Found a bug'
     DESC
     def edit(user, repo, id)
       Issue.edit user, repo, id, options[:params], options[:format]
