@@ -1,3 +1,16 @@
+0.4.4 (July 15, 2012)
+
+* Fix bug with tree retrieval and add feature tests.
+* Add repository, tag api commands feature tests.
+* Fix bug with listing references and add feature tests.
+* Fix bugs with pull requests api and add feature tests.
+* Add watching, search api commands tests.
+* Fix bug when adding team repository and add feature tests.
+* Fix bug when editing organization and add feature tests.
+* Fix bug with listing issue on a repository and add tests.
+* Fix bug with updating milestone and add milestone api tests.
+* Improve overal command interface with explicit names and parameters.
+
 0.4.3 (July 14, 2012)
 
 * Add communist gem dependency.
