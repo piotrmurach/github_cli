@@ -11,7 +11,6 @@ module GithubCLI
         end
       end
 
-
       def get(id, params, format)
         output format do
           github_api.orgs.teams.get id, params
@@ -74,7 +73,7 @@ module GithubCLI
 
       def add_repo(id, user, repo, params, format)
         output format do
-          github_api.orgs.teams.add_member id, user, repo, params
+          github_api.orgs.teams.add_repo id, user, repo, params
         end
       end
 

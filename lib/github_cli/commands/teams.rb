@@ -10,7 +10,7 @@ module GithubCLI
       Team.all org, options[:params], options[:format]
     end
 
-    desc 'get <id>', "Get a team"
+    desc 'get <team-id>', "Get a team"
     def get(id)
       Team.get id, options[:params], options[:format]
     end
@@ -32,7 +32,7 @@ module GithubCLI
       Team.create org, options[:params], options[:format]
     end
 
-    desc 'edit <id>', "Edit team <id>"
+    desc 'edit <team-id>', "Edit team <team-id>"
     long_desc <<-DESC
       In order to edit a team, the authenticated user must be an owner of the org that the team is associated with.
 
@@ -48,7 +48,7 @@ module GithubCLI
       Team.edit id, options[:params], options[:format]
     end
 
-    desc 'delete <id>', 'Delete team'
+    desc 'delete <team-id>', 'Delete team <team-id>'
     long_desc <<-DESC
       In order to delete a team, the authenticated user must be an owner of the org that the team is associated with.
     DESC
@@ -56,12 +56,12 @@ module GithubCLI
       Team.delete id, options[:params], options[:format]
     end
 
-    desc 'list_member <id>', "List team <id> members"
+    desc 'list_member <team-id>', "List team <team-id> members"
     def list_member(id)
       Team.all_member id, options[:params], options[:format]
     end
 
-    desc 'member <id> <user>', 'Check if <user> is a team member'
+    desc 'member <team-id> <user>', 'Check if <user> is a team member'
     long_desc <<-DESC
       In order to get if a user is a member of a team, the authenticated user must be a member of the team.
     DESC
@@ -69,7 +69,7 @@ module GithubCLI
       Team.member id, user, options[:params], options[:format]
     end
 
-    desc 'add_member <id> <user>', 'Add team member'
+    desc 'add_member <team-id> <user>', 'Add team member'
     long_desc <<-DESC
       In order to add a user to a team, the authenticated user must have ‘admin’ permissions to the team or be an owner of the org that the team is associated with.
     DESC
@@ -77,7 +77,7 @@ module GithubCLI
       Team.add_member id, user, options[:params], options[:format]
     end
 
-    desc 'remove_member <id> <user>', 'Remove team member'
+    desc 'remove_member <team-id> <user>', 'Remove team member'
     long_desc <<-DESC
       In order to remove a user from a team, the authenticated user must have
       ‘admin’ permissions to the team or be an owner of the org that the team
@@ -88,17 +88,17 @@ module GithubCLI
       Team.remove_member id, user, options[:params], options[:format]
     end
 
-    desc 'list_repo <id>', "List team <id> repositories"
+    desc 'list_repo <team-id>', "List team <team-id> repositories"
     def list_repo(id)
       Team.all_repo id, options[:params], options[:format]
     end
 
-    desc 'repo <id> <user> <repo>', 'Check if <repo> is managed by <id> team'
+    desc 'repo <team-id> <user> <repo>', 'Check if <repo> is managed by <team-id> team'
     def repo(id, user, repo)
       Team.repo id, user, repo, options[:params], options[:format]
     end
 
-    desc 'add_repo <id> <user> <repo>', 'Add team <repo>'
+    desc 'add_repo <team-id> <user> <repo>', 'Add team <repo>'
     long_desc <<-DESC
       In order to add a repo to a team, the authenticated user must be an owner
       of the org that the team is associated with. Also, the repo must be owned
@@ -108,7 +108,7 @@ module GithubCLI
       Team.add_repo id, user, repo, options[:params], options[:format]
     end
 
-    desc 'remove_repo <id> <user> <repo>', 'Remove team <repo>'
+    desc 'remove_repo <team-id> <user> <repo>', 'Remove team <repo>'
     long_desc <<-DESC
       In order to remove a repo from a team, the authenticated user must be an
       owner of the org that the team is associated with. NOTE: This does not
