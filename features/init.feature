@@ -6,14 +6,14 @@ Feature: Init command
   I have ability to create configuration file
 
   Scenario: Init requires scope
-    When I run `ghc init`
+    When I run `gcli init`
     Then the output should contain:
     """
     Invalid scope given. Please use --local or --global.
     """
 
   Scenario: Installs global config file
-    When I run `ghc init --global` interactively
+    When I run `gcli init --global` interactively
       And I type "token"
     Then the output should contain:
     """
@@ -25,14 +25,14 @@ Feature: Init command
   Scenario: Installs local config file
     Given a directory named "piotr"
     When I cd to "piotr"
-      And I run `ghc init --local` interactively
+      And I run `gcli init --local` interactively
       And I type "token"
     Then a file named ".githubrc" should exist
     And the file ".githubrc" should contain "auth.token: token"
 
   Scenario: Global config file arleady exists
     Given an empty file named "/tmp/fakehome/.githubrc"
-    When I run `ghc init --global`
+    When I run `gcli init --global`
     Then the output should contain:
     """
     Not overwritting existing config file /tmp/fakehome/.githubrc, use --force to override.
@@ -40,7 +40,7 @@ Feature: Init command
 
   Scenario: Force global config file override
     Given an empty file named "/tmp/fakehome/.githubrc"
-    When I run `ghc init --global --force` interactively
+    When I run `gcli init --global --force` interactively
       And I type "token"
     Then the output should contain:
     """

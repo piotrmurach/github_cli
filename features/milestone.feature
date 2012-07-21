@@ -1,21 +1,21 @@
-Feature: ghc milestone
+Feature: gcli milestone
 
   Scenario: Available commands
 
-    When I run `ghc milestone`
+    When I run `gcli milestone`
     Then the exit status should be 0
-      And the output should contain "ghc milestone create"
-      And the output should contain "ghc milestone delete"
-      And the output should contain "ghc milestone get"
-      And the output should contain "ghc milestone list"
-      And the output should contain "ghc milestone update"
+      And the output should contain "gcli milestone create"
+      And the output should contain "gcli milestone delete"
+      And the output should contain "gcli milestone get"
+      And the output should contain "gcli milestone list"
+      And the output should contain "gcli milestone update"
 
   Scenario: List milestones
     Given the GitHub API server:
     """
     get('/repos/wycats/thor/milestones') { status 200 }
     """
-    When I run `ghc milestone ls wycats thor`
+    When I run `gcli milestone ls wycats thor`
     Then the exit status should be 0
 
   Scenario: Get milestone
@@ -23,7 +23,7 @@ Feature: ghc milestone
     """
     get('/repos/wycats/thor/milestones/1') { status 200 }
     """
-    When I run `ghc milestone get wycats thor 1`
+    When I run `gcli milestone get wycats thor 1`
     Then the exit status should be 0
 
   Scenario: Create milestone
@@ -31,7 +31,7 @@ Feature: ghc milestone
     """
     post('/repos/wycats/thor/milestones') { status 200 }
     """
-    When I run `ghc milestone create wycats thor --params=title:new`
+    When I run `gcli milestone create wycats thor --params=title:new`
     Then the exit status should be 0
 
   Scenario: Update milestone
@@ -39,7 +39,7 @@ Feature: ghc milestone
     """
     patch('/repos/wycats/thor/milestones/1') { status 200 }
     """
-    When I run `ghc milestone update wycats thor 1 --params=title:new`
+    When I run `gcli milestone update wycats thor 1 --params=title:new`
     Then the exit status should be 0
 
   Scenario: Delete milestone
@@ -47,6 +47,6 @@ Feature: ghc milestone
     """
     delete('/repos/wycats/thor/milestones/1') { status 200 }
     """
-    When I run `ghc milestone del wycats thor 1`
+    When I run `gcli milestone del wycats thor 1`
     Then the exit status should be 0
 

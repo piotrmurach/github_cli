@@ -1,28 +1,28 @@
-Feature: ghc team
+Feature: gcli team
 
   Scenario: Available commands
-    When I run `ghc team`
+    When I run `gcli team`
     Then the exit status should be 0
-      And the output should contain "ghc team add_member"
-      And the output should contain "ghc team add_repo"
-      And the output should contain "ghc team create"
-      And the output should contain "ghc team delete"
-      And the output should contain "ghc team edit"
-      And the output should contain "ghc team get"
-      And the output should contain "ghc team list"
-      And the output should contain "ghc team list_member"
-      And the output should contain "ghc team list_repo"
-      And the output should contain "ghc team member"
-      And the output should contain "ghc team remove_member"
-      And the output should contain "ghc team remove_repo"
-      And the output should contain "ghc team repo"
+      And the output should contain "gcli team add_member"
+      And the output should contain "gcli team add_repo"
+      And the output should contain "gcli team create"
+      And the output should contain "gcli team delete"
+      And the output should contain "gcli team edit"
+      And the output should contain "gcli team get"
+      And the output should contain "gcli team list"
+      And the output should contain "gcli team list_member"
+      And the output should contain "gcli team list_repo"
+      And the output should contain "gcli team member"
+      And the output should contain "gcli team remove_member"
+      And the output should contain "gcli team remove_repo"
+      And the output should contain "gcli team repo"
 
   Scenario: List all teams
     Given the GitHub API server:
     """
     get('/orgs/rails/teams') { status 200 }
     """
-    When I run `ghc team ls rails`
+    When I run `gcli team ls rails`
     Then the exit status should be 0
 
   Scenario: Get team
@@ -30,7 +30,7 @@ Feature: ghc team
     """
     get('/teams/rails') { status 200 }
     """
-    When I run `ghc team get rails`
+    When I run `gcli team get rails`
     Then the exit status should be 0
 
   Scenario: Create team
@@ -38,7 +38,7 @@ Feature: ghc team
     """
     post('/orgs/rails/teams') { status 200 }
     """
-    When I run `ghc team create rails --params=name:'new team'`
+    When I run `gcli team create rails --params=name:'new team'`
     Then the exit status should be 0
 
   Scenario: Edit team
@@ -46,7 +46,7 @@ Feature: ghc team
     """
     patch('/teams/rails') { status 200 }
     """
-    When I run `ghc team edit rails --params=name:'new team'`
+    When I run `gcli team edit rails --params=name:'new team'`
     Then the exit status should be 0
 
   Scenario: Delete team
@@ -54,7 +54,7 @@ Feature: ghc team
     """
     delete('/teams/rails') { status 200 }
     """
-    When I run `ghc team del rails`
+    When I run `gcli team del rails`
     Then the exit status should be 0
 
   Scenario: List team members
@@ -62,7 +62,7 @@ Feature: ghc team
     """
     get('/teams/rails/members') { status 200 }
     """
-    When I run `ghc team list_members rails`
+    When I run `gcli team list_members rails`
     Then the exit status should be 0
 
   Scenario: Check is user is a team member
@@ -70,7 +70,7 @@ Feature: ghc team
     """
     get('/teams/rails/members/wycats') { status 200 }
     """
-    When I run `ghc team member rails wycats`
+    When I run `gcli team member rails wycats`
     Then the exit status should be 0
 
   Scenario: Add a team member
@@ -78,7 +78,7 @@ Feature: ghc team
     """
     put('/teams/rails/members/wycats') { status 200 }
     """
-    When I run `ghc team add_member rails wycats`
+    When I run `gcli team add_member rails wycats`
     Then the exit status should be 0
 
   Scenario: Remove a team member
@@ -86,7 +86,7 @@ Feature: ghc team
     """
     delete('/teams/rails/members/wycats') { status 200 }
     """
-    When I run `ghc team remove_member rails wycats`
+    When I run `gcli team remove_member rails wycats`
     Then the exit status should be 0
 
   Scenario: List team repositories
@@ -94,7 +94,7 @@ Feature: ghc team
     """
     get('/teams/rails/repos') { status 200 }
     """
-    When I run `ghc team list_repo rails`
+    When I run `gcli team list_repo rails`
     Then the exit status should be 0
 
   Scenario: Check if repository belongs to a team
@@ -102,7 +102,7 @@ Feature: ghc team
     """
     get('/teams/rails/repos/wycats/thor') { status 200 }
     """
-    When I run `ghc team repo rails wycats thor`
+    When I run `gcli team repo rails wycats thor`
     Then the exit status should be 0
 
   Scenario: Add a team repository
@@ -110,7 +110,7 @@ Feature: ghc team
     """
     put('/teams/rails/repos/wycats/thor') { status 200 }
     """
-    When I run `ghc team add_repo rails wycats thor`
+    When I run `gcli team add_repo rails wycats thor`
     Then the exit status should be 0
 
   Scenario: Remove a team repository
@@ -118,6 +118,6 @@ Feature: ghc team
     """
     delete('/teams/rails/repos/wycats/thor') { status 200 }
     """
-    When I run `ghc team remove_repo rails wycats thor`
+    When I run `gcli team remove_repo rails wycats thor`
     Then the exit status should be 0
 

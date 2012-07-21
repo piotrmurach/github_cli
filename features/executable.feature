@@ -7,11 +7,11 @@ Feature: The GHC Executable
 
   Scenario Outline: Getting Help for Commands
 
-    When I run `ghc <cmd>`
+    When I run `gcli <cmd>`
     Then the exit status should be 0
     And the output should contain:
     """
-      ghc help <command>
+      gcli help <command>
     """
     Examples:
       | cmd  |
@@ -20,9 +20,9 @@ Feature: The GHC Executable
 
   Scenario Outline: Getting Subcommands
 
-    When I run `ghc <command>`
+    When I run `gcli <command>`
     Then the exit status should be 0
-    And the output should contain "ghc <command>"
+    And the output should contain "gcli <command>"
 
     Examples:
       | command   |

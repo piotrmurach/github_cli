@@ -1,26 +1,26 @@
-Feature: ghc label
+Feature: gcli label
 
   Scenario: Available commands
 
-    When I run `ghc label`
+    When I run `gcli label`
     Then the exit status should be 0
-      And the output should contain "ghc label add"
-      And the output should contain "ghc label create"
-      And the output should contain "ghc label delete"
-      And the output should contain "ghc label get"
-      And the output should contain "ghc label issue"
-      And the output should contain "ghc label list"
-      And the output should contain "ghc label milestone"
-      And the output should contain "ghc label remove"
-      And the output should contain "ghc label replace"
-      And the output should contain "ghc label update"
+      And the output should contain "gcli label add"
+      And the output should contain "gcli label create"
+      And the output should contain "gcli label delete"
+      And the output should contain "gcli label get"
+      And the output should contain "gcli label issue"
+      And the output should contain "gcli label list"
+      And the output should contain "gcli label milestone"
+      And the output should contain "gcli label remove"
+      And the output should contain "gcli label replace"
+      And the output should contain "gcli label update"
 
   Scenario: List labels
     Given the GitHub API server:
     """
     get('/repos/wycats/thor/labels') { status 200 }
     """
-    When I run `ghc label ls wycats thor`
+    When I run `gcli label ls wycats thor`
     Then the exit status should be 0
 
   Scenario: Get label
@@ -28,7 +28,7 @@ Feature: ghc label
     """
     get('/repos/wycats/thor/labels/1') { status 200 }
     """
-    When I run `ghc label get wycats thor 1`
+    When I run `gcli label get wycats thor 1`
     Then the exit status should be 0
 
   Scenario: Create label
@@ -36,7 +36,7 @@ Feature: ghc label
     """
     post('/repos/wycats/thor/labels') { status 200 }
     """
-    When I run `ghc label create wycats thor --params=name:bug color:f3f3f3`
+    When I run `gcli label create wycats thor --params=name:bug color:f3f3f3`
     Then the exit status should be 0
 
   Scenario: Update label
@@ -44,7 +44,7 @@ Feature: ghc label
     """
     patch('/repos/wycats/thor/labels/1') { status 200 }
     """
-    When I run `ghc label update wycats thor 1 --params=name:bug color:f3f3f3`
+    When I run `gcli label update wycats thor 1 --params=name:bug color:f3f3f3`
     Then the exit status should be 0
 
   Scenario: Delete label
@@ -52,7 +52,7 @@ Feature: ghc label
     """
     delete('/repos/wycats/thor/labels/1') { status 200 }
     """
-    When I run `ghc label delete wycats thor 1`
+    When I run `gcli label delete wycats thor 1`
     Then the exit status should be 0
 
   Scenario: Add labels
@@ -60,7 +60,7 @@ Feature: ghc label
     """
     post('/repos/wycats/thor/issues/1/labels') { status 200 }
     """
-    When I run `ghc label add wycats thor 1 'bug' 'feature'`
+    When I run `gcli label add wycats thor 1 'bug' 'feature'`
     Then the exit status should be 0
 
   Scenario: Remove label from an issue
@@ -68,7 +68,7 @@ Feature: ghc label
     """
     delete('/repos/wycats/thor/issues/1/labels/2') { status 200 }
     """
-    When I run `ghc label remove wycats thor 2/1`
+    When I run `gcli label remove wycats thor 2/1`
     Then the exit status should be 0
 
   Scenario: Remove label from an issue
@@ -76,7 +76,7 @@ Feature: ghc label
     """
     delete('/repos/wycats/thor/issues/1/labels/2') { status 200 }
     """
-    When I run `ghc label remove wycats thor 2/1`
+    When I run `gcli label remove wycats thor 2/1`
     Then the exit status should be 0
 
   Scenario: Remove all labels from an issue
@@ -84,7 +84,7 @@ Feature: ghc label
     """
     delete('/repos/wycats/thor/issues/1/labels') { status 200 }
     """
-    When I run `ghc label remove wycats thor 1`
+    When I run `gcli label remove wycats thor 1`
     Then the exit status should be 0
 
   Scenario: Replace labels
@@ -92,7 +92,7 @@ Feature: ghc label
     """
     put('/repos/wycats/thor/issues/1/labels') { status 200 }
     """
-    When I run `ghc label replace wycats thor 1 'bug' 'feature'`
+    When I run `gcli label replace wycats thor 1 'bug' 'feature'`
     Then the exit status should be 0
 
   Scenario: Milestone labels
@@ -100,6 +100,6 @@ Feature: ghc label
     """
     get('/repos/wycats/thor/milestones/1/labels') { status 200 }
     """
-    When I run `ghc label milestone wycats thor 1`
+    When I run `gcli label milestone wycats thor 1`
     Then the exit status should be 0
 

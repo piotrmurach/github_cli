@@ -2,9 +2,9 @@ Feature: Command Usage
 
   Scenario: Getting Usage for Commands
 
-    When I run `ghc`
+    When I run `gcli`
     Then the exit status should be 0
-    And the output should contain "Usage: ghc"
+    And the output should contain "Usage: gcli"
       And the output should contain "[--config]"
       And the output should contain "[--no-color]"
       And the output should contain "[--no-pager]"
@@ -13,6 +13,6 @@ Feature: Command Usage
 
   Scenario: Specific usage for command
 
-    When I run `ghc repo`
+    When I run `gcli repo`
     Then the exit status should be 0
     And the output should contain "repo <subcommand>"

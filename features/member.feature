@@ -1,20 +1,20 @@
-Feature: ghc member
+Feature: gcli member
 
   Scenario: Available commands
 
-    When I run `ghc member`
+    When I run `gcli member`
     Then the exit status should be 0
-      And the output should contain "ghc member delete"
-      And the output should contain "ghc member list"
-      And the output should contain "ghc member member"
-      And the output should contain "ghc member publicize"
+      And the output should contain "gcli member delete"
+      And the output should contain "gcli member list"
+      And the output should contain "gcli member member"
+      And the output should contain "gcli member publicize"
 
   Scenario: List members
     Given the GitHub API server:
     """
     get('/orgs/rails/members') { status 200 }
     """
-    When I run `ghc member ls rails`
+    When I run `gcli member ls rails`
     Then the exit status should be 0
 
   Scenario: List public members
@@ -22,7 +22,7 @@ Feature: ghc member
     """
     get('/orgs/rails/public_members') { status 200 }
     """
-    When I run `ghc member ls --public rails`
+    When I run `gcli member ls --public rails`
     Then the exit status should be 0
 
   Scenario: Check if user is a member of an organization
@@ -30,7 +30,7 @@ Feature: ghc member
     """
     get('/orgs/rails/members/wycats') { status 200 }
     """
-    When I run `ghc member member rails wycats`
+    When I run `gcli member member rails wycats`
     Then the exit status should be 0
 
   Scenario: Check if user is a public member of an organization
@@ -38,7 +38,7 @@ Feature: ghc member
     """
     get('/orgs/rails/public_members/wycats') { status 200 }
     """
-    When I run `ghc member member --public rails wycats`
+    When I run `gcli member member --public rails wycats`
     Then the exit status should be 0
 
   Scenario: Remove a member
@@ -46,7 +46,7 @@ Feature: ghc member
     """
     delete('/orgs/rails/members/wycats') { status 200 }
     """
-    When I run `ghc member del rails wycats`
+    When I run `gcli member del rails wycats`
     Then the exit status should be 0
 
   Scenario: Publicize user's membership
@@ -54,7 +54,7 @@ Feature: ghc member
     """
     put('/orgs/rails/public_members/wycats') { status 200 }
     """
-    When I run `ghc member publicize rails wycats`
+    When I run `gcli member publicize rails wycats`
     Then the exit status should be 0
 
   Scenario: Conceal user's membership
@@ -62,6 +62,6 @@ Feature: ghc member
     """
     delete('/orgs/rails/public_members/wycats') { status 200 }
     """
-    When I run `ghc member conceal rails wycats`
+    When I run `gcli member conceal rails wycats`
     Then the exit status should be 0
 

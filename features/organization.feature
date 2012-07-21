@@ -1,19 +1,19 @@
-Feature: ghc org
+Feature: gcli org
 
   Scenario: Available commands
 
-    When I run `ghc org`
+    When I run `gcli org`
     Then the exit status should be 0
-      And the output should contain "ghc org edit"
-      And the output should contain "ghc org list"
-      And the output should contain "ghc org get"
+      And the output should contain "gcli org edit"
+      And the output should contain "gcli org list"
+      And the output should contain "gcli org get"
 
   Scenario: List public organizations for a user
     Given the GitHub API server:
     """
     get('/users/wycats/orgs') { status 200 }
     """
-    When I run `ghc org ls --user=wycats`
+    When I run `gcli org ls --user=wycats`
     Then the exit status should be 0
 
   Scenario: List public organizations for the authenticated user
@@ -21,7 +21,7 @@ Feature: ghc org
     """
     get('/user/orgs') { status 200 }
     """
-    When I run `ghc org ls`
+    When I run `gcli org ls`
     Then the exit status should be 0
 
   Scenario: Get an organization
@@ -29,7 +29,7 @@ Feature: ghc org
     """
     get('/orgs/rails') { status 200 }
     """
-    When I run `ghc org get rails`
+    When I run `gcli org get rails`
     Then the exit status should be 0
 
   Scenario: Edit an organization
@@ -37,5 +37,5 @@ Feature: ghc org
     """
     patch('/orgs/rails') { status 200 }
     """
-    When I run `ghc org edit rails --params=name:github company:GitHub email:support@github.com`
+    When I run `gcli org edit rails --params=name:github company:GitHub email:support@github.com`
     Then the exit status should be 0

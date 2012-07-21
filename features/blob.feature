@@ -1,18 +1,18 @@
-Feature: ghc blob
+Feature: gcli blob
 
   Scenario: Available commands
 
-    When I run `ghc blob`
+    When I run `gcli blob`
     Then the exit status should be 0
-      And the output should contain "ghc blob get"
-      And the output should contain "ghc blob create"
+      And the output should contain "gcli blob get"
+      And the output should contain "gcli blob create"
 
   Scenario: Get blob
     Given the GitHub API server:
     """
     get('/repos/wycats/thor/git/blobs/59b23de9b91d') { status 200 }
     """
-    When I run `ghc blob get wycats thor 59b23de9b91d`
+    When I run `gcli blob get wycats thor 59b23de9b91d`
     Then the exit status should be 0
 
   Scenario: Create blob
@@ -20,5 +20,5 @@ Feature: ghc blob
     """
     post('/repos/wycats/thor/git/blobs') { status 200 }
     """
-    When I run `ghc blob create wycats thor --params=content:'Content' encoding:'utf-8'`
+    When I run `gcli blob create wycats thor --params=content:'Content' encoding:'utf-8'`
     Then the exit status should be 0

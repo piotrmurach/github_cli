@@ -1,21 +1,21 @@
-Feature: ghc follower
+Feature: gcli follower
 
   Scenario: Available commands
 
-    When I run `ghc follower`
+    When I run `gcli follower`
     Then the exit status should be 0
-      And the output should contain "ghc follower follow"
-      And the output should contain "ghc follower follower"
-      And the output should contain "ghc follower following"
-      And the output should contain "ghc follower list"
-      And the output should contain "ghc follower unfollow"
+      And the output should contain "gcli follower follow"
+      And the output should contain "gcli follower follower"
+      And the output should contain "gcli follower following"
+      And the output should contain "gcli follower list"
+      And the output should contain "gcli follower unfollow"
 
   Scenario: List for user
     Given the GitHub API server:
     """
     get('/users/wycats/followers') { status 200 }
     """
-    When I run `ghc follower ls -u wycats`
+    When I run `gcli follower ls -u wycats`
     Then the exit status should be 0
 
   Scenario: List for the authenticated user
@@ -23,7 +23,7 @@ Feature: ghc follower
     """
     get('/user/followers') { status 200 }
     """
-    When I run `ghc follower ls`
+    When I run `gcli follower ls`
     Then the exit status should be 0
 
   Scenario: Follower
@@ -31,7 +31,7 @@ Feature: ghc follower
     """
     get('/users/following/wycats') { status 200 }
     """
-    When I run `ghc follower follower wycats`
+    When I run `gcli follower follower wycats`
     Then the exit status should be 0
 
   Scenario: Following
@@ -39,7 +39,7 @@ Feature: ghc follower
     """
     get('/users/wycats/following') { status 200 }
     """
-    When I run `ghc follower following -u wycats`
+    When I run `gcli follower following -u wycats`
     Then the exit status should be 0
 
   Scenario: Follow
@@ -47,7 +47,7 @@ Feature: ghc follower
     """
     put('/user/following/wycats') { status 200 }
     """
-    When I run `ghc follower follow wycats`
+    When I run `gcli follower follow wycats`
     Then the exit status should be 0
 
   Scenario: Unfollow
@@ -55,5 +55,5 @@ Feature: ghc follower
     """
     delete('/user/following/wycats') { status 200 }
     """
-    When I run `ghc follower unfollow wycats`
+    When I run `gcli follower unfollow wycats`
     Then the exit status should be 0

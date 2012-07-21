@@ -1,22 +1,22 @@
-Feature: ghc hook
+Feature: gcli hook
 
   Scenario: Available commands
 
-    When I run `ghc hook`
+    When I run `gcli hook`
     Then the exit status should be 0
-      And the output should contain "ghc hook create"
-      And the output should contain "ghc hook delete"
-      And the output should contain "ghc hook edit"
-      And the output should contain "ghc hook get"
-      And the output should contain "ghc hook list"
-      And the output should contain "ghc hook test"
+      And the output should contain "gcli hook create"
+      And the output should contain "gcli hook delete"
+      And the output should contain "gcli hook edit"
+      And the output should contain "gcli hook get"
+      And the output should contain "gcli hook list"
+      And the output should contain "gcli hook test"
 
   Scenario: List hooks
     Given the GitHub API server:
     """
     get('/repos/wycats/thor/hooks') { status 200 }
     """
-    When I run `ghc hook ls wycats thor`
+    When I run `gcli hook ls wycats thor`
     Then the exit status should be 0
 
   Scenario: Get hook
@@ -24,7 +24,7 @@ Feature: ghc hook
     """
     get('/repos/wycats/thor/hooks/1') { status 200 }
     """
-    When I run `ghc hook get wycats thor 1`
+    When I run `gcli hook get wycats thor 1`
     Then the exit status should be 0
 
   Scenario: Create hook
@@ -32,7 +32,7 @@ Feature: ghc hook
     """
     post('/repos/wycats/thor/hooks') { status 200 }
     """
-    When I run `ghc hook create wycats thor --params=name:web config:{}`
+    When I run `gcli hook create wycats thor --params=name:web config:{}`
     Then the exit status should be 0
 
   Scenario: Edit hook
@@ -40,7 +40,7 @@ Feature: ghc hook
     """
     patch('/repos/wycats/thor/hooks/1') { status 200 }
     """
-    When I run `ghc hook edit wycats thor 1 --params=name:web config:{}`
+    When I run `gcli hook edit wycats thor 1 --params=name:web config:{}`
     Then the exit status should be 0
 
   Scenario: Test hook
@@ -48,7 +48,7 @@ Feature: ghc hook
     """
     post('/repos/wycats/thor/hooks/1/test') { status 200 }
     """
-    When I run `ghc hook test wycats thor 1`
+    When I run `gcli hook test wycats thor 1`
     Then the exit status should be 0
 
   Scenario: Delete hook
@@ -56,6 +56,6 @@ Feature: ghc hook
     """
     delete('/repos/wycats/thor/hooks/1') { status 200 }
     """
-    When I run `ghc hook del wycats thor 1`
+    When I run `gcli hook del wycats thor 1`
     Then the exit status should be 0
 

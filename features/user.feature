@@ -1,18 +1,18 @@
-Feature: ghc user
+Feature: gcli user
 
   Scenario: Available commands
 
-    When I run `ghc user`
+    When I run `gcli user`
     Then the exit status should be 0
-      And the output should contain "ghc user get"
-      And the output should contain "ghc user update"
+      And the output should contain "gcli user get"
+      And the output should contain "gcli user update"
 
   Scenario: Get user
     Given the GitHub API server:
     """
     get('/users/wycats') { status 200 }
     """
-    When I run `ghc user get -u wycats`
+    When I run `gcli user get -u wycats`
     Then the exit status should be 0
 
   Scenario: Get the authenticated user
@@ -20,7 +20,7 @@ Feature: ghc user
     """
     get('/user') { status 200 }
     """
-    When I run `ghc user get`
+    When I run `gcli user get`
     Then the exit status should be 0
 
   Scenario: Update the authenticated user
@@ -28,5 +28,5 @@ Feature: ghc user
     """
     patch('/user') { status 200 }
     """
-    When I run `ghc user update --params=name:peter-murach`
+    When I run `gcli user update --params=name:peter-murach`
     Then the exit status should be 0

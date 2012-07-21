@@ -6,7 +6,7 @@ Feature: Github API Commands Search
   I have ability to list commands by search criteria
 
   Scenario: Listing
-    When I run `ghc list`
+    When I run `gcli list`
     Then the exit status should be 0
     And the output should contain:
     """
@@ -16,7 +16,7 @@ Feature: Github API Commands Search
     """
 
   Scenario Outline: Pattern Matching
-    When I run `ghc list <pattern>`
+    When I run `gcli list <pattern>`
     Then the output should contain "repo"
     And the output should not contain "issue"
 
@@ -26,8 +26,8 @@ Feature: Github API Commands Search
       | repo    |
 
   Scenario: No Match
-    When I run `ghc list bla`
+    When I run `gcli list bla`
     Then the output should contain:
     """
-    ghc: 'bla' is not a ghc command. See 'ghc --help'.
+    gcli: 'bla' is not a gcli command. See 'gcli --help'.
     """

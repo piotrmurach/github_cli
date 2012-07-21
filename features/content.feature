@@ -1,19 +1,19 @@
-Feature: ghc content
+Feature: gcli content
 
   Scenario: Available commands
 
-    When I run `ghc content`
+    When I run `gcli content`
     Then the exit status should be 0
-      And the output should contain "ghc content get"
-      And the output should contain "ghc content readme"
-      And the output should contain "ghc content archive"
+      And the output should contain "gcli content get"
+      And the output should contain "gcli content readme"
+      And the output should contain "gcli content archive"
 
   Scenario: Readme
     Given the GitHub API server:
     """
     get('/repos/wycats/thor/readme') { status 200 }
     """
-    When I run `ghc content readme wycats thor`
+    When I run `gcli content readme wycats thor`
     Then the exit status should be 0
 
   Scenario: Get content
@@ -21,7 +21,7 @@ Feature: ghc content
     """
     get('/repos/wycats/thor/contents/lib') { status 200 }
     """
-    When I run `ghc content get wycats thor lib`
+    When I run `gcli content get wycats thor lib`
     Then the exit status should be 0
 
   Scenario: Archive
@@ -29,7 +29,7 @@ Feature: ghc content
     """
     get('/repos/wycats/thor/zipball/master') { status 200 }
     """
-    When I run `ghc content archive wycats thor`
+    When I run `gcli content archive wycats thor`
     Then the exit status should be 0
 
   Scenario: Archive with params
@@ -37,5 +37,5 @@ Feature: ghc content
     """
     get('/repos/wycats/thor/tarball/new_feature') { status 200 }
     """
-    When I run `ghc content archive wycats thor --params=archive_format:tarball ref:new_feature`
+    When I run `gcli content archive wycats thor --params=archive_format:tarball ref:new_feature`
     Then the exit status should be 0

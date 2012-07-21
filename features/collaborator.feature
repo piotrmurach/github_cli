@@ -1,20 +1,20 @@
-Feature: ghc collab
+Feature: gcli collab
 
   Scenario: Available commands
 
-    When I run `ghc collab`
+    When I run `gcli collab`
     Then the exit status should be 0
-      And the output should contain "ghc collab list"
-      And the output should contain "ghc collab add"
-      And the output should contain "ghc collab collab"
-      And the output should contain "ghc collab remove"
+      And the output should contain "gcli collab list"
+      And the output should contain "gcli collab add"
+      And the output should contain "gcli collab collab"
+      And the output should contain "gcli collab remove"
 
   Scenario: List collaborators
     Given the GitHub API server:
     """
     get('/repos/wycats/thor/collaborators') { status 200 }
     """
-    When I run `ghc collab ls wycats thor`
+    When I run `gcli collab ls wycats thor`
     Then the exit status should be 0
 
   Scenario: Add collaborator
@@ -22,7 +22,7 @@ Feature: ghc collab
     """
     put('/repos/wycats/thor/collaborators/octocat') { status 200 }
     """
-    When I run `ghc collab add wycats thor octocat`
+    When I run `gcli collab add wycats thor octocat`
     Then the exit status should be 0
 
   Scenario: Remove collaborator
@@ -30,7 +30,7 @@ Feature: ghc collab
     """
     delete('/repos/wycats/thor/collaborators/octocat') { status 200 }
     """
-    When I run `ghc collab remove wycats thor octocat`
+    When I run `gcli collab remove wycats thor octocat`
     Then the exit status should be 0
 
   Scenario: Check if collaborator
@@ -38,6 +38,6 @@ Feature: ghc collab
     """
     delete('/repos/wycats/thor/collaborators/octocat') { status 200 }
     """
-    When I run `ghc collab collab wycats thor octocat`
+    When I run `gcli collab collab wycats thor octocat`
     Then the exit status should be 0
 

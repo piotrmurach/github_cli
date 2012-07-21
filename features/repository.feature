@@ -1,24 +1,24 @@
-Feature: gh repository
+Feature: gcli repository
 
   Scenario: Available commands
-    When I run `ghc repo`
+    When I run `gcli repo`
     Then the exit status should be 0
-      And the output should contain "ghc repo branches"
-      And the output should contain "ghc repo contribs"
-      And the output should contain "ghc repo create"
-      And the output should contain "ghc repo edit"
-      And the output should contain "ghc repo get"
-      And the output should contain "ghc repo list"
-      And the output should contain "ghc repo languages"
-      And the output should contain "ghc repo tags"
-      And the output should contain "ghc repo teams"
+      And the output should contain "gcli repo branches"
+      And the output should contain "gcli repo contribs"
+      And the output should contain "gcli repo create"
+      And the output should contain "gcli repo edit"
+      And the output should contain "gcli repo get"
+      And the output should contain "gcli repo list"
+      And the output should contain "gcli repo languages"
+      And the output should contain "gcli repo tags"
+      And the output should contain "gcli repo teams"
 
   Scenario: List repositories
     Given the GitHub API server:
     """
     get('/users/wycats/repos') { status 200 }
     """
-    When I run `ghc repo ls -u wycats`
+    When I run `gcli repo ls -u wycats`
     Then the exit status should be 0
 
   Scenario: Get repository
@@ -26,7 +26,7 @@ Feature: gh repository
     """
     get('/repos/wycats/thor') { status 200 }
     """
-    When I run `ghc repo get wycats thor`
+    When I run `gcli repo get wycats thor`
     Then the exit status should be 0
 
   Scenario: List repository contributors
@@ -36,7 +36,7 @@ Feature: gh repository
       status 200
     }
     """
-    When I run `ghc repo contribs wycats thor`
+    When I run `gcli repo contribs wycats thor`
     Then the exit status should be 0
 
   Scenario: List repository branches
@@ -46,7 +46,7 @@ Feature: gh repository
       status 200
     }
     """
-    When I run `ghc repo branches wycats thor`
+    When I run `gcli repo branches wycats thor`
     Then the exit status should be 0
 
   Scenario: List repository languages
@@ -56,7 +56,7 @@ Feature: gh repository
       status 200
     }
     """
-    When I run `ghc repo languages wycats thor`
+    When I run `gcli repo languages wycats thor`
     Then the exit status should be 0
 
   Scenario: List repository teams
@@ -66,7 +66,7 @@ Feature: gh repository
       status 200
     }
     """
-    When I run `ghc repo teams wycats thor`
+    When I run `gcli repo teams wycats thor`
     Then the exit status should be 0
 
   Scenario: List repository tags
@@ -76,7 +76,7 @@ Feature: gh repository
       status 200
     }
     """
-    When I run `ghc repo tags wycats thor`
+    When I run `gcli repo tags wycats thor`
     Then the exit status should be 0
 
   Scenario: Create repository
@@ -84,7 +84,7 @@ Feature: gh repository
     """
     post('/user/repos') { status 200 }
     """
-    When I run `ghc repo create github`
+    When I run `gcli repo create github`
     Then the exit status should be 0
 
   Scenario: Edit repository
@@ -92,6 +92,6 @@ Feature: gh repository
     """
     patch('/repos/wycats/thor') { status 200 }
     """
-    When I run `ghc repo edit wycats thor --params=name:thor`
+    When I run `gcli repo edit wycats thor --params=name:thor`
     Then the exit status should be 0
 

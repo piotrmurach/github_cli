@@ -1,24 +1,24 @@
-Feature: ghc pull request
+Feature: gcli pull request
 
   Scenario: Available commands
 
-    When I run `ghc pull`
+    When I run `gcli pull`
     Then the exit status should be 0
-      And the output should contain "ghc pull commits"
-      And the output should contain "ghc pull create"
-      And the output should contain "ghc pull files"
-      And the output should contain "ghc pull get"
-      And the output should contain "ghc pull list"
-      And the output should contain "ghc pull merge"
-      And the output should contain "ghc pull merged"
-      And the output should contain "ghc pull update"
+      And the output should contain "gcli pull commits"
+      And the output should contain "gcli pull create"
+      And the output should contain "gcli pull files"
+      And the output should contain "gcli pull get"
+      And the output should contain "gcli pull list"
+      And the output should contain "gcli pull merge"
+      And the output should contain "gcli pull merged"
+      And the output should contain "gcli pull update"
 
   Scenario: List pull requests
     Given the GitHub API server:
     """
     get('/repos/wycats/thor/pulls') { status 200 }
     """
-    When I run `ghc pull ls wycats thor`
+    When I run `gcli pull ls wycats thor`
     Then the exit status should be 0
 
   Scenario: Get pull request
@@ -26,7 +26,7 @@ Feature: ghc pull request
     """
     get('/repos/wycats/thor/pulls/1') { status 200 }
     """
-    When I run `ghc pull get wycats thor 1`
+    When I run `gcli pull get wycats thor 1`
     Then the exit status should be 0
 
   Scenario: Create pull request
@@ -34,7 +34,7 @@ Feature: ghc pull request
     """
     post('/repos/wycats/thor/pulls') { status 200 }
     """
-    When I run `ghc pull create wycats thor --params=title:'Amazing new feauture'`
+    When I run `gcli pull create wycats thor --params=title:'Amazing new feauture'`
     Then the exit status should be 0
 
   Scenario: Update pull request
@@ -42,7 +42,7 @@ Feature: ghc pull request
     """
     patch('/repos/wycats/thor/pulls/1') { status 200 }
     """
-    When I run `ghc pull update wycats thor 1 --params=title:'Amazing update'`
+    When I run `gcli pull update wycats thor 1 --params=title:'Amazing update'`
     Then the exit status should be 0
 
   Scenario: Commits on pull request
@@ -50,7 +50,7 @@ Feature: ghc pull request
     """
     get('/repos/wycats/thor/pulls/1/commits') { status 200 }
     """
-    When I run `ghc pull commits wycats thor 1`
+    When I run `gcli pull commits wycats thor 1`
     Then the exit status should be 0
 
   Scenario: Files on pull request
@@ -58,7 +58,7 @@ Feature: ghc pull request
     """
     get('/repos/wycats/thor/pulls/1/files') { status 200 }
     """
-    When I run `ghc pull files wycats thor 1`
+    When I run `gcli pull files wycats thor 1`
     Then the exit status should be 0
 
   Scenario: Check if pull request has been merged
@@ -66,7 +66,7 @@ Feature: ghc pull request
     """
     get('/repos/wycats/thor/pulls/1/merge') { status 200 }
     """
-    When I run `ghc pull merged wycats thor 1`
+    When I run `gcli pull merged wycats thor 1`
     Then the exit status should be 0
 
   Scenario: Merge pull request
@@ -74,5 +74,5 @@ Feature: ghc pull request
     """
     put('/repos/wycats/thor/pulls/1/merge') { status 200 }
     """
-    When I run `ghc pull merge wycats thor 1`
+    When I run `gcli pull merge wycats thor 1`
     Then the exit status should be 0

@@ -1,18 +1,18 @@
-Feature: ghc fork
+Feature: gcli fork
 
   Scenario: Available commands
 
-    When I run `ghc fork`
+    When I run `gcli fork`
     Then the exit status should be 0
-      And the output should contain "ghc fork create"
-      And the output should contain "ghc fork list"
+      And the output should contain "gcli fork create"
+      And the output should contain "gcli fork list"
 
   Scenario: List forks
     Given the GitHub API server:
     """
     get('/repos/wycats/thor/forks') { status 200 }
     """
-    When I run `ghc fork ls wycats thor`
+    When I run `gcli fork ls wycats thor`
     Then the exit status should be 0
 
   Scenario: Create fork
@@ -20,5 +20,5 @@ Feature: ghc fork
     """
     post('/repos/wycats/thor/forks') { status 200 }
     """
-    When I run `ghc fork create wycats thor`
+    When I run `gcli fork create wycats thor`
     Then the exit status should be 0

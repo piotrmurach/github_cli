@@ -1,24 +1,24 @@
-Feature: ghc event
+Feature: gcli event
 
   Scenario: Available commands
 
-    When I run `ghc event`
+    When I run `gcli event`
     Then the exit status should be 0
-      And the output should contain "ghc event issue"
-      And the output should contain "ghc event network"
-      And the output should contain "ghc event org"
-      And the output should contain "ghc event performed"
-      And the output should contain "ghc event public"
-      And the output should contain "ghc event received"
-      And the output should contain "ghc event repo"
-      And the output should contain "ghc event user_org"
+      And the output should contain "gcli event issue"
+      And the output should contain "gcli event network"
+      And the output should contain "gcli event org"
+      And the output should contain "gcli event performed"
+      And the output should contain "gcli event public"
+      And the output should contain "gcli event received"
+      And the output should contain "gcli event repo"
+      And the output should contain "gcli event user_org"
 
   Scenario: Public events
     Given the GitHub API server:
     """
     get('/events') { status 200 }
     """
-    When I run `ghc event public`
+    When I run `gcli event public`
     Then the exit status should be 0
 
   Scenario: Repository events
@@ -26,7 +26,7 @@ Feature: ghc event
     """
     get('/repos/wycats/thor/events') { status 200 }
     """
-    When I run `ghc event repo wycats thor`
+    When I run `gcli event repo wycats thor`
     Then the exit status should be 0
 
   Scenario: Issue events
@@ -34,7 +34,7 @@ Feature: ghc event
     """
     get('/repos/wycats/thor/issues/events') { status 200 }
     """
-    When I run `ghc event issue wycats thor`
+    When I run `gcli event issue wycats thor`
     Then the exit status should be 0
 
   Scenario: Network events
@@ -42,7 +42,7 @@ Feature: ghc event
     """
     get('/networks/wycats/thor/events') { status 200 }
     """
-    When I run `ghc event network wycats thor`
+    When I run `gcli event network wycats thor`
     Then the exit status should be 0
 
   Scenario: Organization events
@@ -50,7 +50,7 @@ Feature: ghc event
     """
     get('/orgs/github/events') { status 200 }
     """
-    When I run `ghc event org github`
+    When I run `gcli event org github`
     Then the exit status should be 0
 
   Scenario: Received events
@@ -58,7 +58,7 @@ Feature: ghc event
     """
     get('/users/wycats/received_events') { status 200 }
     """
-    When I run `ghc event received wycats`
+    When I run `gcli event received wycats`
     Then the exit status should be 0
 
   Scenario: Received public events
@@ -66,7 +66,7 @@ Feature: ghc event
     """
     get('/users/wycats/received_events/public') { status 200 }
     """
-    When I run `ghc event received wycats --public`
+    When I run `gcli event received wycats --public`
     Then the exit status should be 0
 
   Scenario: Performed events
@@ -74,7 +74,7 @@ Feature: ghc event
     """
     get('/users/wycats/events') { status 200 }
     """
-    When I run `ghc event performed wycats`
+    When I run `gcli event performed wycats`
     Then the exit status should be 0
 
   Scenario: Performed public events
@@ -82,7 +82,7 @@ Feature: ghc event
     """
     get('/users/wycats/events/public') { status 200 }
     """
-    When I run `ghc event performed wycats --public`
+    When I run `gcli event performed wycats --public`
     Then the exit status should be 0
 
   Scenario: User organization events
@@ -90,5 +90,5 @@ Feature: ghc event
     """
     get('/users/wycats/events/orgs/rails') { status 200 }
     """
-    When I run `ghc event user_org wycats rails`
+    When I run `gcli event user_org wycats rails`
     Then the exit status should be 0

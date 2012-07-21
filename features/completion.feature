@@ -2,7 +2,7 @@ Feature: Command Completion
 
   Scenario: Suggest alternative
 
-    When I run `ghc blah`
+    When I run `gcli blah`
     Then the exit status should be 0
     And the output should contain:
     """
@@ -12,7 +12,7 @@ Feature: Command Completion
 
   Scenario: Suggest more than one
 
-    When I run `ghc convent`
+    When I run `gcli convent`
     Then the exit status should be 0
     And the output should contain:
     """
@@ -24,7 +24,7 @@ Feature: Command Completion
 
   Scenario: Suggset nothing
 
-    When I run `ghc xen`
+    When I run `gcli xen`
     Then the exit status should be 0
     And the output should not contain:
     """

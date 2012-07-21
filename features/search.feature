@@ -1,20 +1,20 @@
-Feature: ghc search
+Feature: gcli search
 
   Scenario: Available commands
 
-    When I run `ghc search`
+    When I run `gcli search`
     Then the exit status should be 0
-      And the output should contain "ghc search email"
-      And the output should contain "ghc search issue"
-      And the output should contain "ghc search repo"
-      And the output should contain "ghc search user"
+      And the output should contain "gcli search email"
+      And the output should contain "gcli search issue"
+      And the output should contain "gcli search repo"
+      And the output should contain "gcli search user"
 
   Scenario: Search issues
     Given the GitHub API server:
     """
     get('/legacy/issues/search/wycats/thor/open/shell') { status 200 }
     """
-    When I run `ghc search issue wycats thor shell --state=open`
+    When I run `gcli search issue wycats thor shell --state=open`
     Then the exit status should be 0
 
   Scenario: Search repositories
@@ -22,7 +22,7 @@ Feature: ghc search
     """
     get('/legacy/repos/search/shell') { status 200 }
     """
-    When I run `ghc search repo shell`
+    When I run `gcli search repo shell`
     Then the exit status should be 0
 
   Scenario: Search users
@@ -30,7 +30,7 @@ Feature: ghc search
     """
     get('/legacy/user/search/wycats') { status 200 }
     """
-    When I run `ghc search user wycats`
+    When I run `gcli search user wycats`
     Then the exit status should be 0
 
   Scenario: Search email
@@ -38,5 +38,5 @@ Feature: ghc search
     """
     get('/legacy/user/search/wycats') { status 200 }
     """
-    When I run `ghc search user wycats`
+    When I run `gcli search user wycats`
     Then the exit status should be 0
