@@ -22,6 +22,7 @@ module GithubCLI
         @@api = Github.new
         @@api.oauth_token = GithubCLI.config['auth.token']
         @@api.basic_auth  = GithubCLI.config['auth.basic']
+        @@api.endpoint    = GithubCLI.config['core.endpoint'] || @@api.endpoint
         if ENV['TEST_HOST']
           @@api.endpoint = 'http://' + ENV['TEST_HOST']
         end
