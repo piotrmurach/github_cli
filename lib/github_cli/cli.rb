@@ -126,7 +126,7 @@ module GithubCLI
       end
 
       if options[:list]
-        Terminal.print_config && return
+        Terminal.print_config(name) && return
       elsif options[:edit]
         editor = Editor.new GithubCLI.config.path
         editor.open && return

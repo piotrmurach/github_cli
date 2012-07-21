@@ -81,9 +81,9 @@ Usage: ghc #{GithubCLI::Command::Usage.new(command, flags).format_usage }
         TEXT
       end
 
-      def print_config
+      def print_config(pattern=nil)
         GithubCLI.ui.info "Configuration options:"
-        GithubCLI.ui.print_table GithubCLI.config.pretty
+        GithubCLI.ui.print_table GithubCLI.config.pretty(pattern)
       end
 
     end

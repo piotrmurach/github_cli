@@ -48,10 +48,10 @@ module GithubCLI
       data
     end
 
-    def pretty
+    def pretty(pattern="")
       all.keys.zip(all.values).map do |el|
         el.last.nil? ? [el.first, 'UNDEFINED'] : el
-      end
+      end.select { |el| el.first =~ /^#{pattern}.*$/i }
     end
 
     def location=(loc)
