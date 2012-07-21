@@ -42,30 +42,55 @@ module GithubCLI
     class_option :version, :type => :boolean, :aliases => ['-V'],
                  :desc => "Show program version"
 
-    desc 'init', 'Generates a configuration file in your home directory'
+    no_tasks do
+      def defaults
+        {
+          'auth.token'    => nil,
+          'auth.basic'    => nil,
+          'auth.login'    => nil,
+          'auth.password' => nil,
+          'core.editor'   => 'vi',
+          'core.pager'    => 'less',
+          'core.no-pager' => false,
+          'core.no-color' => false,
+          'core.format'   => 'csv',
+          'core.auto'     => false
+        }
+      end
+    end
+
+    desc 'init [<filename>]', 'Generates a configuration file in your home directory'
     long_desc <<-DESC
       Initializes a configuration file where you can set default options for
-      interacting with GitHub API. Both global and per-command options can be
-      specified. These defaults override the bult-in defaults and allow you to
-      omit commonly used command line options.
+      interacting with GitHub API.\n
+
+      Both global and per-command options can be specified. These defaults
+      override the bult-in defaults and allow you to save typing commonly  used
+      command line options.
     DESC
     method_option :force, :type => :boolean, :default => false, :aliases => "-f",
                   :banner => "Overwrite configuration file. "
+    method_option :global, :type => :boolean, :default => false,
+                  :desc => 'Create global config file'
+    method_option :local, :type => :boolean, :default => false,
+                  :desc => 'Create local config file'
     def init(filename=nil)
-      if filename.nil? || filename =~ /^\//
-        @config_filename = options[:config]
-      else
-        @config_filename = filename
+      config_filename = (filename.nil? || filename =~ /^\//)? options[:config] : filename
+
+      if !options[:global] and !options[:local]
+        GithubCLI.ui.error 'Invalid scope given. Please use --local or --global.'
+        exit 1
       end
 
-      # config = Config.new(@config_filename)
+      GithubCLI.config.location = options[:local] ? 'local' : 'global'
+
       if File.exists?(GithubCLI.config.path) && !options[:force]
         GithubCLI.ui.error "Not overwritting existing config file #{GithubCLI.config.path}, use --force to override."
         exit 1
       end
 
       oauth_token = ask "Please specify your GitHub Authentication Token (register on github.com to get it):"
-      GithubCLI.config.save({'oauth_token' => oauth_token, 'basic_auth' => nil })
+      GithubCLI.config.save(defaults.merge({'auth.token' => oauth_token}))
       GithubCLI.ui.confirm "Writing new configuration file to #{GithubCLI.config.path}"
     end
 
