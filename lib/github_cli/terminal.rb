@@ -68,7 +68,8 @@ module GithubCLI
       end
 
       def print_command_not_found(cmd)
-        GithubCLI.ui.info "ghc: '#{cmd}' is not a ghc command. See 'ghc --help'."
+        exec_name = GithubCLI.executable_name
+        GithubCLI.ui.info "#{exec_name}: '#{cmd}' is not a #{exec_name} command. See '#{exec_name} --help'."
       end
 
       def print_usage(flags, command='<command>')
@@ -76,7 +77,7 @@ module GithubCLI
 
 #{GithubCLI.program_name}
 
-Usage: ghc #{GithubCLI::Command::Usage.new(command, flags).format_usage }
+Usage: #{GithubCLI.executable_name} #{GithubCLI::Command::Usage.new(command, flags).format_usage }
 
         TEXT
       end
