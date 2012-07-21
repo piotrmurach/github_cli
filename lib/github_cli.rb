@@ -19,6 +19,7 @@ module GithubCLI
   autoload :Terminal,  'github_cli/terminal'
   autoload :System,    'github_cli/system'
   autoload :Pager,     'github_cli/pager'
+  autoload :Editor,    'github_cli/editor'
   autoload :Commands,  'github_cli/commands'
   autoload :Helpers,   'github_cli/helpers'
   autoload :Formatter, 'github_cli/formatter'
@@ -40,6 +41,10 @@ module GithubCLI
 
     def ui
       @ui ||= UI.new
+    end
+
+    def executable_name
+      File.basename($PROGRAM_NAME)
     end
 
     def default_configfile
