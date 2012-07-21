@@ -137,9 +137,9 @@ module GithubCLI
       end
 
       if !value
-        GithubCLI.ui.info GithubCLI.config[name] || "Unknown option key"
+        Terminal.line GithubCLI.config[name] || "Unknown option key"
       else
-        GithubCLI.ui.info GithubCLI.config[name] = value
+        Terminal.line GithubCLI.config[name] = value
       end
 
       return
@@ -153,7 +153,7 @@ module GithubCLI
 
     desc 'version', 'Display Github CLI version.'
     def version
-      say "Github CLI #{GithubCLI::VERSION}"
+      GithubCLI.ui.info "#{GithubCLI.program_name} v#{GithubCLI::VERSION}"
     end
 
   end # CLI
