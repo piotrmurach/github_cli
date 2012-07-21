@@ -49,6 +49,7 @@ module GithubCLI
           'auth.basic'    => nil,
           'auth.login'    => nil,
           'auth.password' => nil,
+          'core.endpoint' => nil,
           'core.editor'   => 'vi',
           'core.pager'    => 'less',
           'core.no-pager' => false,
@@ -137,7 +138,7 @@ module GithubCLI
       end
 
       if !value
-        Terminal.line GithubCLI.config[name] || "Unknown option key"
+        Terminal.line GithubCLI.config[name]
       else
         Terminal.line GithubCLI.config[name] = value
       end
