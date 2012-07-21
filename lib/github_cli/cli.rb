@@ -94,6 +94,57 @@ module GithubCLI
       GithubCLI.ui.confirm "Writing new configuration file to #{GithubCLI.config.path}"
     end
 
+    desc 'config <name> [<value>]', 'Get and set GitHub configuration options'
+    long_desc <<-DESC
+      You can query/set options with this command. The name is actually a hash key
+      string that is a composite one, nested with dots. If only name is provided, a
+      value will be retrieved. If two parameters are given then value will be set
+      or updated depending whether it already exists or not.\n
+
+      There two types of config files, global and project specific. When modifying
+      options ensure that you modifying the correct config.
+    DESC
+    method_option :global, :type => :boolean, :default => false,
+                  :desc => 'use global config file'
+    method_option :local, :type => :boolean, :default => false,
+                  :desc => 'use local config file'
+    method_option :list, :type => :boolean, :default => false, :aliases => '-l',
+                  :desc => 'list all'
+    method_option :edit, :type => :boolean, :default => false, :aliases => '-e',
+                  :desc => 'opens an editor'
+    def config(*args)
+      name, value = args.shift, args.shift
+
+      GithubCLI.config.location = options[:local] ? 'local' : 'global'
+
+      if !options[:global] and !options[:local]
+        GithubCLI.ui.error 'Invalid scope given. Please use --local or --global.'
+        exit 1
+      elsif !File.exists?(GithubCLI.config.path)
+        GithubCLI.ui.error "#{GithubCLI.config.location} configuration file does not exist. Please use `#{GithubCLI.executable_name} init --#{GithubCLI.config.location}`"
+        exit 1
+      end
+
+      if options[:list]
+        Terminal.print_config && return
+      elsif options[:edit]
+        editor = Editor.new GithubCLI.config.path
+        editor.open && return
+      end
+
+      if !name
+        Terminal.print_config && return
+      end
+
+      if !value
+        GithubCLI.ui.info GithubCLI.config[name] || "Unknown option key"
+      else
+        GithubCLI.ui.info GithubCLI.config[name] = value
+      end
+
+      return
+    end
+
     desc 'list <pattern>', 'List all available commands limited by pattern'
     def list(pattern="")
       pattern = /^#{pattern}.*$/i
