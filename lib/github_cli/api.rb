@@ -20,9 +20,8 @@ module GithubCLI
 
       def configure_api
         @@api = Github.new
-        @@api.oauth_token = GithubCLI.config['oauth_token']
-        @@api.basic_auth  = GithubCLI.config['basic_auth']
-        puts "#{ENV['TEST_HOST']}"
+        @@api.oauth_token = GithubCLI.config['auth.token']
+        @@api.basic_auth  = GithubCLI.config['auth.basic']
         if ENV['TEST_HOST']
           @@api.endpoint = 'http://' + ENV['TEST_HOST']
         end
