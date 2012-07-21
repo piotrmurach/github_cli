@@ -4,9 +4,14 @@ module GithubCLI
   class Config
 
     COMMAND_KEY  = 'commands'
+
     COMMAND_HELP = 'help'
 
+    # Contains information of where the command is run from.
     attr_reader :root
+
+    # Location scope of currently used configuration file.
+    attr_reader :location
 
     def initialize(root, options={})
       @root = root
@@ -20,7 +25,7 @@ module GithubCLI
     end
 
     def [](key)
-      data[key] || data[COMMAND_KEY][key] rescue nil
+      data[key] || data["#{COMMAND_KEY}.#{key}"] rescue nil
     end
 
     def fetch(key, default=nil)
@@ -28,7 +33,7 @@ module GithubCLI
     end
 
     def delete(key)
-      @data.delete(key)
+      data.delete(key)
     end
 
     def data
@@ -39,11 +44,21 @@ module GithubCLI
       data.keys
     end
 
+    def all
+      data
+    end
+
+    def location=(loc)
+      @location = loc
+      @data = nil
+    end
+
     def save(config)
-      config[COMMAND_KEY] = {}
       Command.all.each do |cmd|
-        if !cmd.namespace.empty? && cmd.name != COMMAND_HELP
-          config[COMMAND_KEY]["#{cmd.namespace}-#{cmd.name}"] = { }
+        composite_key = "#{COMMAND_KEY}.#{cmd.namespace}.#{cmd.name}"
+        if !cmd.namespace.empty? && cmd.name != COMMAND_HELP &&
+           !config.has_key?(composite_key)
+          config[composite_key]= {}
         end
       end
       File.open(path, 'w', 0600) do |file|
@@ -62,7 +77,7 @@ module GithubCLI
     end
 
     def path
-      if File.exists?(local_options_file)
+      if location == 'local' || File.exists?(local_options_file)
         local_options_file
       else
         global_options_file
@@ -80,7 +95,7 @@ module GithubCLI
         Pathname.new File.join(Thor::Util.user_home, ".githubrc")
       rescue ArgumentError
         GithubCLI.ui.warn "Unable to find ~/.githubrc because the HOME environment variable is not set"
-        nil
+        exit 1
       end
     end
 

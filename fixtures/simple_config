@@ -1,9 +1,10 @@
 ---
-oauth_token: ad7f9asdf97as98df7as9fd7
-basic_auth: 'login:password'
-host:
-user:
-repo:
-commands:
-  issue-list: { inputs: 'ticket' }
-  issue-get: {}
+auth.token: ad7f9asdf97as98df7as9fd7
+auth.basic: 'login:password'
+core.host:
+core.user:
+core.repo:
+commands.issue.list:
+  title: 'ticket'
+commands.issue.get:
+  title: 'ticket'

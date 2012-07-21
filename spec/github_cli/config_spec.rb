@@ -20,11 +20,11 @@ describe GithubCLI::Config do
 
     context 'array access' do
       it 'returns value for the key' do
-        config['basic_auth'].should == 'login:password'
+        config['auth.basic'].should == 'login:password'
       end
 
       it 'searches in commands' do
-        config['issue-list'].should == { 'inputs' => 'ticket' }
+        config['issue.list'].should == { 'title' => 'ticket' }
       end
 
       it 'returns nil for missing key' do
@@ -34,7 +34,7 @@ describe GithubCLI::Config do
 
     context '#fetch' do
       it 'finds value' do
-        config.fetch('oauth_token').should == 'ad7f9asdf97as98df7as9fd7'
+        config.fetch('auth.token').should == 'ad7f9asdf97as98df7as9fd7'
       end
 
       it 'uses default value' do
@@ -54,6 +54,7 @@ describe GithubCLI::Config do
 
       before do
         GithubCLI::Command.stub(:all) { [cmd] }
+        File.stub(:open)
       end
 
       it 'saves config to yaml format' do
@@ -64,20 +65,19 @@ describe GithubCLI::Config do
 
       it 'retrieves api commands' do
         config.save attrs
-        attrs.should have_key described_class::COMMAND_KEY
-        attrs[described_class::COMMAND_KEY].should have_key 'repo-create'
+        attrs.should have_key 'commands.repo.create'
       end
 
       it 'skips commands with no namespace' do
         cmd.stub(:namespace) { '' }
         config.save attrs
-        attrs[described_class::COMMAND_KEY].should be_empty
+        attrs.keys.should be_empty
       end
 
       it 'skips help commands' do
         cmd.stub(:name) { 'help' }
         config.save attrs
-        attrs[described_class::COMMAND_KEY].should be_empty
+        attrs.keys.should be_empty
       end
     end
 
