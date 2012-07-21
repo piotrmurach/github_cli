@@ -29,7 +29,7 @@ module GithubCLI
     end
 
     def fetch(key, default=nil)
-      data[key] || default || raise(IndexError.new("key #{key} not found"))
+      self[key] || default || raise(IndexError.new("key #{key} not found"))
     end
 
     def delete(key)
@@ -46,6 +46,12 @@ module GithubCLI
 
     def all
       data
+    end
+
+    def pretty
+      all.keys.zip(all.values).map do |el|
+        el.last.nil? ? [el.first, 'UNDEFINED'] : el
+      end
     end
 
     def location=(loc)
@@ -103,7 +109,7 @@ module GithubCLI
       unless data[key] == value
         data[key] = value
         data.delete(key) if value.nil?
-        save data.to_yaml
+        save data
       end
       value
     end
