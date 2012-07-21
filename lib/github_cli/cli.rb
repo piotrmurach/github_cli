@@ -18,27 +18,28 @@ module GithubCLI
       'reference'  => 'ref',
       'is'         => :issue,
       '--version'  => 'version',
+      '-V'         => 'version',
       'ls'         => 'list'
     }
 
     map ALIASES
 
     class_option :config, :type => :string,
-                 :desc => "Configuration file.", :banner => "Config file name",
+                 :desc => "Configuration file.", :banner => "<filename>",
                  :default => ".githubrc"
-    class_option :oauth, :type => :string, :aliases => '-a',
+    class_option :token, :type => :string,
                  :desc => 'Authentication token.',
-                 :banner => 'Set authentication token'
+                 :banner => '<oauth token>'
     class_option "no-color", :type => :boolean,
                  :desc => "Disable colorization in output."
     class_option "no-pager", :type => :boolean,
                  :desc => "Disable pagination of the output."
     class_option :pager, :type => :string, :aliases => '-p',
-                 :desc => "Command to be used for paging. Command can have options after it i.e. 'less -r'. Defaults to common pagers i.e. less if detected.",
-                 :banner => "less, more etc..."
+                 :desc => "Command to be used for paging.",
+                 :banner => "less|more|..."
     class_option :verbose, :type => :boolean,
                  :desc => "Enable verbose output mode."
-    class_option :version, :type => :boolean,
+    class_option :version, :type => :boolean, :aliases => ['-V'],
                  :desc => "Show program version"
 
     desc 'init', 'Generates a configuration file in your home directory'
