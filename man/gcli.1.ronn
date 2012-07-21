@@ -1,0 +1,23 @@
+gcli(1) -- Command Line Access to GitHub API v3
+===============================================
+
+## SYNOPSIS
+
+`gcli` COMMAND SUBCOMMAND [<args>]
+
+## DESCRIPTION
+
+The `gcli` utility integrates command line with GitHub API v3.
+
+## OPTIONS
+
+* `--no-color`:
+  Prints output without color.
+
+* `--pager`:
+  Sets command to be used for paging results. This option can be also set in the
+  configuration file.
+
+## AUTHOR
+
+  Piotr Murach

@@ -1,0 +1,6 @@
+gcli-repo(1) - Manage repository data
+=====================================
+
+## SYNOPSIS
+
+`gcli repo`

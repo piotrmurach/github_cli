@@ -1,0 +1,50 @@
+gcli-config(1) - Get or set global or local configuration options
+=================================================================
+
+## SYNOPSIS
+
+`gcli config` --global|--local name [value]
+`gcli config` --global|--local --list|-l [name_regex]
+
+## DESCRIPTION
+
+You can query/set options with this command. The name is actually a hash key
+string that is a composite one, nested with dots. If only name is provided, a
+value will be retrieved. If two parameters are given then value will be set
+or updated depending whether it already exists or not.\n
+
+There two types of config files, global and project specific. When modifying
+options ensure that you modifying the correct config.
+
+## OPTIONS
+
+* `--global`:
+  Writes configuration settings to global ~/.githubrc file inside user home directory.
+
+* `--local`:
+  Writes cofinguration settings inside the current directory to the .githubrc file.
+
+* `-l, --list`:
+  List all variables set in config file
+
+* `-e, --edit`:
+  Opens an editor to modify the specified config file.
+
+  Defaults to `vi` editor if non specified. It first looks inside --global or --local config, then searches environement variables ENV['EDITOR'] and ENV['VISUAL] before assuming default.
+
+## CONFIGURATION FILE
+
+The `gcli` configuration file contains a number of variables that affect the way the GitHub API is quried.
+
+### SYNTAX
+
+The configuration file is written in `yaml`. Therfore all formatting rules are derived from yaml specification.
+
+### VARIABLES
+
+*  `core.editor`:
+  Sets the editor to be used when opening files.
+
+## AUTHOR
+
+  Piotr Murach
