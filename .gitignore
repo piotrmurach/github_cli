@@ -7,3 +7,4 @@ pkg
 *.swp
 log
 *.sqlite3
+lib/github_cli/man
