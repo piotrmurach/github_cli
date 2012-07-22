@@ -3,8 +3,9 @@ gcli-config(1) - Get or set global or local configuration options
 
 ## SYNOPSIS
 
-`gcli config` --global|--local name [value]
-`gcli config` --global|--local --list|-l [name_regex]
+`gcli config` --global|--local name [value]<br>
+`gcli config` --global|--local `-l | -list` [name_regex]<br>
+`gcli config` --global|--local `-e | --edit`
 
 ## DESCRIPTION
 
@@ -16,6 +17,10 @@ or updated depending whether it already exists or not.\n
 There two types of config files, global and project specific. When modifying
 options ensure that you modifying the correct config.
 
+This command line will fail (with the exit code ret) if:
+
+1. The config file is invalid.
+
 ## OPTIONS
 
 * `--global`:
@@ -25,12 +30,12 @@ options ensure that you modifying the correct config.
   Writes cofinguration settings inside the current directory to the .githubrc file.
 
 * `-l, --list`:
-  List all variables set in config file
+  List all variables set in config file.
 
 * `-e, --edit`:
   Opens an editor to modify the specified config file.
 
-  Defaults to `vi` editor if non specified. It first looks inside --global or --local config, then searches environement variables ENV['EDITOR'] and ENV['VISUAL] before assuming default.
+  Defaults to `vi` editor if non specified. It first looks inside --global or --local config, then searches environement variables `EDITOR` and `VISUAL` before assuming default.
 
 ## CONFIGURATION FILE
 
@@ -42,8 +47,35 @@ The configuration file is written in `yaml`. Therfore all formatting rules are d
 
 ### VARIABLES
 
+*  `auth.token`:
+  Authentication token.
+
+*  `auth.basic`: 
+  Basic credentials in the form `login:password`.
+
+*  `core.endpoint`:
+  Sets host path used as the base for all requests to GitHub API v3.
+
 *  `core.editor`:
-  Sets the editor to be used when opening files.
+  Sets the editor to be used when opening files. By default `vi` is specified.
+
+*  `core.pager`:
+  The command that will be used to paginate output. Can be overridden with PAGER environment variable. less
+
+*  `core.no-pager`:
+  false
+
+*  `core.no-color`:
+  If set to true disables color output. By default is set to false.
+
+*  `core.format`:
+  Determines output formatting. Defaults to table output.
+
+*  `core.auto`:
+   Automatic pagination of requests to GitHub.
+
+*  `core.aliases`:
+  Global aliases used by commands.
 
 ## AUTHOR
 

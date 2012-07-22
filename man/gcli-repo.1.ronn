@@ -3,4 +3,5 @@ gcli-repo(1) - Manage repository data
 
 ## SYNOPSIS
 
-`gcli repo`
+`gcli repo` `branches` user repo<br>
+`gcli repo` `contribs|contributors` user repo<br>

@@ -11,12 +11,18 @@ The `gcli` utility integrates command line with GitHub API v3.
 
 ## OPTIONS
 
+* `--token`:
+  Authentication token.
+
 * `--no-color`:
   Prints output without color.
 
 * `--pager`:
   Sets command to be used for paging results. This option can be also set in the
   configuration file.
+
+* `--verbose`:
+  Include
 
 ## AUTHOR
 
