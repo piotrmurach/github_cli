@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "http://github.com/peter-murach/github_cli"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  gem.files         = `git ls-files`.split("\n")
+  gem.files         = `git ls-files`.split("\n") + Dir.glob("lib/github_cli/man/**/*")
   gem.test_files    = `git ls-files -- {spec,features}/*`.split("\n")
   gem.name          = "github_cli"
   gem.require_paths = ["lib"]
