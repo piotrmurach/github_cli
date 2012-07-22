@@ -48,6 +48,20 @@ describe GithubCLI::Config do
       end
     end
 
+    context '#pretty' do
+      it 'collects options into array' do
+        options= {'auth.token' => 'abc123' }
+        config.stub(:all).and_return options
+        config.pretty.should == [['auth.token','abc123']]
+      end
+
+      it 'marks nil option value as undefined' do
+        options= {'option' => nil}
+        config.stub(:all).and_return options
+        config.pretty.should == [['option', 'UNDEFINED']]
+      end
+    end
+
     context '#save' do
       let(:attrs) { {} }
       let(:cmd) { stub(:cmd, :namespace => 'repo', :name => 'create') }
