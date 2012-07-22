@@ -33,35 +33,23 @@ Feature: Configuration file
   Scenario: Read existing option
     Given I run `gcli init --global` interactively
       And I type "abc123"
-    When I run `gcli config --global auth.token`
-    Then the output should contain:
-    """
-    abc123
-    """
+    When I successfully run `gcli config --global auth.token`
+    Then the stdout should contain "abc123"
 
   Scenario: Read missing option
     Given I run `gcli init --global` interactively
       And I type "abc123"
     When I run `gcli config --global missing.key`
-    Then the output should contain:
-    """
-    Unknown option key
-    """
+    Then the exit status should be 0
 
   Scenario: Write existing option
     Given I run `gcli init --global` interactively
       And I type "abc123"
-    When I run `gcli config --global auth.token eee555`
-    Then the output should contain:
-    """
-    eee555
-    """
+    When I successfully run `gcli config --global auth.token eee555`
+    Then the stdout should contain "eee555"
 
   Scenario: Write missing option
     Given I run `gcli init --global` interactively
       And I type "abc123"
-    When I run `gcli config --global core.token eee555`
-    Then the output should contain:
-    """
-    eee555
-    """
+    When I successfully run `gcli config --global core.token eee555`
+    Then the stdout should contain "eee555"
