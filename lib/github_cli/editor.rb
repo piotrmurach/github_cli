@@ -18,7 +18,7 @@ module GithubCLI
 
     def open(name=nil)
       if editor
-        command = "#{editor} #{name}"
+        command = "#{editor} #{filename}"
         success = system(command)
         GithubCLI.ui.info "Could not run '#{command}'" unless success
         exit success
