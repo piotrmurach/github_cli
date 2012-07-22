@@ -55,7 +55,8 @@ module GithubCLI
           'core.no-pager' => false,
           'core.no-color' => false,
           'core.format'   => 'csv',
-          'core.auto'     => false
+          'core.auto'     => false,
+          'core.aliases'  => {}
         }
       end
     end
