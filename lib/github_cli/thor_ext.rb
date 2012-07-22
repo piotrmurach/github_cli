@@ -51,8 +51,19 @@ class Thor
     end
   end
 
+  MANPAGES = %w[
+    gcli-config.1
+  ]
+
   desc "help <command>", "Describe available commands or one specific command"
   def help(task = nil, subcommand = false)
-    task ? self.class.task_help(shell, task) : self.class.help(shell, subcommand)
+    command = "gcli-#{task}.1"
+
+    if MANPAGES.include? command
+      root = File.expand_path("../man", __FILE__)
+      system "man #{root}/#{command}"
+    else
+      task ? self.class.task_help(shell, task) : self.class.help(shell, subcommand)
+    end
   end
 end # Thor
