@@ -59,11 +59,10 @@ class Thor
   def help(task = nil, subcommand = false)
     command = "gcli-#{task}.1"
 
-    if MANPAGES.include? command
-      root = File.expand_path("../man", __FILE__)
-      system "man #{root}/#{command}"
-    else
-      task ? self.class.task_help(shell, task) : self.class.help(shell, subcommand)
+    GithubCLI::Manpage.has?(command) do |manpage|
+      manpage.show(command) && return
     end
+
+    task ? self.class.task_help(shell, task) : self.class.help(shell, subcommand)
   end
 end # Thor

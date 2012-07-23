@@ -62,5 +62,5 @@ module GithubCLI
         read_io.close
       end
     end
-  end # System
+  end # Pager
 end # GithubCLI
