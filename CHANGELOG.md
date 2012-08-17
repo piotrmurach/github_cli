@@ -1,3 +1,17 @@
+0.5.0 (August 17, 2012) - IMPORTANT!!!
+
+* Change editor settings to seek first local config before system properties.
+* Change config key format and add config file location setup.
+* Change init command to allow for local and global config files.
+* Add new default configuration options to .githubrc file.
+* Fix bug with setting config file options.
+* Add pretty printing of config entries with pattern matching.
+* Add config command for setting, unsetting and listing of options with tests.
+* Change executable command name from *ghc* to *gcli*
+* Add manpages for gcli executable and config command.
+* Setup automatic manpage trigger on help command.
+* Add raketask for vendoring gems and vendor thor.
+
 0.4.4 (July 15, 2012)
 
 * Fix bug with tree retrieval and add feature tests.
