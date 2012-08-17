@@ -26,41 +26,59 @@ Or install it yourself as:
 Run it:
 
 ```shell
-$ ghc
+$ gcli
 ```
 
 ### Initialize a configuration file
 
-The first step is to create a configuration file:
+The first step is to create a configuration file, either global in home directory or local inside the project:
 
 ```shell
-$ ghc init
+$ gcli init [--global|--local]
 ```
 
-This will setup a `.githubrc` configuration file in your home directory with
-all the global settings. During the install process you will be prompted for your
-`authentication token`.
+This will setup a `.githubrc` configuration file in your home/project directory
+with all the global settings. During the install process you will be prompted
+for your `authentication token`.
+
+Moreover, `gcli config` command allows you to set/get any configuration option such as output format, editor or oauth token.
+
+For instance, to check value for your `token` do
+
+```shell
+$ gcli config [--global|--local] auth.token
+```
+
+and to set the value do
+
+```shell
+$ gcli config [--global|--local] auth.token lh23l4kj234....
+```
+
+To list specific options
+
+$ gcli config [--global|--local] --list [regex]
 
 ### Arguments
 
-The required arguments come first as per command description, then follow the optional arguments inside a `params` flag.
+The required arguments come first as per command description, then are followed by the optional arguments supplied inside a `params` flag.
 
-You can create repository by supplying parameters in the following way:
+For instance, one can create repository by supplying parameters in the following way:
 
 ```shell
-ghc repo create octokit --params=description:'Test repo for kitty.'
+gcli repo create octokit --params=description:'Test repo for kitty.'
 ```
 
 To create repository inside organization:
 
 ```shell
-ghc repo create github/octokit --params=description:'Test repo for kitty.'
+gcli repo create github/octokit --params=description:'Test repo for kitty.'
 ```
 
-To find out which options are required and optional type:
+To find out which options are required and which are optional - type:
 
 ```shell
-ghc repo help create
+gcli repo help create
 ```
 
 ### Getting a list of commands
@@ -68,13 +86,13 @@ ghc repo help create
 You can list all GitHub APIs comamnds:
 
 ```shell
-$ ghc list
+$ gcli list
 ```
 
 to limit returned results pass `pattern`
 
 ```shell
-$ ghc list re*   # Returns all commands matching the pattern
+$ gcli list re*   # Returns all commands matching the pattern
 ```
 
 ### Output Format
@@ -84,19 +102,19 @@ The API responses can be formatted as `csv`, `json`, `pretty`, `table`.
 By default responses are in tabular format. Tables are available in `horizontal` and `vertical` mode. To enforce table display pass `:h` and `:v` respectively. Otherwise a default orientation will be picked depending on the request made and terminal size.
 
 ```shell
-ghc user get -u peter-murach --format=table:h
+gcli user get -u peter-murach --format=table:h
 
-┏━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳
-┃ type     ┃ login    ┃ public_… ┃ blog     ┃ hireable ┃ followe… ┃ followi… ┃ location ┃ html_url ┃ name     ┃
-┣━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋
-┃ User     ┃ peter-m… ┃ 14       ┃ peter-m… ┃ false    ┃ 18       ┃ 52       ┃ Sheffie… ┃ https:/… ┃ Piotr M… ┃
-┗━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻
+┏━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳
+┃ type     ┃ login    ┃ public_… ┃ blog     ┃ hireable ┃ followe… ┃ followi… ┃ location ┃ html_url ┃
+┣━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋
+┃ User     ┃ peter-m… ┃ 14       ┃ peter-m… ┃ false    ┃ 18       ┃ 52       ┃ Sheffie… ┃ https:/… ┃
+┗━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻
 ```
 
 To get `csv` formatting for easy command piping do
 
 ```shell
-ghc repo ls -u wycats --format=csv
+gcli repo ls -u wycats --format=csv
 ```
 
 ### Output Paging
@@ -104,7 +122,7 @@ ghc repo ls -u wycats --format=csv
 By default all responses are paged. You can switch off paging by supplying `no-pager` flag.
 
 ```shell
-ghc --no-pager user ls -u wycats
+gcli --no-pager user ls -u wycats
 ```
 
 Also you can supply you preferred `pager`, otherwise the paging program is taken from environment variable PAGER if defined or defaults to "less".
@@ -114,67 +132,67 @@ Also you can supply you preferred `pager`, otherwise the paging program is taken
 Interact with git data:
 
 ```shell
-$ ghc blob
-$ ghc commit
-$ ghc ref
-$ ghc tag
-$ ghc tree
+$ gcli blob
+$ gcli commit
+$ gcli ref
+$ gcli tag
+$ gcli tree
 ```
 
 Interact with issues:
 
 ```shell
-$ ghc issue
-$ ghc label
-$ ghc milestone
-$ ghc comment
+$ gcli issue
+$ gcli label
+$ gcli milestone
+$ gcli comment
 ```
 
 Interact with repositories:
 
 ```shell
-$ ghc repo
-$ ghc collab
-$ ghc content
-$ ghc download
-$ ghc fork
-$ ghc hook
-$ ghc key
-$ ghc watching
+$ gcli repo
+$ gcli collab
+$ gcli content
+$ gcli download
+$ gcli fork
+$ gcli hook
+$ gcli key
+$ gcli watching
 ```
 
 Interact with gists:
 
 ```shell
-$ ghc gist
+$ gcli gist
 ```
 
 Interact with users:
 
 ```shell
-$ ghc user
-$ ghc email
-$ ghc follower
+$ gcli user
+$ gcli email
+$ gcli follower
 ```
 
 Interact with organizations:
 
 ```shell
-$ ghc org
-$ ghc member
-$ ghc team
+$ gcli org
+$ gcli member
+$ gcli team
 ```
 
 Interact with authorizations:
 
 ```shell
-$ ghc auth
+$ gcli auth
 ```
 
 Interact with search:
 
 ```shell
-$ ghc search
+$ gcli search
 ```
 
 ## Contributing
