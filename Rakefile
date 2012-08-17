@@ -45,3 +45,14 @@ begin
     end
   end
 end
+
+namespace :vendor do
+  desc "Build"
+  task :build => :clean do
+    sh "git clone git://github.com/wycats/thor.git lib/github_cli/vendor/thor"
+  end
+
+  task :clean do
+    rm_rf "lib/github_cli/vendor"
+  end
+end
