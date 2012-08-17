@@ -57,7 +57,9 @@ $ gcli config [--global|--local] auth.token lh23l4kj234....
 
 To list specific options
 
+```shell
 $ gcli config [--global|--local] --list [regex]
+```
 
 ### Arguments
 
@@ -66,19 +68,19 @@ The required arguments come first as per command description, then are followed 
 For instance, one can create repository by supplying parameters in the following way:
 
 ```shell
-gcli repo create octokit --params=description:'Test repo for kitty.'
+$ gcli repo create octokit --params=description:'Test repo for kitty.'
 ```
 
 To create repository inside organization:
 
 ```shell
-gcli repo create github/octokit --params=description:'Test repo for kitty.'
+$ gcli repo create github/octokit --params=description:'Test repo for kitty.'
 ```
 
 To find out which options are required and which are optional - type:
 
 ```shell
-gcli repo help create
+$ gcli repo help create
 ```
 
 ### Getting a list of commands
