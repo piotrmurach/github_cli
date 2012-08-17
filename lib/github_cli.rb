@@ -2,8 +2,7 @@
 
 require 'yaml'
 require 'pathname'
-require 'thor'
-require 'thor/group'
+require 'github_cli/vendor'
 require 'github_api'
 require 'github_cli/thor_ext'
 require 'github_cli/version'
