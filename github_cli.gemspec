@@ -8,8 +8,10 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{github_cli is a set of tools that provide full command line access to GitHub API v3}
   gem.homepage      = "http://github.com/peter-murach/github_cli"
 
+  man_files         = Dir.glob("lib/github_cli/man/**/*")
+  vendor_files      = Dir.glob("lib/github_cli/vendor/**/*")
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  gem.files         = `git ls-files`.split("\n") + Dir.glob("lib/github_cli/man/**/*")
+  gem.files         = `git ls-files`.split("\n") + man_files + vendor_files
   gem.test_files    = `git ls-files -- {spec,features}/*`.split("\n")
   gem.name          = "github_cli"
   gem.require_paths = ["lib"]
