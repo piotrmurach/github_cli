@@ -1,6 +1,4 @@
-$:.unshift File.expand_path('../vendor/thor', __FILE__)
-require 'thor'
-require 'github_cli'
+# encoding: utf-8
 
 class Thor
   include Thor::Base
