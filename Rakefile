@@ -49,7 +49,10 @@ end
 namespace :vendor do
   desc "Build"
   task :build => :clean do
-    sh "git clone git://github.com/wycats/thor.git lib/github_cli/vendor/thor"
+    sh "git clone git://github.com/wycats/thor.git lib/github_cli/vendor/tmp"
+    sh "mkdir lib/github_cli/vendor/thor"
+    sh "mv lib/github_cli/vendor/tmp/lib/* lib/github_cli/vendor/"
+    rm_rf "lib/github_cli/vendor/tmp"
   end
 
   task :clean do
