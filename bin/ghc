@@ -1,2 +1,0 @@
-#!/usr/bin/env ruby
-$stdout.print "[DEPRECATED] Please use `gcli` instead."
