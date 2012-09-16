@@ -1,3 +1,8 @@
+0.5.1 (September 16, 2012)
+
+* Fix bug - failure to load vendored dependencies.
+* Remove *ghc* executable.
+
 0.5.0 (August 17, 2012) - IMPORTANT!!!
 
 * Change editor settings to seek first local config before system properties.
