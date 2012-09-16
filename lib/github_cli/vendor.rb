@@ -1,10 +1,12 @@
-vendor_dir = File.expand_path('../vendor', __FILE__)
+# encoding: utf-8
 
-# Add any vendored libraries into search path
-Dir.glob(vendor_dir + '/*').each do |dir|
-  $LOAD_PATH.unshift File.join(dir, 'lib')
+if defined?(Thor)
+  GithubCLI.ui.warn "Thor has already been required. "
 end
-$:.unshift File.expand_path('../vendor/thor', __FILE__)
+
+vendor_dir = File.expand_path('../vendor', __FILE__)
+$:.unshift(vendor_dir) unless $:.include?(vendor_dir)
 
 require 'thor'
 require 'thor/group'
+require 'thor/actions'
