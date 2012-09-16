@@ -29,9 +29,15 @@ module GithubCLI
       }
     end
 
-    map "ls" => :list,
-        "all" => :list,
-        "del" => :delete
+    ALIASES = {
+      "ls"  => :list,
+      "all" => :list,
+      "del" => :delete,
+      "rm"  => :delete,
+      "c"   => :create,
+      "e"   => :edit
+    }
+    map ALIASES
 
     class_option :params, :type => :hash, :default => {}, :aliases => '-p',
                  :desc => 'Request parameters e.i per_page:100'
