@@ -1,3 +1,13 @@
+0.5.2 (September 22, 2012)
+
+* Fix bug with Ruby 1.8 and passing arguments in add and replace label api
+* Fix ui component in Ruby 1.8 and add newline param
+* Update dependencies.
+* Fix table formatting in Ruby 1.8.
+* Change watching api to new subscribers api.
+* Add starring api commands.
+* Fix bug preventing listing of your authorizations.
+
 0.5.1 (September 16, 2012)
 
 * Fix bug - failure to load vendored dependencies.
