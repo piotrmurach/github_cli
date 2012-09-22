@@ -5,9 +5,9 @@ module GithubCLI
 
     namespace :watch
 
-    desc 'watchers <user> <repo>', 'Lists repo watchers'
-    def watchers(user, repo)
-      Watching.watchers user, repo, options[:params], options[:format]
+    desc 'list <user> <repo>', 'Lists repo watchers'
+    def list(user, repo)
+      Watching.list user, repo, options[:params], options[:format]
     end
 
     desc 'watched', 'Lists repos being watched by a user'
@@ -27,12 +27,12 @@ module GithubCLI
 
     desc 'start <user> <repo>', 'Watch a repository'
     def start(user, repo)
-      Watching.start_watching user, repo, options[:params], options[:format]
+      Watching.start user, repo, options[:params], options[:format]
     end
 
     desc 'stop <user> <repo>', 'Stop watching a repository'
     def stop(user, repo)
-      Watching.stop_watching user, repo, options[:params], options[:format]
+      Watching.stop user, repo, options[:params], options[:format]
     end
 
   end # Watching

@@ -5,9 +5,9 @@ module GithubCLI
 
     class << self
 
-      def watchers(user, repo, params, format)
+      def list(user, repo, params, format)
         output format do
-          github_api.repos.watching.watchers user, repo, params
+          github_api.repos.watching.list user, repo, params
         end
       end
 
@@ -23,15 +23,15 @@ module GithubCLI
         end
       end
 
-      def start_watching(user, repo, params, format)
+      def start(user, repo, params, format)
         output format do
-          github_api.repos.watching.start_watching user, repo, params
+          github_api.repos.watching.watch user, repo, params
         end
       end
 
-      def stop_watching(user, repo, params, format)
+      def stop(user, repo, params, format)
         output format do
-          github_api.repos.watching.stop_watching user, repo, params
+          github_api.repos.watching.unwatch user, repo, params
         end
       end
     end
