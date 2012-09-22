@@ -233,9 +233,9 @@ module GithubCLI
           # Don't output 2 trailing spaces when printing last column
           width = width - 2 if width > 3 # Ensure sensible width
         end
-        field = if field.length == width
-          field
-        elsif field.length < width
+        field = if field.to_s.length == width
+          field.to_s
+        elsif field.to_s.length < width
           pad(field.to_s, width, :align => style.align)
         else
           truncate(field.to_s, width)
