@@ -6,26 +6,32 @@ module GithubCLI
 
     def initialize(shell)
       @shell = shell
+      @quite = false
+      @debug = ENV['DEBUG']
     end
 
-    def confirm(message)
-      @shell.say message, :green
+    def confirm(message, newline=nil)
+      @shell.say message, :green, newline
     end
 
-    def info(message)
-      @shell.say message, nil
+    def info(message, newline=nil)
+      @shell.say message, nil, newline
     end
 
-    def warn(message)
-      @shell.say message, :yellow
+    def warn(message, newline=nil)
+      @shell.say message, :yellow, newline
     end
 
-    def error(message)
-      @shell.say message, :red
+    def error(message, newline=nil)
+      @shell.say message, :red, newline
     end
 
-    def debug(message)
-      @shell.say message
+    def debug(message, newline=nil)
+      @shell.say message, nil, newline
+    end
+
+    def quite!
+      @quite = true
     end
 
     def debug!
