@@ -42,7 +42,7 @@ module GithubCLI
 
     desc 'add <user> <repo> <issue_id> <label>[<label>...]', 'Add labels to <issue_id>.'
     def add(user, repo, issue_id, *args)
-      Label.add user, repo, issue_id, *args, options[:params], options[:format]
+      Label.add user, repo, issue_id, args, options[:params], options[:format]
     end
 
     desc 'remove <user> <repo> [<label_id>/]<issue_id>', 'Remove <label_id> from an <issue_id>'
@@ -53,7 +53,7 @@ module GithubCLI
 
     desc 'replace <user> <repo> <issue_id> <label>[<label>...]', 'Replace all labels for an <issue_id>.'
     def replace(user, repo, issue_id, *args)
-      Label.replace user, repo, issue_id, *args, options[:params], options[:format]
+      Label.replace user, repo, issue_id, args, options[:params], options[:format]
     end
 
     desc 'milestone <user> <repo> <number>', 'Get labels for every issue in a milestone.'

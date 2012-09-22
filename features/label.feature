@@ -60,7 +60,7 @@ Feature: gcli label
     """
     post('/repos/wycats/thor/issues/1/labels') { status 200 }
     """
-    When I run `gcli label add wycats thor 1 'bug' 'feature'`
+    When I run `gcli label add wycats thor 1 bug feature`
     Then the exit status should be 0
 
   Scenario: Remove label from an issue
@@ -92,7 +92,7 @@ Feature: gcli label
     """
     put('/repos/wycats/thor/issues/1/labels') { status 200 }
     """
-    When I run `gcli label replace wycats thor 1 'bug' 'feature'`
+    When I run `gcli label replace wycats thor 1 bug feature`
     Then the exit status should be 0
 
   Scenario: Milestone labels

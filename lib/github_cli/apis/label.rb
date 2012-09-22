@@ -41,9 +41,11 @@ module GithubCLI
         end
       end
 
-      def add(user, repo, issue_id, *args, params, format)
+      def add(user, repo, issue_id, *args)
+        format, params = args.pop, args.pop
+
         output format do
-          github_api.issues.labels.add user, repo, issue_id, *args, params
+          github_api.issues.labels.add user, repo, issue_id, args.flatten, params
         end
       end
 
@@ -53,9 +55,11 @@ module GithubCLI
         end
       end
 
-      def replace(user, repo, issue_id, *args, params, format)
+      def replace(user, repo, issue_id, *args)
+        format, params = args.pop, args.pop
+
         output format do
-          github_api.issues.labels.replace user, repo, issue_id, *args, params
+          github_api.issues.labels.replace user, repo, issue_id, args.flatten, params
         end
       end
 
