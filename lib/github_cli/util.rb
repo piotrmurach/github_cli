@@ -6,13 +6,13 @@ module GithubCLI
 
     # Converts deeply nested hash into only one level structure
     #
-    def flatten_hash(prefix=nil, hash)
+    def flatten_hash(hash, prefix=nil)
       new_hash ||= {}
       hash.each do |key, val|
         key =  prefix ? :"#{prefix}_#{key}" : key
         case val
         when Hash
-          new_hash.update flatten_hash(key, val)
+          new_hash.update flatten_hash(val, key)
         else
           new_hash[key] = val
         end
@@ -86,5 +86,6 @@ module GithubCLI
     def longest_common_prefix(string_1, string_2)
       ("#{string_1}\0#{string_2}").match(/^(.*).*\0\1/i).to_a[1]
     end
+
   end
 end # GithubCLI
