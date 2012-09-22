@@ -13,7 +13,7 @@ module GithubCLI
 
       def watched(params, format)
         output format do
-          github_api.repos.watching.watched user, repo, id, params
+          github_api.repos.watching.watched params
         end
       end
 
