@@ -10,7 +10,7 @@ module GithubCLI
       You can only list your own tokens, and only through Basic Authentication.
     DESC
     def list
-      Authorization.all options[:params], options[:formats]
+      Authorization.all options[:params], options[:format]
     end
 
     desc 'get <id>', 'Get a single authorization'
