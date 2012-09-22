@@ -40,7 +40,7 @@ module GithubCLI
     attr_writer :ui, :config
 
     def ui
-      @ui ||= UI.new
+      @ui ||= UI.new Thor::Shell::Basic.new
     end
 
     def executable_name
