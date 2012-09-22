@@ -69,6 +69,9 @@ module GithubCLI
     desc "search <command>", "Leverage Search API"
     subcommand "search", GithubCLI::Commands::Search
 
+    desc "star <command>", "Leverage Starring API"
+    subcommand "star", GithubCLI::Commands::Starring
+
     desc "tag <command>", "Leverage Tags API"
     subcommand "tag", GithubCLI::Commands::Tags
 

@@ -31,6 +31,7 @@ end
   reference
   repository
   search
+  starring
   tag
   team
   tree
