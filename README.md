@@ -1,11 +1,13 @@
-# GithubCLI<img src="https://github.com/peter-murach/github_cli/raw/master/ghc_logo.png" align="right" />
+# GithubCLI
 [![Build Status](https://secure.travis-ci.org/peter-murach/github_cli.png?branch=master)][travis] [![Dependency Status](https://gemnasium.com/peter-murach/github_cli.png?travis)][gemnasium] [![Code Climate](https://codeclimate.com/badge.png)][codeclimate]
 
 [travis]: http://travis-ci.org/peter-murach/github_cli
 [gemnasium]: https://gemnasium.com/peter-murach/github_cli
 [codeclimate]: https://codeclimate.com/github/peter-murach/github_cli
 
-CLI-based access to GitHub API v3 that works hand-in-hand with 'github_api' gem.
+CLI-based access to GitHub API v3 that works hand-in-hand with `github_api` gem.
+
+![Interface](https://github.com/peter-murach/github_cli/raw/master/screenshots/interface.png)
 
 ## Installation
 
@@ -103,15 +105,8 @@ The API responses can be formatted as `csv`, `json`, `pretty`, `table`.
 
 By default responses are in tabular format. Tables are available in `horizontal` and `vertical` mode. To enforce table display pass `:h` and `:v` respectively. Otherwise a default orientation will be picked depending on the request made and terminal size.
 
-```shell
-gcli user get -u peter-murach --format=table:h
 
-┏━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━┳
-┃ type     ┃ login    ┃ public_… ┃ blog     ┃ hireable ┃ followe… ┃ followi… ┃ location ┃ html_url ┃
-┣━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋━━━━━━━━━━╋
-┃ User     ┃ peter-m… ┃ 14       ┃ peter-m… ┃ false    ┃ 18       ┃ 52       ┃ Sheffie… ┃ https:/… ┃
-┗━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻━━━━━━━━━━┻
-```
+![Command](https://github.com/peter-murach/github_cli/raw/master/screenshots/command.png)
 
 To get `csv` formatting for easy command piping do
 
