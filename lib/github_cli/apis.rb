@@ -33,6 +33,7 @@ end
   repository
   search
   starring
+  status
   tag
   team
   tree

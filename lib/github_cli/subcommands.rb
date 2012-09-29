@@ -75,6 +75,9 @@ module GithubCLI
     desc "star <command>", "Leverage Starring API"
     subcommand "star", GithubCLI::Commands::Starring
 
+    desc "status <command>", "Leverage Statuses API"
+    subcommand "status", GithubCLI::Commands::Statuses
+
     desc "tag <command>", "Leverage Tags API"
     subcommand "tag", GithubCLI::Commands::Tags
 
