@@ -1,3 +1,12 @@
+0.5.3 (September 29, 2012)
+
+* Fix bug with starring api starred command.[Issue #6]
+* Fix bug with watching api watched command.
+* Add assignees api commands.
+* Add statuses api commands.
+* Add merges api command.
+* Rewrote tests for follower & collaborators apis to fix travis CI.
+
 0.5.2 (September 22, 2012)
 
 * Fix bug with Ruby 1.8 and passing arguments in add and replace label api
