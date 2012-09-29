@@ -13,7 +13,7 @@ module GithubCLI
     desc 'starred', 'Lists repos being starred by a user'
     method_option :user, :type => :string, :aliases => ["-u"],
                   :desc => 'Starred repositories for <user>'
-    def starred(user, repo, id)
+    def starred
       if options[:user]
         options[:params]['user'] = options[:user]
       end

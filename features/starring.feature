@@ -37,6 +37,7 @@ Feature: gcli star
     """
     When I run `gcli star unstar wycats thor`
     Then the exit status should be 0
+      And the stdout should contain "204"
 
   Scenario: Starring
     Given the GitHub API server:
@@ -63,6 +64,7 @@ Feature: gcli star
     """
     When I run `gcli star starred -u wycats`
     Then the exit status should be 0
+      And the stdout should contain "200"
 
   Scenario: Starred by the authenticated user
     Given the GitHub API server:
@@ -71,4 +73,5 @@ Feature: gcli star
     """
     When I run `gcli star starred`
     Then the exit status should be 0
+      And the stdout should contain "200"
 
