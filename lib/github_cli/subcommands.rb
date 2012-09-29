@@ -54,6 +54,9 @@ module GithubCLI
     desc "member <command>", "Leverage Members API"
     subcommand "member", GithubCLI::Commands::Members
 
+    desc "merge <command>", "Leverage Merging API"
+    subcommand "merge", GithubCLI::Commands::Merging
+
     desc "milestone <command>", "Leverage Milestones API"
     subcommand "milestone", GithubCLI::Commands::Milestones
 

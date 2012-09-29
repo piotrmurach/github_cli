@@ -26,6 +26,7 @@ end
   key
   label
   member
+  merging
   milestone
   organization
   pull_request
