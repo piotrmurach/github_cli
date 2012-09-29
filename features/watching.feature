@@ -29,6 +29,7 @@ Feature: gcli watching
     """
     When I run `gcli watch start wycats thor`
     Then the exit status should be 0
+      And the stdout should contain "204"
 
   Scenario: Stop watching
     Given the GitHub API server:
@@ -37,6 +38,7 @@ Feature: gcli watching
     """
     When I run `gcli watch stop wycats thor`
     Then the exit status should be 0
+      And the stdout should contain "204"
 
   Scenario: Watching
     Given the GitHub API server:
@@ -59,16 +61,18 @@ Feature: gcli watching
   Scenario: Watched by a user
     Given the GitHub API server:
     """
-    get('/users/wycats/watched') { status 200 }
+    get('/users/wycats/subscriptions') { status 200 }
     """
     When I run `gcli watch watched -u wycats`
     Then the exit status should be 0
+      And the stdout should contain "200"
 
   Scenario: Watched by the authenticated user
     Given the GitHub API server:
     """
-    get('/user/watched') { status 200 }
+    get('/user/subscriptions') { status 200 }
     """
     When I run `gcli watch watched`
     Then the exit status should be 0
+      And the stdout should contain "200"
 

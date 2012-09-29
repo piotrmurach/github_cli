@@ -13,7 +13,7 @@ module GithubCLI
     desc 'watched', 'Lists repos being watched by a user'
     method_option :user, :type => :string, :aliases => ["-u"],
                   :desc => 'Watch repositories for <user>'
-    def watched(user, repo, id)
+    def watched
       if options[:user]
         options[:params]['user'] = options[:user]
       end
