@@ -2,6 +2,7 @@
 
 module GithubCLI
   module Commands
+    autoload :Assignees,      'github_cli/commands/assignees'
     autoload :Authorizations, 'github_cli/commands/authorizations'
     autoload :Blobs,          'github_cli/commands/blobs'
     autoload :Collaborators,  'github_cli/commands/collaborators'

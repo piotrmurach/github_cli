@@ -9,6 +9,7 @@ else
 end
 
 %w[
+  assignee
   authorization
   blob
   collaborator

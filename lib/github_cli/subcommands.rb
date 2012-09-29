@@ -3,6 +3,9 @@
 module GithubCLI
   class CLI
 
+    desc "assignee <command>", "Leverage Assignees API"
+    subcommand "assignee", GithubCLI::Commands::Assignees
+
     desc "auth <command>", "Leverage Authorizations API"
     subcommand "auth", GithubCLI::Commands::Authorizations
 
