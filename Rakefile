@@ -10,7 +10,7 @@ end
 
 Cucumber::Rake::Task.new(:features)
 
-task :default => [:spec, :features]
+task :default => [:spec]
 
 task :release => ["man:clean", "man:build"]
 
