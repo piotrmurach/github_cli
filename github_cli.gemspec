@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = GithubCLI::VERSION
 
-  gem.add_dependency 'github_api', '~> 0.7'
+  gem.add_dependency 'github_api', '~> 0.9'
 
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'aruba'
