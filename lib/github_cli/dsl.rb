@@ -6,6 +6,7 @@ module GithubCLI
     @@error_block  = nil
 
     # Defines a program name.
+    #
     def program_name(name=nil)
       if name
         @@program_name = name
@@ -13,9 +14,19 @@ module GithubCLI
       @@program_name
     end
 
-    # Defines behaviour on error.
-    def on_error(&block)
-      @@error_block = block
+    # Defines behaviour on error to emit consistent type.
+    #
+    def on_error
+      yield
+    rescue Exception => error
+      raise GithubCLI::GithubCLIError, "Rescued: #{error}"
     end
-  end
-end
+
+    def before(&block)
+    end
+
+    def configure(&block)
+    end
+
+  end # DSL
+end # GithubCLI
