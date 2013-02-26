@@ -13,7 +13,7 @@ module GithubCLI
       Follower.all options[:user], options[:params], options[:format]
     end
 
-    desc 'following', 'List who the authenticated user is following'
+    desc 'following', 'List who a user/the authenticated user is following'
     method_option :user, :type => :string, :aliases => ["-u"],
                   :desc => 'List who a <user> is following',
                   :banner => '<user>'
