@@ -16,22 +16,6 @@ describe GithubCLI::Util do
     end
   end
 
-  describe '#convert_values' do
-    let(:values) { [true, {:a => false }, 'string']}
-
-    it "converts ruby boolean to string" do
-      expect(subject.convert_values([true])).to eql ["true"]
-    end
-
-    it "converts recursively" do
-      subject.convert_values(values).should include ['false']
-    end
-
-    it 'preserves strings' do
-      subject.convert_values(values).should include 'string'
-    end
-  end
-
   describe '#longest_common_prefix' do
     it 'finds common prefix' do
       a = 'tribe'; b = 'tree'
