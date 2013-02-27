@@ -20,8 +20,7 @@ describe GithubCLI::Util do
     let(:values) { [true, {:a => false }, 'string']}
 
     it "converts ruby boolean to string" do
-      subject.convert_values(values).should include "true"
-      subject.convert_values(values).should_not include true
+      expect(subject.convert_values([true])).to eql ["true"]
     end
 
     it "converts recursively" do
@@ -30,18 +29,6 @@ describe GithubCLI::Util do
 
     it 'preserves strings' do
       subject.convert_values(values).should include 'string'
-    end
-  end
-
-  describe "#convert_value" do
-    it 'converts arrays to arrays of strings' do
-      values = [:bar, 123, 3.14]
-      subject.convert_value(values).should eq(["bar", "123", "3.14"])
-    end
-
-    it 'converts hash values to strings' do
-      values = {:foo => 123, :bar => :baz, :buz => 2.3}
-      subject.convert_value(values).should eq(["123", "baz", "2.3"])
     end
   end
 
