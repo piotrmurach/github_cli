@@ -8,11 +8,13 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = FileList['spec/**/*_spec.rb']
 end
 
-Cucumber::Rake::Task.new(:features)
-
-task :default => [:spec]
+task :default => [:spec, :features]
 
 task :release => ["man:clean", "man:build"]
+
+task :features do
+ sh 'bundle exec cucumber -f progress -t @commands features'
+end
 
 begin
   require 'ronn'
