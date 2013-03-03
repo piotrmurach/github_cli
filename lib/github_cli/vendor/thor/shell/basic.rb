@@ -58,10 +58,10 @@ class Thor
       # ==== Example
       # say("I know you knew that.")
       #
-      def say(message="", color=nil, force_new_line=(message.to_s !~ /( |\t)$/))
+      def say(message="", color=nil, force_new_line=(message.to_s !~ /( |\t)\Z/))
         message = message.to_s
 
-        message = set_color(message, *color) if color
+        message = set_color(message, *color) if color && can_display_colors?
 
         spaces = "  " * padding
 
@@ -226,20 +226,20 @@ class Thor
           answer = ask %[Overwrite #{destination}? (enter "h" for help) #{options}]
 
           case answer
-            when is?(:yes), is?(:force), ""
-              return true
-            when is?(:no), is?(:skip)
-              return false
-            when is?(:always)
-              return @always_force = true
-            when is?(:quit)
-              say 'Aborting...'
-              raise SystemExit
-            when is?(:diff)
-              show_diff(destination, yield) if block_given?
-              say 'Retrying...'
-            else
-              say file_collision_help
+          when is?(:yes), is?(:force), ""
+            return true
+          when is?(:no), is?(:skip)
+            return false
+          when is?(:always)
+            return @always_force = true
+          when is?(:quit)
+            say 'Aborting...'
+            raise SystemExit
+          when is?(:diff)
+            show_diff(destination, yield) if block_given?
+            say 'Retrying...'
+          else
+            say file_collision_help
           end
         end
       end
@@ -274,6 +274,10 @@ class Thor
       end
 
     protected
+
+      def can_display_colors?
+        false
+      end
 
       def lookup_color(color)
         return color unless color.is_a?(Symbol)
