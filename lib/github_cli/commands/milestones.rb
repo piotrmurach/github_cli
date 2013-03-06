@@ -17,9 +17,9 @@ module GithubCLI
       Milestone.all user, repo, options[:params], options[:format]
     end
 
-    desc 'get <user> <repo> <milestone-id>', 'Get a single milestone'
-    def get(user, repo, id)
-      Milestone.get user, repo, id, options[:params], options[:format]
+    desc 'get <user> <repo> <number>', 'Get a single milestone'
+    def get(user, repo, number)
+      Milestone.get user, repo, number, options[:params], options[:format]
     end
 
     desc 'create <user> <repo>', 'Create a milestone'
@@ -39,7 +39,7 @@ module GithubCLI
       Milestone.create user, repo, options[:params], options[:format]
     end
 
-    desc 'update <user> <repo> <milestone-id>', 'Update a milestone'
+    desc 'update <user> <repo> <number>', 'Update a milestone'
     long_desc <<-DESC
       Parameters
 
@@ -52,13 +52,13 @@ module GithubCLI
 
       ghc milestone update wycats thor 1 --params=title:new
     DESC
-    def update(user, repo, milestone_id)
-      Milestone.update user, repo, milestone_id, options[:params], options[:format]
+    def update(user, repo, number)
+      Milestone.update user, repo, number, options[:params], options[:format]
     end
 
-    desc 'delete <user> <repo> <milestone-id>', 'Delete a milestone'
-    def delete(user, repo, id)
-      Milestone.delete user, repo, id, options[:params], options[:format]
+    desc 'delete <user> <repo> <number>', 'Delete a milestone'
+    def delete(user, repo, number)
+      Milestone.delete user, repo, number, options[:params], options[:format]
     end
 
   end # Milestones
