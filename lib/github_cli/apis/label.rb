@@ -35,12 +35,6 @@ module GithubCLI
         end
       end
 
-      def issue(user, repo, issue_id, params, format)
-        output format do
-          github_api.issues.labels.issue user, repo, issue_id, params
-        end
-      end
-
       def add(user, repo, issue_id, *args)
         format, params = args.pop, args.pop
 
@@ -60,12 +54,6 @@ module GithubCLI
 
         output format do
           github_api.issues.labels.replace user, repo, issue_id, args.flatten, params
-        end
-      end
-
-      def milestone(user, repo, number, params, format)
-        output format do
-          github_api.issues.labels.milestone user, repo, number, params
         end
       end
     end
