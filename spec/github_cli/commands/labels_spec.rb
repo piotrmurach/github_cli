@@ -14,6 +14,16 @@ describe GithubCLI::Commands::Labels do
     subject.invoke "label:list", [user, repo]
   end
 
+  it "invokes label:list --milestone 1" do
+    api_class.should_receive(:all).with(user, repo, {'milestone_id' => 1}, 'csv')
+    subject.invoke "label:list", [user, repo], :milestone => 1, :format => 'csv'
+  end
+
+  it "invokes label:list --issue 1" do
+    api_class.should_receive(:all).with(user, repo, {'issue_id' => 1}, format)
+    subject.invoke "label:list", [user, repo], :issue => 1
+  end
+
   it "invokes label:get" do
     api_class.should_receive(:get).with(user, repo, name, {}, format)
     subject.invoke "label:get", [user, repo, name]
@@ -32,16 +42,6 @@ describe GithubCLI::Commands::Labels do
   it "invokes label:delete" do
     api_class.should_receive(:delete).with(user, repo, name, {}, format)
     subject.invoke "label:delete", [user, repo, name]
-  end
-
-  it "invokes label:issue" do
-    api_class.should_receive(:issue).with(user, repo, name, {}, format)
-    subject.invoke "label:issue", [user, repo, name]
-  end
-
-  it "invokes lable:milestone" do
-    api_class.should_receive(:milestone).with(user, repo, 1, {}, format)
-    subject.invoke "label:milestone", [user, repo, 1]
   end
 
   it "invokes lable:add" do

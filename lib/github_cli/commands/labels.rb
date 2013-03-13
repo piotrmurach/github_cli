@@ -6,8 +6,20 @@ module GithubCLI
     namespace :label
 
     desc 'list <user> <repo>', 'Listing all labels for this repository.'
+    method_option :milestone, :type => :string, :aliases => ["-m"],
+                  :desc => 'List labels for every issue in a milestone.',
+                  :banner => '<milestone>'
+    method_option :issue, :type => :string, :aliases => ["-i"],
+                  :desc => 'List labels on an issue.',
+                  :banner => '<issue>'
     def list(user, repo)
-      Label.all user, repo, options[:params], options[:format]
+      params = options[:params].dup
+      if (milestone_id = options[:milestone])
+        params['milestone_id'] = milestone_id
+      elsif (issue_id = options[:issue])
+        params['issue_id'] = issue_id
+      end
+      Label.all user, repo, params, options[:format]
     end
 
     desc 'get <user> <repo> <name>', 'Get a single label.'
@@ -35,30 +47,20 @@ module GithubCLI
       Label.delete user, repo, name, options[:params], options[:format]
     end
 
-    desc 'issue <user> <repo> <number>', 'List labels on an issue.'
-    def issue(user, repo, number)
-      Label.issue user, repo, number, options[:params], options[:format]
-    end
-
-    desc 'add <user> <repo> <issue_id> <label>[<label>...]', 'Add labels to <issue_id>.'
+    desc 'add <user> <repo> <number> <label>[<label>...]', 'Add labels to issue <number>.'
     def add(user, repo, number, *args)
       Label.add user, repo, number, args, options[:params], options[:format]
     end
 
-    desc 'remove <user> <repo> [<label_id>/]<issue_id>', 'Remove <label_id> from an <issue_id>'
+    desc 'remove <user> <repo> [<name>/]<number>', 'Remove label<name> from an issue<number>'
     def remove(user, repo, number)
-      label_id, issue_id  = Arguments.new(number).parse
-      Label.remove user, repo, issue_id, label_id, options[:params], options[:format]
+      name, number  = Arguments.new(number).parse
+      Label.remove user, repo, number, name, options[:params], options[:format]
     end
 
-    desc 'replace <user> <repo> <number> <label>[<label>...]', 'Replace all labels for an <number>.'
+    desc 'replace <user> <repo> <number> <label>[<label>...]', 'Replace all labels for an issue <number>.'
     def replace(user, repo, number, *args)
       Label.replace user, repo, number, args, options[:params], options[:format]
-    end
-
-    desc 'milestone <user> <repo> <number>', 'Get labels for every issue in a milestone.'
-    def milestone(user, repo, number)
-      Label.milestone user, repo, number, options[:params], options[:format]
     end
 
   end # Labels
