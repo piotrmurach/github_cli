@@ -39,10 +39,11 @@ module GithubCLI
       Otherwise, you’ll only see public events.
     DESC
     def received(user)
+      params = options[:params].dup
       if options[:public]
-        options[:params]['public'] = true
+        params['public'] = true
       end
-      Event.received user, options[:params], options[:format]
+      Event.received user, params, options[:format]
     end
 
     desc 'performed <user>', 'Lists all events that a user has performed'
@@ -53,10 +54,11 @@ module GithubCLI
       events. Otherwise, you’ll only see public events.
     DESC
     def performed(user)
+      params = options[:params].dup
       if options[:public]
-        options[:params]['public'] = true
+        params['public'] = true
       end
-      Event.performed user, options[:params], options[:format]
+      Event.performed user, params, options[:format]
     end
 
     desc 'user_org <user> <org>', "Lists all events for a user's organization"
