@@ -14,10 +14,11 @@ module GithubCLI
     method_option :user, :type => :string, :aliases => ["-u"],
                   :desc => 'Starred repositories for <user>'
     def starred
+      params = options[:params].dup
       if options[:user]
-        options[:params]['user'] = options[:user]
+        params['user'] = options[:user]
       end
-      Starring.starred options[:params], options[:format]
+      Starring.starred params, options[:format]
     end
 
     desc 'starring <user> <repo>', 'Check if you are starring a repository'
