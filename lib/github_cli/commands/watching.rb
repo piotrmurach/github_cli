@@ -14,10 +14,11 @@ module GithubCLI
     method_option :user, :type => :string, :aliases => ["-u"],
                   :desc => 'Watch repositories for <user>'
     def watched
+      params = options[:params].dup
       if options[:user]
-        options[:params]['user'] = options[:user]
+        params['user'] = options[:user]
       end
-      Watching.watched options[:params], options[:format]
+      Watching.watched params, options[:format]
     end
 
     desc 'watching <user> <repo>', 'Check if you are watching a repository'
