@@ -1,5 +1,6 @@
 Feature: gcli star
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli star`

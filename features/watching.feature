@@ -1,5 +1,6 @@
 Feature: gcli watching
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli watch`
