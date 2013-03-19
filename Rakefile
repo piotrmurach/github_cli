@@ -13,7 +13,7 @@ task :default => [:spec, :features]
 task :release => ["man:clean", "man:build"]
 
 task :features do
- sh 'bundle exec cucumber -f progress -t @commands features'
+  sh 'bundle exec cucumber -f progress -t @ci-run features'
 end
 
 begin
