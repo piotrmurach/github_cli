@@ -7,6 +7,8 @@
 
 CLI-based access to GitHub API v3 that works hand-in-hand with `github_api` gem.
 
+Important!: This library is currently being updated to include all Github API requests and undergoes rapid development cycles. A feature readmap will be added shortly.
+
 ![Interface](https://github.com/peter-murach/github_cli/raw/master/screenshots/interface.png)
 
 ## Installation
@@ -202,4 +204,4 @@ $ gcli search
 
 ## Copyright
 
-Copyright (c) 2012 Piotr Murach. See LICENSE for further details.
+Copyright (c) 2012-2013 Piotr Murach. See LICENSE for further details.
