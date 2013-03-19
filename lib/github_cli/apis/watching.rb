@@ -7,31 +7,31 @@ module GithubCLI
 
       def list(user, repo, params, format)
         output format do
-          github_api.repos.watching.list user, repo, params
+          github_api.activity.watching.list user, repo, params
         end
       end
 
       def watched(params, format)
         output format do
-          github_api.repos.watching.watched params
+          github_api.activity.watching.watched params
         end
       end
 
       def watching?(user, repo, params, format)
         output format do
-          github_api.repos.watching.watching? user, repo, params
+          github_api.activity.watching.watching? user, repo, params
         end
       end
 
       def start(user, repo, params, format)
         output format do
-          github_api.repos.watching.watch user, repo, params
+          github_api.activity.watching.watch user, repo, params
         end
       end
 
       def stop(user, repo, params, format)
         output format do
-          github_api.repos.watching.unwatch user, repo, params
+          github_api.activity.watching.unwatch user, repo, params
         end
       end
     end
