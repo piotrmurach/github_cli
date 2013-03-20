@@ -1,5 +1,6 @@
 Feature: gcli assignee
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli assignee`

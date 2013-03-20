@@ -1,5 +1,6 @@
 Feature: gcli blob
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli blob`

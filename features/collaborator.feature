@@ -1,5 +1,6 @@
 Feature: gcli collab
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli collab`
