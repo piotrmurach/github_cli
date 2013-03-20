@@ -5,24 +5,24 @@ module GithubCLI
 
     namespace :collab
 
-    desc 'list <user> <repo>', 'Lists collaborators'
-    def list(user, repo)
-      Collaborator.all user, repo, options[:params], options[:format]
+    desc 'list <owner> <repo>', 'Lists collaborators'
+    def list(owner, repo)
+      Collaborator.all owner, repo, options[:params], options[:format]
     end
 
-    desc 'add <user> <repo> <collab>', 'Add a collaborator'
-    def add(user, repo, collab)
-      Collaborator.add user, repo, collab, options[:params], options[:format]
+    desc 'add <owner> <repo> <user>', 'Add a collaborator'
+    def add(owner, repo, user)
+      Collaborator.add owner, repo, user, options[:params], options[:format]
     end
 
-    desc 'collab <user> <repo> <collab>', 'Checks if user is a collaborator on a given repo'
-    def collab(user, repo, collab)
-      Collaborator.collaborator? user, repo, collab, options[:params], options[:format]
+    desc 'collab <owner> <repo> <user>', 'Checks if user is a collaborator on a given repo'
+    def collab(owner, repo, user)
+      Collaborator.collaborator? owner, repo, user, options[:params], options[:format]
     end
 
-    desc 'remove <user> <repo> <id>', 'Remove a collaborator'
-    def remove(user, repo, collab)
-      Collaborator.remove user, repo, collab, options[:params], options[:format]
+    desc 'remove <owner> <repo> <user>', 'Remove a collaborator'
+    def remove(owner, repo, user)
+      Collaborator.remove owner, repo, user, options[:params], options[:format]
     end
 
   end # Collaborators
