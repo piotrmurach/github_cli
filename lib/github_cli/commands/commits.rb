@@ -27,7 +27,7 @@ module GithubCLI
         author.date - Timestamp of when this commit was authored \n
         committer.name - String of the name of the committer of the commit \n
         committer.email - String of the email of the committer of the commit \n
-        committer.date:: Timestamp of when this commit was committed
+        committer.date - Timestamp of when this commit was committed
     DESC
     def create(user, repo)
       Commit.create user, repo, options[:params], options[:format]
