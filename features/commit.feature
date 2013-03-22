@@ -1,5 +1,6 @@
 Feature: gcli commit
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli commit`
