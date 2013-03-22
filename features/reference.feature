@@ -1,5 +1,6 @@
 Feature: gcli ref
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli ref`
@@ -39,7 +40,7 @@ Feature: gcli ref
     """
     post('/repos/wycats/thor/git/refs') { status 200 }
     """
-    When I run `gcli ref create wycats thor --params=ref:refs/heads/master sha:827efc6d5`
+    When I run `gcli ref create wycats thor --ref=refs/heads/master --sha=827efc6d5`
     Then the exit status should be 0
 
   Scenario: Update reference
@@ -47,7 +48,7 @@ Feature: gcli ref
     """
     patch('/repos/wycats/thor/git/refs/7d1b31e') { status 200 }
     """
-    When I run `gcli ref update wycats thor 7d1b31e --params=force:true sha:827efc6d5`
+    When I run `gcli ref update wycats thor 7d1b31e --force --sha=827efc6d5`
     Then the exit status should be 0
 
   Scenario: Delete reference
