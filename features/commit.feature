@@ -21,5 +21,5 @@ Feature: gcli commit
     """
     post('/repos/wycats/thor/git/commits') { status 200 }
     """
-    When I run `gcli commit create wycats thor --params=message:'my commit' tree:827efc parents:['7d1b31e']`
+    When I run `gcli commit create wycats thor --message='my commit' --tree=827efc --parents=['7d1b31e']`
     Then the exit status should be 0
