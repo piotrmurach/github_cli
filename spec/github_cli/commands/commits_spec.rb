@@ -18,4 +18,9 @@ describe GithubCLI::Commands::Commits do
     api_class.should_receive(:create).with(user, repo, {}, format)
     subject.invoke "commit:create", [user, repo]
   end
+
+  it "invokes commit:create --tree" do
+    api_class.should_receive(:create).with(user, repo, {"tree" => sha}, format)
+    subject.invoke "commit:create", [user, repo], :tree => sha
+  end
 end
