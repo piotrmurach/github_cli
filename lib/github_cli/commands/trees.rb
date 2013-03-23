@@ -9,13 +9,16 @@ module GithubCLI
     method_option :recursive, :type => :boolean, :aliases => ["-r"],
                   :desc => 'get a tree recursively'
     def get(user, repo, sha)
-      if options[:recursive]
-        options[:params]['recursive'] = true
-      end
-      Tree.get user, repo, sha, options[:params], options[:format]
+      params = options[:params].dup
+      params['recursive'] = options[:recursive] if options[:recursive]
+      Tree.get user, repo, sha, params, options[:format]
     end
 
     desc 'create <user> <repo>', 'Create a new Tree'
+    option :base_tree, :type => :string, :banner => "<SHA>",
+      :desc => "optional string of the SHA1 of the tree you want to update with new data"
+    option :tree, :type => :array,
+      :desc => "array of hash objects(of :path, :mode, :type and sha)"
     long_desc <<-DESC
       The tree creation API will take nested entries as well.
       If both a tree and a nested path modifying that tree are specified,
@@ -33,7 +36,10 @@ module GithubCLI
       tree.content - String of content you want this file to have - GitHub will write this blob out and use the SHA for this entry. Use either this or tree.sha
     DESC
     def create(user, repo)
-      Tree.create user, repo, options[:params], options[:format]
+      params = options[:params].dup
+      params['base_tree'] = options[:base_tree] if options[:base_tree]
+      params['tree']      = options[:tree] if options[:tree]
+      Tree.create user, repo, params, options[:format]
     end
 
   end # Blobs
