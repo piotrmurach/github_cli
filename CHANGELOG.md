@@ -1,3 +1,18 @@
+0.5.4 (March 23, 2013)
+
+* Update vendor dependency
+* Update github_api dependency
+* Change Labels commands to merge milestones and issues listing into list command
+* Change Tags create to take specific options and add tests
+* Change References create to take specific options and add tests
+* Chnage Tree create to take specific options and add tests
+* Change Commit create to take specific options and add tests
+* Change Milestone commands to take specific options
+* Change table and csv formatters to work with new 'github_api'
+* Change init command to be global by default and accept filename
+* Add filename to config class to allow for easy parametrization
+* Change config command to be global by default and add feature tests
+
 0.5.3 (September 29, 2012)
 
 * Fix bug with starring api starred command.[Issue #6]
