@@ -1,5 +1,6 @@
 Feature: gcli milestone
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli milestone`
@@ -31,7 +32,7 @@ Feature: gcli milestone
     """
     post('/repos/wycats/thor/milestones') { status 200 }
     """
-    When I run `gcli milestone create wycats thor --params=title:new`
+    When I run `gcli milestone create wycats thor --title=new`
     Then the exit status should be 0
 
   Scenario: Update milestone
@@ -39,7 +40,7 @@ Feature: gcli milestone
     """
     patch('/repos/wycats/thor/milestones/1') { status 200 }
     """
-    When I run `gcli milestone update wycats thor 1 --params=title:new`
+    When I run `gcli milestone update wycats thor 1 --title=new`
     Then the exit status should be 0
 
   Scenario: Delete milestone
