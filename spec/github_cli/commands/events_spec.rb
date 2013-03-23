@@ -11,20 +11,20 @@ describe GithubCLI::Commands::Events do
 
   it "invokes event:public" do
     api_class.should_receive(:public).with({}, format)
-    subject.invoke "event:public"
+    subject.invoke "event:public", []
   end
 
-  it "invokes event:public" do
+  it "invokes event:repo" do
     api_class.should_receive(:repository).with(user, repo, {}, format)
     subject.invoke "event:repo", [user, repo]
   end
 
-  it "invokes event:public" do
-    api_class.should_receive(:issue).with(user, repo, {}, format)
-    subject.invoke "event:issue", [user, repo]
+  it "invokes event:issue" do
+    api_class.should_receive(:repository).with(user, repo, {}, format)
+    subject.invoke "event:repo", [user, repo]
   end
 
-  it "invokes event:public" do
+  it "invokes event:network" do
     api_class.should_receive(:network).with(user, repo, {}, format)
     subject.invoke "event:network", [user, repo]
   end
@@ -40,18 +40,13 @@ describe GithubCLI::Commands::Events do
   end
 
   it "invokes event:received --public" do
-    api_class.should_receive(:received).with(user, {"public" => true}, format)
+    api_class.should_receive(:received).with(user, {'public' => true}, format)
     subject.invoke "event:received", [user], :public => true
   end
 
   it "invokes event:performed" do
     api_class.should_receive(:performed).with(user, {}, format)
     subject.invoke "event:performed", [user]
-  end
-
-  it "invokes event:performed --public" do
-    api_class.should_receive(:performed).with(user, {"public" => true}, format)
-    subject.invoke "event:performed", [user], :public => true
   end
 
   it "invokes event:user_org" do
