@@ -103,8 +103,6 @@ module GithubCLI
       There two types of config files, global and project specific. When modifying
       options ensure that you modifying the correct config.
     DESC
-    method_option :global, :type => :boolean, :default => false,
-                  :desc => 'use global config file'
     method_option :local, :type => :boolean, :default => false,
                   :desc => 'use local config file'
     method_option :list, :type => :boolean, :default => false, :aliases => '-l',
@@ -113,14 +111,10 @@ module GithubCLI
                   :desc => 'opens an editor'
     def config(*args)
       name, value = args.shift, args.shift
-
       GithubCLI.config.location = options[:local] ? 'local' : 'global'
 
-      if !options[:global] and !options[:local]
-        GithubCLI.ui.error 'Invalid scope given. Please use --local or --global.'
-        exit 1
-      elsif !File.exists?(GithubCLI.config.path)
-        GithubCLI.ui.error "#{GithubCLI.config.location} configuration file does not exist. Please use `#{GithubCLI.executable_name} init --#{GithubCLI.config.location}`"
+      if !File.exists?(GithubCLI.config.path)
+        GithubCLI.ui.error "Configuration file does not exist. Please use `#{GithubCLI.executable_name} init` to create one."
         exit 1
       end
 
