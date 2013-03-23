@@ -7,7 +7,7 @@
 
 CLI-based access to GitHub API v3 that works hand-in-hand with `github_api` gem.
 
-Important!: This library is currently being updated to include all Github API requests and undergoes rapid development cycles. A feature readmap will be added shortly.
+Important!: This library is currently being updated to include all Github API requests and undergoes rapid development cycles. A feature roadmap will be added shortly.
 
 ![Interface](https://github.com/peter-murach/github_cli/raw/master/screenshots/interface.png)
 
@@ -157,7 +157,14 @@ $ gcli download
 $ gcli fork
 $ gcli hook
 $ gcli key
-$ gcli watching
+```
+
+Interact with activities:
+
+```shell
+$ gcli star
+$ gcli watch
+$ gcli event
 ```
 
 Interact with gists:
