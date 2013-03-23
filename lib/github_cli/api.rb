@@ -1,10 +1,9 @@
 # encoding: utf-8
 
 module GithubCLI
+
   # The API class is the main entry point for creating GithubCLI APIs.
   class API
-
-    ENDPOINT = ''
 
     @@api = nil
 
@@ -20,9 +19,15 @@ module GithubCLI
 
       def configure_api
         @@api = Github.new
-        @@api.oauth_token = GithubCLI.config['auth.token']
-        @@api.basic_auth  = GithubCLI.config['auth.basic']
-        @@api.endpoint    = GithubCLI.config['core.endpoint'] || @@api.endpoint
+        config = GithubCLI.config.data
+
+        if config['user.token']
+          @@api.oauth_token = config['user.token']
+        end
+        if config['user.login'] && config['user.password']
+          @@api.basic_auth = "#{config['user.login']}:#{config['user.password']}"
+        end
+        @@api.endpoint = GithubCLI.config['core.endpoint'] || @@api.endpoint
         if ENV['TEST_HOST']
           @@api.endpoint = 'http://' + ENV['TEST_HOST']
         end
@@ -30,7 +35,7 @@ module GithubCLI
       end
 
       def output(format=:table, &block)
-        response =  block.call
+        response  = block.call
         formatter = Formatter.new response, :format => format
         formatter.render_output
       end
