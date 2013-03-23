@@ -1,5 +1,6 @@
 Feature: gcli tag
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli tag`
@@ -20,5 +21,5 @@ Feature: gcli tag
     """
     post('/repos/wycats/thor/git/tags') { status 200 }
     """
-    When I run `gcli tag create wycats thor`
+    When I run `gcli tag create wycats thor --object=234f23rf`
     Then the exit status should be 0
