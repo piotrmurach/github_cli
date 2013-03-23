@@ -21,7 +21,7 @@ module GithubCLI
     def determine_output_formatter
       case format.to_s
       when 'table', /table:v.*/, /table:h.*/
-        formatter = Formatters::Table.new(response,
+        formatter = Formatters::Table.new(response.body,
                       :transform => format.to_s.split(':').last)
         formatter.format
       when 'csv'
