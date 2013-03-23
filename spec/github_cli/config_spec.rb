@@ -121,6 +121,4 @@ describe GithubCLI::Config do
       config.path.to_s.should == "#{ENV['HOME']}/#{filename}"
     end
   end
-end
-
 end # GithubCLI::Config
