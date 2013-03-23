@@ -70,8 +70,7 @@ module GithubCLI
       # Builds output array from response hash
       #
       def build_output
-        case response
-        when Array
+        if response.respond_to?(:to_ary)
           case transform
           when :horizontal
             array = [flatten_hash(response[0].to_hash).keys]
@@ -88,7 +87,7 @@ module GithubCLI
               array
             end
           end
-        when Hash
+        elsif response.respond_to?(:to_hash)
           output = flatten_hash(response)
           case transform
           when :horizontal
