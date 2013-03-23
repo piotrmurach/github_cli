@@ -3,9 +3,11 @@
 module GithubCLI
   class Config
 
-    COMMAND_KEY  = 'commands'
+    COMMAND_KEY  = 'commands'.freeze
 
-    COMMAND_HELP = 'help'
+    COMMAND_HELP = 'help'.freeze
+
+    DEFAULT_NAME = '.githubrc'.freeze
 
     # Contains information of where the command is run from.
     attr_reader :root
@@ -13,8 +15,15 @@ module GithubCLI
     # Location scope of currently used configuration file.
     attr_reader :location
 
+    # Name for the confiugration file
+    attr_accessor :filename
+
+    # Initialize a Config
+    #
+    # @api public
     def initialize(root, options={})
-      @root = root
+      @root          = root
+      @filename      = options.fetch(:filename) { DEFAULT_NAME }
       @local_config  = local_options_file
       @global_config = global_options_file
     end
@@ -64,7 +73,7 @@ module GithubCLI
         composite_key = "#{COMMAND_KEY}.#{cmd.namespace}.#{cmd.name}"
         if !cmd.namespace.empty? && cmd.name != COMMAND_HELP &&
            !config.has_key?(composite_key)
-          config[composite_key]= {}
+          config[composite_key]= nil
         end
       end
       File.open(path, 'w', 0600) do |file|
@@ -93,12 +102,12 @@ module GithubCLI
   private
 
     def local_options_file
-      Pathname.new "#{root}/.githubrc"
+      Pathname.new "#{root}/#{filename}"
     end
 
     def global_options_file
       begin
-        Pathname.new File.join(Thor::Util.user_home, ".githubrc")
+        Pathname.new File.join(Thor::Util.user_home, filename)
       rescue ArgumentError
         GithubCLI.ui.warn "Unable to find ~/.githubrc because the HOME environment variable is not set"
         exit 1
