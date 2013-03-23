@@ -3,9 +3,9 @@ gcli-config(1) - Get or set global or local configuration options
 
 ## SYNOPSIS
 
-`gcli config` --global|--local name [value]<br>
-`gcli config` --global|--local `-l | -list` [name_regex]<br>
-`gcli config` --global|--local `-e | --edit`
+`gcli config` [--local] name [value]<br>
+`gcli config` [--local] `-l | -list` [name_regex]<br>
+`gcli config` [--local] `-e | --edit`
 
 ## DESCRIPTION
 
@@ -22,9 +22,6 @@ This command line will fail (with the exit code ret) if:
 1. The config file is invalid.
 
 ## OPTIONS
-
-* `--global`:
-  Writes configuration settings to global ~/.githubrc file inside user home directory.
 
 * `--local`:
   Writes cofinguration settings inside the current directory to the .githubrc file.
@@ -47,11 +44,17 @@ The configuration file is written in `yaml`. Therfore all formatting rules are d
 
 ### VARIABLES
 
-*  `auth.token`:
+*  `user.token`:
   Authentication token.
 
-*  `auth.basic`: 
-  Basic credentials in the form `login:password`.
+*  `user.login`: 
+  Basic login credentials.
+
+*  `user.password`:
+  Basic password credentials.
+
+*  `core.adapter`:
+  Sets http adapter used to perform requests to GitHub API v3.
 
 *  `core.endpoint`:
   Sets host path used as the base for all requests to GitHub API v3.
@@ -63,7 +66,7 @@ The configuration file is written in `yaml`. Therfore all formatting rules are d
   The command that will be used to paginate output. Can be overridden with PAGER environment variable. less
 
 *  `core.no-pager`:
-  false
+  Switched off results paging.
 
 *  `core.no-color`:
   If set to true disables color output. By default is set to false.
@@ -71,7 +74,7 @@ The configuration file is written in `yaml`. Therfore all formatting rules are d
 *  `core.format`:
   Determines output formatting. Defaults to table output.
 
-*  `core.auto`:
+*  `core.auto_pagination`:
    Automatic pagination of requests to GitHub.
 
 *  `core.aliases`:
