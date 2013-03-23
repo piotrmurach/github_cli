@@ -13,6 +13,14 @@ module GithubCLI
     end
 
     desc 'create <user> <repo>', 'Create a Tag Object'
+    option :tag, :type => :string, :desc => "String of the tag"
+    option :message, :type => :string, :aliases => ["-m"],
+      :desc => "String of the tag message"
+    option :object, :type => :string, :banner => "<SHA>",
+      :desc => "String of the SHA of the git object this is tagging"
+    option :type, :type => :string, :banner => "commit/tree/blob",
+      :desc => "String of the type of the object we're tagging."
+    option :tagger, :type => :hash, :desc => "Tag author information"
     long_desc <<-DESC
       Note that creating a tag object does not create the reference that
       makes a tag in Git. If you want to create an annotated tag in Git,
@@ -31,7 +39,14 @@ module GithubCLI
       tagger.date - Timestamp of when this object was tagged \n
     DESC
     def create(user, repo)
-      Tag.create user, repo, options[:params], options[:format]
+      params = options[:params].dup
+      params['tag']     = options[:tag] if options[:tag]
+      params['message'] = options[:message] if options[:message]
+      params['object']  = options[:object] if options[:object]
+      params['type']    = optiosn[:type] if options[:type]
+      params['tagger']  = options[:tagger] if options[:tagger]
+
+      Tag.create user, repo, params, options[:format]
     end
 
   end # Tag
