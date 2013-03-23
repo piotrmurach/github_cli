@@ -24,8 +24,8 @@ module GithubCLI
 
     map ALIASES
 
-    class_option :config, :type => :string,
-                 :desc => "Configuration file.", :banner => "<filename>",
+    class_option :filename, :type => :string,
+                 :desc => "Configuration file name.", :banner => "<filename>",
                  :default => ".githubrc"
     class_option :token, :type => :string,
                  :desc => 'Authentication token.',
@@ -77,18 +77,11 @@ module GithubCLI
     DESC
     method_option :force, :type => :boolean, :default => false, :aliases => "-f",
                   :banner => "Overwrite configuration file. "
-    method_option :global, :type => :boolean, :default => false,
-                  :desc => 'Create global config file'
     method_option :local, :type => :boolean, :default => false,
-                  :desc => 'Create local config file'
+                  :desc => 'Create local configuration file, otherwise a global configuration file in user home is created.'
     def init(filename=nil)
-      config_filename = (filename.nil? || filename =~ /^\//)? options[:config] : filename
-
-      if !options[:global] and !options[:local]
-        GithubCLI.ui.error 'Invalid scope given. Please use --local or --global.'
-        exit 1
-      end
-
+      config_filename = filename ? filename : options[:filename]
+      GithubCLI.config.filename = config_filename
       GithubCLI.config.location = options[:local] ? 'local' : 'global'
 
       if File.exists?(GithubCLI.config.path) && !options[:force]
@@ -96,8 +89,7 @@ module GithubCLI
         exit 1
       end
 
-      oauth_token = ask "Please specify your GitHub Authentication Token (register on github.com to get it):"
-      GithubCLI.config.save(defaults.merge({'auth.token' => oauth_token}))
+      GithubCLI.config.save(defaults)
       GithubCLI.ui.confirm "Writing new configuration file to #{GithubCLI.config.path}"
     end
 
