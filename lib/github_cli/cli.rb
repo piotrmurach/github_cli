@@ -45,18 +45,23 @@ module GithubCLI
     no_tasks do
       def defaults
         {
-          'auth.token'    => nil,
-          'auth.basic'    => nil,
-          'auth.login'    => nil,
-          'auth.password' => nil,
-          'core.endpoint' => nil,
+          'user.token'    => nil,
+          'user.login'    => nil,
+          'user.password' => nil,
+          'user.name'     => nil,
+          'user.repo'     => nil,
+          'user.org'      => nil,
+          'core.adapter'  => :net_http,
+          'core.endpoint' => 'https://api.github.com',
+          'core.ssl'      => nil,
+          'core.mime'     => :json,
           'core.editor'   => 'vi',
           'core.pager'    => 'less',
           'core.no-pager' => false,
           'core.no-color' => false,
-          'core.format'   => 'csv',
-          'core.auto'     => false,
-          'core.aliases'  => {}
+          'core.format'   => 'table',
+          'core.auto_pagination' => false,
+          'core.aliases'  => nil,
         }
       end
     end
