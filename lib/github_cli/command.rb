@@ -58,7 +58,7 @@ module GithubCLI
         Thor::Base.subclasses.each do |klass|
           namespace = extract_namespace(klass)
           next unless is_api_command?(namespace)
-          namespace = "" if namespace.index API_CLASSES.first
+          namespace = "" if namespace.index(API_CLASSES.first)
 
           klass.tasks.each do |task|
             next if task.last.name.index HELP_COMMAND

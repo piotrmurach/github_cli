@@ -22,6 +22,12 @@ module GithubCLI
     end
 
     desc 'create', 'Create a new authorization'
+    option :scopes, :type => :array, :banner => "user public_repo repo...",
+      :desc => "A list of scopes that this authorization is in."
+    option :note, :type => :string,
+      :desc => "A note to remind you what the OAuth token is for."
+    option :note_url, :type => :string,
+      :desc => "A URL to remind you what the OAuth token is for."
     long_desc <<-DESC
       You can only create your own token, and only through Basic Authentication.\n
 
@@ -32,10 +38,24 @@ module GithubCLI
       note_url - Optional string - A URL to remind you what the OAuth token is for.
     DESC
     def create
-      Authorization.create options[:params], options[:format]
+      params = options[:params].dup
+      params['scopes']   = options[:scopes] if options[:scopes]
+      params['note']     = options[:note] if options[:note]
+      params['note_url'] = options[:note_url] if options[:note_url]
+      Authorization.create params, options[:format]
     end
 
     desc 'update <id>', 'Update an existing authorization'
+    option :scopes, :type => :array, :banner => "user public_repo repo...",
+      :desc => "A list of scopes that this authorization is in."
+    option :add_scopes, :type => :array,
+      :desc => "A list of scopes to add to this authorization."
+    option :remove_scopes, :type => :array,
+      :desc => "A list of scopes to remove from this authorization."
+    option :note, :type => :string,
+      :desc => "A note to remind you what the OAuth token is for."
+    option :note_url, :type => :string,
+      :desc => "A URL to remind you what the OAuth token is for."
     long_desc <<-DESC
       Inputs
 
@@ -46,7 +66,13 @@ module GithubCLI
       note_url - Optional string - A URL to remind you what the OAuth token is for.
     DESC
     def update(id)
-      Authorization.update id, options[:params], options[:format]
+      params = options[:params].dup
+      params['scopes']        = options[:scopes] if options[:scopes]
+      params['add_scopes']    = options[:add_scopes] if options[:add_scopes]
+      params['remove_scopes'] = options[:remove_scopes] if options[:remove_scopes]
+      params['note']          = options[:note] if options[:note]
+      params['note_url']      = options[:note_url] if options[:note_url]
+      Authorization.update id, params, options[:format]
     end
 
     desc 'delete <id>', 'Delete an authorization'
