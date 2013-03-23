@@ -38,31 +38,85 @@ $ gcli
 The first step is to create a configuration file, either global in home directory or local inside the project:
 
 ```shell
-$ gcli init [--global|--local]
+$ gcli init [--local] [filename]
 ```
 
-This will setup a `.githubrc` configuration file in your home/project directory
-with all the global settings. During the install process you will be prompted
-for your `authentication token`.
+Without any options this command will setup a `.githubrc` configuration file in
+your home/project directory with all the global settings. By passing `--local` option the config file will be created locally in the execution directory. Further, by default `.githubrc` name is used which can be changed by passing the `filename`.
+
+Main configuration options are:
+
+```
+user.token            # Authentication token
+user.login            # User login
+user.password         # User password
+user.name             # Default user name
+user.repo             # Default repo name
+user.org              # Default organization name
+core.editor           # Editor to be opened
+core.pager            # Pager to be used, by default less
+core.format           # Output formating
+core.auto_pagination  # Switch on default results pagination, default false
+```
 
 Moreover, `gcli config` command allows you to set/get any configuration option such as output format, editor or oauth token.
 
-For instance, to check value for your `token` do
+For instance, to check value for your `authentication token` do
 
 ```shell
-$ gcli config [--global|--local] auth.token
+$ gcli config [--local] user.token
 ```
 
 and to set the value do
 
 ```shell
-$ gcli config [--global|--local] auth.token lh23l4kj234....
+$ gcli config [--local] user.token lh23l4kj234....
 ```
 
 To list specific options
 
 ```shell
-$ gcli config [--global|--local] --list [regex]
+$ gcli config [--local] --list [regex]
+```
+
+To edit config in your favourite editor:
+
+```shell
+$ gcli config -e
+```
+
+Finally, to see a manpage about available configuration options do
+
+```shell
+$ gcli help config
+```
+
+### Authorization
+
+To create oauth tokens you need to setup your basic authentication like so
+
+```shell
+$ gcli init
+$ gcli config user.login '...'
+$ gcli config user.password '...'
+```
+
+Then to create your token do
+
+```shell
+$ gcli auth create --scopes=repo --note=gihtub_cli --note-url=http://github.com/peter-murach/github_cli
+```
+
+To see your current tokens do
+
+```shell
+$ gcli auth ls
+```
+
+Finally to add the token to your config do
+
+```shell
+$ gcli config user.token '...'
 ```
 
 ### Arguments
@@ -72,16 +126,16 @@ The required arguments come first as per command description, then are followed 
 For instance, one can create repository by supplying parameters in the following way:
 
 ```shell
-$ gcli repo create octokit --params=description:'Test repo for kitty.'
+$ gcli repo create github_api --desc='Test repo for kitty.'
 ```
 
 To create repository inside organization:
 
 ```shell
-$ gcli repo create github/octokit --params=description:'Test repo for kitty.'
+$ gcli repo create github/github_api --desc='Test repo for kitty.'
 ```
 
-To find out which options are required and which are optional - type:
+To find out which options are required and which are optional use `help` command:
 
 ```shell
 $ gcli repo help create
