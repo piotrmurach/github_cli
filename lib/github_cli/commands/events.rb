@@ -40,9 +40,7 @@ module GithubCLI
     DESC
     def received(user)
       params = options[:params].dup
-      if options[:public]
-        params['public'] = true
-      end
+      params['public'] = options[:public] if options[:public]
       Event.received user, params, options[:format]
     end
 
@@ -55,9 +53,7 @@ module GithubCLI
     DESC
     def performed(user)
       params = options[:params].dup
-      if options[:public]
-        params['public'] = true
-      end
+      params['public'] = true if options[:public]
       Event.performed user, params, options[:format]
     end
 
