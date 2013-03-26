@@ -5,6 +5,12 @@ module GithubCLI
 
     class << self
 
+      def all(params, format)
+        output format do
+          github_api.users.all params
+        end
+      end
+
       def get(user, params, format)
         output format do
           github_api.users.get params.update(:user => user)
