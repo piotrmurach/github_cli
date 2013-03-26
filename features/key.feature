@@ -1,7 +1,7 @@
 Feature: gcli key
 
+  @ci-run
   Scenario: Available commands
-
     When I run `gcli key`
     Then the exit status should be 0
       And the output should contain "gcli key create"
