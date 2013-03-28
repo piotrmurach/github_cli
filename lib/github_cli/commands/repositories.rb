@@ -4,22 +4,29 @@ module GithubCLI
   class Commands::Repositories < Command
 
     namespace :repo
-    # TODO: format_type options[:format]
 
+    option :org, :type => :string, :aliases => ["-o"], :banner => '<organization>',
+      :desc => 'List repositories for <organization>'
+    option :user, :type => :string, :aliases => ["-u"], :banner => '<user>',
+      :desc => 'List repositories for <user>'
+    option :since, :type => :string, :banner => '<id>',
+      :desc => "the integer ID of the last Repository that you've seen"
+    option :type, :type => :string,
+      :desc => "all, owner, public, private, member. Default: all."
+    option :sort, :type => :string,
+      :desc => "created, updated, pushed, full_name, default: full_name."
+    option :direction, :type => :string,
+      :desc => "asc or desc, default: when using full_name: asc, otherwise desc."
     desc 'list', 'Lists all repositories for the authenticated user'
-    method_option :org, :type => :string, :aliases => ["-o"],
-                  :desc => 'List repositories for <organization>',
-                  :banner => '<organization>'
-    method_option :user, :type => :string, :aliases => ["-u"],
-                  :desc => 'List repositories for <user>',
-                  :banner => '<user>'
     def list
-      if options[:org]
-        options[:params]['org'] = options[:org]
-      elsif options[:user]
-        options[:params]['user'] = options[:user]
-      end
-      Repository.all options[:params], options[:format]
+      params = options[:params].dup
+      params['org']   = options[:org] if options[:org]
+      params['user']  = options[:user] if options[:user]
+      params['since'] = options[:since] if options[:since]
+      params['type']  = options[:type] if options[:type]
+      params['sort']  = options[:sort] if options[:sort]
+      params['direction'] = options[:direction] if options[:direction]
+      Repository.all params, options[:format]
     end
 
     desc 'get <user> <repo>', 'Get a repository'
