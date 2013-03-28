@@ -1,5 +1,6 @@
 Feature: gcli pull request
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli pull`

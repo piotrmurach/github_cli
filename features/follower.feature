@@ -1,5 +1,6 @@
 Feature: gcli follower
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli follower`
