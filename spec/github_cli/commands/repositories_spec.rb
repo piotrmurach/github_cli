@@ -35,4 +35,14 @@ describe GithubCLI::Commands::Repositories do
     api_class.should_receive(:get).with(user, repo, {}, format)
     subject.invoke "repo:get", [user, repo]
   end
+
+  it "invokes repo:create name" do
+    api_class.should_receive(:create).with({'name' => repo}, format)
+    subject.invoke "repo:create", [repo]
+  end
+
+  it "invokes repo:create org/name" do
+    api_class.should_receive(:create).with({'name' => repo, 'org' => org}, format)
+    subject.invoke "repo:create", ["#{org}/#{repo}"]
+  end
 end
