@@ -45,4 +45,63 @@ describe GithubCLI::Commands::Repositories do
     api_class.should_receive(:create).with({'name' => repo, 'org' => org}, format)
     subject.invoke "repo:create", ["#{org}/#{repo}"]
   end
+
+  it "invokes repo:create name --org" do
+    api_class.should_receive(:create).with({'name' => repo, 'org' => org}, format)
+    subject.invoke "repo:create", [repo], :org => org
+  end
+
+  it "invokes repo:create name --wiki --issues --downloads --auto_init" do
+    api_class.should_receive(:create).with({'name' => repo, "has_wiki" => true,
+      "has_issues" => true, "has_downloads" => true, "auto_init" => true}, format)
+    subject.invoke "repo:create", [repo], :wiki => true, :issues => true,
+      :downloads => true, :auto => true
+  end
+
+  it "invokes repo:edit user repo name" do
+    api_class.should_receive(:edit).with(user, repo, {'name' => 'new'}, format)
+    subject.invoke "repo:edit", [user, repo, 'new']
+  end
+
+  it "invokes repo:edit user repo name --wiki --issues --downloads --auto_init" do
+    api_class.should_receive(:edit).with(user, repo, {'name' => 'new',
+      "has_wiki" => true, "has_issues" => true, "has_downloads" => true}, format)
+    subject.invoke "repo:edit", [user, repo, 'new'], :wiki => true,
+      :issues => true, :downloads => true
+  end
+
+  it "invokes repo:delete user repo" do
+    api_class.should_receive(:delete).with(user, repo, {}, format)
+    subject.invoke "repo:delete", [user, repo]
+  end
+
+  it "invokes repo:branches" do
+    api_class.should_receive(:branches).with(user, repo, {}, format)
+    subject.invoke "repo:branches", [user, repo]
+  end
+
+  it "invokes repo:branch" do
+    api_class.should_receive(:branch).with(user, repo, 'new', {}, format)
+    subject.invoke "repo:branch", [user, repo, 'new']
+  end
+
+  it "invokes repo:contribs" do
+    api_class.should_receive(:contributors).with(user, repo, {}, format)
+    subject.invoke "repo:contribs", [user, repo]
+  end
+
+  it "invokes repo:langs" do
+    api_class.should_receive(:languages).with(user, repo, {}, format)
+    subject.invoke "repo:langs", [user, repo]
+  end
+
+  it "invokes repo:tags" do
+    api_class.should_receive(:tags).with(user, repo, {}, format)
+    subject.invoke "repo:tags", [user, repo]
+  end
+
+  it "invokes repo:teams" do
+    api_class.should_receive(:teams).with(user, repo, {}, format)
+    subject.invoke "repo:teams", [user, repo]
+  end
 end
