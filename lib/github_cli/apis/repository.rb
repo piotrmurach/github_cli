@@ -29,9 +29,21 @@ module GithubCLI
         end
       end
 
+      def delete(user, repo, params, format)
+        output format do
+          github_api.repos.delete user, repo, params
+        end
+      end
+
       def branches(user, repo, params, format)
         output format do
           github_api.repos.branches user, repo, params
+        end
+      end
+
+      def branch(user, repo, name, params, format)
+        output format do
+          github_api.repos.branch user, repo, name, params
         end
       end
 
