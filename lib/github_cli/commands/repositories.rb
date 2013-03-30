@@ -39,7 +39,7 @@ module GithubCLI
            :banner => '<organization>'
     option :desc, :type => :string, :banner => "description"
     option :home, :type => :string, :banner => "homepage"
-    option :private, :type => :boolean, 
+    option :private, :type => :boolean,
            :desc => "true to create a private repository, false to create a public one"
     option :issues, :type => :boolean, :banner => "has_issues",
            :desc => "true to enable issues for this repository, false to disable them"
@@ -83,11 +83,24 @@ module GithubCLI
       params['has_downloads'] = options[:downloads] if options[:downloads]
       params['team_id'] = options[:team] if options[:team]
       params['auto_init'] = options[:auto] if options[:auto]
+      params['gitignore_template'] = options[:gitignore] if options[:gitignore]
 
       Repository.create params, options[:format]
     end
 
-    desc 'edit <user> <repo>', 'Edit <repo> for an <user>.'
+    option :desc, :type => :string, :banner => "description"
+    option :home, :type => :string, :banner => "homepage"
+    option :private, :type => :boolean,
+           :desc => "true to create a private repository, false to create a public one"
+    option :issues, :type => :boolean, :banner => "has_issues",
+           :desc => "true to enable issues for this repository, false to disable them"
+    option :wiki, :type => :boolean, :banner => "has_wiki",
+           :desc => "true to enable the wiki for this repository, false to disable it. Default is true"
+    option :downloads, :type => :boolean, :banner => "has_downloads",
+           :desc => "true to enable downloads for this repository "
+    option :branch, :type => :string, :banner => "default branch",
+           :desc => "Update the default branch for this repository."
+    desc 'edit <user> <repo> <name>', 'Edit <repo> with <name> for an <user>.'
     long_desc <<-DESC
       Create a new repository for the autheticated user.
 
@@ -99,10 +112,26 @@ module GithubCLI
         private - Optional boolean - true to create a private repository, false to create a public one \n
         has_issues - Optional boolean - true to enable issues for this repository, false to disable them \n
         has_wiki - Optional boolean - true to enable the wiki for this repository, false to disable it. Default is true \n
-        has_downloads Optional boolean - true to enable downloads for this repository \n
+        has_downloads - Optional boolean - true to enable downloads for this repository \n
+        default_branch - Optional string - update the default branch for this repository \n
     DESC
-    def edit(user, repo)
-      Repository.edit user, repo, options[:params], options[:format]
+    def edit(user, repo, name)
+      params = options[:params].dup
+      params['name'] = name
+      params['description'] = options[:desc] if options[:desc]
+      params['homepage'] = options[:home] if options[:home]
+      params['private'] = options[:private] if options[:private]
+      params['has_issues'] = options[:issues] if options[:issues]
+      params['has_wiki'] = options[:wiki] if options[:wiki]
+      params['has_downloads'] = options[:downloads] if options[:downloads]
+      params['default_branch'] = options[:branch] if options[:branch]
+
+      Repository.edit user, repo, params, options[:format]
+    end
+
+    desc 'delete <user> <repo>', 'Delete a repository'
+    def delete(user, repo)
+      Repository.delete user, repo, options[:params], options[:format]
     end
 
     desc 'branches <user> <repo>', 'List branches'
@@ -110,13 +139,18 @@ module GithubCLI
       Repository.branches user, repo, options[:params], options[:format]
     end
 
+    desc 'branch <user> <repo> <name>', 'Get branch'
+    def branch(user, repo, name)
+      Repository.branch user, repo, name, options[:params], options[:format]
+    end
+
     desc 'contribs <user> <repo>', 'List contributors'
     def contribs(user, repo)
       Repository.contributors user, repo, options[:params], options[:format]
     end
 
-    desc 'languages <user> <repo>', 'Listing all languages'
-    def languages(user, repo)
+    desc 'langs <user> <repo>', 'Listing all languages'
+    def langs(user, repo)
       Repository.languages user, repo, options[:params], options[:format]
     end
 
