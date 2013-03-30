@@ -1,24 +1,51 @@
 Feature: gcli repository
 
+  @ci-run
   Scenario: Available commands
     When I run `gcli repo`
     Then the exit status should be 0
+      And the output should contain "gcli repo branch"
       And the output should contain "gcli repo branches"
       And the output should contain "gcli repo contribs"
       And the output should contain "gcli repo create"
       And the output should contain "gcli repo edit"
+      And the output should contain "gcli repo delete"
       And the output should contain "gcli repo get"
       And the output should contain "gcli repo list"
-      And the output should contain "gcli repo languages"
+      And the output should contain "gcli repo langs"
       And the output should contain "gcli repo tags"
       And the output should contain "gcli repo teams"
 
-  Scenario: List repositories
+  Scenario: List all repositories
+    Given the GitHub API server:
+    """
+    get('/repositories') { status 200 }
+    """
+    When I run `gcli repo ls`
+    Then the exit status should be 0
+
+  Scenario: List repositories for user
     Given the GitHub API server:
     """
     get('/users/wycats/repos') { status 200 }
     """
     When I run `gcli repo ls -u wycats`
+    Then the exit status should be 0
+
+  Scenario: List repositories for organization
+    Given the GitHub API server:
+    """
+    get('/orgs/github/repos') { status 200 }
+    """
+    When I run `gcli repo ls -o github`
+    Then the exit status should be 0
+
+  Scenario: List repositories for organization
+    Given the GitHub API server:
+    """
+    get('/orgs/github/repos') { status 200 }
+    """
+    When I run `gcli repo ls -o github`
     Then the exit status should be 0
 
   Scenario: Get repository
@@ -87,11 +114,37 @@ Feature: gcli repository
     When I run `gcli repo create github`
     Then the exit status should be 0
 
+  Scenario: Create repository in organization
+    Given the GitHub API server:
+    """
+    post('/orgs/github/repos') { status 200 }
+    """
+    When I run `gcli repo create github/thor`
+    Then the exit status should be 0
+
   Scenario: Edit repository
     Given the GitHub API server:
     """
     patch('/repos/wycats/thor') { status 200 }
     """
-    When I run `gcli repo edit wycats thor --params=name:thor`
+    When I run `gcli repo edit wycats thor new`
+    Then the exit status should be 0
+
+  Scenario: Delete repository
+    Given the GitHub API server:
+    """
+    delete('/repos/wycats/thor') { status 200 }
+    """
+    When I run `gcli repo del wycats thor`
+    Then the exit status should be 0
+
+  Scenario: Get repository branch
+    Given the GitHub API server:
+    """
+    get('/repos/wycats/thor/branches/master') {
+      status 200
+    }
+    """
+    When I run `gcli repo branch wycats thor master`
     Then the exit status should be 0
 
