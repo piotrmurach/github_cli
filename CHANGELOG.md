@@ -1,3 +1,11 @@
+0.5.5 (March 30, 2013)
+
+* Change PullRequest commands to take specific options and add tests
+* Change to stop formatting response without body
+* Change Repository commands to take specific options and add tests
+* Add repo branch & delete commands
+* Change Gist commands to take specific options and add tests
+
 0.5.4 (March 23, 2013)
 
 * Update vendor dependency
