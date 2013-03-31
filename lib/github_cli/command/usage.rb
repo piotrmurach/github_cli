@@ -5,7 +5,7 @@ module GithubCLI
   class Command
     class Usage
 
-      DEFAULT_INDENT = 11
+      DEFAULT_INDENT = 12
 
       # Returns command
       attr_reader :command
