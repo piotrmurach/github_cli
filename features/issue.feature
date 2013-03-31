@@ -1,13 +1,13 @@
 Feature: gcli issue
 
+  @ci-run
   Scenario: Available commands
     When I run `gcli issue`
     Then the exit status should be 0
-      And the output should contain "gcli issue create"
-      And the output should contain "gcli issue edit"
-      And the output should contain "gcli issue get"
-      And the output should contain "gcli issue list"
-      And the output should contain "gcli issue repo"
+      And the output should contain "issue create"
+      And the output should contain "issue edit"
+      And the output should contain "issue get"
+      And the output should contain "issue list"
 
   Scenario: List issues
     Given the GitHub API server:
@@ -22,7 +22,7 @@ Feature: gcli issue
     """
     get('/repos/wycats/thor/issues') { status 200 }
     """
-    When I run `gcli issue repo wycats thor`
+    When I run `gcli issue ls --user wycats --repo thor`
     Then the exit status should be 0
 
   Scenario: Get issue
@@ -38,7 +38,7 @@ Feature: gcli issue
     """
     post('/repos/wycats/thor/issues') { status 200 }
     """
-    When I run `gcli issue create wycats thor --params=title:'Found a bug'`
+    When I run `gcli issue create wycats thor --title 'Found a bug'`
     Then the exit status should be 0
 
   Scenario: Edit issue
@@ -46,6 +46,6 @@ Feature: gcli issue
     """
     patch('/repos/wycats/thor/issues/1') { status 200 }
     """
-    When I run `gcli issue edit wycats thor 1 --params=title:'Found a bug'`
+    When I run `gcli issue edit wycats thor 1 --title 'Found a bug'`
     Then the exit status should be 0
 
