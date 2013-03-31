@@ -5,20 +5,37 @@ class Thor
 
   class << self
 
+    def banner(command, namespace=nil, subcommand=false)
+      "#{command.formatted_usage(self, $thor_runner, subcommand)}"
+    end
+
     def help(shell, subcommand = false)
-      list = printable_tasks(true, subcommand)
+      list = printable_commands(true, subcommand)
       Thor::Util.thor_classes_in(self).each do |klass|
-        list += klass.printable_tasks(false)
+        list += klass.printable_commands(false)
       end
       list.sort!{ |a,b| a[0] <=> b[0] }
 
       GithubCLI::Terminal.print_usage global_flags, list[0][0]
 
       shell.say "Commands:"
-      shell.print_table(list, :indent => 2, :truncate => true)
+      shell.print_table(list, :indent => 3, :truncate => true)
       shell.say
       class_options_help(shell)
     end
+
+    # Returns commands ready to be printed.
+    def printable_commands(all = true, subcommand = false)
+      (all ? all_commands : commands).map do |_, command|
+        next if command.hidden?
+        item = []
+        item << banner(command, false, subcommand).gsub(/#{basename} /, '')
+        item << (command.description ? "# #{command.description.gsub(/\s+/m,' ')}" : "")
+        item
+      end.compact
+    end
+    alias printable_tasks printable_commands
+
 
     # String representation of all available global flags
     def global_flags
