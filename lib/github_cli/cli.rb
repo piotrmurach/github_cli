@@ -30,6 +30,8 @@ module GithubCLI
     class_option :token, :type => :string,
                  :desc => 'Authentication token.',
                  :banner => '<oauth token>'
+    class_option :login, :type => :string
+    class_option :password, :type => :string
     class_option "no-color", :type => :boolean,
                  :desc => "Disable colorization in output."
     class_option "no-pager", :type => :boolean,
@@ -66,7 +68,7 @@ module GithubCLI
       end
     end
 
-    desc 'init [<filename>]', 'Generates a configuration file in your home directory'
+    desc 'init [<filename>]', 'Create a configuration file or overwirte existing one'
     long_desc <<-DESC
       Initializes a configuration file where you can set default options for
       interacting with GitHub API.\n
