@@ -5,11 +5,11 @@ Feature: gcli follower
 
     When I run `gcli follower`
     Then the exit status should be 0
-      And the output should contain "gcli follower follow"
-      And the output should contain "gcli follower follower"
-      And the output should contain "gcli follower following"
-      And the output should contain "gcli follower list"
-      And the output should contain "gcli follower unfollow"
+      And the output should contain "follower follow"
+      And the output should contain "follower follower"
+      And the output should contain "follower following"
+      And the output should contain "follower list"
+      And the output should contain "follower unfollow"
 
   Scenario: List for user
     Given the GitHub API server:

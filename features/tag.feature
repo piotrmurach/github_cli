@@ -5,8 +5,8 @@ Feature: gcli tag
 
     When I run `gcli tag`
     Then the exit status should be 0
-      And the output should contain "gcli tag create"
-      And the output should contain "gcli tag get"
+      And the output should contain "tag create"
+      And the output should contain "tag get"
 
   Scenario: Get tag
     Given the GitHub API server:

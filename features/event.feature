@@ -5,14 +5,14 @@ Feature: gcli event
 
     When I run `gcli event`
     Then the exit status should be 0
-      And the output should contain "gcli event issue"
-      And the output should contain "gcli event network"
-      And the output should contain "gcli event org"
-      And the output should contain "gcli event performed"
-      And the output should contain "gcli event public"
-      And the output should contain "gcli event received"
-      And the output should contain "gcli event repo"
-      And the output should contain "gcli event user_org"
+      And the output should contain "event issue"
+      And the output should contain "event network"
+      And the output should contain "event org"
+      And the output should contain "event performed"
+      And the output should contain "event public"
+      And the output should contain "event received"
+      And the output should contain "event repo"
+      And the output should contain "event user_org"
 
   Scenario: Public events
     Given the GitHub API server:

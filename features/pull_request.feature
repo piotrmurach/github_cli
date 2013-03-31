@@ -5,14 +5,14 @@ Feature: gcli pull request
 
     When I run `gcli pull`
     Then the exit status should be 0
-      And the output should contain "gcli pull commits"
-      And the output should contain "gcli pull create"
-      And the output should contain "gcli pull files"
-      And the output should contain "gcli pull get"
-      And the output should contain "gcli pull list"
-      And the output should contain "gcli pull merge"
-      And the output should contain "gcli pull merged"
-      And the output should contain "gcli pull update"
+      And the output should contain "pull commits"
+      And the output should contain "pull create"
+      And the output should contain "pull files"
+      And the output should contain "pull get"
+      And the output should contain "pull list"
+      And the output should contain "pull merge"
+      And the output should contain "pull merged"
+      And the output should contain "pull update"
 
   Scenario: List pull requests
     Given the GitHub API server:

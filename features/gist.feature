@@ -5,15 +5,15 @@ Feature: gcli gist
 
     When I run `gcli gist`
     Then the exit status should be 0
-      And the output should contain "gcli gist create"
-      And the output should contain "gcli gist delete"
-      And the output should contain "gcli gist edit"
-      And the output should contain "gcli gist get"
-      And the output should contain "gcli gist fork"
-      And the output should contain "gcli gist list"
-      And the output should contain "gcli gist star"
-      And the output should contain "gcli gist starred"
-      And the output should contain "gcli gist unstar"
+      And the output should contain "gist create"
+      And the output should contain "gist delete"
+      And the output should contain "gist edit"
+      And the output should contain "gist get"
+      And the output should contain "gist fork"
+      And the output should contain "gist list"
+      And the output should contain "gist star"
+      And the output should contain "gist starred"
+      And the output should contain "gist unstar"
 
   Scenario: List gists for user
     Given the GitHub API server:

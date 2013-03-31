@@ -5,11 +5,11 @@ Feature: gcli ref
 
     When I run `gcli ref`
     Then the exit status should be 0
-      And the output should contain "gcli ref create"
-      And the output should contain "gcli ref delete"
-      And the output should contain "gcli ref get"
-      And the output should contain "gcli ref list"
-      And the output should contain "gcli ref update"
+      And the output should contain "ref create"
+      And the output should contain "ref delete"
+      And the output should contain "ref get"
+      And the output should contain "ref list"
+      And the output should contain "ref update"
 
   Scenario: List all references
     Given the GitHub API server:

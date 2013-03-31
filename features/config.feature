@@ -52,3 +52,4 @@ Feature: Configuration file
     Given I run `gcli init`
     When I run `gcli config -l`
     Then the stdout should contain "user.token"
+

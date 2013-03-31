@@ -5,8 +5,8 @@ Feature: gcli tree
 
     When I run `gcli tree`
     Then the exit status should be 0
-      And the output should contain "gcli tree create"
-      And the output should contain "gcli tree get"
+      And the output should contain "tree create"
+      And the output should contain "tree get"
 
   Scenario: Get tree
     Given the GitHub API server:

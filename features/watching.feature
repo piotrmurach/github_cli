@@ -5,11 +5,11 @@ Feature: gcli watching
 
     When I run `gcli watch`
     Then the exit status should be 0
-      And the output should contain "gcli watch list"
-      And the output should contain "gcli watch start"
-      And the output should contain "gcli watch stop"
-      And the output should contain "gcli watch watched"
-      And the output should contain "gcli watch watching"
+      And the output should contain "watch list"
+      And the output should contain "watch start"
+      And the output should contain "watch stop"
+      And the output should contain "watch watched"
+      And the output should contain "watch watching"
 
   Scenario: List watchers
     Given the GitHub API server:

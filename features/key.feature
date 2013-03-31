@@ -4,11 +4,11 @@ Feature: gcli key
   Scenario: Available commands
     When I run `gcli key`
     Then the exit status should be 0
-      And the output should contain "gcli key create"
-      And the output should contain "gcli key delete"
-      And the output should contain "gcli key edit"
-      And the output should contain "gcli key get"
-      And the output should contain "gcli key list"
+      And the output should contain "key create"
+      And the output should contain "key delete"
+      And the output should contain "key edit"
+      And the output should contain "key get"
+      And the output should contain "key list"
 
   Scenario: List keys
     Given the GitHub API server:

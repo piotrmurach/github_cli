@@ -4,17 +4,17 @@ Feature: gcli repository
   Scenario: Available commands
     When I run `gcli repo`
     Then the exit status should be 0
-      And the output should contain "gcli repo branch"
-      And the output should contain "gcli repo branches"
-      And the output should contain "gcli repo contribs"
-      And the output should contain "gcli repo create"
-      And the output should contain "gcli repo edit"
-      And the output should contain "gcli repo delete"
-      And the output should contain "gcli repo get"
-      And the output should contain "gcli repo list"
-      And the output should contain "gcli repo langs"
-      And the output should contain "gcli repo tags"
-      And the output should contain "gcli repo teams"
+      And the output should contain "repo branch"
+      And the output should contain "repo branches"
+      And the output should contain "repo contribs"
+      And the output should contain "repo create"
+      And the output should contain "repo edit"
+      And the output should contain "repo delete"
+      And the output should contain "repo get"
+      And the output should contain "repo list"
+      And the output should contain "repo langs"
+      And the output should contain "repo tags"
+      And the output should contain "repo teams"
 
   Scenario: List all repositories
     Given the GitHub API server:

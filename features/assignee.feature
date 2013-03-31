@@ -5,8 +5,8 @@ Feature: gcli assignee
 
     When I run `gcli assignee`
     Then the exit status should be 0
-      And the output should contain "gcli assignee list"
-      And the output should contain "gcli assignee check"
+      And the output should contain "assignee list"
+      And the output should contain "assignee check"
 
   Scenario: List assignees
     Given the GitHub API server:

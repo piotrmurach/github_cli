@@ -5,10 +5,10 @@ Feature: gcli collab
 
     When I run `gcli collab`
     Then the exit status should be 0
-      And the output should contain "gcli collab list"
-      And the output should contain "gcli collab add"
-      And the output should contain "gcli collab collab"
-      And the output should contain "gcli collab remove"
+      And the output should contain "collab list"
+      And the output should contain "collab add"
+      And the output should contain "collab collab"
+      And the output should contain "collab remove"
 
   Scenario: List collaborators
     Given the GitHub API server:

@@ -5,8 +5,8 @@ Feature: gcli blob
 
     When I run `gcli blob`
     Then the exit status should be 0
-      And the output should contain "gcli blob get"
-      And the output should contain "gcli blob create"
+      And the output should contain "blob get"
+      And the output should contain "blob create"
 
   Scenario: Get blob
     Given the GitHub API server:

@@ -5,11 +5,11 @@ Feature: gcli milestone
 
     When I run `gcli milestone`
     Then the exit status should be 0
-      And the output should contain "gcli milestone create"
-      And the output should contain "gcli milestone delete"
-      And the output should contain "gcli milestone get"
-      And the output should contain "gcli milestone list"
-      And the output should contain "gcli milestone update"
+      And the output should contain "milestone create"
+      And the output should contain "milestone delete"
+      And the output should contain "milestone get"
+      And the output should contain "milestone list"
+      And the output should contain "milestone update"
 
   Scenario: List milestones
     Given the GitHub API server:

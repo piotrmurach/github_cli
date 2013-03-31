@@ -5,9 +5,9 @@ Feature: gcli email
 
     When I run `gcli email`
     Then the exit status should be 0
-      And the output should contain "gcli email delete"
-      And the output should contain "gcli email list"
-      And the output should contain "gcli email add"
+      And the output should contain "email delete"
+      And the output should contain "email list"
+      And the output should contain "email add"
 
   Scenario: List emails
     Given the GitHub API server:

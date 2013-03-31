@@ -5,8 +5,8 @@ Feature: gcli commit
 
     When I run `gcli commit`
     Then the exit status should be 0
-      And the output should contain "gcli commit get"
-      And the output should contain "gcli commit create"
+      And the output should contain "commit get"
+      And the output should contain "commit create"
 
   Scenario: Get commit
     Given the GitHub API server:

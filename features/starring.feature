@@ -5,11 +5,11 @@ Feature: gcli star
 
     When I run `gcli star`
     Then the exit status should be 0
-      And the output should contain "gcli star list"
-      And the output should contain "gcli star star"
-      And the output should contain "gcli star unstar"
-      And the output should contain "gcli star starred"
-      And the output should contain "gcli star starring"
+      And the output should contain "star list"
+      And the output should contain "star star"
+      And the output should contain "star unstar"
+      And the output should contain "star starred"
+      And the output should contain "star starring"
 
   Scenario: List stargazers
     Given the GitHub API server:
