@@ -9,10 +9,18 @@ Feature: gcli issue
       And the output should contain "issue get"
       And the output should contain "issue list"
 
-  Scenario: List issues
+  Scenario: List all issues
     Given the GitHub API server:
     """
     get('/issues') { status 200 }
+    """
+    When I run `gcli issue ls --all`
+    Then the exit status should be 0
+
+  Scenario: List issues for authenticated user
+    Given the GitHub API server:
+    """
+    get('/user/issues') { status 200 }
     """
     When I run `gcli issue ls`
     Then the exit status should be 0
@@ -23,6 +31,14 @@ Feature: gcli issue
     get('/repos/wycats/thor/issues') { status 200 }
     """
     When I run `gcli issue ls --user wycats --repo thor`
+    Then the exit status should be 0
+
+  Scenario: List issues for an organization
+    Given the GitHub API server:
+    """
+    get('/orgs/rails/issues') { status 200 }
+    """
+    When I run `gcli issue ls --org rails`
     Then the exit status should be 0
 
   Scenario: Get issue
