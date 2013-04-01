@@ -11,9 +11,9 @@ module GithubCLI
         end
       end
 
-      def get(user, params, format)
+      def get(params, format)
         output format do
-          github_api.users.get params.update(:user => user)
+          github_api.users.get params
         end
       end
 
