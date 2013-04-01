@@ -19,7 +19,9 @@ module GithubCLI
            :desc => 'Get a single unauthenticated <user>',
            :banner => '<user>'
     def get
-      User.get options[:user], options[:params], options[:format]
+      params = options[:params].dup
+      params['user'] = options[:user] if options[:user]
+      User.get params, options[:format]
     end
 
     desc 'update', 'Update the authenticated user'
