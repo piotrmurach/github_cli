@@ -1,21 +1,22 @@
 Feature: gcli team
 
+  @ci-run
   Scenario: Available commands
     When I run `gcli team`
     Then the exit status should be 0
-      And the output should contain "gcli team add_member"
-      And the output should contain "gcli team add_repo"
-      And the output should contain "gcli team create"
-      And the output should contain "gcli team delete"
-      And the output should contain "gcli team edit"
-      And the output should contain "gcli team get"
-      And the output should contain "gcli team list"
-      And the output should contain "gcli team list_member"
-      And the output should contain "gcli team list_repo"
-      And the output should contain "gcli team member"
-      And the output should contain "gcli team remove_member"
-      And the output should contain "gcli team remove_repo"
-      And the output should contain "gcli team repo"
+      And the output should contain "team add_member"
+      And the output should contain "team add_repo"
+      And the output should contain "team create"
+      And the output should contain "team delete"
+      And the output should contain "team edit"
+      And the output should contain "team get"
+      And the output should contain "team list"
+      And the output should contain "team list_member"
+      And the output should contain "team list_repo"
+      And the output should contain "team member"
+      And the output should contain "team remove_member"
+      And the output should contain "team remove_repo"
+      And the output should contain "team repo"
 
   Scenario: List all teams
     Given the GitHub API server:
