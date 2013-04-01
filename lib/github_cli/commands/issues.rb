@@ -5,9 +5,14 @@ module GithubCLI
 
     namespace :issue
 
-
     option :filter, :type => :string,
            :banner => "assigned|created|mentioned|subscribed|all"
+    option :milstone, :type => :string,
+           :banner => "number|none|*"
+    option :creator, :type => :string,
+           :desc => "user login"
+    option :mentioned, :type => :string,
+           :desc => "user login"
     option :state, :type => :string, :banner => "open|closed",
            :desc => "open, closed, default: open"
     option :labels, :type => :array,
@@ -21,6 +26,8 @@ module GithubCLI
     option :org, :type => :string, :aliases => ["-o"]
     option :user, :type => :string, :aliases => ["-u"]
     option :repo, :type => :string, :aliases => ["-r"]
+    option :all, :type => :boolean,
+           :desc => "List all issues across all the authenticated user’s visible repositories"
     desc 'list', 'List issues'
     long_desc <<-DESC
       ghc issue list --filter=assigned --state=open
@@ -32,6 +39,16 @@ module GithubCLI
           * created: Issues assigned to you (default) \n
           * mentioned: Issues assigned to you (default)\n
           * subscribed: Issues assigned to you (default)\n
+        milestone:\n
+          * Integer Milestone number\n
+          * none for Issues with no Milestone.\n
+          *  * for Issues with any Milestone\n
+        assignee:\n
+          * String User login\n
+          * none for Issues with no assigned User.\n
+          *  * for Issues with any assigned User.\n
+        creator - string - user login\n
+        mentioned - string - user login\n
         state - open, closed, default: open \n
         labels - String list of comma separated Label names. Example: bug,ui,@high
         sort - created, updated, comments, default: created \n
@@ -40,40 +57,22 @@ module GithubCLI
     DESC
     def list
       params = options[:params].dup
-      params['org'] = options[:org] if options[:org]
-      params['user'] = options[:user] if options[:user]
-      params['repo'] = options[:repo] if options[:repo]
-      params['filter'] = options[:filter] if options[:filter]
-      params['sort'] = options[:sort] if options[:sort]
-      params['state'] = options[:state] if options[:state]
-      params['labels'] = options[:labels] if options[:labels]
+      params['org']       = options[:org]       if options[:org]
+      params['user']      = options[:user]      if options[:user]
+      params['repo']      = options[:repo]      if options[:repo]
+      params['filter']    = options[:filter]    if options[:filter]
+      params['milestone'] = options[:milestone] if options[:milestone]
+      params['assignee']  = options[:assignee]  if options[:assignee]
+      params['creator']   = options[:creator]   if options[:creator]
+      params['mentioned'] = options[:mentioned] if options[:mentioned]
+      params['sort']      = options[:sort]      if options[:sort]
+      params['state']     = options[:state]     if options[:state]
+      params['labels']    = options[:labels]    if options[:labels]
       params['direction'] = options[:direction] if options[:direction]
-      params['since'] = options[:since] if options[:since]
+      params['since']     = options[:since]     if options[:since]
 
-      Issue.all params, options[:format]
-    end
-
-    desc 'repo <user> <repo>', 'List all issues for a repository'
-    long_desc <<-DESC
-      Parameters
-
-        milestone:\n
-          * Integer Milestone number\n
-          * none for Issues with no Milestone.\n
-          *  * for Issues with any Milestone\n
-        state - open, closed, default: open \n
-        assignee:\n
-          * String User login\n
-          * none for Issues with no assigned User.\n
-          *  * for Issues with any assigned User.\n
-        mentioned - String User login\n
-        labels - String list of comma separated Label names. Example: bug,ui,@high\n
-        sort - created, updated, comments, default: created\n
-        direction - asc, desc, default: desc\n
-        since - Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ\n
-    DESC
-    def repo(user, repo)
-      Issue.all_repo user, repo, options[:params], options[:format]
+      arg = options[:all] ? [] : :user
+      Issue.all arg, params, options[:format]
     end
 
     desc 'get <user> <repo> <number>', 'Get a single issue'
@@ -105,11 +104,11 @@ module GithubCLI
     DESC
     def create(user, repo)
       params = options[:params].dup
-      params['title'] = options[:title]
-      params['body'] = options[:body] if options[:body]
-      params['assignee'] = options[:assignee] if options[:assignee]
+      params['title']     = options[:title]
+      params['body']      = options[:body]      if options[:body]
+      params['assignee']  = options[:assignee]  if options[:assignee]
       params['milestone'] = options[:milestone] if options[:milestone]
-      params['labels'] = options[:labels] if options[:labels]
+      params['labels']    = options[:labels]    if options[:labels]
 
       Issue.create user, repo, params, options[:format]
     end
@@ -141,12 +140,12 @@ module GithubCLI
     DESC
     def edit(user, repo, number)
       params = options[:params].dup
-      params['title'] = options[:title]
-      params['body'] = options[:body] if options[:body]
-      params['assignee'] = options[:assignee] if options[:assignee]
+      params['title']     = options[:title]
+      params['body']      = options[:body]      if options[:body]
+      params['assignee']  = options[:assignee]  if options[:assignee]
       params['milestone'] = options[:milestone] if options[:milestone]
-      params['labels'] = options[:labels] if options[:labels]
-      params['state'] = options[:state] if options[:state]
+      params['labels']    = options[:labels]    if options[:labels]
+      params['state']     = options[:state]     if options[:state]
 
       Issue.edit user, repo, number, params, options[:format]
     end
