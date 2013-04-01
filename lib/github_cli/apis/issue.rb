@@ -5,15 +5,9 @@ module GithubCLI
 
     class << self
 
-      def all(params, format)
+      def all(arg, params, format)
         output format do
-          github_api.issues.list params
-        end
-      end
-
-      def all_repo(user, repo, params, format)
-        output format do
-          github_api.issues.list_repo user, repo, params
+          github_api.issues.list arg, params
         end
       end
 
