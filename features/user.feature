@@ -1,11 +1,20 @@
 Feature: gcli user
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli user`
     Then the exit status should be 0
-      And the output should contain "gcli user get"
-      And the output should contain "gcli user update"
+      And the output should contain "user get"
+      And the output should contain "user update"
+
+  Scenario: List all users
+    Given the GitHub API server:
+    """
+    get('/users') { status 200 }
+    """
+    When I run `gcli user ls`
+    Then the exit status should be 0
 
   Scenario: Get user
     Given the GitHub API server:
@@ -28,5 +37,5 @@ Feature: gcli user
     """
     patch('/user') { status 200 }
     """
-    When I run `gcli user update --params=name:peter-murach`
+    When I run `gcli user update --name=peter-murach`
     Then the exit status should be 0
