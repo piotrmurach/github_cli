@@ -71,7 +71,8 @@ module GithubCLI
       params['direction'] = options[:direction] if options[:direction]
       params['since']     = options[:since]     if options[:since]
 
-      arg = options[:all] ? [] : :user
+      arg = []
+      arg = :user if !options[:all] && !(options[:user] || options[:org])
       Issue.all arg, params, options[:format]
     end
 
