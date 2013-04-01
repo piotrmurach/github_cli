@@ -1,3 +1,10 @@
+0.5.6 (April 1, 2013)
+
+* Change gcli interface to be more concise and not include gcli name
+* Change issue command to add specific options and add tests
+* Change user command to add specific options and add tests
+* Change team command to add specific options and add tests
+
 0.5.5 (March 30, 2013)
 
 * Change PullRequest commands to take specific options and add tests
