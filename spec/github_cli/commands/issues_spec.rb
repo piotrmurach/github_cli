@@ -15,6 +15,11 @@ describe GithubCLI::Commands::Issues do
     subject.invoke "issue:list", []
   end
 
+  it "invokes issue:list --all" do
+    api_class.should_receive(:all).with({"user" => user, "repo" => repo}, format)
+    subject.invoke "issue:list", [], :user => user, :repo => repo
+  end
+
   it "invokes issue:list --org" do
     api_class.should_receive(:all).with({"org" => org}, format)
     subject.invoke "issue:list", [], :org => org
