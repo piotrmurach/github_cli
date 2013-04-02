@@ -68,7 +68,7 @@ module GithubCLI
       end
     end
 
-    desc 'init [<filename>]', 'Create a configuration file or overwirte existing one'
+    desc 'init', 'Create a configuration file or overwirte existing one'
     long_desc <<-DESC
       Initializes a configuration file where you can set default options for
       interacting with GitHub API.\n
@@ -95,7 +95,7 @@ module GithubCLI
       GithubCLI.ui.confirm "Writing new configuration file to #{GithubCLI.config.path}"
     end
 
-    desc 'config <name> [<value>]', 'Get and set GitHub configuration options'
+    desc 'config', 'Get and set GitHub configuration options'
     long_desc <<-DESC
       You can query/set options with this command. The name is actually a hash key
       string that is a composite one, nested with dots. If only name is provided, a
@@ -140,7 +140,7 @@ module GithubCLI
       return
     end
 
-    desc 'list <pattern>', 'List all available commands limited by pattern'
+    desc 'list', 'List all available commands limited by pattern'
     def list(pattern="")
       pattern = /^#{pattern}.*$/i
       Terminal.print_commands pattern
