@@ -8,38 +8,7 @@ else
   end
 end
 
-%w[
-  assignee
-  authorization
-  blob
-  collaborator
-  commit
-  content
-  download
-  email
-  event
-  follower
-  fork
-  gist
-  hook
-  issue
-  key
-  label
-  member
-  merging
-  milestone
-  organization
-  pull_request
-  reference
-  repository
-  search
-  starring
-  status
-  tag
-  team
-  tree
-  user
-  watching
-].each do |api|
-  require_api api
+Dir[File.dirname(__FILE__) + '/apis/*.rb'].sort.each do |path|
+  filename = File.basename(path)
+  require_api(filename)
 end
