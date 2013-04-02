@@ -26,7 +26,7 @@ class Thor
         next if command.hidden?
         item = []
         item << banner(command, false, subcommand).gsub(/#{basename} /, '')
-        item << (command.description ? "# #{command.description.gsub(/\s+/m,' ')}" : "")
+        item << (command.description ? "  #{command.description.gsub(/\s+/m,' ')}" : "")
         item
       end.compact
     end
@@ -67,7 +67,7 @@ class Thor
     gcli-config.1
   ]
 
-  desc "help <command>", "Describe available commands or one specific command"
+  desc "help", "Describe available commands or one specific command"
   def help(task = nil, subcommand = false)
     command = "gcli-#{task}.1"
 
