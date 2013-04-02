@@ -5,10 +5,6 @@ class Thor
 
   class << self
 
-    def banner(command, namespace=nil, subcommand=false)
-      "#{command.formatted_usage(self, $thor_runner, subcommand)}"
-    end
-
     def help(shell, subcommand = false)
       list = printable_commands(true, subcommand)
       Thor::Util.thor_classes_in(self).each do |klass|
