@@ -60,6 +60,9 @@ module GithubCLI
     desc "milestone", "Leverage Milestones API"
     subcommand "milestone", GithubCLI::Commands::Milestones
 
+    desc "notify", "Leverage Notifications API"
+    subcommand "notify", GithubCLI::Commands::Notifications
+
     desc "org", "Leverage Organizations API"
     subcommand "org", GithubCLI::Commands::Organizations
 

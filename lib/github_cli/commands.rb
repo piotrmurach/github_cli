@@ -21,6 +21,7 @@ module GithubCLI
     autoload :Members,        'github_cli/commands/members'
     autoload :Merging,        'github_cli/commands/merging'
     autoload :Milestones,     'github_cli/commands/milestones'
+    autoload :Notifications,  'github_cli/commands/notifications'
     autoload :Organizations,  'github_cli/commands/organizations'
     autoload :PullRequests,   'github_cli/commands/pull_requests'
     autoload :References,     'github_cli/commands/references'
