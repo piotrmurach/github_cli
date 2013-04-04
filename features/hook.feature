@@ -1,15 +1,16 @@
 Feature: gcli hook
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli hook`
     Then the exit status should be 0
-      And the output should contain "gcli hook create"
-      And the output should contain "gcli hook delete"
-      And the output should contain "gcli hook edit"
-      And the output should contain "gcli hook get"
-      And the output should contain "gcli hook list"
-      And the output should contain "gcli hook test"
+      And the output should contain "hook create"
+      And the output should contain "hook delete"
+      And the output should contain "hook edit"
+      And the output should contain "hook get"
+      And the output should contain "hook list"
+      And the output should contain "hook test"
 
   Scenario: List hooks
     Given the GitHub API server:
@@ -32,7 +33,7 @@ Feature: gcli hook
     """
     post('/repos/wycats/thor/hooks') { status 200 }
     """
-    When I run `gcli hook create wycats thor --params=name:web config:{}`
+    When I run `gcli hook create wycats thor --name=web --config="url:http://example.com/webhook" --events=status`
     Then the exit status should be 0
 
   Scenario: Edit hook
