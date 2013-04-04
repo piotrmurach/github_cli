@@ -1,3 +1,12 @@
+0.5.7 (April 4, 2013)
+
+* Change apis.rb to dynamically load api files
+* Change interface to remove command options and clean up descriptions
+* Add notify command for Notifications API access
+* Change error handling for output to provided common error type
+* Change hooks commands to take specific options and add tests
+* Fix error on empty response bodies
+
 0.5.6 (April 1, 2013)
 
 * Change gcli interface to be more concise and not include gcli name
