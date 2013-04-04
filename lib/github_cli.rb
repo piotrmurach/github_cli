@@ -62,5 +62,9 @@ module GithubCLI
     def commands
       @commands ||= GithubCLI::Command.all
     end
+
+    def terminal
+      @terminal ||= GithubCLI::Terminal
+    end
   end
 end # GithubCLI
