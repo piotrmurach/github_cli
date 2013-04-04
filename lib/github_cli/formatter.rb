@@ -5,10 +5,11 @@ module GithubCLI
   # It delegates to other objects like Formatter::Table
   # to perform actual rendering.
   class Formatter
-    attr_reader :response, :format
+    attr_reader :response, :format, :message
 
     def initialize(response, options={})
       @response = response
+      @message  = options[:message]
       @format   = options[:format]
     end
 
@@ -16,14 +17,17 @@ module GithubCLI
       render_status
       Terminal.paged_output
       determine_output_formatter
+      render_message
     end
 
     def determine_output_formatter
       case format.to_s
       when 'table', /table:v.*/, /table:h.*/
-        formatter = Formatters::Table.new(response.body,
-                      :transform => format.to_s.split(':').last)
-        formatter.format
+        if response.body && !response.body.empty?
+          formatter = Formatters::Table.new(response.body,
+                        :transform => format.to_s.split(':').last)
+          formatter.format
+        end
       when 'csv'
         formatter = Formatters::CSV.new(response)
         formatter.format
@@ -39,6 +43,12 @@ module GithubCLI
       if response.respond_to? :status
         Terminal.line "Response Status: #{response.status}\n"
         Terminal.newline
+      end
+    end
+
+    def render_message
+      if message
+        Terminal.line message
       end
     end
 
