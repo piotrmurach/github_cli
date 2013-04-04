@@ -19,7 +19,14 @@ module GithubCLI
     def on_error
       yield
     rescue Exception => error
-      raise GithubCLI::GithubCLIError, "Rescued: #{error}"
+      case error
+      when Github::Error::NotFound
+        terminal.newline
+        ui.error 'Resource Not Found'
+        terminal.newline
+      else
+        raise GithubCLI::GithubCLIError, "Rescued: #{error}"
+      end
     end
 
     def before(&block)
