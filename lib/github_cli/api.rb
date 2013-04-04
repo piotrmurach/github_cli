@@ -35,12 +35,14 @@ module GithubCLI
       end
 
       def output(format=:table, &block)
-        response  = block.call
-        if response.respond_to?(:body)
-          formatter = Formatter.new response, :format => format
-          formatter.render_output
-        else
-          response
+        GithubCLI.on_error do
+          response  = block.call
+          if response.respond_to?(:body)
+            formatter = Formatter.new response, :format => format
+            formatter.render_output
+          else
+            response
+          end
         end
       end
 
