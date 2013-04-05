@@ -77,10 +77,10 @@ module GithubCLI
       override the bult-in defaults and allow you to save typing commonly  used
       command line options.
     DESC
-    method_option :force, :type => :boolean, :default => false, :aliases => "-f",
-                  :banner => "Overwrite configuration file. "
-    method_option :local, :type => :boolean, :default => false,
-                  :desc => 'Create local configuration file, otherwise a global configuration file in user home is created.'
+    option :force, :type => :boolean, :default => false, :aliases => "-f",
+           :banner => "Overwrite configuration file. "
+    option :local, :type => :boolean, :default => false,
+           :desc => 'Create local configuration file, otherwise a global configuration file in user home is created.'
     def init(filename=nil)
       config_filename = filename ? filename : options[:filename]
       GithubCLI.config.filename = config_filename
@@ -105,12 +105,12 @@ module GithubCLI
       There two types of config files, global and project specific. When modifying
       options ensure that you modifying the correct config.
     DESC
-    method_option :local, :type => :boolean, :default => false,
-                  :desc => 'use local config file'
-    method_option :list, :type => :boolean, :default => false, :aliases => '-l',
-                  :desc => 'list all'
-    method_option :edit, :type => :boolean, :default => false, :aliases => '-e',
-                  :desc => 'opens an editor'
+    option :local, :type => :boolean, :default => false,
+           :desc => 'use local config file'
+    option :list, :type => :boolean, :default => false, :aliases => '-l',
+           :desc => 'list all'
+    option :edit, :type => :boolean, :default => false, :aliases => '-e',
+           :desc => 'opens an editor'
     def config(*args)
       name, value = args.shift, args.shift
       GithubCLI.config.location = options[:local] ? 'local' : 'global'
