@@ -5,7 +5,7 @@ module GithubCLI
 
     class << self
 
-      def list(user, repo, sha, params, format)
+      def all(user, repo, sha, params, format)
         output format do
           github_api.repos.statuses.list user, repo, sha, params
         end
