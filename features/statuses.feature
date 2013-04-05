@@ -1,11 +1,12 @@
 Feature: gcli status
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli status`
     Then the exit status should be 0
-      And the output should contain "gcli status list"
-      And the output should contain "gcli status create"
+      And the output should contain "status list"
+      And the output should contain "status create"
 
   Scenario: List statuses
     Given the GitHub API server:
@@ -30,7 +31,7 @@ Feature: gcli status
       status 200
     }
     """
-    When I run `gcli status create wycats thor abc123 --params=state:pending`
+    When I run `gcli status create wycats thor abc123 --state=pending`
     Then the exit status should be 0
       And the stdout should contain "success"
 
