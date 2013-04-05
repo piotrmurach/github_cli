@@ -121,7 +121,7 @@ $ gcli config user.token '...'
 
 ### Arguments
 
-The required arguments come first as per command description, then are followed by the optional arguments supplied inside a `params` flag.
+The required arguments come first as per command description, then are followed by the optional arguments supplied as specific options.
 
 For instance, one can create repository by supplying parameters in the following way:
 
@@ -133,6 +133,18 @@ To create repository inside organization:
 
 ```shell
 $ gcli repo create github/github_api --desc='Test repo for kitty.'
+```
+
+To provide array argument, pass space delimited strings like so
+
+```
+$ gcli hook create <user> <repo> --events=push issues status
+```
+
+To provide hash argument, pass space delimited key:value pairs such as
+
+```
+$ gcli hook create <user> <repo> --config=url:"http://example.com/path" content_type:json
 ```
 
 To find out which options are required and which are optional use `help` command:
