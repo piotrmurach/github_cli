@@ -1,11 +1,12 @@
 Feature: gcli fork
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli fork`
     Then the exit status should be 0
-      And the output should contain "gcli fork create"
-      And the output should contain "gcli fork list"
+      And the output should contain "fork create"
+      And the output should contain "fork list"
 
   Scenario: List forks
     Given the GitHub API server:
