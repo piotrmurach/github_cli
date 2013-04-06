@@ -1,0 +1,10 @@
+gcli-whoami(1) - Display gcli username
+======================================
+
+## SYNOPSIS
+
+`gcli whoami`
+
+## SEE ALSO
+
+* gcli-config(1)

@@ -3,5 +3,18 @@ gcli-repo(1) - Manage repository data
 
 ## SYNOPSIS
 
+`gcli repo` `branch` <user> <repo> <name><br>
 `gcli repo` `branches` user repo<br>
 `gcli repo` `contribs|contributors` user repo<br>
+`gcli repo` `create` [<org>/]<name><br>
+`gcli repo` `delete` <user> <repo><br>
+`gcli repo` `edit` <user> <repo> <name><br>
+`gcli repo` `get` <user> <repo><br>
+`gcli repo` `langs` <user> <repo><br>
+`gcli repo` `list`<br>
+`gcli repo` `tags` <user> <repo><br>
+`gcli repo` `teams` <user> <repo><br>
+
+## DESCRIPTION
+
+Manage GitHub repositories through the underlying API HTTP methods.

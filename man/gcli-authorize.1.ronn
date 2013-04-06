@@ -1,0 +1,19 @@
+gcli-authorize(1) -- Add a authentication token
+===============================================
+
+## SYNOPSIS
+
+`gcli authorize` [--local]
+
+## DESCRIPTION
+
+Create authentication token for a user named <login> in the GitHub, and
+save the credentials to the `.githubrc` file.
+
+The login, password, and email are read in from prompts.
+
+## SEE ALSO
+
+* gcli-auth(1)
+* gcli-config(1)
+* gcli-whoami(1)

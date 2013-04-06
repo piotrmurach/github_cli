@@ -3,7 +3,7 @@ gcli(1) -- Command Line Access to GitHub API v3
 
 ## SYNOPSIS
 
-`gcli` COMMAND SUBCOMMAND [<args>]
+`gcli` <command> <subcommand> [<args>]
 
 ## DESCRIPTION
 

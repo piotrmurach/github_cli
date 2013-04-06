@@ -5,7 +5,11 @@ module GithubCLI
     extend self
 
     MANPAGES = %w[
+      gcli-authorize.1
       gcli-config.1
+      gcli-repo.1
+      gcli.1
+      gcli-whoami.1
     ]
 
     def has?(command)
