@@ -19,6 +19,10 @@ module GithubCLI
     def on_error
       yield
     rescue Exception => error
+      handle_error(error)
+    end
+
+    def handle_error(error)
       case error
       when Github::Error::NotFound
         terminal.newline
