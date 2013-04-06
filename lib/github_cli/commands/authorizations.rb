@@ -39,8 +39,8 @@ module GithubCLI
     DESC
     def create
       params = options[:params].dup
-      params['scopes']   = options[:scopes] if options[:scopes]
-      params['note']     = options[:note] if options[:note]
+      params['scopes']   = options[:scopes]   if options[:scopes]
+      params['note']     = options[:note]     if options[:note]
       params['note_url'] = options[:note_url] if options[:note_url]
       Authorization.create params, options[:format]
     end
@@ -67,11 +67,11 @@ module GithubCLI
     DESC
     def update(id)
       params = options[:params].dup
-      params['scopes']        = options[:scopes] if options[:scopes]
-      params['add_scopes']    = options[:add_scopes] if options[:add_scopes]
+      params['scopes']        = options[:scopes]        if options[:scopes]
+      params['add_scopes']    = options[:add_scopes]    if options[:add_scopes]
       params['remove_scopes'] = options[:remove_scopes] if options[:remove_scopes]
-      params['note']          = options[:note] if options[:note]
-      params['note_url']      = options[:note_url] if options[:note_url]
+      params['note']          = options[:note]          if options[:note]
+      params['note_url']      = options[:note_url]      if options[:note_url]
       Authorization.update id, params, options[:format]
     end
 

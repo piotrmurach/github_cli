@@ -44,7 +44,7 @@ module GithubCLI
     class_option :version, :type => :boolean, :aliases => ['-V'],
                  :desc => "Show program version"
 
-    no_tasks do
+    no_commands do
       def defaults
         {
           'user.token'    => nil,
@@ -68,6 +68,43 @@ module GithubCLI
       end
     end
 
+    option :local, :type => :boolean, :default => false, :aliases => "-l",
+           :desc => 'Modify local configuration file, otherwise a global configuration file is changed.'
+    desc 'authorize', 'Add user authentication token'
+    long_desc <<-DESC
+      Create authorization token for a user named <username> Save user credentials to the .githubrc file.\n
+
+      The username, password, and email are read in from prompts.
+
+      You may use this command to change your details.
+    DESC
+    def authorize
+      params = {}
+      params['scopes'] = options[:scopes] || %w(public_repo repo)
+      params['note']   = options[:note] || 'github_cli'
+      params['note_url'] = options[:note_url] || 'https://github.com/peter-murach/github_cli'
+      # Need to configure client with login and password
+      res = self.invoke("auth:create", [], params)
+      token = res.body['token']
+
+      config = GithubCLI.config
+      config.location = options[:local] ? 'local' : 'global'
+      config['user.login']    = login
+      config['user.password'] = password
+      config['user.token']    = token
+
+      GithubCLI.ui.warn <<-EOF
+        Your #{GithubCLI.config.location} has been overwritten!
+      EOF
+    end
+
+    desc 'whoami', 'Print the username config to standard out'
+    def whoami
+      config = GithubCLI.config
+      me = config['user.login'] || "Not authed. Run 'gcli authorize'"
+      GithubCLI.ui.info me
+    end
+
     desc 'init', 'Create a configuration file or overwirte existing one'
     long_desc <<-DESC
       Initializes a configuration file where you can set default options for
@@ -79,19 +116,20 @@ module GithubCLI
     DESC
     option :force, :type => :boolean, :default => false, :aliases => "-f",
            :banner => "Overwrite configuration file. "
-    option :local, :type => :boolean, :default => false,
+    option :local, :type => :boolean, :default => false, :aliases => "-l",
            :desc => 'Create local configuration file, otherwise a global configuration file in user home is created.'
     def init(filename=nil)
       config_filename = filename ? filename : options[:filename]
-      GithubCLI.config.filename = config_filename
-      GithubCLI.config.location = options[:local] ? 'local' : 'global'
+      config = GithubCLI.config
+      config.filename = config_filename
+      config.location = options[:local] ? 'local' : 'global'
 
       if File.exists?(GithubCLI.config.path) && !options[:force]
         GithubCLI.ui.error "Not overwritting existing config file #{GithubCLI.config.path}, use --force to override."
         exit 1
       end
 
-      GithubCLI.config.save(defaults)
+      config.save(defaults)
       GithubCLI.ui.confirm "Writing new configuration file to #{GithubCLI.config.path}"
     end
 
@@ -148,7 +186,7 @@ module GithubCLI
 
     desc 'version', 'Display Github CLI version.'
     def version
-      GithubCLI.ui.info "#{GithubCLI.program_name} v#{GithubCLI::VERSION}"
+      GithubCLI.ui.info "#{GithubCLI.program_name} #{GithubCLI::VERSION}"
     end
 
   end # CLI
