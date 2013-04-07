@@ -5,6 +5,8 @@ module GithubCLI
 
     namespace :content
 
+    option :ref, :type => :string,
+           :desc => "The String name of the Commit/Branch/Tag. Defaults to master."
     desc 'get <user> <repo> <path>', 'Get repository <path> contents'
     long_desc <<-DESC
       This method returns the contents of any file or directory in a repository.
@@ -14,9 +16,14 @@ module GithubCLI
       ref - Optional string - The String name of the Commit/Branch/Tag. Defaults to master.
     DESC
     def get(user, repo, path)
-      Content.get user, repo, path, options[:params], options[:format]
+      params = options[:params].dup
+      params['ref'] = options[:ref] if options[:ref]
+
+      Content.get user, repo, path, params, options[:format]
     end
 
+    option :ref, :type => :string,
+           :desc => "The String name of the Commit/Branch/Tag. Defaults to master."
     desc 'readme <user> <repo>', 'Get the README'
     long_desc <<-DESC
       Parameters
@@ -24,9 +31,16 @@ module GithubCLI
       ref - Optional string - The String name of the Commit/Branch/Tag. Defaults to master.
     DESC
     def readme(user, repo)
-      Content.readme user, repo, options[:params], options[:format]
+      params = options[:params].dup
+      params['ref'] = options[:ref] if options[:ref]
+
+      Content.readme user, repo, params, options[:format]
     end
 
+    option :ref, :type => :string,
+           :desc => "The String name of the Commit/Branch/Tag. Defaults to master."
+    option :archive_format, :type => :string, :banner => "tarball|zipball",
+           :desc => "Either tarball or zipball"
     desc 'archive <user> <repo>', 'Get archive link'
     long_desc <<-DESC
       This method will return a 302 to a URL to download a tarball or zipball
@@ -42,7 +56,11 @@ module GithubCLI
       ref - Optional string - valid Git reference, defaults to master\n
     DESC
     def archive(user, repo)
-      Content.archive user, repo, options[:params], options[:format]
+      params = options[:params].dup
+      params['ref'] = options[:ref] if options[:ref]
+      params['archive_format'] = options[:archive_format] if options[:archive_format]
+
+      Content.archive user, repo, params, options[:format]
     end
 
   end # Contents
