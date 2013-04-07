@@ -1,12 +1,13 @@
 Feature: gcli content
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli content`
     Then the exit status should be 0
-      And the output should contain "gcli content get"
-      And the output should contain "gcli content readme"
-      And the output should contain "gcli content archive"
+      And the output should contain "content get"
+      And the output should contain "content readme"
+      And the output should contain "content archive"
 
   Scenario: Readme
     Given the GitHub API server:
@@ -37,5 +38,5 @@ Feature: gcli content
     """
     get('/repos/wycats/thor/tarball/new_feature') { status 200 }
     """
-    When I run `gcli content archive wycats thor --params=archive_format:tarball ref:new_feature`
+    When I run `gcli content archive wycats thor --archive_format=tarball --ref=new_feature`
     Then the exit status should be 0
