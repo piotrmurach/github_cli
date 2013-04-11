@@ -10,6 +10,9 @@ module GithubCLI
       Blob.get user, repo, sha, options[:params], options[:format]
     end
 
+    option :content, :type => :string
+    option :encoding, :type => :string, :banner => "utf-8|base64",
+           :desc => "String containing encoding utf-8 or base64"
     desc 'create <user> <repo>', 'Create a new Blob'
     long_desc <<-DESC
       Inputs
@@ -18,7 +21,11 @@ module GithubCLI
         encoding - String containing encoding utf-8 or base64
     DESC
     def create(user, repo)
-      Blob.create user, repo, options[:params], options[:format]
+      params = options[:params].dup
+      params['content'] = options[:content] if options[:content]
+      params['encoding'] = options[:encoding] if options[:encoding]
+
+      Blob.create user, repo, params, options[:format]
     end
 
   end # Blobs

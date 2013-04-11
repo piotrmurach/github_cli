@@ -18,4 +18,9 @@ describe GithubCLI::Commands::Blobs do
     api_class.should_receive(:create).with(user, repo, {}, format)
     subject.invoke "blob:create", [user, repo]
   end
+
+  it "invokes blob:create --encoding" do
+    api_class.should_receive(:create).with(user, repo, {'encoding'=>'utf-8'}, format)
+    subject.invoke "blob:create", [user, repo], :encoding => 'utf-8'
+  end
 end
