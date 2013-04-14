@@ -5,35 +5,38 @@ module GithubCLI
   # The API class is the main entry point for creating GithubCLI APIs.
   class API
 
-    @@api = nil
-
     class << self
 
-      attr_reader :config
-
-      def github_api
-        @@api ||= begin
-          @@api = configure_api
+      # Access or initialize Github API client
+      #
+      # @api public
+      def github_api(options)
+        @github_api ||= begin
+          @github_api = configure(options)
         end
       end
 
-      def configure_api
-        @@api = Github.new
+      # this could become a command such as configure that gets class options
+      #
+      # @api public
+      def configure(options)
+        api    = Github.new
         config = GithubCLI.config.data
 
-        if config['user.token']
-          @@api.oauth_token = config['user.token']
-        end
+        api.oauth_token = config['user.token'] if config['user.token']
         if config['user.login'] && config['user.password']
-          @@api.basic_auth = "#{config['user.login']}:#{config['user.password']}"
+          api.basic_auth = "#{config['user.login']}:#{config['user.password']}"
         end
-        @@api.endpoint = GithubCLI.config['core.endpoint'] || @@api.endpoint
+        api.endpoint = config['core.endpoint'] if config['core.endpoint']
         if ENV['TEST_HOST']
-          @@api.endpoint = 'http://' + ENV['TEST_HOST']
+          api.endpoint = 'http://' + ENV['TEST_HOST']
         end
-        @@api
+        api
       end
 
+      # Procoess response and output to shell
+      #
+      # @api public
       def output(format=:table, &block)
         GithubCLI.on_error do
           response  = block.call
@@ -46,12 +49,6 @@ module GithubCLI
         end
       end
 
-    end
-
-    class All
-      def initialize(params)
-        puts Github::Repos.new.all params
-      end
     end
 
   end # API
