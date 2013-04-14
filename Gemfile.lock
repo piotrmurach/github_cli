@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    github_cli (0.5.7)
+    github_cli (0.5.8)
       github_api (~> 0.9)
 
 GEM
