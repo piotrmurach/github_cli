@@ -1,3 +1,14 @@
+0.5.8 (April 14, 2013)
+
+* Change forks commands to take specific options and add tests
+* Change statuses commands to take specific options and add tests
+* Add authorize command for easy token creation
+* Add whoami as convenience command for checking user
+* Change content commands to take specific options and add tests
+* Change blob create command to add specific options and tests
+* Add remaining notify commands for full Notifications support
+* Change merge command to take specific options and add tests
+
 0.5.7 (April 4, 2013)
 
 * Change apis.rb to dynamically load api files
