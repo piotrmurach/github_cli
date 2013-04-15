@@ -24,14 +24,28 @@ module GithubCLI
         config = GithubCLI.config.data
 
         api.oauth_token = config['user.token'] if config['user.token']
-        if config['user.login'] && config['user.password']
-          api.basic_auth = "#{config['user.login']}:#{config['user.password']}"
-        end
-        api.endpoint = config['core.endpoint'] if config['core.endpoint']
+
+        api.basic_auth  = set_basic_auth(config, options)
+
+        api.endpoint    = config['core.endpoint'] if config['core.endpoint']
+
         if ENV['TEST_HOST']
           api.endpoint = 'http://' + ENV['TEST_HOST']
         end
         api
+      end
+
+      # Set user basic authentication
+      #
+      # @api public
+      def set_basic_auth(config, options)
+        if options['login'] && options['password']
+           "#{options['login']}:#{options['password']}"
+        elsif config['user.login'] && config['user.password']
+          "#{config['user.login']}:#{config['user.password']}"
+        else
+          nil
+        end
       end
 
       # Procoess response and output to shell
