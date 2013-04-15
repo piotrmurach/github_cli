@@ -5,33 +5,33 @@ module GithubCLI
 
     class << self
 
-      def all(params, format)
-        output format do
-          github_api.oauth.list params
+      def all(params, options)
+        output options[:format] do
+          github_api(options).oauth.list params
         end
       end
 
-      def get(id, params, format)
-        output format do
-          github_api.oauth.get id, params
+      def get(id, params, options)
+        output options[:format] do
+          github_api(options).oauth.get id, params
         end
       end
 
-      def create(params, format)
-        output format do
-          github_api.oauth.create params
+      def create(params, options)
+        output options[:format] do
+          github_api(options).oauth.create params
         end
       end
 
-      def update(id, params, format)
-        output format do
-          github_api.oauth.update id, params
+      def update(id, params, options)
+        output options[:format] do
+          github_api(options).oauth.update id, params
         end
       end
 
-      def delete(id, params, format)
-        output format do
-          github_api.oauth.delete id, params
+      def delete(id, params, options)
+        output options[:format] do
+          github_api(options).oauth.delete id, params
         end
       end
     end
