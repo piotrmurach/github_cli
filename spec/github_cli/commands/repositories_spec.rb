@@ -37,34 +37,44 @@ describe GithubCLI::Commands::Repositories do
   end
 
   it "invokes repo:create name" do
-    api_class.should_receive(:create).with({'name' => repo}, format)
+    api_class.should_receive(:create).with({
+      'name' => repo, 'private' => nil, 'has_issues' => nil,
+      'has_wiki' => nil, 'has_downloads' => nil, 'auto_init' => nil}, format)
     subject.invoke "repo:create", [repo]
   end
 
   it "invokes repo:create org/name" do
-    api_class.should_receive(:create).with({'name' => repo, 'org' => org}, format)
+    api_class.should_receive(:create).with({
+      'name' => repo, 'org' => org, 'private' => nil, 'has_issues' => nil,
+      'has_wiki' => nil, 'has_downloads' => nil, 'auto_init' => nil}, format)
     subject.invoke "repo:create", ["#{org}/#{repo}"]
   end
 
   it "invokes repo:create name --org" do
-    api_class.should_receive(:create).with({'name' => repo, 'org' => org}, format)
+    api_class.should_receive(:create).with({
+      'name' => repo, 'org' => org, 'private' => nil, 'has_issues' => nil,
+      'has_wiki' => nil, 'has_downloads' => nil, 'auto_init' => nil}, format)
     subject.invoke "repo:create", [repo], :org => org
   end
 
   it "invokes repo:create name --wiki --issues --downloads --auto_init" do
-    api_class.should_receive(:create).with({'name' => repo, "has_wiki" => true,
+    api_class.should_receive(:create).with({
+     'name' => repo, "has_wiki" => true, 'private' => nil,
       "has_issues" => true, "has_downloads" => true, "auto_init" => true}, format)
     subject.invoke "repo:create", [repo], :wiki => true, :issues => true,
       :downloads => true, :auto => true
   end
 
   it "invokes repo:edit user repo name" do
-    api_class.should_receive(:edit).with(user, repo, {'name' => 'new'}, format)
+    api_class.should_receive(:edit).with(user, repo, {
+      'name' => 'new', 'private' => nil,
+      "has_wiki" => nil, "has_issues" => nil, "has_downloads" => nil}, format)
     subject.invoke "repo:edit", [user, repo, 'new']
   end
 
   it "invokes repo:edit user repo name --wiki --issues --downloads --auto_init" do
-    api_class.should_receive(:edit).with(user, repo, {'name' => 'new',
+    api_class.should_receive(:edit).with(user, repo, {
+      'name' => 'new', 'private' => nil,
       "has_wiki" => true, "has_issues" => true, "has_downloads" => true}, format)
     subject.invoke "repo:edit", [user, repo, 'new'], :wiki => true,
       :issues => true, :downloads => true

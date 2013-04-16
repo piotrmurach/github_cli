@@ -39,17 +39,18 @@ module GithubCLI
            :banner => '<organization>'
     option :desc, :type => :string, :banner => "description"
     option :home, :type => :string, :banner => "homepage"
-    option :private, :type => :boolean,
+    option :private, :type => :boolean, :default => false,
            :desc => "true to create a private repository, false to create a public one"
-    option :issues, :type => :boolean, :banner => "has_issues",
+    option :issues, :type => :boolean, :banner => "has_issues", :default => true,
            :desc => "true to enable issues for this repository, false to disable them"
-    option :wiki, :type => :boolean, :banner => "has_wiki",
+    option :wiki, :type => :boolean, :banner => "has_wiki", :default => true,
            :desc => "true to enable the wiki for this repository, false to disable it. Default is true"
     option :downloads, :type => :boolean, :banner => "has_downloads",
+           :default => true,
            :desc => "true to enable downloads for this repository "
-    option :team, :type => :string, :banner => "team <id>",
+    option :team, :type => :numeric, :banner => "team <id>",
            :desc => "The id of the team that will be granted access to this repository. This is only valid when creating a repo in an organization"
-    option :auto, :type => :string, :banner => "auto_init",
+    option :auto, :type => :string, :banner => "auto_init", :default => false,
            :desc => "true to create an initial commit with empty README. Default is false."
     option :gitignore, :type => :string, :banner => "gitignore_template",
            :desc => "Desired language or platform .gitignore template to apply."
@@ -73,16 +74,16 @@ module GithubCLI
     def create(args)
       params = options[:params].dup
       org, params['name'] = Arguments.new(args).parse
-      params['org'] = org if org
-      params['org'] = options[:org] if options[:org]
-      params['description'] = options[:desc] if options[:desc]
-      params['homepage'] = options[:home] if options[:home]
-      params['private'] = options[:private] if options[:private]
-      params['has_issues'] = options[:issues] if options[:issues]
-      params['has_wiki'] = options[:wiki] if options[:wiki]
-      params['has_downloads'] = options[:downloads] if options[:downloads]
-      params['team_id'] = options[:team] if options[:team]
-      params['auto_init'] = options[:auto] if options[:auto]
+      params['org']                = org if org
+      params['org']                = options[:org]       if options[:org]
+      params['description']        = options[:desc]      if options[:desc]
+      params['homepage']           = options[:home]      if options[:home]
+      params['private']            = options[:private]
+      params['has_issues']         = options[:issues]
+      params['has_wiki']           = options[:wiki]
+      params['has_downloads']      = options[:downloads]
+      params['team_id']            = options[:team]      if options[:team]
+      params['auto_init']          = options[:auto]
       params['gitignore_template'] = options[:gitignore] if options[:gitignore]
 
       Repository.create params, options[:format]
@@ -90,13 +91,14 @@ module GithubCLI
 
     option :desc, :type => :string, :banner => "description"
     option :home, :type => :string, :banner => "homepage"
-    option :private, :type => :boolean,
+    option :private, :type => :boolean, :default => false,
            :desc => "true to create a private repository, false to create a public one"
-    option :issues, :type => :boolean, :banner => "has_issues",
+    option :issues, :type => :boolean, :banner => "has_issues", :default => true,
            :desc => "true to enable issues for this repository, false to disable them"
-    option :wiki, :type => :boolean, :banner => "has_wiki",
+    option :wiki, :type => :boolean, :banner => "has_wiki", :default => true,
            :desc => "true to enable the wiki for this repository, false to disable it. Default is true"
     option :downloads, :type => :boolean, :banner => "has_downloads",
+           :default => true,
            :desc => "true to enable downloads for this repository "
     option :branch, :type => :string, :banner => "default branch",
            :desc => "Update the default branch for this repository."
@@ -118,13 +120,13 @@ module GithubCLI
     def edit(user, repo, name)
       params = options[:params].dup
       params['name'] = name
-      params['description'] = options[:desc] if options[:desc]
-      params['homepage'] = options[:home] if options[:home]
-      params['private'] = options[:private] if options[:private]
-      params['has_issues'] = options[:issues] if options[:issues]
-      params['has_wiki'] = options[:wiki] if options[:wiki]
-      params['has_downloads'] = options[:downloads] if options[:downloads]
-      params['default_branch'] = options[:branch] if options[:branch]
+      params['description']    = options[:desc]      if options[:desc]
+      params['homepage']       = options[:home]      if options[:home]
+      params['private']        = options[:private]
+      params['has_issues']     = options[:issues]
+      params['has_wiki']       = options[:wiki]
+      params['has_downloads']  = options[:downloads]
+      params['default_branch'] = options[:branch]    if options[:branch]
 
       Repository.edit user, repo, params, options[:format]
     end
