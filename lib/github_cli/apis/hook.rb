@@ -5,39 +5,39 @@ module GithubCLI
 
     class << self
 
-      def all(user, repo, params, format)
-        output format do
-          github_api.repos.hooks.list user, repo, params
+      def all(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.hooks.list user, repo, params
         end
       end
 
-      def get(user, repo, id, params, format)
-        output format do
-          github_api.repos.hooks.get user, repo, id, params
+      def get(user, repo, id, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.hooks.get user, repo, id, params
         end
       end
 
-      def create(user, repo, params, format)
-        output format do
-          github_api.repos.hooks.create user, repo, params
+      def create(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.hooks.create user, repo, params
         end
       end
 
-      def edit(user, repo, id, params, format)
-        output format do
-          github_api.repos.hooks.edit user, repo, id, params
+      def edit(user, repo, id, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.hooks.edit user, repo, id, params
         end
       end
 
-      def test(user, repo, id, params, format)
-        output format do
-          github_api.repos.hooks.test user, repo, id, params
+      def test(user, repo, id, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.hooks.test user, repo, id, params
         end
       end
 
-      def delete(user, repo, id, params, format)
-        output format do
-          github_api.repos.hooks.delete user, repo, id, params
+      def delete(user, repo, id, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.hooks.delete user, repo, id, params
         end
       end
     end
