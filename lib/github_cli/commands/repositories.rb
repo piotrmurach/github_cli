@@ -19,6 +19,7 @@ module GithubCLI
            :desc => "asc or desc, default: when using full_name: asc, otherwise desc."
     desc 'list', 'Lists all repositories for the authenticated user'
     def list
+      global_options = options.dup
       params = options[:params].dup
       params['org']   = options[:org] if options[:org]
       params['user']  = options[:user] if options[:user]
@@ -26,12 +27,16 @@ module GithubCLI
       params['type']  = options[:type] if options[:type]
       params['sort']  = options[:sort] if options[:sort]
       params['direction'] = options[:direction] if options[:direction]
-      Repository.all params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Repository.all params, global_options
     end
 
     desc 'get <user> <repo>', 'Get a repository'
     def get(user, repo)
-      Repository.get user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, %w[ params ])
+      Repository.get user, repo, params, global_options
     end
 
     option :org, :type => :string, :aliases => ["-o"],
@@ -72,6 +77,7 @@ module GithubCLI
         gitignore_template - Optional string - Desired language or platform .gitignore template to apply. Use the name of the template without the extension. For example, “Haskell” Ignored if auto_init parameter is not provided.
     DESC
     def create(args)
+      global_options = options.dup
       params = options[:params].dup
       org, params['name'] = Arguments.new(args).parse
       params['org']                = org if org
@@ -86,7 +92,9 @@ module GithubCLI
       params['auto_init']          = options[:auto]
       params['gitignore_template'] = options[:gitignore] if options[:gitignore]
 
-      Repository.create params, options[:format]
+      Util.hash_without!(global_options,
+        params.keys + %w[ params issues wiki downloads team auto gitignore ])
+      Repository.create params, global_options
     end
 
     option :desc, :type => :string, :banner => "description"
@@ -118,6 +126,7 @@ module GithubCLI
         default_branch - Optional string - update the default branch for this repository \n
     DESC
     def edit(user, repo, name)
+      global_options = options.dup
       params = options[:params].dup
       params['name'] = name
       params['description']    = options[:desc]      if options[:desc]
@@ -128,42 +137,65 @@ module GithubCLI
       params['has_downloads']  = options[:downloads]
       params['default_branch'] = options[:branch]    if options[:branch]
 
-      Repository.edit user, repo, params, options[:format]
+      Util.hash_without!(global_options,
+        params.keys + %w[ wiki issues downloads params] )
+      Repository.edit user, repo, params, global_options
     end
 
     desc 'delete <user> <repo>', 'Delete a repository'
     def delete(user, repo)
-      Repository.delete user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Repository.delete user, repo, params, global_options
     end
 
     desc 'branches <user> <repo>', 'List branches'
     def branches(user, repo)
-      Repository.branches user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Repository.branches user, repo, params, global_options
     end
 
     desc 'branch <user> <repo> <name>', 'Get branch'
     def branch(user, repo, name)
-      Repository.branch user, repo, name, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Repository.branch user, repo, name, params, global_options
     end
 
     desc 'contribs <user> <repo>', 'List contributors'
     def contribs(user, repo)
-      Repository.contributors user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Repository.contributors user, repo, params, global_options
     end
 
     desc 'langs <user> <repo>', 'Listing all languages'
     def langs(user, repo)
-      Repository.languages user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Repository.languages user, repo, params, global_options
     end
 
     desc 'tags <user> <repo>', 'Listing all tags'
     def tags(user, repo)
-      Repository.tags user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Repository.tags user, repo, params, global_options
     end
 
     desc 'teams <user> <repo>', 'Listing all teams'
     def teams(user, repo)
-      Repository.teams user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Repository.teams user, repo, params, global_options
     end
 
   end # Repositories
