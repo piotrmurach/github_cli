@@ -5,16 +5,18 @@ module GithubCLI
   # It delegates to other objects like Formatter::Table
   # to perform actual rendering.
   class Formatter
-    attr_reader :response, :format, :message
+    attr_reader :response, :format, :message, :quiet
 
     def initialize(response, options={})
       @response = response
       @message  = options[:message]
       @format   = options[:format]
+      @quiet    = options[:quiet]
     end
 
     def render_output
       render_status
+      return if quiet
       Terminal.paged_output
       determine_output_formatter
       render_message
