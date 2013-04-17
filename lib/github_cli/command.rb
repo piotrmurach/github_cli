@@ -39,13 +39,15 @@ module GithubCLI
     }
     map ALIASES
 
-    class_option :params, :type => :hash, :default => {}, :aliases => '-p',
-                 :desc => 'Request parameters e.i per_page:100'
-
     class_option :format, :type => :string, :aliases => '-f',
                  :default => 'table',
                  :banner => output_formats.keys.join('|'),
                  :desc => "Format of the output. Type table:h to display table horizontally."
+    class_option :quiet, :type => :boolean, :aliases => "-q",
+                 :desc => "Suppress response output"
+
+    class_option :params, :type => :hash, :default => {}, :aliases => '-p',
+                 :desc => 'Request parameters e.i per_page:100'
 
     class << self
 
