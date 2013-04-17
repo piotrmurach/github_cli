@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe GithubCLI::Commands::Authorizations do
-  let(:format) { 'table' }
+  let(:format) { {'format' => 'table'} }
   let(:id) { 1 }
   let(:api_class) { GithubCLI::Authorization }
 
