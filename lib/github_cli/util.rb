@@ -20,6 +20,10 @@ module GithubCLI
       return new_hash
     end
 
+    def hash_without!(hash, keys)
+      hash.reject! { |key| keys.include?(key) }
+    end
+
     def convert_values(values)
       values_copy = values.dup
       collected = []
