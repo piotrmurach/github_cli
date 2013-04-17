@@ -10,7 +10,7 @@ module GithubCLI
       # Access or initialize Github API client
       #
       # @api public
-      def github_api(options)
+      def github_api(options={})
         @github_api ||= begin
           @github_api = configure(options)
         end
@@ -19,7 +19,7 @@ module GithubCLI
       # this could become a command such as configure that gets class options
       #
       # @api public
-      def configure(options)
+      def configure(options={})
         api    = Github.new
         config = GithubCLI.config.data
 
@@ -49,13 +49,13 @@ module GithubCLI
       end
 
       # Procoess response and output to shell
-      #
+      # TODO: change to take options
       # @api public
-      def output(format=:table, &block)
+      def output(format=:table, quiet=false, &block)
         GithubCLI.on_error do
           response  = block.call
           if response.respond_to?(:body)
-            formatter = Formatter.new response, :format => format
+            formatter = Formatter.new response, :format => format, :quiet => quiet
             formatter.render_output
           else
             response
