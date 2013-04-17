@@ -7,12 +7,18 @@ module GithubCLI
 
     desc 'list <user> <repo>', 'List repository hooks'
     def list(user, repo)
-      Hook.all user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, %w[ params ])
+      Hook.all user, repo, params, global_options
     end
 
     desc 'get <user> <repo> <id>', 'Get a hook'
     def get(user, repo, id)
-      Hook.get user, repo, id, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, %w[ params ])
+      Hook.get user, repo, id, params, global_options
     end
 
     option :name, :type => :string, :required => true, :banner => "service",
@@ -33,13 +39,14 @@ module GithubCLI
       active - Optional boolean - Determines whether the hook is actually triggered on pushes.
     DESC
     def create(user, repo)
+      global_options = options.dup
       params = options[:params].dup
       params['name']   = options[:name]
       params['config'] = options[:config]
       params['events'] = options[:events] if options[:events]
       params['active'] = options[:active] if options[:active]
-
-      Hook.create user, repo, params, options[:format]
+      Util.hash_without!(global_options, %w[ params name config events active ])
+      Hook.create user, repo, params, global_options
     end
 
     option :name, :type => :string, :required => true, :banner => "service",
@@ -66,6 +73,7 @@ module GithubCLI
       active - Optional boolean - Determines whether the hook is actually triggered on pushes. \n
     DESC
     def edit(user, repo, id)
+      global_options = options.dup
       params = options[:params].dup
       params['name']          = options[:name]
       params['config']        = options[:config]
@@ -73,18 +81,24 @@ module GithubCLI
       params['add_events']    = options[:add_events]    if options[:add_events]
       params['remove_events'] = options[:remove_events] if options[:remove_events]
       params['active']        = options[:active]        if options[:active]
-
-      Hook.edit user, repo, id, params, options[:format]
+      Util.hash_without!(global_options, %w[ params name config events add_events remove_events active ])
+      Hook.edit user, repo, id, params, global_options
     end
 
     desc 'test <user> <repo> <id>', 'Test a hook'
     def test(user, repo, id)
-      Hook.test user, repo, id, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, %w[ params ])
+      Hook.test user, repo, id, params, global_options
     end
 
     desc 'delete <user> <repo> <id>', 'Delete a hook'
     def delete(user, repo, id)
-      Hook.delete user, repo, id, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, %w[ params ])
+      Hook.delete user, repo, id, params, global_options
     end
 
   end # Hooks
