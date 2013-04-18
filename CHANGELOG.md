@@ -1,3 +1,11 @@
+0.5.9 (April 17, 2013)
+
+* Change API class configure to take options and allow for basic auth,
+  stop using class api variable
+* Change API commands to take and pass options for global configuration
+* Add --quiet option for supressing output only for repo/hook/auth commands
+* Fix problem with repo create command and boolean option flags
+
 0.5.8 (April 14, 2013)
 
 * Change forks commands to take specific options and add tests
