@@ -113,6 +113,12 @@ To see your current tokens do
 $ gcli auth ls
 ```
 
+To see current tokens without configuration file pass `--login` and `--password` flags like so
+
+```shell
+$ gcli auth ls --login=... --password=...
+```
+
 Finally to add the token to your config do
 
 ```shell
