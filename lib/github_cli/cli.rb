@@ -39,6 +39,8 @@ module GithubCLI
     class_option :pager, :type => :string, :aliases => '-p',
                  :desc => "Command to be used for paging.",
                  :banner => "less|more|..."
+    class_option :quiet, :type => :boolean, :aliases => "-q",
+                 :desc => "Suppress response output"
     class_option :verbose, :type => :boolean,
                  :desc => "Enable verbose output mode."
     class_option :version, :type => :boolean, :aliases => ['-V'],
