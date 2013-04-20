@@ -72,6 +72,12 @@ module GithubCLI
 
     option :local, :type => :boolean, :default => false, :aliases => "-l",
            :desc => 'Modify local configuration file, otherwise a global configuration file is changed.'
+    option :scopes, :type => :array, :banner => "user public_repo repo...",
+      :desc => "A list of scopes that this authorization is in."
+    option :note, :type => :string,
+      :desc => "A note to remind you what the OAuth token is for."
+    option :note_url, :type => :string,
+      :desc => "A URL to remind you what the OAuth token is for."
     desc 'authorize', 'Add user authentication token'
     long_desc <<-DESC
       Create authorization token for a user named <username> Save user credentials to the .githubrc file.\n
@@ -81,12 +87,21 @@ module GithubCLI
       You may use this command to change your details.
     DESC
     def authorize
+      global_options = options.dup
       params = {}
-      params['scopes'] = options[:scopes] || %w(public_repo repo)
-      params['note']   = options[:note] || 'github_cli'
+      params['scopes']   = options[:scopes] || %w(public_repo repo)
+      params['note']     = options[:note] || 'github_cli'
       params['note_url'] = options[:note_url] || 'https://github.com/peter-murach/github_cli'
+      global_options[:params] = params
       # Need to configure client with login and password
-      res = self.invoke("auth:create", [], params)
+      login = ask("login: ")
+      password = ask("password: ")
+
+      global_options['login']    = login
+      global_options['password'] = password
+      global_options['quiet']    = options[:quiet]
+
+      res   = self.invoke("auth:create", [], global_options)
       token = res.body['token']
 
       config = GithubCLI.config
@@ -96,7 +111,7 @@ module GithubCLI
       config['user.token']    = token
 
       GithubCLI.ui.warn <<-EOF
-        Your #{GithubCLI.config.location} has been overwritten!
+        Your #{GithubCLI.config.location} configuration file has been overwritten!
       EOF
     end
 
