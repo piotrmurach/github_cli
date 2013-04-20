@@ -7,7 +7,10 @@ module GithubCLI
 
     desc 'get <user> <repo> <sha>', 'Get a Commit'
     def get(user, repo, sha)
-      Commit.get user, repo, sha, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Commit.get user, repo, sha, params, global_options
     end
 
     desc 'create <user> <repo>', 'Create a Commit'
@@ -40,13 +43,15 @@ module GithubCLI
         committer.date - Timestamp of when this commit was committed
     DESC
     def create(user, repo)
+      global_options = options.dup
       params = options[:params].dup
-      params['message']   = options[:message] if options[:message]
-      params['tree']      = options[:tree] if options[:tree]
-      params['parents']   = options[:parents] if options[:parents]
-      params['author']    = options[:author] if options[:author]
+      params['message']   = options[:message]   if options[:message]
+      params['tree']      = options[:tree]      if options[:tree]
+      params['parents']   = options[:parents]   if options[:parents]
+      params['author']    = options[:author]    if options[:author]
       params['committer'] = options[:committer] if options[:committer]
-      Commit.create user, repo, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Commit.create user, repo, params, global_options
     end
 
   end # Commit

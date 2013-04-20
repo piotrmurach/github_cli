@@ -5,15 +5,15 @@ module GithubCLI
 
     class << self
 
-      def get(user, repo, sha, params, format)
-        output format do
-          github_api.git_data.commits.get user, repo, sha, params
+      def get(user, repo, sha, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).git_data.commits.get user, repo, sha, params
         end
       end
 
-      def create(user, repo, params, format)
-        output format do
-          github_api.git_data.commits.create user, repo, params
+      def create(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).git_data.commits.create user, repo, params
         end
       end
     end
