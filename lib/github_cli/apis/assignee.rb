@@ -5,15 +5,15 @@ module GithubCLI
 
     class << self
 
-      def all(user, repo, params, format)
-        output format do
-          github_api.issues.assignees.list user, repo, params
+      def all(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).issues.assignees.list user, repo, params
         end
       end
 
-      def check(user, repo, assignee, params, format)
-        output format do
-          github_api.issues.assignees.check user, repo, assignee, params
+      def check(user, repo, assignee, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).issues.assignees.check user, repo, assignee, params
         end
       end
     end
