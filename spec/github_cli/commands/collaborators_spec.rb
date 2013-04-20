@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe GithubCLI::Commands::Collaborators do
-  let(:format) { 'table' }
+  let(:format) { {'format' => 'table'} }
   let(:owner)  { 'peter-murach' }
   let(:repo)   { 'github_cli' }
   let(:user)   { 'github' }
