@@ -8,7 +8,7 @@ module GithubCLI
     desc 'get <user> <repo> <sha>', 'Get a Blob'
     def get(user, repo, sha)
       global_options = options.dup
-      params = global_options[:params].dup
+      params = options[:params].dup
       Util.hash_without!(global_options, ['params'])
 
       Blob.get user, repo, sha, params, global_options
@@ -26,9 +26,8 @@ module GithubCLI
     DESC
     def create(user, repo)
       global_options = options.dup
-      params = global_options[:params].dup
-      params = global_options[:params].dup
-      params['content'] = options[:content] if options[:content]
+      params = options[:params].dup
+      params['content']  = options[:content]  if options[:content]
       params['encoding'] = options[:encoding] if options[:encoding]
       Util.hash_without!(global_options, params.keys + ['params'])
 
