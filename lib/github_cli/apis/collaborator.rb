@@ -5,27 +5,27 @@ module GithubCLI
 
     class << self
 
-      def all(user, repo, params, format)
-        output format do
-          github_api.repos.collaborators.list user, repo, params
+      def all(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.collaborators.list user, repo, params
         end
       end
 
-      def add(user, repo, collab, params, format)
-        output format do
-          github_api.repos.collaborators.add user, repo, collab, params
+      def add(user, repo, collab, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.collaborators.add user, repo, collab, params
         end
       end
 
-      def collaborator?(user, repo, collab, params, format)
-        output format do
-          github_api.repos.collaborators.collaborator? user, repo, collab, params
+      def collaborator?(user, repo, collab, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.collaborators.collaborator? user, repo, collab, params
         end
       end
 
-      def remove(user, repo, collab, params, format)
-        output format do
-          github_api.repos.collaborators.remove user, repo, collab, params
+      def remove(user, repo, collab, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.collaborators.remove user, repo, collab, params
         end
       end
     end
