@@ -58,8 +58,9 @@ module GithubCLI
             formatter = Formatter.new response, :format => format, :quiet => quiet
             formatter.render_output
           else
-            response
+            Terminal.line response
           end
+          response
         end
       end
 
