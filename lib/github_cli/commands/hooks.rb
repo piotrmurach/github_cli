@@ -81,7 +81,7 @@ module GithubCLI
       params['add_events']    = options[:add_events]    if options[:add_events]
       params['remove_events'] = options[:remove_events] if options[:remove_events]
       params['active']        = options[:active]        if options[:active]
-      Util.hash_without!(global_options, %w[ params name config events add_events remove_events active ])
+      Util.hash_without!(global_options, params.keys + ['params'])
       Hook.edit user, repo, id, params, global_options
     end
 
