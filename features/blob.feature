@@ -21,5 +21,5 @@ Feature: gcli blob
     """
     post('/repos/wycats/thor/git/blobs') { status 200 }
     """
-    When I run `gcli blob create wycats thor --params=content:'Content' encoding:'utf-8'`
+    When I run `gcli blob create wycats thor --content=Content --encoding='utf-8'`
     Then the exit status should be 0
