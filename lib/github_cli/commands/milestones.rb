@@ -20,16 +20,21 @@ module GithubCLI
         direction - asc, desc, default: desc\n
     DESC
     def list(user, repo)
+      global_options = options.dup
       params = options[:params].dup
-      params['state'] = options[:state] || 'open'
-      params['sort']  = options[:sort] || 'due_date'
+      params['state']     = options[:state] || 'open'
+      params['sort']      = options[:sort] || 'due_date'
       params['direction'] = options[:direction] || 'desc'
-      Milestone.all user, repo, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Milestone.all user, repo, params, global_options
     end
 
     desc 'get <user> <repo> <number>', 'Get a single milestone'
     def get(user, repo, number)
-      Milestone.get user, repo, number, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Milestone.get user, repo, number, params, global_options
     end
 
     desc 'create <user> <repo>', 'Create a milestone'
@@ -51,12 +56,14 @@ module GithubCLI
       ghc milestone create wycats thor --title=new
     DESC
     def create(user, repo)
+      global_options = options.dup
       params = options[:params].dup
-      params['title'] = options[:title]
-      params['state'] = options[:state] if options[:state]
-      params['description'] = options[:desc] if options[:desc]
-      params['due_on'] = options[:due_on] if options[:due_on]
-      Milestone.create user, repo, params, options[:format]
+      params['title']       = options[:title]
+      params['state']       = options[:state]  if options[:state]
+      params['description'] = options[:desc]   if options[:desc]
+      params['due_on']      = options[:due_on] if options[:due_on]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Milestone.create user, repo, params, global_options
     end
 
     desc 'update <user> <repo> <number>', 'Update a milestone'
@@ -78,17 +85,22 @@ module GithubCLI
       ghc milestone update wycats thor 1 --title=new
     DESC
     def update(user, repo, number)
+      global_options = options.dup
       params = options[:params].dup
-      params['title'] = options[:title] if options[:title]
-      params['state'] = options[:state] if options[:state]
-      params['description'] = options[:desc] if options[:desc]
-      params['due_on'] = options[:due_on] if options[:due_on]
-      Milestone.update user, repo, number, params, options[:format]
+      params['title']       = options[:title]  if options[:title]
+      params['state']       = options[:state]  if options[:state]
+      params['description'] = options[:desc]   if options[:desc]
+      params['due_on']      = options[:due_on] if options[:due_on]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Milestone.update user, repo, number, params, global_options
     end
 
     desc 'delete <user> <repo> <number>', 'Delete a milestone'
     def delete(user, repo, number)
-      Milestone.delete user, repo, number, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Milestone.delete user, repo, number, params, global_options
     end
 
   end # Milestones
