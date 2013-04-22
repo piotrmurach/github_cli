@@ -93,7 +93,9 @@ $ gcli help config
 
 ### Authorization
 
-To create oauth tokens you need to setup your basic authentication like so
+To create oauth tokens you need to setup your basic authentication.
+
+You can either set it up manually like so
 
 ```shell
 $ gcli init
@@ -105,6 +107,12 @@ Then to create your token do
 
 ```shell
 $ gcli auth create --scopes=repo --note=gihtub_cli --note-url=http://github.com/peter-murach/github_cli
+```
+
+Alternatively `authorize` command has been provided that will guide you through authentication process by asking questions and then save the crednetials to `.githubrc` file. Example
+
+```shell
+$ gcli authorize
 ```
 
 To see your current tokens do
@@ -186,6 +194,12 @@ To get `csv` formatting for easy command piping do
 
 ```shell
 gcli repo ls -u wycats --format=csv
+```
+
+To suppress output pass `--quiet` option like so
+
+```shell
+gcli repo create ... --quiet=true
 ```
 
 ### Output Paging
