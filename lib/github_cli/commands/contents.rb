@@ -16,10 +16,11 @@ module GithubCLI
       ref - Optional string - The String name of the Commit/Branch/Tag. Defaults to master.
     DESC
     def get(user, repo, path)
+      global_options = options.dup
       params = options[:params].dup
       params['ref'] = options[:ref] if options[:ref]
-
-      Content.get user, repo, path, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Content.get user, repo, path, params, global_options
     end
 
     option :ref, :type => :string,
@@ -31,10 +32,11 @@ module GithubCLI
       ref - Optional string - The String name of the Commit/Branch/Tag. Defaults to master.
     DESC
     def readme(user, repo)
+      global_options = options.dup
       params = options[:params].dup
       params['ref'] = options[:ref] if options[:ref]
-
-      Content.readme user, repo, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Content.readme user, repo, params, global_options
     end
 
     option :ref, :type => :string,
@@ -56,11 +58,12 @@ module GithubCLI
       ref - Optional string - valid Git reference, defaults to master\n
     DESC
     def archive(user, repo)
+      global_options = options.dup
       params = options[:params].dup
       params['ref'] = options[:ref] if options[:ref]
       params['archive_format'] = options[:archive_format] if options[:archive_format]
-
-      Content.archive user, repo, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Content.archive user, repo, params, global_options
     end
 
   end # Contents
