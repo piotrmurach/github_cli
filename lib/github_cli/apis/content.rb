@@ -5,21 +5,21 @@ module GithubCLI
 
     class << self
 
-      def get(user, repo, path, params, format)
-        output format do
-          github_api.repos.contents.get user, repo, path, params
+      def get(user, repo, path, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.contents.get user, repo, path, params
         end
       end
 
-      def readme(user, repo, params, format)
-        output format do
-          github_api.repos.contents.readme user, repo, params
+      def readme(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.contents.readme user, repo, params
         end
       end
 
-      def archive(user, repo, params, format)
-        output format do
-          github_api.repos.contents.archive user, repo, params
+      def archive(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.contents.archive user, repo, params
         end
       end
     end
