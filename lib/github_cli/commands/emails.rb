@@ -7,7 +7,10 @@ module GithubCLI
 
     desc 'list', 'Lists email addresses for the authenticated user'
     def list
-      Email.all options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Email.all params, global_options
     end
 
     desc 'add <email>[<email>...]', 'Add email address(es) for the authenticated user'
@@ -15,7 +18,10 @@ module GithubCLI
       You can include a single email address or an array of addresses
     DESC
     def add(*emails)
-      Email.add emails, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Email.add emails, params, global_options
     end
 
     desc 'delete <email>[<email>...]', 'Delete email address(es) for the authenticated user'
@@ -23,7 +29,10 @@ module GithubCLI
       You can include a single email address or an array of addresses
     DESC
     def delete(*emails)
-      Email.delete emails, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Email.delete emails, params, global_options
     end
 
   end # Emails
