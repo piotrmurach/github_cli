@@ -9,7 +9,7 @@ module GithubCLI
     def get(user, repo, sha)
       global_options = options.dup
       params = options[:params].dup
-      Util.hash_without!(global_options, ['params'])
+      Util.hash_without!(global_options, params.keys + ['params'])
 
       Blob.get user, repo, sha, params, global_options
     end
