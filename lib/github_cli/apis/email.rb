@@ -5,21 +5,21 @@ module GithubCLI
 
     class << self
 
-      def all(params, format)
-        output format do
-          github_api.users.emails.list params
+      def all(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).users.emails.list params
         end
       end
 
-      def add(emails, params, format)
-        output format do
-          github_api.users.emails.add emails, params
+      def add(emails, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).users.emails.add emails, params
         end
       end
 
-      def delete(emails, params, format)
-        output format do
-          github_api.users.emails.delete emails, params
+      def delete(emails, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).users.emails.delete emails, params
         end
       end
     end
