@@ -63,6 +63,7 @@ module GithubCLI
           'core.pager'    => 'less',
           'core.no-pager' => false,
           'core.no-color' => false,
+          'core.quiet'    => false,
           'core.format'   => 'table',
           'core.auto_pagination' => false,
           'core.aliases'  => nil,
