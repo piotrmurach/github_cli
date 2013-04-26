@@ -7,27 +7,42 @@ module GithubCLI
 
     desc 'public', 'Lists all public events'
     def public
-      Event.public options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Event.public params, global_options
     end
 
     desc 'repo <user> <repo>', 'Lists all repository events for a given user'
     def repo(user, repo)
-      Event.repository user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Event.repository user, repo, params, global_options
     end
 
     desc 'issue <user> <repo>', 'Lists all issue events for a given repository'
     def issue(user, repo)
-      Event.issue user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Event.issue user, repo, params, global_options
     end
 
     desc 'network <user> <repo>', 'Lists all public events for a network of repositories'
     def network(user, repo)
-      Event.network user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Event.network user, repo, params, global_options
     end
 
     desc 'org <org>', 'Lists all public events for an organization'
     def org(org)
-      Event.organization org, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Event.organization org, params, global_options
     end
 
     desc 'received <user>', 'Lists all events that a user has received'
@@ -39,9 +54,11 @@ module GithubCLI
       Otherwise, you’ll only see public events.
     DESC
     def received(user)
+      global_options = options.dup
       params = options[:params].dup
       params['public'] = options[:public] if options[:public]
-      Event.received user, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Event.received user, params, global_options
     end
 
     desc 'performed <user>', 'Lists all events that a user has performed'
@@ -52,9 +69,11 @@ module GithubCLI
       events. Otherwise, you’ll only see public events.
     DESC
     def performed(user)
+      global_options = options.dup
       params = options[:params].dup
       params['public'] = true if options[:public]
-      Event.performed user, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Event.performed user, params, global_options
     end
 
     desc 'user_org <user> <org>', "Lists all events for a user's organization"
@@ -63,7 +82,10 @@ module GithubCLI
       as the user to view this.
     DESC
     def user_org(user, org)
-      Event.user_org user, org, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Event.user_org user, org, params, global_options
     end
 
   end # Events
