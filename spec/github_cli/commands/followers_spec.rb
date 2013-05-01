@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe GithubCLI::Commands::Followers do
-  let(:format) { 'table' }
+  let(:format) { { 'format' => 'table' } }
   let(:user)   { 'peter-murach' }
   let(:api_class) { GithubCLI::Follower }
 

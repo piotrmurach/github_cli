@@ -10,7 +10,10 @@ module GithubCLI
                   :desc => 'List a <user> followers',
                   :banner => '<user>'
     def list
-      Follower.all options[:user], options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params', 'user'])
+      Follower.all options[:user], params, global_options
     end
 
     desc 'following', 'List who a user/the authenticated user is following'
@@ -18,22 +21,34 @@ module GithubCLI
                   :desc => 'List who a <user> is following',
                   :banner => '<user>'
     def following
-      Follower.following options[:user], options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params', 'user'])
+      Follower.following options[:user], params, global_options
     end
 
     desc 'follower <user>', 'Check if you are following a user'
     def follower(user)
-      Follower.follower user, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Follower.follower user, params, global_options
     end
 
     desc 'follow <user>', 'Follow a user'
     def follow(user)
-      Follower.follow user, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Follower.follow user, params, global_options
     end
 
     desc 'unfollow <user>', 'Unfollow a user'
     def unfollow(user)
-      Follower.unfollow user, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Follower.unfollow user, params, global_options
     end
 
   end # Followers
