@@ -5,33 +5,34 @@ module GithubCLI
 
     class << self
 
-      def all(user, params, format)
-        output format do
-          github_api.users.followers.list user, params
+      def all(user, params, options)
+        args = user ? [user, params] : [params]
+        output options[:format], options[:quiet] do
+          github_api(options).users.followers.list *args
         end
       end
 
-      def following(user, params, format)
-        output format do
-          github_api.users.followers.following user, params
+      def following(user, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).users.followers.following user, params
         end
       end
 
-      def follower(user, params, format)
-        output format do
-          github_api.users.followers.following? user, params
+      def follower(user, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).users.followers.following? user, params
         end
       end
 
-      def follow(user, params, format)
-        output format do
-          github_api.users.followers.follow user, params
+      def follow(user, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).users.followers.follow user, params
         end
       end
 
-      def unfollow(user, params, format)
-        output format do
-          github_api.users.followers.unfollow user, params
+      def unfollow(user, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).users.followers.unfollow user, params
         end
       end
     end
