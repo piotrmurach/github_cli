@@ -17,20 +17,22 @@ module GithubCLI
       sort - newest, oldest, watchers, default: newest
     DESC
     def list(user, repo)
+      global_options = options.dup
       params = options[:params].dup
       params['sort'] = options[:sort] if options[:sort]
-
-      Fork.all user, repo, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Fork.all user, repo, params, global_options
     end
 
     option :org, :type => :string,
            :desc => 'Organization login. The repository will be forked into this organization.'
     desc 'create <user> <repo>', 'Create a new fork'
     def create(user, repo)
+      global_options = options.dup
       params = options[:params].dup
       params['organization'] = options[:org] if options[:org]
-
-      Fork.create user, repo, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params', 'org'])
+      Fork.create user, repo, params, global_options
     end
 
   end # Forks
