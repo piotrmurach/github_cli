@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe GithubCLI::Commands::Gists do
-  let(:format) { 'table' }
+  let(:format) { {'format' => 'table'} }
   let(:user)   { 'peter-murach' }
   let(:id)    { 1 }
   let(:api_class) { GithubCLI::Gist }

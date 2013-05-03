@@ -13,18 +13,24 @@ module GithubCLI
     option :since, :type => :string, :banner => "timestamp",
            :desc => "a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ "
     def list
+      global_options = options.dup
+      params = options[:params].dup
       if options[:starred]
-        Gist.starred options[:params], options[:format]
+        Util.hash_without!(global_options, params.keys + ['params', 'starred'])
+        Gist.starred params, global_options
       else
-        params = options[:params].dup
         params['user'] = options[:user] if options[:user]
-        Gist.all params, options[:format]
+        Util.hash_without!(global_options, params.keys + ['params', 'user'])
+        Gist.all params, global_options
       end
     end
 
     desc 'get <id>', 'Get a single gist'
     def get(id)
-      Gist.get id, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Gist.get id, params, global_options
     end
 
     option :public, :type => :boolean, :default => false
@@ -43,11 +49,13 @@ module GithubCLI
           content - Required string - File contents.
     DESC
     def create
+      global_options = options.dup
       params = options[:params].dup
       params['description'] = options[:desc] if options[:desc]
       params['public'] = options[:public] || false
-      params['files'] = options[:files] if options[:files]
-      Gist.create params, options[:format]
+      params['files']  = options[:files] if options[:files]
+      Util.hash_without!(global_options, params.keys + ['params', 'desc'])
+      Gist.create params, global_options
     end
 
     option :desc, :type => :string
@@ -65,35 +73,52 @@ module GithubCLI
           filename - Optional string - New name for this file.\n
     DESC
     def edit(id)
+      global_options = options.dup
       params = options[:params].dup
       params['description'] = options[:desc] if options[:desc]
       params['files'] = options[:files] if options[:files]
-      Gist.edit id, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params', 'desc'])
+      Gist.edit id, params, global_options
     end
 
     desc 'star <id>', 'Star a gist'
     def star(id)
-      Gist.star id, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params', 'desc'])
+      Gist.star id, params, global_options
     end
 
     desc 'unstar <id>', 'Unstar a gist'
     def unstar(id)
-      Gist.unstar id, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params', 'desc'])
+      Gist.unstar id, params, global_options
     end
 
     desc 'starred <id>', 'Check if a gist is starred'
     def starred(id)
-      Gist.starred? id, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params', 'desc'])
+      Gist.starred? id, params, global_options
     end
 
     desc 'fork <id>', 'Fork a gist'
     def fork(id)
-      Gist.fork id, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params', 'desc'])
+      Gist.fork id, params, global_options
     end
 
     desc 'delete <id>', 'Delete a gist'
     def delete(id)
-      Gist.delete id, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params', 'desc'])
+      Gist.delete id, params, global_options
     end
 
   end # Gists
