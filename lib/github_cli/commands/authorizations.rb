@@ -11,8 +11,8 @@ module GithubCLI
     DESC
     def list
       global_options = options.dup
-      params = global_options[:params].dup
-      Util.hash_without!(global_options, %w[ params ])
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
       Authorization.all params, global_options
     end
 
@@ -22,8 +22,8 @@ module GithubCLI
     DESC
     def get(id)
       global_options = options.dup
-      params = global_options[:params].dup
-      Util.hash_without!(global_options, %w[ params ])
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
       Authorization.get id, params, global_options
     end
 
@@ -45,12 +45,11 @@ module GithubCLI
     DESC
     def create
       global_options     = options.dup
-      params             = global_options[:params].dup
+      params             = options[:params].dup
       params['scopes']   = options[:scopes]   if options[:scopes]
       params['note']     = options[:note]     if options[:note]
       params['note_url'] = options[:note_url] if options[:note_url]
-
-      Util.hash_without!(global_options, %w[ params scopes note note_url])
+      Util.hash_without!(global_options, params.keys + ['params'])
 
       Authorization.create params, global_options
     end
@@ -77,15 +76,13 @@ module GithubCLI
     DESC
     def update(id)
       global_options = options.dup
-      params = global_options[:params].dup
+      params                  = options[:params].dup
       params['scopes']        = options[:scopes]        if options[:scopes]
       params['add_scopes']    = options[:add_scopes]    if options[:add_scopes]
       params['remove_scopes'] = options[:remove_scopes] if options[:remove_scopes]
       params['note']          = options[:note]          if options[:note]
       params['note_url']      = options[:note_url]      if options[:note_url]
-
-      Util.hash_without!(global_options,
-        %w[ params scopes add_scopes remove_scopes note note_url])
+      Util.hash_without!(global_options, params.keys + ['params'])
 
       Authorization.update id, params, global_options
     end
@@ -93,8 +90,8 @@ module GithubCLI
     desc 'delete <id>', 'Delete an authorization'
     def delete(id)
       global_options = options.dup
-      params = global_options[:params].dup
-      Util.hash_without!(global_options, %w[ params ])
+      params         = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
       Authorization.delete id, params, global_options
     end
 
