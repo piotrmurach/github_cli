@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe GithubCLI::Commands::Keys do
-  let(:format) { 'table' }
+  let(:format) { {'format' => 'table'} }
   let(:id)     { 1 }
   let(:user)   { 'peter-murach' }
   let(:repo)   { 'github' }
