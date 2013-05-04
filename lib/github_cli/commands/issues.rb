@@ -56,6 +56,7 @@ module GithubCLI
         since - Optional string of a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ \n
     DESC
     def list
+      global_options = options.dup
       params = options[:params].dup
       params['org']       = options[:org]       if options[:org]
       params['user']      = options[:user]      if options[:user]
@@ -73,12 +74,18 @@ module GithubCLI
 
       arg = []
       arg = :user if !options[:all] && !(options[:user] || options[:org])
-      Issue.all arg, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params', 'all'])
+
+      Issue.all arg, params, global_options
     end
 
     desc 'get <user> <repo> <number>', 'Get a single issue'
     def get(user, repo, number)
-      Issue.get user, repo, number, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+
+      Issue.get user, repo, number, params, global_options
     end
 
     option :title, :type => :string, :required => true
@@ -104,14 +111,16 @@ module GithubCLI
       ghc issue create wycats thor --title='Found a bug'
     DESC
     def create(user, repo)
+      global_options = options.dup
       params = options[:params].dup
       params['title']     = options[:title]
       params['body']      = options[:body]      if options[:body]
       params['assignee']  = options[:assignee]  if options[:assignee]
       params['milestone'] = options[:milestone] if options[:milestone]
       params['labels']    = options[:labels]    if options[:labels]
+      Util.hash_without!(global_options, params.keys + ['params'])
 
-      Issue.create user, repo, params, options[:format]
+      Issue.create user, repo, params, global_options
     end
 
     option :title, :type => :string, :required => true
@@ -140,6 +149,7 @@ module GithubCLI
       ghc issue edit wycats thor 1 --title='Found a bug'
     DESC
     def edit(user, repo, number)
+      global_options = options.dup
       params = options[:params].dup
       params['title']     = options[:title]
       params['body']      = options[:body]      if options[:body]
@@ -147,8 +157,9 @@ module GithubCLI
       params['milestone'] = options[:milestone] if options[:milestone]
       params['labels']    = options[:labels]    if options[:labels]
       params['state']     = options[:state]     if options[:state]
+      Util.hash_without!(global_options, params.keys + ['params'])
 
-      Issue.edit user, repo, number, params, options[:format]
+      Issue.edit user, repo, number, params, global_options
     end
 
   end # Issues
