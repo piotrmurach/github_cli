@@ -6,7 +6,7 @@ module GithubCLI
     class << self
 
       def all(user, repo, params, options)
-        output options(:format), options[:quiet] do
+        output options[:format], options[:quiet] do
           github_api(options).repos.keys.list user, repo, params
         end
       end
