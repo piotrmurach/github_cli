@@ -5,21 +5,21 @@ module GithubCLI
 
     class << self
 
-      def list(params, format)
-        output format do
-          github_api.orgs.list params
+      def list(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).orgs.list params
         end
       end
 
-      def get(org, params, format)
-        output format do
-          github_api.orgs.get org, params
+      def get(org, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).orgs.get org, params
         end
       end
 
-      def edit(org, params, format)
-        output format do
-          github_api.orgs.edit org, params
+      def edit(org, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).orgs.edit org, params
         end
       end
     end
