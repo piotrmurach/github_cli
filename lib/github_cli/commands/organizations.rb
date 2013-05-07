@@ -10,15 +10,26 @@ module GithubCLI
                   :desc => 'List all public organizations for a user',
                   :banner => '<user>'
     def list
-      options[:params]['user'] = options[:user] if options[:user]
-      Organization.list options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      params['user'] = options[:user] if options[:user]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Organization.list params, global_options
     end
 
     desc 'get <org>', 'Get properties for a single organization'
     def get(org)
-      Organization.get org, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Organization.get org, params, global_options
     end
 
+    option :billing_email, :type => :string
+    option :company, :type => :string
+    option :email, :type => :string
+    option :location, :type => :string
+    option :name, :type => :string
     desc 'edit <org>', 'Edit organization'
     long_desc <<-DESC
       Parameters
@@ -31,10 +42,18 @@ module GithubCLI
 
       Example
 
-      ghc org edit rails --params=name:github company:GitHub email:support@github.com
+      ghc org edit rails --name=github --company=GitHub --email=support@github.com
     DESC
     def edit(org)
-      Organization.edit org, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      params['billing_email'] = options[:billing_email] if options[:billing_email]
+      params['company']  = options[:company]  if options[:company]
+      params['email']    = options[:email]    if options[:email]
+      params['location'] = options[:location] if options[:location]
+      params['name']     = options[:name]     if options[:name]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Organization.edit org, params, global_options
     end
 
   end # Organizations
