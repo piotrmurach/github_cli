@@ -1,12 +1,13 @@
 Feature: gcli org
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli org`
     Then the exit status should be 0
-      And the output should contain "gcli org edit"
-      And the output should contain "gcli org list"
-      And the output should contain "gcli org get"
+      And the output should contain "org edit"
+      And the output should contain "org list"
+      And the output should contain "org get"
 
   Scenario: List public organizations for a user
     Given the GitHub API server:
@@ -37,5 +38,5 @@ Feature: gcli org
     """
     patch('/orgs/rails') { status 200 }
     """
-    When I run `gcli org edit rails --params=name:github company:GitHub email:support@github.com`
+    When I run `gcli org edit rails --name=github --company=GitHub --email=support@github.com`
     Then the exit status should be 0
