@@ -42,7 +42,7 @@ module GithubCLI
 
       Example
 
-      ghc org edit rails --name=github --company=GitHub --email=support@github.com
+      gcli org edit rails --name=github --company=GitHub --email=support@github.com
     DESC
     def edit(org)
       global_options = options.dup
