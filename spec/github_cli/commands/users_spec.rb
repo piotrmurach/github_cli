@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe GithubCLI::Commands::Users do
-  let(:format) { 'table' }
+  let(:format) { {'format' => 'table'} }
   let(:user)   { 'peter-murach' }
   let(:name)   { 'github_cli' }
   let(:api_class) { GithubCLI::User }

@@ -5,21 +5,21 @@ module GithubCLI
 
     class << self
 
-      def all(params, format)
-        output format do
-          github_api.users.all params
+      def all(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).users.all params
         end
       end
 
-      def get(params, format)
-        output format do
-          github_api.users.get params
+      def get(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).users.get params
         end
       end
 
-      def update(params, format)
-        output format do
-          github_api.users.update params
+      def update(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).users.update params
         end
       end
     end

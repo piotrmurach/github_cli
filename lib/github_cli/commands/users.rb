@@ -9,9 +9,11 @@ module GithubCLI
     option :since, :type => :string, :banner => "<user>",
            :desc => "The integer ID of the last User that you’ve seen."
     def list
+      global_options = options.dup
       params = options[:params].dup
       params['since'] = options[:since] if options[:since]
-      User.all params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      User.all params, global_options
     end
 
     desc 'get', 'Get the authenticated user'
@@ -19,9 +21,11 @@ module GithubCLI
            :desc => 'Get a single unauthenticated <user>',
            :banner => '<user>'
     def get
+      global_options = options.dup
       params = options[:params].dup
       params['user'] = options[:user] if options[:user]
-      User.get params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      User.get params, global_options
     end
 
     desc 'update', 'Update the authenticated user'
@@ -33,6 +37,7 @@ module GithubCLI
     option :hireable, :type => :string
     option :bio, :type => :string
     def update
+      global_options = options.dup
       params = options[:params].dup
       params['name']     = options[:name]     if options[:name]
       params['email']    = options[:email]    if options[:email]
@@ -41,7 +46,8 @@ module GithubCLI
       params['location'] = options[:location] if options[:location]
       params['hireable'] = options[:hireable] if options[:hireable]
       params['bio']      = options[:bio]      if options[:bio]
-      User.update params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      User.update params, global_options
     end
 
   end # Users
