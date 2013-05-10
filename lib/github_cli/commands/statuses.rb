@@ -7,7 +7,10 @@ module GithubCLI
 
     desc 'list <user> <repo> <sha>', 'Lists statuses for a <sha>'
     def list(user, repo, sha)
-      Status.all user, repo, sha, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Status.all user, repo, sha, params, global_options
     end
 
     option :state, :type => :string, :required => true,
@@ -25,12 +28,13 @@ module GithubCLI
       description - Optional string - Short description of the status\n
     DESC
     def create(user, repo, sha)
+      global_options = options.dup
       params = options[:params].dup
       params['state']       = options[:state]  if options[:state]
       params['target_url']  = options[:target] if options[:target]
       params['description'] = options[:desc]   if options[:desc]
-
-      Status.create user, repo, sha, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params', 'target'])
+      Status.create user, repo, sha, params, global_options
     end
 
   end # Statuses
