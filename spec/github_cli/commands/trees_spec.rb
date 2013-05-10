@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe GithubCLI::Commands::Trees do
-  let(:format) { 'table' }
+  let(:format) { {'format' => 'table'} }
   let(:user)   { 'peter-murach' }
   let(:repo)   { 'github_cli' }
   let(:sha)    { '3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15' }

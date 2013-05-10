@@ -9,9 +9,11 @@ module GithubCLI
     method_option :recursive, :type => :boolean, :aliases => ["-r"],
                   :desc => 'get a tree recursively'
     def get(user, repo, sha)
+      global_options = options.dup
       params = options[:params].dup
       params['recursive'] = options[:recursive] if options[:recursive]
-      Tree.get user, repo, sha, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Tree.get user, repo, sha, params, global_options
     end
 
     desc 'create <user> <repo>', 'Create a new Tree'
@@ -36,10 +38,12 @@ module GithubCLI
       tree.content - String of content you want this file to have - GitHub will write this blob out and use the SHA for this entry. Use either this or tree.sha
     DESC
     def create(user, repo)
+      global_options = options.dup
       params = options[:params].dup
       params['base_tree'] = options[:base_tree] if options[:base_tree]
       params['tree']      = options[:tree] if options[:tree]
-      Tree.create user, repo, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Tree.create user, repo, params, global_options
     end
 
   end # Blobs
