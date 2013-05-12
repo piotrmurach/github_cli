@@ -20,12 +20,13 @@ module GithubCLI
       commit_message - Optional String - Commit message to use for the merge commit. If omitted, a default message will be used.\n
     DESC
     def perform(user, repo)
+      global_options = options.dup
       params = options[:params].dup
       params['base'] = options[:base] if options[:base]
       params['head'] = options[:head] if options[:head]
       params['commit_message'] = options[:message] if options[:message]
-
-      Merging.merge user, repo, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params', 'commit_message'])
+      Merging.merge user, repo, params, global_options
     end
 
   end # Merging

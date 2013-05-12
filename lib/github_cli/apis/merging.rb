@@ -5,9 +5,9 @@ module GithubCLI
 
     class << self
 
-      def merge(user, repo, params, format)
-        output format do
-          github_api.repos.merging.merge user, repo, params
+      def merge(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).repos.merging.merge user, repo, params
         end
       end
 
