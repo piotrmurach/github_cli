@@ -1,10 +1,11 @@
 Feature: gcli merge
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli merge`
     Then the exit status should be 0
-      And the output should contain "gcli merge perform"
+      And the output should contain "merge perform"
 
   Scenario: Merge success
     Given the GitHub API server:
@@ -15,7 +16,7 @@ Feature: gcli merge
       status 201
     }
     """
-    When I successfully run `gcli merge perform wycats thor --params=base:master head:cool_feature`
+    When I successfully run `gcli merge perform wycats thor --base=master --head=cool_feature`
     Then the stdout should contain "octokit"
       And the stdout should contain "201"
 
@@ -26,7 +27,7 @@ Feature: gcli merge
       status 204
     }
     """
-    When I successfully run `gcli merge perform wycats thor --params=base:master head:cool_feature`
+    When I successfully run `gcli merge perform wycats thor --base=master --head=cool_feature`
     Then the stdout should contain "204"
 
   Scenario: Merge conflict
@@ -37,7 +38,7 @@ Feature: gcli merge
       status 409
     }
     """
-    When I run `gcli merge perform wycats thor --params=base:master head:cool_feature`
+    When I run `gcli merge perform wycats thor --base=master --head=cool_feature`
     Then the exit status should be 1
     Then the stdout should contain "Merge conflict"
       And the stdout should contain "409"
