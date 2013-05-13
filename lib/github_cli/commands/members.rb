@@ -19,22 +19,32 @@ module GithubCLI
     method_option :public, :type => :boolean, :default => false,
                   :desc => 'List public members'
     def list(org)
+      global_options = options.dup
+      params = options[:params].dup
+      params_remove = params.keys + ['params']
+
       if options[:public]
-        Member.all_public org, options[:params], options[:format]
-      else
-        Member.all org, options[:params], options[:format]
+        params['public'] = true
+        params_remove << 'public'
       end
+      Util.hash_without!(global_options, params_remove)
+      Member.all org, params, global_options
     end
 
     desc 'member [--public] <org> <user>', 'Checks if user is a member of an organization'
     method_option :public, :type => :boolean, :default => false,
                   :desc => 'Get if a user is a public member of an organization'
     def member(org, user)
+      global_options = options.dup
+      params = options[:params].dup
+      params_remove = params.keys + ['params']
+
       if options[:public]
-        Member.public_member? org, user, options[:params], options[:format]
-      else
-        Member.member? org, user, options[:params], options[:format]
+        params['public'] = true
+        params_remove << 'public'
       end
+      Util.hash_without!(global_options, params_remove)
+      Member.member? org, user, params, global_options
     end
 
     desc 'delete <org> <user>', 'Remove a member from an organization'
@@ -43,17 +53,26 @@ module GithubCLI
       will no longer have any access to the organization’s repositories.
     DESC
     def delete(org, user)
-      Member.delete org, user, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Member.delete org, user, params, global_options
     end
 
     desc 'publicize <org> <user>', "Publicize a user’s membership"
     def publicize(org, user)
-      Member.publicize org, user, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Member.publicize org, user, params, global_options
     end
 
     desc 'conceal <org> <user>', "Conceal a user’s membership"
     def conceal(org, user)
-      Member.conceal org, user, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Member.conceal org, user, params, global_options
     end
 
   end # Members
