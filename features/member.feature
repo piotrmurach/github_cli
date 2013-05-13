@@ -1,13 +1,14 @@
 Feature: gcli member
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli member`
     Then the exit status should be 0
-      And the output should contain "gcli member delete"
-      And the output should contain "gcli member list"
-      And the output should contain "gcli member member"
-      And the output should contain "gcli member publicize"
+      And the output should contain "member delete"
+      And the output should contain "member list"
+      And the output should contain "member member"
+      And the output should contain "member publicize"
 
   Scenario: List members
     Given the GitHub API server:
