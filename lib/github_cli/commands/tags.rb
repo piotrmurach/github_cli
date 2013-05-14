@@ -9,7 +9,10 @@ module GithubCLI
     method_option :recursive, :type => :boolean, :aliases => ["-r"],
                   :desc => 'get a tree recursively'
     def get(user, repo, sha)
-      Tag.get user, repo, sha, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Tag.get user, repo, sha, params, global_options
     end
 
     desc 'create <user> <repo>', 'Create a Tag Object'
@@ -39,14 +42,15 @@ module GithubCLI
       tagger.date - Timestamp of when this object was tagged \n
     DESC
     def create(user, repo)
+      global_options = options.dup
       params = options[:params].dup
       params['tag']     = options[:tag] if options[:tag]
       params['message'] = options[:message] if options[:message]
       params['object']  = options[:object] if options[:object]
       params['type']    = optiosn[:type] if options[:type]
       params['tagger']  = options[:tagger] if options[:tagger]
-
-      Tag.create user, repo, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Tag.create user, repo, params, global_options
     end
 
   end # Tag
