@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe GithubCLI::Commands::Watching do
-  let(:format) { 'table' }
+  let(:format) { {'format' => 'table'} }
   let(:user)   { 'peter-murach' }
   let(:repo)   { 'github_cli' }
   let(:api_class) { GithubCLI::Watching }

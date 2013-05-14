@@ -5,33 +5,33 @@ module GithubCLI
 
     class << self
 
-      def list(user, repo, params, format)
-        output format do
-          github_api.activity.watching.list user, repo, params
+      def list(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.watching.list user, repo, params
         end
       end
 
-      def watched(params, format)
-        output format do
-          github_api.activity.watching.watched params
+      def watched(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.watching.watched params
         end
       end
 
-      def watching?(user, repo, params, format)
-        output format do
-          github_api.activity.watching.watching? user, repo, params
+      def watching?(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.watching.watching? user, repo, params
         end
       end
 
-      def start(user, repo, params, format)
-        output format do
-          github_api.activity.watching.watch user, repo, params
+      def start(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.watching.watch user, repo, params
         end
       end
 
-      def stop(user, repo, params, format)
-        output format do
-          github_api.activity.watching.unwatch user, repo, params
+      def stop(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.watching.unwatch user, repo, params
         end
       end
     end
