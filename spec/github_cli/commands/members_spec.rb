@@ -15,7 +15,7 @@ describe GithubCLI::Commands::Members do
   end
 
   it "invokes member:list --public" do
-    api_class.should_receive(:all_public).with(org, {}, format)
+    api_class.should_receive(:all).with(org, {'public' => true}, format)
     subject.invoke "member:list", [org], {:public => true}
   end
 
