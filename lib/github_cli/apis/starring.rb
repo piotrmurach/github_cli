@@ -5,33 +5,33 @@ module GithubCLI
 
     class << self
 
-      def list(user, repo, params, format)
-        output format do
-          github_api.activity.starring.list user, repo, params
+      def list(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.starring.list user, repo, params
         end
       end
 
-      def starred(params, format)
-        output format do
-          github_api.activity.starring.starred params
+      def starred(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.starring.starred params
         end
       end
 
-      def starring?(user, repo, params, format)
-        output format do
-          github_api.activity.starring.starring? user, repo, params
+      def starring?(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.starring.starring? user, repo, params
         end
       end
 
-      def star(user, repo, params, format)
-        output format do
-          github_api.activity.starring.star user, repo, params
+      def star(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.starring.star user, repo, params
         end
       end
 
-      def unstar(user, repo, params, format)
-        output format do
-          github_api.activity.starring.unstar user, repo, params
+      def unstar(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.starring.unstar user, repo, params
         end
       end
     end
