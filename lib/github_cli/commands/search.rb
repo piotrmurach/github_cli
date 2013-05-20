@@ -5,6 +5,7 @@ module GithubCLI
 
     namespace :search
 
+    option :state, :type => :string, :aliases => ["-s"], :desc => 'Repository name'
     desc 'issue <owner> <repo> <keyword>', 'Search issues'
     long_desc <<-DESC
       Search issues
@@ -14,25 +15,42 @@ module GithubCLI
       state - open or closed. \n
       keyword - search term
     DESC
-    method_option :state, :type => :string, :aliases => ["-s"],
-                  :desc => 'Repository name'
     def issue(owner, repo, keyword)
-      Search.issue owner, repo, keyword, options[:params].update(:state => options[:state]), options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      params['owner']   = owner
+      params['repo']    = repo
+      params['keyword'] = keyword
+      params['state']   = options[:state] if options[:state]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Search.issue params, global_options
     end
 
     desc 'repo <keyword>', 'Repository search'
     def repo(keyword)
-      Search.repo options[:params].update(:keyword => keyword), options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      params['keyword'] = keyword
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Search.repo params, global_options
     end
 
     desc 'user <keyword>', 'User search'
     def user(keyword)
-      Search.user options[:params].update(:keyword => keyword), options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      params['keyword'] = keyword
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Search.user params, global_options
     end
 
     desc 'email <email>', 'Email search'
     def email(email)
-      Search.email options[:params].update(:email => email), options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      params['email'] = email
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Search.email params, global_options
     end
 
   end # Search
