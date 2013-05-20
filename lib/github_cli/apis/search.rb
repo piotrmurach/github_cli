@@ -5,27 +5,27 @@ module GithubCLI
 
     class << self
 
-      def issue(owner, repo, keyword, params, format)
-        output format do
-          github_api.search.issues params.update(:owner => owner, :repo => repo, :keyword => keyword)
+      def issue(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).search.issues params
         end
       end
 
-      def repo(params, format)
-        output format do
-          github_api.search.repos params
+      def repo(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).search.repos params
         end
       end
 
-      def user(params, format)
-        output format do
-          github_api.search.users params
+      def user(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).search.users params
         end
       end
 
-      def email(params, format)
-        output format do
-          github_api.search.email params
+      def email(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).search.email params
         end
       end
 
