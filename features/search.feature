@@ -1,13 +1,14 @@
 Feature: gcli search
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli search`
     Then the exit status should be 0
-      And the output should contain "gcli search email"
-      And the output should contain "gcli search issue"
-      And the output should contain "gcli search repo"
-      And the output should contain "gcli search user"
+      And the output should contain "search email"
+      And the output should contain "search issue"
+      And the output should contain "search repo"
+      And the output should contain "search user"
 
   Scenario: Search issues
     Given the GitHub API server:
