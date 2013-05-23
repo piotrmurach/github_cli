@@ -5,51 +5,51 @@ module GithubCLI
 
     class << self
 
-      def list(user, repo, params, format)
-        output format do
-          github_api.pull_requests.list user, repo, params
+      def list(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).pull_requests.list user, repo, params
         end
       end
 
-      def get(user, repo, number, params, format)
-        output format do
-          github_api.pull_requests.get user, repo, number, params
+      def get(user, repo, number, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).pull_requests.get user, repo, number, params
         end
       end
 
-      def create(user, repo, params, format)
-        output format do
-          github_api.pull_requests.create user, repo, params
+      def create(user, repo, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).pull_requests.create user, repo, params
         end
       end
 
-      def update(user, repo, number, params, format)
-        output format do
-          github_api.pull_requests.update user, repo, number, params
+      def update(user, repo, number, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).pull_requests.update user, repo, number, params
         end
       end
 
-      def commits(user, repo, number, params, format)
-        output format do
-          github_api.pull_requests.commits user, repo, number, params
+      def commits(user, repo, number, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).pull_requests.commits user, repo, number, params
         end
       end
 
-      def files(user, repo, number, params, format)
-        output format do
-          github_api.pull_requests.files user, repo, number, params
+      def files(user, repo, number, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).pull_requests.files user, repo, number, params
         end
       end
 
-      def merged(user, repo, number, params, format)
-        output format do
-          github_api.pull_requests.merged? user, repo, number, params
+      def merged(user, repo, number, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).pull_requests.merged? user, repo, number, params
         end
       end
 
-      def merge(user, repo, number, params, format)
-        output format do
-          github_api.pull_requests.merge user, repo, number, params
+      def merge(user, repo, number, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).pull_requests.merge user, repo, number, params
         end
       end
     end
