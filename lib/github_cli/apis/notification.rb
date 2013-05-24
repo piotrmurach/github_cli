@@ -5,39 +5,39 @@ module GithubCLI
 
     class << self
 
-      def all(params, format)
-        output format do
-          github_api.activity.notifications.list params
+      def all(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.notifications.list params
         end
       end
 
-      def get(id, params, format)
-        output format do
-          github_api.activity.notifications.get id, params
+      def get(id, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.notifications.get id, params
         end
       end
 
-      def mark(params, format)
-        output format do
-          github_api.activity.notifications.mark params
+      def mark(params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.notifications.mark params
         end
       end
 
-      def subscribed?(id, params, format)
-        output format do
-          github_api.activity.notifications.subscribed? id, params
+      def subscribed?(id, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.notifications.subscribed? id, params
         end
       end
 
-      def create(id, params, format)
-        output format do
-          github_api.activity.notifications.create id, params
+      def create(id, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.notifications.create id, params
         end
       end
 
-      def delete(id, params, format)
-        output format do
-          github_api.activity.notifications.delete id, params
+      def delete(id, params, options)
+        output options[:format], options[:quiet] do
+          github_api(options).activity.notifications.delete id, params
         end
       end
     end

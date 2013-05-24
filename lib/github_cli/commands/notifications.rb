@@ -22,16 +22,20 @@ module GithubCLI
         since - Optional time - filters out any notifications updated before the given time.\n
     DESC
     def list
+      global_options = options.dup
       params = options[:params].dup
       params['user'] = options[:user] if options[:user]
       params['repo'] = options[:repo] if options[:repo]
-
-      Notification.all params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Notification.all params, global_options
     end
 
     desc 'get <id>', 'View a single thread'
     def get(id)
-      Notification.get id, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Notification.get id, params, global_options
     end
 
     option :user, :type => :string, :aliases => ["-u"]
@@ -40,20 +44,22 @@ module GithubCLI
     option :id, :type => :numeric, :desc => "thread id to be marked"
     desc 'mark', 'Mark as read'
     def mark
+      global_options = options.dup
       params = options[:params].dup
       params['user']      = options[:user] if options[:user]
       params['repo']      = options[:repo] if options[:repo]
       params['read']      = options[:read] if options[:read]
       params['thread_id'] = options[:id]   if options[:id]
-
-      Notification.mark params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params', 'id'])
+      Notification.mark params, global_options
     end
 
     desc 'check', 'Check to see if the current user is subscribed to a thread'
     def check(id)
+      global_options = options.dup
       params = options[:params].dup
-
-      Notification.subscribed? id, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Notification.subscribed? id, params, global_options
     end
 
     option :subscribed, :type => :boolean,
@@ -67,18 +73,20 @@ module GithubCLI
       a thread will mute all future notifications (until you comment or get @mentioned).
     DESC
     def create(id)
+      global_options = options.dup
       params = options[:params].dup
       params['subscribed'] = options[:subscribed] if options[:subscrirbed]
       params['ignored']    = options[:ignored]    if options[:ignored]
-
-      Notification.create id, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Notification.create id, params, global_options
     end
 
     desc 'delete', 'Delete a thread subscription'
     def delete(id)
+      global_options = options.dup
       params = options[:params].dup
-
-      Notification.delete id, params, options[:format]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Notification.delete id, params, global_options
     end
 
   end # Notifications
