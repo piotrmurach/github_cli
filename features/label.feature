@@ -1,19 +1,18 @@
 Feature: gcli label
 
+  @ci-run
   Scenario: Available commands
 
     When I run `gcli label`
     Then the exit status should be 0
-      And the output should contain "gcli label add"
-      And the output should contain "gcli label create"
-      And the output should contain "gcli label delete"
-      And the output should contain "gcli label get"
-      And the output should contain "gcli label issue"
-      And the output should contain "gcli label list"
-      And the output should contain "gcli label milestone"
-      And the output should contain "gcli label remove"
-      And the output should contain "gcli label replace"
-      And the output should contain "gcli label update"
+      And the output should contain "label add"
+      And the output should contain "label create"
+      And the output should contain "label delete"
+      And the output should contain "label get"
+      And the output should contain "label list"
+      And the output should contain "label remove"
+      And the output should contain "label replace"
+      And the output should contain "label update"
 
   Scenario: List labels
     Given the GitHub API server:
@@ -36,7 +35,7 @@ Feature: gcli label
     """
     post('/repos/wycats/thor/labels') { status 200 }
     """
-    When I run `gcli label create wycats thor --params=name:bug color:f3f3f3`
+    When I run `gcli label create wycats thor --name=bug --color=f3f3f3`
     Then the exit status should be 0
 
   Scenario: Update label
@@ -44,7 +43,7 @@ Feature: gcli label
     """
     patch('/repos/wycats/thor/labels/1') { status 200 }
     """
-    When I run `gcli label update wycats thor 1 --params=name:bug color:f3f3f3`
+    When I run `gcli label update wycats thor 1 --name=bug --color=f3f3f3`
     Then the exit status should be 0
 
   Scenario: Delete label
