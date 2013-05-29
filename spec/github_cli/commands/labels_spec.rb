@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe GithubCLI::Commands::Labels do
-  let(:format) { 'table' }
+  let(:format) { {'format' => 'table'} }
   let(:user)   { 'peter-murach' }
   let(:repo)   { 'github_cli' }
   let(:name)   { 'bug' }
@@ -15,7 +15,7 @@ describe GithubCLI::Commands::Labels do
   end
 
   it "invokes label:list --milestone 1" do
-    api_class.should_receive(:all).with(user, repo, {'milestone_id' => 1}, 'csv')
+    api_class.should_receive(:all).with(user, repo, {'milestone_id' => 1}, {'format' => 'csv'})
     subject.invoke "label:list", [user, repo], :milestone => 1, :format => 'csv'
   end
 
@@ -34,9 +34,19 @@ describe GithubCLI::Commands::Labels do
     subject.invoke "label:create", [user, repo]
   end
 
+  it "invokes label:create" do
+    api_class.should_receive(:create).with(user, repo, {'color' => 'FFFFFF'}, format)
+    subject.invoke "label:create", [user, repo], {'color' => 'FFFFFF'}
+  end
+
   it "invokes label:update" do
     api_class.should_receive(:update).with(user, repo, name, {}, format)
     subject.invoke "label:update", [user, repo, name]
+  end
+
+  it "invokes label:update" do
+    api_class.should_receive(:update).with(user, repo, name, {'color' => 'FFFFFF'}, format)
+    subject.invoke "label:update", [user, repo, name], {'color' => 'FFFFFF'}
   end
 
   it "invokes label:delete" do
@@ -50,7 +60,7 @@ describe GithubCLI::Commands::Labels do
   end
 
   it "invokes lable:remove" do
-    api_class.should_receive(:remove).with(user, repo, '1', nil, {}, format)
+    api_class.should_receive(:remove).with(user, repo, '1', {}, format)
     subject.invoke "label:remove", [user, repo, '1']
   end
 
