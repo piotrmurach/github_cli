@@ -7,14 +7,27 @@ module GithubCLI
 
     desc 'list <user> <repo>', 'Lists downloads'
     def list(user, repo)
-      Download.all user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Download.all user, repo, params, global_options
     end
 
     desc 'get <user> <repo> <id>', 'Get a download'
     def get(user, repo, id)
-      Download.get user, repo, id, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Download.get user, repo, id, params, global_options
     end
 
+
+    option :name, :type => :string, :required => true,
+           :desc => 'name of the file that is being created.'
+    option :size, :type => :numeric, :required => true,
+           :desc => 'size of file in bytes'
+    option :desc, :type => :string
+    option :type, :type => :string
     desc 'create <user> <repo>', 'Create a new download resource'
     long_desc <<-DESC
       Creating a new download is a two step process.
@@ -30,13 +43,20 @@ module GithubCLI
         content_type - Optional string \n
     DESC
     def create(user, repo)
-      Download.create user, repo, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      params['name'] = options[:name]
+      params['size'] = options[:size]
+      params['descritpion']  = options[:desc] if options[:desc]
+      params['content_type'] = options[:type] if options[:type]
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Download.create user, repo, params, global_options
     end
 
     desc 'upload <resource> <filename>', 'Upload resource to s3'
     long_desc <<-DESC
       Upload a file to Amazon, using the reponse instance from
-      Github::Repos::Downloads#create_download. 
+      Github::Repos::Downloads#create
 
       This can be done by passing the response object
       as an argument to upload method.
@@ -47,12 +67,17 @@ module GithubCLI
         filename - Required filename, a path to a file location. \n
     DESC
     def upload(resource, filename)
-      Download.upload resource, filename, options[:format]
+      global_options = options.dup
+      Util.hash_without!(global_options, ['params'])
+      Download.upload resource, filename, global_options
     end
 
     desc 'delete <user> <repo> <id>', 'Delete a download'
     def delete(user, repo, id)
-      Download.delete user, repo, id, options[:params], options[:format]
+      global_options = options.dup
+      params = options[:params].dup
+      Util.hash_without!(global_options, params.keys + ['params'])
+      Download.delete user, repo, id, params, global_options
     end
 
   end # Downloads
