@@ -3,6 +3,16 @@ require 'thor/base'
 
 class Thor
   class << self
+    # Allows for custom "Command" package naming.
+    #
+    # === Parameters
+    # name<String>
+    # options<Hash>
+    #
+    def package_name(name, options={})
+      @package_name = name.nil? || name == '' ? nil : name
+    end
+
     # Sets the default command when thor is executed without an explicit command to be called.
     #
     # ==== Parameters
@@ -185,7 +195,12 @@ class Thor
       end
       list.sort!{ |a,b| a[0] <=> b[0] }
 
-      shell.say "Commands:"
+      if @package_name
+        shell.say "#{@package_name} commands:"
+      else
+        shell.say "Commands:"
+      end
+
       shell.print_table(list, :indent => 2, :truncate => true)
       shell.say
       class_options_help(shell)
@@ -299,7 +314,7 @@ class Thor
     end
 
     def stop_on_unknown_option?(command) #:nodoc:
-      !!@stop_on_unknown_option && @stop_on_unknown_option.include?(command.name.to_sym)
+      command && !@stop_on_unknown_option.nil? && @stop_on_unknown_option.include?(command.name.to_sym)
     end
 
   protected

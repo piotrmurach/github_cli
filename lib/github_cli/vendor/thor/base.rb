@@ -119,6 +119,18 @@ class Thor
     end
 
     module ClassMethods
+      def attr_reader(*) #:nodoc:
+        no_commands { super }
+      end
+
+      def attr_writer(*) #:nodoc:
+        no_commands { super }
+      end
+
+      def attr_accessor(*) #:nodoc:
+        no_commands { super }
+      end
+
       # If you want to raise an error for unknown options, call check_unknown_options!
       # This is disabled by default to allow dynamic invocations.
       def check_unknown_options!
@@ -406,11 +418,10 @@ class Thor
       #   thor :my_command
       #
       def namespace(name=nil)
-        @namespace = case name
-        when nil
-          @namespace || Thor::Util.namespace_from_thor_class(self)
-        else
+        if name
           @namespace = name.to_s
+        else
+          @namespace ||= Thor::Util.namespace_from_thor_class(self)
         end
       end
 
@@ -462,17 +473,11 @@ class Thor
       end
       alias handle_no_task_error handle_no_command_error
 
-      def handle_argument_error(command, error, arity=nil) #:nodoc:
-        msg = "#{basename} #{command.name}"
-        if arity && arity != 0
-          required = arity < 0 ? (-1 - arity) : arity
-          msg << " requires at least #{required} argument"
-          msg << "s" if required > 1
-        else
-          msg = "call #{msg} as"
-        end
-
-        msg << ": #{self.banner(command).inspect}."
+      def handle_argument_error(command, error, args, arity) #:nodoc:
+        msg = "ERROR: #{basename} #{command.name} was called with "
+        msg << 'no arguments'               if  args.empty?
+        msg << 'arguments ' << args.inspect if !args.empty?
+        msg << "\nUsage: #{self.banner(command).inspect}."
         raise InvocationError, msg
       end
 
@@ -583,9 +588,6 @@ class Thor
 
           # Return if it's not a public instance method
           return unless public_method_defined?(meth.to_sym)
-
-          # Return if attr_* added the method
-          return if caller.first.to_s[/`attr_(reader|writer|accessor)'/]
 
           return if @no_commands || !create_command(meth)
 
