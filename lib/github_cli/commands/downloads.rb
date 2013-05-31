@@ -21,7 +21,6 @@ module GithubCLI
       Download.get user, repo, id, params, global_options
     end
 
-
     option :name, :type => :string, :required => true,
            :desc => 'name of the file that is being created.'
     option :size, :type => :numeric, :required => true,
