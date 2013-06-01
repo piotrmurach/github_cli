@@ -54,8 +54,12 @@ user.name             # Default user name
 user.repo             # Default repo name
 user.org              # Default organization name
 core.editor           # Editor to be opened
+core.endpoint         # The api endpoint, by deafult https://api.github.com
+core.site             # The web endpoint, by default https://github.com
 core.pager            # Pager to be used, by default less
 core.format           # Output formating
+core.quiet            # Surpass output to show only response status
+core.ssl              # SSL settings
 core.auto_pagination  # Switch on default results pagination, default false
 ```
 
@@ -179,6 +183,14 @@ to limit returned results pass `pattern`
 
 ```shell
 $ gcli list re*   # Returns all commands matching the pattern
+```
+
+### Subcommands
+
+To see a list of subcommands that a given command provides just type top-level command like so
+
+```shell
+$ gcli repo
 ```
 
 ### Output Format
