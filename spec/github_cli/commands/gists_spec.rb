@@ -13,6 +13,11 @@ describe GithubCLI::Commands::Gists do
     subject.invoke "gist:list", []
   end
 
+  it "invokes gist:list --public" do
+    api_class.should_receive(:all).with({}, format.merge("public" => true))
+    subject.invoke "gist:list", [], {:public => true}
+  end
+
   it "invokes gist:list --user" do
     api_class.should_receive(:all).with({"user" => user}, format)
     subject.invoke "gist:list", [], :user => user

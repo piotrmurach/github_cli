@@ -34,9 +34,17 @@ Feature: gcli gist
   Scenario: List public gists for the authenticated user
     Given the GitHub API server:
     """
+    get('/gists') { status 200 }
+    """
+    When I run `gcli gist ls --login=piotr --password=secret`
+    Then the exit status should be 0
+
+  Scenario: List all public gists
+    Given the GitHub API server:
+    """
     get('/gists/public') { status 200 }
     """
-    When I run `gcli gist ls`
+    When I run `gcli gist ls --public`
     Then the exit status should be 0
 
   Scenario: Get gist

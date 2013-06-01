@@ -6,8 +6,9 @@ module GithubCLI
     class << self
 
       def all(params, options)
-        output options[:format], options[:quiet] do
-          github_api(options).gists.list params
+        args = options[:public] ? ['public', params] : [params]
+        output options do
+          github_api(options).gists.list *args
         end
       end
 

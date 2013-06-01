@@ -10,6 +10,8 @@ module GithubCLI
            :desc => 'List a <user> gists'
     option :starred, :type => :boolean, :aliases => ["-s"], :default => false,
            :desc => 'List the authenticated users starred gists'
+    option :public, :type => :boolean,
+           :desc => "List all public gists"
     option :since, :type => :string, :banner => "timestamp",
            :desc => "a timestamp in ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ "
     def list
