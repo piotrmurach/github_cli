@@ -6,8 +6,12 @@ module GithubCLI
     class << self
 
       def all(params, options)
-        output options[:format], options[:quiet] do
-          github_api(options).repos.list params
+        output options do
+          if options[:every]
+            github_api(options).repos.list 'every', params
+          else
+            github_api(options).repos.list params
+          end
         end
       end
 

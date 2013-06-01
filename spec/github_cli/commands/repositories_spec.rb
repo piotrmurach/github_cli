@@ -14,6 +14,11 @@ describe GithubCLI::Commands::Repositories do
     subject.invoke "repo:list", []
   end
 
+  it "invokes repo:list --every" do
+    api_class.should_receive(:all).with({}, format.merge('every' => true))
+    subject.invoke "repo:list", [], {:every => true}
+  end
+
   it "invokes repo:list --org" do
     api_class.should_receive(:all).with({"org" => org}, format)
     subject.invoke "repo:list", [], :org => org

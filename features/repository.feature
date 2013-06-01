@@ -21,7 +21,15 @@ Feature: gcli repository
     """
     get('/repositories') { status 200 }
     """
-    When I run `gcli repo ls`
+    When I run `gcli repo ls --every`
+    Then the exit status should be 0
+
+  Scenario: List all repositories for the authenticated user
+    Given the GitHub API server:
+    """
+    get('/user/repos') { status 200 }
+    """
+    When I run `gcli repo ls --login=piotr --password=secret`
     Then the exit status should be 0
 
   Scenario: List repositories for user
