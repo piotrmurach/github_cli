@@ -1,3 +1,12 @@
+0.6.0 (June 1, 2013)
+
+* Add authorize command to ease pain with getting authenticated
+* Add 'every' flag to repository listing command
+* Add 'public' flag to gist listing command
+* Change all commands to pass through global options to configure api requests
+* Update vendor dependencies
+* Add ability to configure all github api request options
+
 0.5.9 (April 17, 2013)
 
 * Change API class configure to take options and allow for basic auth,
