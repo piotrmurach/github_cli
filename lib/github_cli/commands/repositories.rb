@@ -9,6 +9,8 @@ module GithubCLI
            :desc => 'List repositories for <organization>'
     option :user, :type => :string, :aliases => ["-u"], :banner => '<user>',
            :desc => 'List repositories for <user>'
+    option :every, :type => :boolean, :default => false,
+           :desc => "This provides a dump of every repository, in the order that they were created."
     option :since, :type => :string, :banner => '<id>',
            :desc => "the integer ID of the last Repository that you've seen"
     option :type, :type => :string,
@@ -21,11 +23,11 @@ module GithubCLI
     def list
       global_options = options.dup
       params = options[:params].dup
-      params['org']   = options[:org] if options[:org]
-      params['user']  = options[:user] if options[:user]
+      params['org']   = options[:org]   if options[:org]
+      params['user']  = options[:user]  if options[:user]
       params['since'] = options[:since] if options[:since]
-      params['type']  = options[:type] if options[:type]
-      params['sort']  = options[:sort] if options[:sort]
+      params['type']  = options[:type]  if options[:type]
+      params['sort']  = options[:sort]  if options[:sort]
       params['direction'] = options[:direction] if options[:direction]
       Util.hash_without!(global_options, params.keys + ['params'])
       Repository.all params, global_options
