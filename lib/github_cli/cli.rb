@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 module GithubCLI
+
+  # Main command line interface
   class CLI < Thor
     include Thor::Actions
     require 'github_cli/subcommands'
@@ -56,6 +58,7 @@ module GithubCLI
           'user.repo'     => nil,
           'user.org'      => nil,
           'core.adapter'  => :net_http,
+          'core.site'     => 'https://github.com',
           'core.endpoint' => 'https://api.github.com',
           'core.ssl'      => nil,
           'core.mime'     => :json,
@@ -123,6 +126,10 @@ module GithubCLI
       GithubCLI.ui.info me
     end
 
+    option :force, :type => :boolean, :default => false, :aliases => "-f",
+           :banner => "Overwrite configuration file. "
+    option :local, :type => :boolean, :default => false, :aliases => "-l",
+           :desc => 'Create local configuration file, otherwise a global configuration file in user home is created.'
     desc 'init', 'Create a configuration file or overwirte existing one'
     long_desc <<-DESC
       Initializes a configuration file where you can set default options for
@@ -132,10 +139,6 @@ module GithubCLI
       override the bult-in defaults and allow you to save typing commonly  used
       command line options.
     DESC
-    option :force, :type => :boolean, :default => false, :aliases => "-f",
-           :banner => "Overwrite configuration file. "
-    option :local, :type => :boolean, :default => false, :aliases => "-l",
-           :desc => 'Create local configuration file, otherwise a global configuration file in user home is created.'
     def init(filename=nil)
       config_filename = filename ? filename : options[:filename]
       config = GithubCLI.config
@@ -151,6 +154,12 @@ module GithubCLI
       GithubCLI.ui.confirm "Writing new configuration file to #{GithubCLI.config.path}"
     end
 
+    option :local, :type => :boolean, :default => false,
+           :desc => 'use local config file'
+    option :list, :type => :boolean, :default => false, :aliases => '-l',
+           :desc => 'list all'
+    option :edit, :type => :boolean, :default => false, :aliases => '-e',
+           :desc => 'opens an editor'
     desc 'config', 'Get and set GitHub configuration options'
     long_desc <<-DESC
       You can query/set options with this command. The name is actually a hash key
@@ -161,12 +170,6 @@ module GithubCLI
       There two types of config files, global and project specific. When modifying
       options ensure that you modifying the correct config.
     DESC
-    option :local, :type => :boolean, :default => false,
-           :desc => 'use local config file'
-    option :list, :type => :boolean, :default => false, :aliases => '-l',
-           :desc => 'list all'
-    option :edit, :type => :boolean, :default => false, :aliases => '-e',
-           :desc => 'opens an editor'
     def config(*args)
       name, value = args.shift, args.shift
       GithubCLI.config.location = options[:local] ? 'local' : 'global'
