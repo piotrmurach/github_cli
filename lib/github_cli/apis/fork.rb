@@ -6,13 +6,13 @@ module GithubCLI
     class << self
 
       def all(user, repo, params, options)
-        output options[:format], options[:quiet] do
+        output options do
           github_api(options).repos.forks.list user, repo, params
         end
       end
 
       def create(user, repo, params, options)
-        output options[:format], options[:quiet] do
+        output options do
           github_api(options).repos.forks.create user, repo, params
         end
       end
