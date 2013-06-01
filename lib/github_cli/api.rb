@@ -55,7 +55,7 @@ module GithubCLI
     #   The flag for reducing the output
     #
     # @api public
-    def output(options, &block)
+    def self.output(options, &block)
       config = GithubCLI.config
       format = options.fetch(:format) { config['core.format'] }
       quiet  = options.fetch(:quiet)  { config['core.quiet'] }
