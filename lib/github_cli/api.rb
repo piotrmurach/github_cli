@@ -49,9 +49,18 @@ module GithubCLI
       end
 
       # Procoess response and output to shell
-      # TODO: change to take options
+      #
+      # @param [Hash] options the options to format the output
+      # @option options [String] :format
+      #   The format type
+      # @option options [String] :quiet
+      #   The flag for reducing the output
+      #
       # @api public
-      def output(format=:table, quiet=false, &block)
+      def output(options, &block)
+        format = options.fetch(:format) { :table }
+        quiet  = options.fetch(:quiet)  { false }
+
         GithubCLI.on_error do
           response  = block.call
           if response.respond_to?(:body)
