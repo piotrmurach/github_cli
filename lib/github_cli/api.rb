@@ -57,7 +57,7 @@ module GithubCLI
     # @api public
     def self.output(options, &block)
       config = GithubCLI.config
-      format = options.fetch(:format) { config['core.format'] }
+      format = options.fetch(:format) { config['core.format'] || :table }
       quiet  = options.fetch(:quiet)  { config['core.quiet'] }
 
       GithubCLI.on_error do
