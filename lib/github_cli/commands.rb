@@ -28,6 +28,7 @@ module GithubCLI
     autoload :Repositories,   'github_cli/commands/repositories'
     autoload :Search,         'github_cli/commands/search'
     autoload :Starring,       'github_cli/commands/starring'
+    autoload :Statistics,     'github_cli/commands/statistics'
     autoload :Statuses,       'github_cli/commands/statuses'
     autoload :Tags,           'github_cli/commands/tags'
     autoload :Teams,          'github_cli/commands/teams'

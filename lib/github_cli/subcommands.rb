@@ -81,6 +81,9 @@ module GithubCLI
     desc "star", "Leverage Starring API"
     subcommand "star", GithubCLI::Commands::Starring
 
+    desc "stat", "Leverage Statistics API"
+    subcommand "stat", GithubCLI::Commands::Statistics
+
     desc "status", "Leverage Statuses API"
     subcommand "status", GithubCLI::Commands::Statuses
 
