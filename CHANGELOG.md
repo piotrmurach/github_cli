@@ -1,3 +1,8 @@
+0.6.1 (June 9, 2013)
+
+* Add stat command for Statistics API
+* Change command class to dynamically load usage for subcommands
+
 0.6.0 (June 1, 2013)
 
 * Add authorize command to ease pain with getting authenticated
