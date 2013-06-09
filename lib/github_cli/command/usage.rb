@@ -25,7 +25,7 @@ module GithubCLI
       #          the first line is already filled in with other padding.
       # length - Line length, otherwise the default terminal width is assumed.
       def format_usage(options={})
-        synopsis = "#{flags} #{command} <subcommand> [<args>]"
+        synopsis = "#{flags}#{command} <subcommand> [<args>]"
         indent = options[:indent] || DEFAULT_INDENT
         padding = sprintf("%#{indent}s",'')
         length  = options[:length] || Terminal.default_width
