@@ -72,7 +72,7 @@ module GithubCLI
         GithubCLI.ui.info "#{exec_name}: '#{cmd}' is not a #{exec_name} command. See '#{exec_name} --help'."
       end
 
-      def print_usage(flags, command='<command>')
+      def print_usage(flags, command)
         GithubCLI.ui.info <<-TEXT
 
 #{GithubCLI.program_name}

@@ -1,23 +1,14 @@
 # encoding: utf-8
 
 module GithubCLI
+
+  # Main class with utility methods for building commands.
   class Command < Thor
     include Thor::Actions
 
-    API_CLASSES = %w(
-      c_l_i
-      repo download key fork hook watch collab content
-      issue label milestone
-      tag tree blob reference commit
-      pull
-      user email follower
-      org member team
-      event
-      search
-    )
-
     HELP_COMMAND = 'help'
 
+    # Internally used command representation
     class Comm < Struct.new(:namespace, :name, :desc, :usage); end
 
     def self.output_formats
@@ -45,53 +36,44 @@ module GithubCLI
                  :desc => "Format of the output. Type table:h to display table horizontally."
     class_option :quiet, :type => :boolean, :aliases => "-q",
                  :desc => "Suppress response output"
-
     class_option :params, :type => :hash, :default => {}, :aliases => '-p',
                  :desc => 'Request parameters e.i per_page:100'
 
-    class << self
+    def self.is_api_command?(namespace)
+      !%w[c_l_i command thor].include?(namespace)
+    end
 
-      def banner(task, namespace=true, subcommand=true)
-        "#{basename} #{task.formatted_usage(self, true, subcommand)}"
-      end
+    def self.extract_namespace(klass)
+      klass.namespace.split(':').last
+    end
 
-      def all
-        commands = []
-        Thor::Base.subclasses.each do |klass|
-          namespace = extract_namespace(klass)
-          next unless is_api_command?(namespace)
-          namespace = "" if namespace.index(API_CLASSES.first)
+    # Search for all commands
+    #
+    def self.all
+      commands = []
+      Thor::Base.subclasses.each do |klass|
+        namespace = extract_namespace(klass)
+        next unless is_api_command?(namespace)
 
-          klass.tasks.each do |task|
-            next if task.last.name.index HELP_COMMAND
-            commands << Comm.new(namespace,
-                                task.last.name,
-                                task.last.description,
-                                task.last.usage)
-          end
+        klass.tasks.each do |task|
+          last_task = task.last
+          name = last_task.name
+          next if name.index HELP_COMMAND
+          commands << Comm.new(namespace, name, last_task.description, last_task.usage)
         end
-        commands
       end
+      commands
+    end
 
-      def is_api_command?(klass)
-        return false unless API_CLASSES.include?(klass.to_s)
-        return true
+    # Decide whether to show specific command or display placeholder
+    #
+    def self.command_to_show(command)
+      command_token = Command.all.find do |cmd|
+        cmd_index = command.index('<') || -1
+        namespace = cmd.namespace
+        !namespace.empty? && command[0..cmd_index].include?(namespace)
       end
-
-      def extract_namespace(klass)
-        klass.namespace.split(':').last
-      end
-
-      # Decide whether to show specific command or placeholder
-      #
-      def command_to_show(command)
-        command_token = Command.all.find do |cmd|
-          end_index = command.index('<').nil? ? -1 : command.index('<')
-          !cmd.namespace.empty? && command[0..end_index].include?(cmd.namespace)
-        end
-        command_token ? command_token.namespace : '<command>'
-      end
-
+      command_token ? command_token.namespace : '<command>'
     end
 
   end # Command
