@@ -29,6 +29,11 @@ describe GithubCLI::Commands::Contents do
     subject.invoke "content:get", [user, repo, path], :ref => "master"
   end
 
+  it "invokes content:create" do
+    api_class.should_receive(:create).with(user, repo, path, {'path' => path, 'message' => 'commit', 'content' => 'puts'}, format)
+    subject.invoke "content:create", [user, repo, path], {:path => path, :message => 'commit', :content => 'puts'}
+  end
+
   it "invokes content:archive" do
     api_class.should_receive(:archive).with(user, repo, {}, format)
     subject.invoke "content:archive", [user, repo]

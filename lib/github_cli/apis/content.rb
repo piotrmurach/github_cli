@@ -11,6 +11,12 @@ module GithubCLI
         end
       end
 
+      def create(user, repo, path, params, options)
+        output options do
+          github_api(options).repos.contents.create user, repo, path, params
+        end
+      end
+
       def readme(user, repo, params, options)
         output options do
           github_api(options).repos.contents.readme user, repo, params
