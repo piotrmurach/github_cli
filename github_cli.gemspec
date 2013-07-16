@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.version       = GithubCLI::VERSION
 
   gem.add_dependency 'github_api', '~> 0.10'
+  gem.add_dependency 'highline', '~> 1.6.19'
 
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'aruba'

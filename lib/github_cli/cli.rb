@@ -6,6 +6,7 @@ module GithubCLI
   class CLI < Thor
     include Thor::Actions
     require 'github_cli/subcommands'
+    require 'highline/import'
 
     def initialize(*args)
       super
@@ -99,7 +100,7 @@ module GithubCLI
       global_options[:params] = params
       # Need to configure client with login and password
       login = ask("login: ")
-      password = ask("password: ")
+      password = ask("password: ") {|q| q.echo = false}
 
       global_options['login']    = login
       global_options['password'] = password
