@@ -98,8 +98,8 @@ module GithubCLI
       params['note_url'] = options[:note_url] || 'https://github.com/peter-murach/github_cli'
       global_options[:params] = params
       # Need to configure client with login and password
-      login = ask("login: ")
-      password = ask("password: ")
+      login    = TTY.shell.ask("login: ").read_string.strip!
+      password = TTY.shell.ask("password: ").read_password.strip!
 
       global_options['login']    = login
       global_options['password'] = password
@@ -115,7 +115,7 @@ module GithubCLI
       config['user.token']    = token
 
       GithubCLI.ui.warn <<-EOF
-        Your #{GithubCLI.config.location} configuration file has been overwritten!
+        \nYour #{GithubCLI.config.location} configuration file has been overwritten!
       EOF
     end
 
