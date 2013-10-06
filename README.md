@@ -4,7 +4,7 @@
 [![Build Status](https://secure.travis-ci.org/peter-murach/github_cli.png?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/peter-murach/github_cli.png?travis)][gemnasium]
 [![Code Climate](https://codeclimate.com/github/peter-murach/github_cli.png)][codeclimate]
-[Website](http://peter-murach.github.io/github/))
+[Website](http://peter-murach.github.io/github/)
 
 [gem]: http://badge.fury.io/rb/github_cli
 [travis]: http://travis-ci.org/peter-murach/github_cli

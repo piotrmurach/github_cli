@@ -1,3 +1,11 @@
+0.6.2 (October 6, 2013)
+
+* Add commands to repository contents API
+* Add tty dependency and fix issue #12 when reading user password
+* Change error message debug
+* Change on_error handler to catch common types of exceptions
+* Change executable to use new error helper
+
 0.6.1 (June 9, 2013)
 
 * Add stat command for Statistics API
