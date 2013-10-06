@@ -1,6 +1,12 @@
 # GithubCLI
-[![Gem Version](https://badge.fury.io/rb/github_cli.png)](http://badge.fury.io/rb/github_cli) [![Build Status](https://secure.travis-ci.org/peter-murach/github_cli.png?branch=master)][travis] [![Dependency Status](https://gemnasium.com/peter-murach/github_cli.png?travis)][gemnasium] [![Code Climate](https://codeclimate.com/badge.png)][codeclimate]
 
+[![Gem Version](https://badge.fury.io/rb/github_cli.png)][gem]
+[![Build Status](https://secure.travis-ci.org/peter-murach/github_cli.png?branch=master)][travis]
+[![Dependency Status](https://gemnasium.com/peter-murach/github_cli.png?travis)][gemnasium]
+[![Code Climate](https://codeclimate.com/github/peter-murach/github_cli.png)][codeclimate]
+[Website](http://peter-murach.github.io/github/))
+
+[gem]: http://badge.fury.io/rb/github_cli
 [travis]: http://travis-ci.org/peter-murach/github_cli
 [gemnasium]: https://gemnasium.com/peter-murach/github_cli
 [codeclimate]: https://codeclimate.com/github/peter-murach/github_cli
