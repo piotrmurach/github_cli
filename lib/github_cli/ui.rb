@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 module GithubCLI
+
+  # Class responsible for displaying different level information
   class UI
     attr_writer :shell
 
@@ -10,24 +12,25 @@ module GithubCLI
       @debug = ENV['DEBUG']
     end
 
-    def confirm(message, newline=nil)
+    def confirm(message, newline = nil)
       @shell.say message, :green, newline
     end
 
-    def info(message, newline=nil)
+    def info(message, newline = nil)
       @shell.say message, nil, newline
     end
 
-    def warn(message, newline=nil)
+    def warn(message, newline = nil)
       @shell.say message, :yellow, newline
     end
 
-    def error(message, newline=nil)
+    def error(message, newline = nil)
       @shell.say message, :red, newline
     end
 
-    def debug(message, newline=nil)
-      @shell.say message, nil, newline
+    def debug(error, newline = nil)
+      message = ["#{error.class}: #{error.message}", *error.backtrace]
+      @shell.say message.join("\n"), nil, newline
     end
 
     def quite!
@@ -38,11 +41,11 @@ module GithubCLI
       @debug = true
     end
 
-    def print_table(table, options={})
+    def print_table(table, options = {})
       @shell.print_table table, options
     end
 
-    def print_wrapped(message, options={})
+    def print_wrapped(message, options = {})
       @shell.print_wrapped message, options
     end
 
