@@ -116,7 +116,7 @@ $ gcli config user.password '...'
 Then to create your token do
 
 ```shell
-$ gcli auth create --scopes=repo --note=gihtub_cli --note-url=http://github.com/peter-murach/github_cli
+$ gcli auth create --scopes=repo --note=github_cli --note-url=http://github.com/peter-murach/github_cli
 ```
 
 Alternatively `authorize` command has been provided that will guide you through authentication process by asking questions and then save the crednetials to `.githubrc` file. Example
