@@ -60,7 +60,7 @@ user.name             # Default user name
 user.repo             # Default repo name
 user.org              # Default organization name
 core.editor           # Editor to be opened
-core.endpoint         # The api endpoint, by deafult https://api.github.com
+core.endpoint         # The api endpoint, by default https://api.github.com
 core.site             # The web endpoint, by default https://github.com
 core.pager            # Pager to be used, by default less
 core.format           # Output formating
