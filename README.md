@@ -1,18 +1,18 @@
 <div align="center">
-  <a href="http://piotrmurach.github.io/github/"><img width="136" src="https://github.com/piotrmurach/github/raw/master/assets/github_api.png" alt="github api logo" /></a>
+  <a href="http://piotrmurach.github.io/github/"><img width="136" src="https://github.com/piotrmurach/github_cli/raw/master/assets/github_api.png" alt="github api logo" /></a>
 </div>
 # GithubCLI
 [![Gem Version](https://badge.fury.io/rb/github_cli.svg)][gem]
 [![Build Status](https://secure.travis-ci.org/piotrmurach/github_cli.svg?branch=master)][travis]
 [![Code Climate](https://codeclimate.com/github/piotrmurach/github_cli/badges/gpa.svg)][codeclimate]
-[![Coverage Status](https://coveralls.io/repos/piotrmurach/github_cli/badge.svg?branch=master)][coverage]
+[![Coverage Status](https://coveralls.io/repos/github/piotrmurach/github_cli/badge.svg?branch=master)][coverage]
 [![Inline docs](http://inch-ci.org/github/piotrmurach/github_cli.svg)][inchpages]
 [![Dependency Status](https://gemnasium.com/piotrmurach/github_cli.svg?travis)][gemnasium]
 
 [gem]: http://badge.fury.io/rb/github_cli
 [travis]: http://travis-ci.org/piotrmurach/github_cli
 [codeclimate]: https://codeclimate.com/github/piotrmurach/github_cli
-[coverage]: https://coveralls.io/r/piotrmurach/github_cli
+[coverage]: https://coveralls.io/github/piotrmurach/github_cli
 [inchpages]: http://inch-ci.org/github/piotrmurach/github_cli
 [gemnasium]: https://gemnasium.com/piotrmurach/github_cli
 
