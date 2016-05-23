@@ -1,21 +1,28 @@
+<div align="center">
+  <a href="http://piotrmurach.github.io/github/"><img width="136" src="https://github.com/piotrmurach/github/raw/master/assets/github_api.png" alt="github api logo" /></a>
+</div>
 # GithubCLI
-
-[![Gem Version](https://badge.fury.io/rb/github_cli.png)][gem]
-[![Build Status](https://secure.travis-ci.org/peter-murach/github_cli.png?branch=master)][travis]
-[![Dependency Status](https://gemnasium.com/peter-murach/github_cli.png?travis)][gemnasium]
-[![Code Climate](https://codeclimate.com/github/peter-murach/github_cli.png)][codeclimate]
-[Website](http://peter-murach.github.io/github/)
+[![Gem Version](https://badge.fury.io/rb/github_cli.svg)][gem]
+[![Build Status](https://secure.travis-ci.org/piotrmurach/github_cli.svg?branch=master)][travis]
+[![Code Climate](https://codeclimate.com/github/piotrmurach/github_cli/badges/gpa.svg)][codeclimate]
+[![Coverage Status](https://coveralls.io/repos/piotrmurach/github_cli/badge.svg?branch=master)][coverage]
+[![Inline docs](http://inch-ci.org/github/piotrmurach/github_cli.svg)][inchpages]
+[![Dependency Status](https://gemnasium.com/piotrmurach/github_cli.svg?travis)][gemnasium]
 
 [gem]: http://badge.fury.io/rb/github_cli
-[travis]: http://travis-ci.org/peter-murach/github_cli
-[gemnasium]: https://gemnasium.com/peter-murach/github_cli
-[codeclimate]: https://codeclimate.com/github/peter-murach/github_cli
+[travis]: http://travis-ci.org/piotrmurach/github_cli
+[codeclimate]: https://codeclimate.com/github/piotrmurach/github_cli
+[coverage]: https://coveralls.io/r/piotrmurach/github_cli
+[inchpages]: http://inch-ci.org/github/piotrmurach/github_cli
+[gemnasium]: https://gemnasium.com/piotrmurach/github_cli
 
-CLI-based access to GitHub API v3 that works hand-in-hand with `github_api` gem.
+[Website](http://piotrmurach.github.io/github/)
+
+> Command line interface for GitHub API that works hand-in-hand with `github_api` gem.
 
 Important!: This library is currently being updated to include all Github API requests and undergoes rapid development cycles. A feature roadmap will be added shortly.
 
-![Interface](https://github.com/peter-murach/github_cli/raw/master/screenshots/interface.png)
+![Interface](https://github.com/piotrmurach/github_cli/raw/master/assets/interface.png)
 
 ## Installation
 
@@ -116,7 +123,7 @@ $ gcli config user.password '...'
 Then to create your token do
 
 ```shell
-$ gcli auth create --scopes=repo --note=github_cli --note-url=http://github.com/peter-murach/github_cli
+$ gcli auth create --scopes=repo --note=github_cli --note-url=http://github.com/piotrmurach/github_cli
 ```
 
 Alternatively `authorize` command has been provided that will guide you through authentication process by asking questions and then save the crednetials to `.githubrc` file. Example
@@ -206,7 +213,7 @@ The API responses can be formatted as `csv`, `json`, `pretty`, `table`.
 By default responses are in tabular format. Tables are available in `horizontal` and `vertical` mode. To enforce table display pass `:h` and `:v` respectively. Otherwise a default orientation will be picked depending on the request made and terminal size.
 
 
-![Command](https://github.com/peter-murach/github_cli/raw/master/screenshots/command.png)
+![Command](https://github.com/piotrmurach/github_cli/raw/master/assets/command.png)
 
 To get `csv` formatting for easy command piping do
 
@@ -315,4 +322,4 @@ $ gcli search
 
 ## Copyright
 
-Copyright (c) 2012-2013 Piotr Murach. See LICENSE for further details.
+Copyright (c) 2012-2016 Piotr Murach. See LICENSE for further details.
