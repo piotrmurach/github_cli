@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'github_cli/system'
+
 module GithubCLI
   # This class determines editor to use to open the output.
   class Editor

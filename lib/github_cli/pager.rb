@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'github_cli/system'
+
 module GithubCLI
   # This class provides pagining of terminal output.
   class Pager
@@ -36,7 +38,7 @@ module GithubCLI
 
     # Pages output using configured pager.
     def page
-      return if not $stdout.tty? or System.windows?
+      return if not $stdout.tty?
 
       read_io, write_io = IO.pipe
 

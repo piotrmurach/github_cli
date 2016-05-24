@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'github_cli/system'
+
 module GithubCLI
   module Manpage
     extend self
@@ -24,12 +26,12 @@ module GithubCLI
 
     # Check if groff is installed on the system
     def has_groff?
-      System.command? 'groff'
+      System.command?('groff')
     end
 
     # Check if man is installed on the system
     def has_man?
-      System.command? 'man'
+      System.command?('man')
     end
 
     def show(command)

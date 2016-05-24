@@ -2,12 +2,14 @@
 
 require 'yaml'
 require 'pathname'
+require 'tty'
+require 'tty-which'
+
 require 'github_cli/vendor'
 require 'github_api'
 require 'github_cli/thor_ext'
 require 'github_cli/version'
 require 'github_cli/errors'
-require 'tty'
 
 # Base module which adds Github API to the command line
 module GithubCLI
@@ -17,7 +19,6 @@ module GithubCLI
   autoload :Command,   'github_cli/command'
   autoload :API,       'github_cli/api'
   autoload :Terminal,  'github_cli/terminal'
-  autoload :System,    'github_cli/system'
   autoload :Pager,     'github_cli/pager'
   autoload :Editor,    'github_cli/editor'
   autoload :Manpage,   'github_cli/manpage'
