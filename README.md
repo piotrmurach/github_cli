@@ -55,7 +55,7 @@ $ gcli init [--local] [filename]
 ```
 
 Without any options this command will setup a `.githubrc` configuration file in
-your home/project directory with all the global settings. By passing `--local` option the config file will be created locally in the execution directory. Further, by default `.githubrc` name is used which can be changed by passing the `filename`.
+your home directory with all the global settings. By passing `--local` option the config file will be created locally in the execution directory. Further, by default `.githubrc` name is used which can be changed by passing the `filename`.
 
 Main configuration options are:
 
@@ -126,7 +126,7 @@ Then to create your token do
 $ gcli auth create --scopes=repo --note=github_cli --note-url=http://github.com/piotrmurach/github_cli
 ```
 
-Alternatively `authorize` command has been provided that will guide you through authentication process by asking questions and then save the crednetials to `.githubrc` file. Example
+Alternatively `authorize` command has been provided that will guide you through authentication process by asking questions and then save the credentials to `.githubrc` file. Example
 
 ```shell
 $ gcli authorize
@@ -186,7 +186,7 @@ $ gcli repo help create
 
 ### Getting a list of commands
 
-You can list all GitHub APIs comamnds:
+You can list all GitHub APIs commands:
 
 ```shell
 $ gcli list
