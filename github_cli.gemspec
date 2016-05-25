@@ -22,6 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'github_api', '~> 0.10.0'
   spec.add_dependency 'tty',        '~> 0.0.10'
   spec.add_dependency 'tty-which',  '~> 0.1.0'
+  spec.add_dependency 'tty-prompt', '~> 0.6.0'
 
   spec.add_development_dependency 'rspec', '2.13.0'
   spec.add_development_dependency 'aruba', '0.5.1'

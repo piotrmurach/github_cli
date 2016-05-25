@@ -3,6 +3,7 @@
 require 'yaml'
 require 'pathname'
 require 'tty'
+require 'tty-prompt'
 require 'tty-which'
 
 require 'github_cli/vendor'
