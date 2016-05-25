@@ -64,18 +64,12 @@ class Thor
     end
   end
 
-  MANPAGES = %w[
-    gcli-config.1
-  ]
-
   desc "help", "Describe available commands or one specific command"
   def help(task = nil, subcommand = false)
-    command = "gcli-#{task}.1"
-
-    GithubCLI::Manpage.has?(command) do |manpage|
-      manpage.show(command) && return
+    if GithubCLI::Manpage.manpage?(task)
+      GithubCLI::Manpage.read(task)
+    else
+      task ? self.class.task_help(shell, task) : self.class.help(shell, subcommand)
     end
-
-    task ? self.class.task_help(shell, task) : self.class.help(shell, subcommand)
   end
 end # Thor
