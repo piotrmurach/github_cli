@@ -38,7 +38,21 @@ Or install it yourself as:
 
     $ gem install github_cli
 
-## Usage
+## Contents
+
+* [1. Usage](#1-usage)
+* [2. Interface](#2-interface)
+  * [2.1. Configuration file](#21-configuration-file)
+  * [2.2. Authorization](#22-authorization)
+  * [2.3. Arguments](#23-arguments)
+  * [2.4. Listing commands](#24-listing-commands)
+  * [2.5. Subcommands](#25-subcommands)
+  * [2.6. Output formatting](#26-output-formatting)
+  * [2.7. Output paging](#27-output-paging)
+* [3. API](#3-api)
+* [4. Development](#4-development)
+
+## 1. Usage
 
 Run it:
 
@@ -46,7 +60,9 @@ Run it:
 $ gcli
 ```
 
-### Initialize a configuration file
+## 2. Interface
+
+### 2.1 Configuration file
 
 The first step is to create a configuration file, either global in home directory or local inside the project:
 
@@ -108,7 +124,7 @@ Finally, to see a manpage about available configuration options do
 $ gcli help config
 ```
 
-### Authorization
+### 2.2 Authorization
 
 To create oauth tokens you need to setup your basic authentication.
 
@@ -150,7 +166,7 @@ Finally to add the token to your config do
 $ gcli config user.token '...'
 ```
 
-### Arguments
+### 2.3. Arguments
 
 The required arguments come first as per command description, then are followed by the optional arguments supplied as specific options.
 
@@ -184,7 +200,7 @@ To find out which options are required and which are optional use `help` command
 $ gcli repo help create
 ```
 
-### Getting a list of commands
+### 2.4. Listing commands
 
 You can list all GitHub APIs commands:
 
@@ -198,7 +214,7 @@ to limit returned results pass `pattern`
 $ gcli list re*   # Returns all commands matching the pattern
 ```
 
-### Subcommands
+### 2.5. Subcommands
 
 To see a list of subcommands that a given command provides just type top-level command like so
 
@@ -206,7 +222,7 @@ To see a list of subcommands that a given command provides just type top-level c
 $ gcli repo
 ```
 
-### Output Format
+### 2.5. Output formatting
 
 The API responses can be formatted as `csv`, `json`, `pretty`, `table`.
 
@@ -227,7 +243,7 @@ To suppress output pass `--quiet` option like so
 gcli repo create ... --quiet=true
 ```
 
-### Output Paging
+### 2.6. Output paging
 
 By default all responses are paged. You can switch off paging by supplying `no-pager` flag.
 
@@ -237,7 +253,7 @@ gcli --no-pager user ls -u wycats
 
 Also you can supply you preferred `pager`, otherwise the paging program is taken from environment variable PAGER if defined or defaults to "less".
 
-### API
+### 3. API
 
 Interact with git data:
 
@@ -312,7 +328,31 @@ Interact with search:
 $ gcli search
 ```
 
+## 4. Development
+
+The test suite includes both unit tests and end-to-end tests. The unit tests are in `spec` folder and can be run:
+
+```bash
+$ bundle exec rake spec
+```
+
+The end-to-end tests are in `features` folder and can be run:
+
+```bash
+$ bundle exec rake features
+```
+
+In order to run all the tests run:
+
+```bash
+$ bundle exec rake [ci]
+```
+
 ## Contributing
+
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+Bug reports and pull requests are welcome.
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
