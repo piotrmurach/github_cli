@@ -43,7 +43,7 @@ GEM
       oauth2
     hashie (3.4.4)
     hpricot (0.8.6)
-    json (1.8.0)
+    json (1.8.3)
     jwt (1.5.1)
     mini_portile2 (2.0.0)
     multi_json (1.12.1)
