@@ -7,14 +7,27 @@ module GithubCLI
     extend self
 
     # Full path to manual direcotry
-    def man_dir
-      File.expand_path('../man', __FILE__)
+    #
+    # @return [String]
+    #
+    # @api private
+    def man_dir(path = nil)
+      if @man_dir.nil? || path
+        man_path = path || File.expand_path('../man', __FILE__)
+
+        if File.directory?(man_path)
+          @man_dir = man_path
+        else
+          fail "Manuals directory `#{man_path}` does not exist"
+        end
+      end
+      @man_dir
     end
 
     # Paths to manpages included in this library
     #
     # @api private
-    def manpages(name, section = nil)
+    def manpages(name = nil, section = nil)
       Dir.entries(man_dir).select do |file|
         file =~ /(.+)#{name}\.#{section || '\d'}$/
       end
@@ -27,6 +40,8 @@ module GithubCLI
     #
     # @api public
     def manpage?(name, section = nil)
+      return false if name.nil?
+
       manpages(name, section).any?
     end
 
@@ -53,6 +68,7 @@ module GithubCLI
     #
     # @api public
     def read(name, section = nil)
+      return if name.nil?
       paths = manpages(name)
       return if paths.empty?
 
