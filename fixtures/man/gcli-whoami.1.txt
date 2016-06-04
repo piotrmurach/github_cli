@@ -1,0 +1,19 @@
+GCLI-WHOAMI(1)							GCLI-WHOAMI(1)
+
+
+
+NAME
+       gcli-whoami - Display gcli username
+
+SYNOPSIS
+       gcli whoami
+
+SEE ALSO
+       o   gcli-config(1)
+
+
+
+
+
+
+				  April 2013			GCLI-WHOAMI(1)

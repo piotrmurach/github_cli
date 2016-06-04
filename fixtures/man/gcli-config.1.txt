@@ -1,0 +1,11 @@
+GCLI-CONFIG(1)							GCLI-CONFIG(1)
+
+
+
+NAME
+       gcli-config - Get or set global or local configuration options
+
+SYNOPSIS
+       gcli config [--local] name [value]
+       gcli config [--local] -l | -list [name_regex]
+       gcli config [--local] -e | --edit
