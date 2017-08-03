@@ -1,7 +1,9 @@
 <div align="center">
   <a href="http://piotrmurach.github.io/github/"><img width="136" src="https://github.com/piotrmurach/github_cli/raw/master/assets/github_api.png" alt="github api logo" /></a>
 </div>
+
 # GithubCLI
+
 [![Gem Version](https://badge.fury.io/rb/github_cli.svg)][gem]
 [![Build Status](https://secure.travis-ci.org/piotrmurach/github_cli.svg?branch=master)][travis]
 [![Code Climate](https://codeclimate.com/github/piotrmurach/github_cli/badges/gpa.svg)][codeclimate]
