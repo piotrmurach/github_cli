@@ -1,12 +1,18 @@
 # encoding: utf-8
 
-require 'github_cli/system'
+require 'ronn'
+require 'tty-prompt'
+require 'tty-which'
 
 module GithubCLI
   module Manpage
     extend self
 
-    # Full path to manual direcotry
+    def base_root
+      File.dirname(__FILE__)
+    end
+
+    # Full path to manual directory
     #
     # @return [String]
     #
@@ -56,12 +62,12 @@ module GithubCLI
     # Check if groff is installed on the system
     # @api private
     def groff?
-      System.command?('groff')
+      TTY::Which.exist?('groff')
     end
 
     # Check if man is installed on the system
     def man?
-      System.command?('man')
+      TTY::Which.exist?('man')
     end
 
     # Read manual page
