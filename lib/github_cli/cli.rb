@@ -1,4 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require 'tty-editor'
 
 module GithubCLI
   # Main command line interface
@@ -180,8 +182,7 @@ module GithubCLI
       if options[:list]
         Terminal.print_config(name) && return
       elsif options[:edit]
-        editor = Editor.new GithubCLI.config.path
-        editor.open && return
+        TTY::Editor.open(GithubCLI.config.path) && return
       end
 
       if !name
