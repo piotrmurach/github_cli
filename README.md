@@ -6,23 +6,20 @@
 
 [![Gem Version](https://badge.fury.io/rb/github_cli.svg)][gem]
 [![Build Status](https://secure.travis-ci.org/piotrmurach/github_cli.svg?branch=master)][travis]
-[![Code Climate](https://codeclimate.com/github/piotrmurach/github_cli/badges/gpa.svg)][codeclimate]
+[![Build status](https://ci.appveyor.com/api/projects/status/dw97iaycnu9ea6u0?svg=true)][appveyor]
+[![Maintainability](https://api.codeclimate.com/v1/badges/38e4d21b00806fd865c1/maintainability)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/github/piotrmurach/github_cli/badge.svg?branch=master)][coverage]
 [![Inline docs](http://inch-ci.org/github/piotrmurach/github_cli.svg)][inchpages]
-[![Dependency Status](https://gemnasium.com/piotrmurach/github_cli.svg?travis)][gemnasium]
+[Website](http://piotrmurach.github.io/github/)
 
 [gem]: http://badge.fury.io/rb/github_cli
 [travis]: http://travis-ci.org/piotrmurach/github_cli
-[codeclimate]: https://codeclimate.com/github/piotrmurach/github_cli
+[appveyor]: https://ci.appveyor.com/project/piotrmurach/github-cli
+[codeclimate]: https://codeclimate.com/github/piotrmurach/github_cli/maintainability
 [coverage]: https://coveralls.io/github/piotrmurach/github_cli
 [inchpages]: http://inch-ci.org/github/piotrmurach/github_cli
-[gemnasium]: https://gemnasium.com/piotrmurach/github_cli
-
-[Website](http://piotrmurach.github.io/github/)
 
 > Command line interface for GitHub API that works hand-in-hand with `github_api` gem.
-
-Important!: This library is currently being updated to include all Github API requests and undergoes rapid development cycles. A feature roadmap will be added shortly.
 
 ![Interface](https://github.com/piotrmurach/github_cli/raw/master/assets/interface.png)
 
@@ -364,4 +361,4 @@ Bug reports and pull requests are welcome.
 
 ## Copyright
 
-Copyright (c) 2012-2016 Piotr Murach. See LICENSE for further details.
+Copyright (c) 2012 Piotr Murach. See LICENSE for further details.
