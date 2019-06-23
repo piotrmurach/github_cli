@@ -25,10 +25,9 @@ module GithubCLI
     end
 
     def convert_values(values)
-      values_copy = values.dup
-      collected = []
-      values_copy.inject([]) do |collected, val|
-        collected << convert_value(val)
+      values.inject([]) do |acc, val|
+        acc << convert_value(val)
+        acc
       end
     end
 
@@ -90,6 +89,5 @@ module GithubCLI
     def longest_common_prefix(string_1, string_2)
       ("#{string_1}\0#{string_2}").match(/^(.*).*\0\1/i).to_a[1]
     end
-
   end
 end # GithubCLI
