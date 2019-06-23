@@ -2,7 +2,7 @@
   <a href="http://piotrmurach.github.io/github/"><img width="136" src="https://github.com/piotrmurach/github_cli/raw/master/assets/github_api.png" alt="github api logo" /></a>
 </div>
 
-# GithubCLI
+# [GithubCLI](https://piotrmurach.github.io/github/)
 
 [![Gem Version](https://badge.fury.io/rb/github_cli.svg)][gem]
 [![Build Status](https://secure.travis-ci.org/piotrmurach/github_cli.svg?branch=master)][travis]
@@ -10,7 +10,6 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/38e4d21b00806fd865c1/maintainability)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/github/piotrmurach/github_cli/badge.svg?branch=master)][coverage]
 [![Inline docs](http://inch-ci.org/github/piotrmurach/github_cli.svg)][inchpages]
-[Website](http://piotrmurach.github.io/github/)
 
 [gem]: http://badge.fury.io/rb/github_cli
 [travis]: http://travis-ci.org/piotrmurach/github_cli
