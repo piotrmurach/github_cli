@@ -5,7 +5,7 @@ describe GithubCLI::Pager do
   context '#pager_command' do
     it 'permits custom commands' do
       cmd = 'more'
-      GithubCLI::System.stub(:command?) { true }
+      TTY::Which.stub(:exist?) { true }
       described_class.pager_command(cmd).should == cmd
     end
   end

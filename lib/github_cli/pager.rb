@@ -1,6 +1,4 @@
-# encoding: utf-8
-
-require 'github_cli/system'
+# frozen_string_literal: true
 
 module GithubCLI
   # This class provides pagining of terminal output.
@@ -14,7 +12,7 @@ module GithubCLI
             ENV['PAGER'], 'less -isr', 'more', 'cat', 'pager'
           ]
           commands = cmds + commands
-          commands.compact.uniq.find { |cmd| System.command? cmd }
+          commands.compact.uniq.find { |cmd| TTY::Which.exist?(cmd) }
         end
       end
 
