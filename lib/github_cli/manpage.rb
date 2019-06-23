@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'tty-pager'
 require 'tty-prompt'
 require 'tty-which'
 
@@ -103,11 +104,15 @@ module GithubCLI
 
     def run(manpath)
       fullpath = File.join(man_dir, manpath)
-      if !(cmd = available_command).nil?
-        system("#{cmd} #{fullpath} | #{Pager.pager_command}")
-      else
-        system("#{Pager.pager_command} #{fullpath}.txt")
-      end
+      pager = TTY::Pager.new
+
+      output = if !(cmd = available_command).nil?
+                 `#{cmd} #{fullpath}`
+               else
+                 ::File.read("#{fullpath}.txt")
+               end
+
+      pager.page(output)
     end
   end # Manpage
 end # GithubCLI

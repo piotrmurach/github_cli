@@ -12,7 +12,7 @@ module GithubCLI
       the_shell = (options["no-color"] ? Thor::Shell::Basic.new : shell)
       GithubCLI.ui = UI.new(the_shell)
       GithubCLI.ui.debug! if options["verbose"]
-      options["no-pager"] ? Pager.disable : Pager.enable
+      #options["no-pager"] ? Pager.disable : Pager.enable
     end
 
     ALIASES = {

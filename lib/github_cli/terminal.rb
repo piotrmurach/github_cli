@@ -26,19 +26,6 @@ module GithubCLI
         nil
       end
 
-      def paged_output
-        if Pager.enabled?
-          pager.page
-          true
-        else
-          false
-        end
-      end
-
-      def pager
-        @pager ||= Pager.new
-      end
-
       def find_commands(pattern=nil)
         Command.all.select do |cmd|
           cmd if pattern && cmd.namespace =~ pattern

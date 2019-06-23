@@ -1,4 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require 'tty-pager'
 
 module GithubCLI
   # This is the main entry point for formatting output.
@@ -12,13 +14,13 @@ module GithubCLI
       @message  = options[:message]
       @format   = options[:format]
       @quiet    = options[:quiet]
+      @pager    = TTY::Pager.new
     end
 
     def render_output
       render_status
       return if quiet
-      Terminal.paged_output
-      determine_output_formatter
+      @pager.page(determine_output_formatter)
       render_message
     end
 
