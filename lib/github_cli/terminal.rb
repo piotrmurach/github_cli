@@ -1,20 +1,20 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require 'tty-screen'
 
 module GithubCLI
   # Responsible for display and size detection.
   class Terminal
 
     DEFAULT_WIDTH  = 80
-    DEFAULT_HEIGHT = 40
 
     class << self
-
       def default_width
         DEFAULT_WIDTH
       end
 
       def width
-        GithubCLI.ui.terminal_width
+        TTY::Screen.width
       end
 
       def line(text)
@@ -73,8 +73,6 @@ Usage: #{GithubCLI.executable_name} #{GithubCLI::Command::Usage.new(command, fla
         GithubCLI.ui.info "Configuration options:"
         GithubCLI.ui.print_table GithubCLI.config.pretty(pattern)
       end
-
     end
-
   end # Terminal
 end # GithubCLI

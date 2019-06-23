@@ -1,7 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 module GithubCLI
-
   # Class responsible for displaying different level information
   class UI
     attr_writer :shell
@@ -47,10 +46,6 @@ module GithubCLI
 
     def print_wrapped(message, options = {})
       @shell.print_wrapped message, options
-    end
-
-    def terminal_width
-      @shell.terminal_width
     end
   end # UI
 end # GithubCLI
