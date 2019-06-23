@@ -1,10 +1,7 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 require 'yaml'
 require 'pathname'
-require 'tty'
-require 'tty-prompt'
-require 'tty-which'
 
 require 'github_cli/vendor'
 require 'github_api'
