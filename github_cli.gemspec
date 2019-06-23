@@ -30,5 +30,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler', '>= 1.5.0'
   spec.add_development_dependency 'rake', '< 1.0'
-  spec.add_development_dependency 'rspec', '2.13.0'
+  spec.add_development_dependency 'rspec', '2.99.0'
+  spec.add_development_dependency 'aruba', '0.5.1'
+  spec.add_development_dependency 'communist', '~> 0.3.0'
 end
