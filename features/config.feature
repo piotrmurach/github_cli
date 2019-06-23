@@ -1,6 +1,6 @@
-@ci-run
 Feature: Configuration file
 
+  @ci-run
   Scenario: Missing global file
     When I run `gcli config`
     Then the output should contain:
@@ -8,6 +8,7 @@ Feature: Configuration file
     Configuration file does not exist. Please use `gcli init` to create one.
     """
 
+  @ci-run
   Scenario: Missing local file
     When I run `gcli config --local`
     Then the output should contain:
@@ -15,6 +16,7 @@ Feature: Configuration file
     Configuration file does not exist. Please use `gcli init` to create one.
     """
 
+  @ci-run
   Scenario: List global file options
     Given I run `gcli init`
     When I run `gcli config`
@@ -23,6 +25,7 @@ Feature: Configuration file
     Configuration options:
     """
 
+  @ci-run
   Scenario: Seek local before global configuration
     Given a directory named "piotr"
       And I cd to "piotr"
