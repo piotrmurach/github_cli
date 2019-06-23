@@ -1,8 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-require 'spec_helper'
-
-describe GithubCLI::API, '#configure' do
+RSpec.describe GithubCLI::API, '#configure' do
   let(:object) { described_class }
 
   before {
@@ -14,15 +12,15 @@ describe GithubCLI::API, '#configure' do
   context 'with default' do
     let(:config) { { } }
 
-    its(:adapter) { should eql(:net_http) }
+    it { expect(subject.adapter).to eql(:net_http) }
 
-    its(:ssl) { should eql({}) }
+    it { expect(subject.ssl).to eql({}) }
 
-    its(:site) { should eql('https://github.com') }
+    it { expect(subject.site).to eql('https://github.com') }
 
-    its(:endpoint) { should eql('https://api.github.com') }
+    it { expect(subject.endpoint).to eql('https://api.github.com') }
 
-    its(:oauth_token) { should be_nil }
+    it { expect(subject.oauth_token).to eql(nil) }
   end
 
   context 'with config values' do
@@ -36,15 +34,14 @@ describe GithubCLI::API, '#configure' do
       }
     }
 
-    its(:adapter) { should eql(:patron) }
+    it { expect(subject.adapter).to eql(:patron) }
 
-    its(:ssl) { should eql({"verify" => false})}
+    it { expect(subject.ssl).to eql({"verify" => false}) }
 
-    its(:site) { should eql('http://site.com')}
+    it { expect(subject.site).to eql('http://site.com') }
 
-    its(:endpoint) { should eql('http://api.com') }
+    it { expect(subject.endpoint).to eql('http://api.com') }
 
-    its(:oauth_token) { should eql('abc1234') }
+    it { expect(subject.oauth_token).to eql('abc1234') }
   end
-
 end
