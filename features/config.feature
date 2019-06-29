@@ -54,5 +54,29 @@ Feature: Configuration file
   Scenario: Listing all configuration options
     Given I run `gcli init`
     When I run `gcli config -l`
-    Then the stdout should contain "user.token"
-
+    Then the stdout should contain:
+    """
+    Writing new configuration file to /tmp/fakehome/.gcliconfig
+    Configuration options:
+    {\"core\"=>
+      {\"adapter\"=>\"net_http\",
+       \"site"=>\"https://github.com\",
+       \"endpoint\"=>\"https://api.github.com\",
+       \"ssl\"=>\"\",
+       \"mime\"=>\"json\",
+       \"editor\"=>\"vi\",
+       \"pager\"=>\"less\",
+       \"no-pager\"=>false,
+       \"no-color\"=>false,
+       \"quiet\"=>false,
+       \"format\"=>\"table\",
+       \"aliases"=>\"\",
+       \"auto_pagination\"=>false},
+     \"user\"=>
+      {\"token\"=>\"\",
+       \"login\"=>\"\",
+       \"password\"=>\"\",
+       \"name\"=>\"\",
+       \"repo\"=>\"\",
+       \"org\"=>\"\"}}
+    """

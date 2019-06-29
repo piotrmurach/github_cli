@@ -7,8 +7,11 @@ module GithubCLI
   class CLI < Thor
     include Thor::Actions
 
+    attr_reader :prompt
+
     def initialize(*args)
       super
+      @prompt = TTY::Prompt.new
       the_shell = (options["no-color"] ? Thor::Shell::Basic.new : shell)
       GithubCLI.ui = UI.new(the_shell)
       GithubCLI.ui.debug! if options["verbose"]
@@ -28,7 +31,7 @@ module GithubCLI
 
     class_option :filename, :type => :string,
                  :desc => "Configuration file name.", :banner => "<filename>",
-                 :default => ".githubrc"
+                 :default => ".gcliconfig"
     class_option :token, :type => :string,
                  :desc => 'Authentication token.',
                  :banner => '<oauth token>'
@@ -47,32 +50,6 @@ module GithubCLI
                  :desc => "Enable verbose output mode."
     class_option :version, :type => :boolean, :aliases => ['-V'],
                  :desc => "Show program version"
-
-    no_commands do
-      def defaults
-        {
-          'user.token'    => nil,
-          'user.login'    => nil,
-          'user.password' => nil,
-          'user.name'     => nil,
-          'user.repo'     => nil,
-          'user.org'      => nil,
-          'core.adapter'  => :net_http,
-          'core.site'     => 'https://github.com',
-          'core.endpoint' => 'https://api.github.com',
-          'core.ssl'      => nil,
-          'core.mime'     => :json,
-          'core.editor'   => 'vi',
-          'core.pager'    => 'less',
-          'core.no-pager' => false,
-          'core.no-color' => false,
-          'core.quiet'    => false,
-          'core.format'   => 'table',
-          'core.auto_pagination' => false,
-          'core.aliases'  => nil,
-        }
-      end
-    end
 
     option :local, :type => :boolean, :default => false, :aliases => "-l",
            :desc => 'Modify local configuration file, otherwise a global configuration file is changed.'
@@ -98,8 +75,8 @@ module GithubCLI
       params['note_url'] = options[:note_url] || 'https://github.com/peter-murach/github_cli'
       global_options[:params] = params
       # Need to configure client with login and password
-      login    = TTY.shell.ask("login: ").read_string.strip!
-      password = TTY.shell.ask("password: ").read_password.strip!
+      login    = prompt.ask("login:").strip!
+      password = prompt.mask("password:").strip!
 
       global_options['login']    = login
       global_options['password'] = password
@@ -108,22 +85,28 @@ module GithubCLI
       res   = self.invoke("auth:create", [], global_options)
       token = res.body['token']
 
-      config = GithubCLI.config
-      config.location = options[:local] ? 'local' : 'global'
-      config['user.login']    = login
-      config['user.password'] = password
-      config['user.token']    = token
+      config = GithubCLI.new_config
+      path = options[:local] ? Dir.pwd : Dir.home
+      fullpath = ::File.join(path, "#{config.filename}")
+      config.append_path(path)
+
+      config.set('user.login', value: login)
+      config.set('user.password', value: password)
+      config.set('user.token', value: token)
+
+      config.write(::File.join(path, config_filename),
+                   force: options[:force], format: 'yml')
 
       GithubCLI.ui.warn <<-EOF
-        \nYour #{GithubCLI.config.location} configuration file has been overwritten!
+        \nYour #{fullpath} configuration file has been overwritten!
       EOF
     end
 
     desc 'whoami', 'Print the username config to standard out'
     def whoami
       config = GithubCLI.config
-      me = config['user.login'] || "Not authed. Run 'gcli authorize'"
-      GithubCLI.ui.info me
+      who = config.fetch('user.login') || "Not authed. Run 'gcli authorize'"
+      GithubCLI.ui.info(who, "\n")
     end
 
     option :force, :type => :boolean, :default => false, :aliases => "-f",
@@ -139,23 +122,26 @@ module GithubCLI
       override the bult-in defaults and allow you to save typing commonly  used
       command line options.
     DESC
-    def init(filename=nil)
+    def init(filename = nil)
       config_filename = filename ? filename : options[:filename]
-      config = GithubCLI.config
+      config = GithubCLI.new_config
       config.filename = config_filename
-      config.location = options[:local] ? 'local' : 'global'
 
-      if File.exists?(GithubCLI.config.path) && !options[:force]
-        GithubCLI.ui.error "Not overwritting existing config file #{GithubCLI.config.path}, use --force to override."
+      path = options[:local] ? Dir.pwd : Dir.home
+      fullpath = ::File.join(path, "#{config.filename}")
+      config.append_path(path)
+
+      if File.exists?(fullpath) && !options[:force]
+        GithubCLI.ui.error "Not overwritting existing config file #{fullpath}, use --force to override.", "\n"
         exit 1
       end
 
-      config.save(defaults)
-      GithubCLI.ui.confirm "Writing new configuration file to #{GithubCLI.config.path}"
+      config.write(::File.join(path, config.filename),
+                   force: options[:force], format: 'yml')
+
+      GithubCLI.ui.confirm "Writing new configuration file to #{fullpath}", "\n"
     end
 
-    option :local, :type => :boolean, :default => false,
-           :desc => 'use local config file'
     option :list, :type => :boolean, :default => false, :aliases => '-l',
            :desc => 'list all'
     option :edit, :type => :boolean, :default => false, :aliases => '-e',
@@ -172,30 +158,29 @@ module GithubCLI
     DESC
     def config(*args)
       name, value = args.shift, args.shift
-      GithubCLI.config.location = options[:local] ? 'local' : 'global'
+      config = GithubCLI.config
 
-      if !File.exists?(GithubCLI.config.path)
+      if !config.exist?
         GithubCLI.ui.error "Configuration file does not exist. Please use `#{GithubCLI.executable_name} init` to create one."
         exit 1
       end
 
       if options[:list]
-        Terminal.print_config(name) && return
+        Terminal.print_config(config) && return
       elsif options[:edit]
-        TTY::Editor.open(GithubCLI.config.path) && return
+        TTY::Editor.open(config.find_file) && return
       end
 
       if !name
-        Terminal.print_config && return
+        Terminal.print_config(config) && return
       end
 
       if !value
-        Terminal.line GithubCLI.config[name]
+        GithubCLI.ui.info config.fetch(name), "\n"
       else
-        Terminal.line GithubCLI.config[name] = value
+        GithubCLI.ui.info config.set(name, value: value), "\n"
+        config.write(force: true, format: 'yml')
       end
-
-      return
     end
 
     desc 'list', 'List all available commands limited by pattern'
@@ -206,7 +191,7 @@ module GithubCLI
 
     desc 'version', 'Display Github CLI version.'
     def version
-      GithubCLI.ui.info "#{GithubCLI.program_name} #{GithubCLI::VERSION}"
+      GithubCLI.ui.info "#{GithubCLI.program_name} #{GithubCLI::VERSION}", "\n"
     end
 
     desc "assignee", "Leverage Assignees API"

@@ -1,0 +1,23 @@
+---
+core:
+  adapter: patron
+  site: https://test.com
+  endpoint: https://api.test.com
+  ssl: 
+    verify: false
+  mime: json
+  editor: vi
+  pager: less
+  no-pager: false
+  no-color: false
+  quiet: false
+  format: table
+  auto_pagination: false
+  aliases: ''
+user:
+  token: 'abc1234'
+  login: ''
+  password: ''
+  name: ''
+  repo: ''
+  org: ''
