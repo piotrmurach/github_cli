@@ -9,7 +9,6 @@ require 'github_api'
 require 'github_cli/thor_ext'
 require 'github_cli/version'
 require 'github_cli/errors'
-require 'github_cli/config'
 
 # Base module which adds Github API to the command line
 module GithubCLI
