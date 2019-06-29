@@ -51,8 +51,6 @@ RSpec.describe GithubCLI::CLI do
   end
 
   context '#config' do
-    let(:name) { 'core.editor' }
-
     before {
       allow(ui).to receive(:info)
       allow(config).to receive(:exist?).and_return(true)
@@ -66,9 +64,9 @@ RSpec.describe GithubCLI::CLI do
     end
 
     it 'prints option for list flag' do
-      allow(GithubCLI::Terminal).to receive(:print_config).with(name)
+      allow(GithubCLI::Terminal).to receive(:print_config).with(config)
 
-      subject.invoke "config", [name], {:list => true}
+      subject.invoke "config", ['core.editor'], {:list => true}
 
       expect(GithubCLI::Terminal).to have_received(:print_config)
     end
