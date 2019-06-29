@@ -2,6 +2,9 @@
 
 require 'tty-pager'
 
+require_relative 'formatters/csv'
+require_relative 'formatters/table'
+
 module GithubCLI
   # This is the main entry point for formatting output.
   # It delegates to other objects like Formatter::Table
@@ -55,6 +58,5 @@ module GithubCLI
         Terminal.line message
       end
     end
-
   end # Formatter
 end # GithubCLi

@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
-require 'yaml'
+require 'github_api'
 require 'pathname'
 require 'tty-config'
+require 'yaml'
 
-require 'github_cli/vendor'
-require 'github_api'
-require 'github_cli/thor_ext'
-require 'github_cli/version'
-require 'github_cli/errors'
+require_relative 'github_cli/errors'
+require_relative 'github_cli/formatter'
+require_relative 'github_cli/version'
+require_relative 'github_cli/vendor'
+require_relative 'github_cli/thor_ext'
 
 # Base module which adds Github API to the command line
 module GithubCLI
@@ -19,8 +20,6 @@ module GithubCLI
   autoload :Terminal,  'github_cli/terminal'
   autoload :Manpage,   'github_cli/manpage'
   autoload :Commands,  'github_cli/commands'
-  autoload :Formatter, 'github_cli/formatter'
-  autoload :Formatters,'github_cli/formatters'
   autoload :UI,        'github_cli/ui'
   autoload :Util,      'github_cli/util'
 

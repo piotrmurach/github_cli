@@ -1,4 +1,4 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 if defined?(Thor)
   GithubCLI.ui.warn "Thor has already been required. "

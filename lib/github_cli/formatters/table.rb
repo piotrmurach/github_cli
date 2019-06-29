@@ -1,7 +1,10 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 require 'ostruct'
 require 'forwardable'
+
+require_relative '../terminal'
+require_relative '../util'
 
 module GithubCLI
   module Formatters
@@ -255,7 +258,6 @@ module GithubCLI
         end
         Terminal.line border.left + columns.join + "\n"
       end
-
     end # Table
   end # Formatters
 end # GithubCLI
