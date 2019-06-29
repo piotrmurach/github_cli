@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'pp'
 require 'tty-screen'
 
 module GithubCLI
@@ -69,9 +70,9 @@ Usage: #{GithubCLI.executable_name} #{GithubCLI::Command::Usage.new(command, fla
         TEXT
       end
 
-      def print_config(pattern=nil)
-        GithubCLI.ui.info "Configuration options:"
-        GithubCLI.ui.print_table GithubCLI.config.pretty(pattern)
+      def print_config(config, pattern: nil)
+        GithubCLI.ui.info "Configuration options:\n"
+        pp config.to_h
       end
     end
   end # Terminal
