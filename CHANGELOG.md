@@ -1,55 +1,101 @@
-0.6.2 (October 6, 2013)
+# Change log
 
+## [v0.7.0] - 2019-07-x
+
+### Added
+* Add tty-config
+* Add tty-editor
+* Add tty-pager
+* Add tty-screen
+* Add tty-which
+
+### Changed
+* Change Editor with TTY::Editor
+* Change GithubCLI::Config to use TTY::Config
+* Change configuration format to have nested YAML keys
+* Change config name from .githubrc to .gcliconfig
+* Change Manpage implementation
+* Change to update github_api requirement to latest
+* Remove System in favour of TTY::Which dependency
+* Remove Config in favour of TTY::Config dependency
+* Remove tty dependency
+
+### Fixed
+* Fixed to use --format option value
+
+## [v0.6.2] - 2013-10-06
+
+### Added
 * Add commands to repository contents API
 * Add tty dependency and fix issue #12 when reading user password
+
+### Changed
 * Change error message debug
 * Change on_error handler to catch common types of exceptions
 * Change executable to use new error helper
 
-0.6.1 (June 9, 2013)
+## [v0.6.1] - 2013-06-09
 
+### Added
 * Add stat command for Statistics API
+
+### Changed
 * Change command class to dynamically load usage for subcommands
 
-0.6.0 (June 1, 2013)
+## [v0.6.0] - 2013-06-01
 
+### Added
 * Add authorize command to ease pain with getting authenticated
 * Add 'every' flag to repository listing command
 * Add 'public' flag to gist listing command
-* Change all commands to pass through global options to configure api requests
-* Update vendor dependencies
 * Add ability to configure all github api request options
 
-0.5.9 (April 17, 2013)
+### Changed
+* Change all commands to pass through global options to configure api requests
+* Update vendor dependencies
 
+## [v0.5.9] - 2013-04-17
+
+### Added
+* Add --quiet option for supressing output only for repo/hook/auth commands
+
+### Changed
 * Change API class configure to take options and allow for basic auth,
   stop using class api variable
 * Change API commands to take and pass options for global configuration
-* Add --quiet option for supressing output only for repo/hook/auth commands
 * Fix problem with repo create command and boolean option flags
 
-0.5.8 (April 14, 2013)
+## [v0.5.8] - 2013-04-14
 
-* Change forks commands to take specific options and add tests
-* Change statuses commands to take specific options and add tests
+### Added
 * Add authorize command for easy token creation
 * Add whoami as convenience command for checking user
+* Add remaining notify commands for full Notifications support
+
+### Changed
+* Change forks commands to take specific options and add tests
+* Change statuses commands to take specific options and add tests
 * Change content commands to take specific options and add tests
 * Change blob create command to add specific options and tests
-* Add remaining notify commands for full Notifications support
 * Change merge command to take specific options and add tests
 
-0.5.7 (April 4, 2013)
+## [v0.5.7] - 2013-04-04
 
+### Added
+* Add notify command for Notifications API access
+
+### Changed
 * Change apis.rb to dynamically load api files
 * Change interface to remove command options and clean up descriptions
-* Add notify command for Notifications API access
 * Change error handling for output to provided common error type
 * Change hooks commands to take specific options and add tests
+
+### Fixed
 * Fix error on empty response bodies
 
-0.5.6 (April 1, 2013)
+# [v0.5.6] - 2013-04-01
 
+### Changed
 * Change gcli interface to be more concise and not include gcli name
 * Change issue command to add specific options and add tests
 * Change user command to add specific options and add tests
@@ -207,3 +253,16 @@
 * Add repository forks, hooks, watching api commands.
 * Fix repository commands bugs.
 * Update gem dependency to 'github_api' version 0.5.0 and rewrote method calls to match new dsl conventions.
+
+[v0.7.0]: https://github.com/piotrmurach/github_cli/compare/v0.6.2...v0.7.0
+[v0.6.2]: https://github.com/piotrmurach/github_cli/compare/v0.6.1...v0.6.2
+[v0.6.1]: https://github.com/piotrmurach/github_cli/compare/v0.6.0...v0.6.1
+[v0.6.0]: https://github.com/piotrmurach/github_cli/compare/v0.5.9...v0.6.0
+[v0.5.9]: https://github.com/piotrmurach/github_cli/compare/v0.5.8...v0.5.9
+[v0.5.8]: https://github.com/piotrmurach/github_cli/compare/v0.5.7...v0.5.8
+[v0.5.7]: https://github.com/piotrmurach/github_cli/compare/v0.5.6...v0.5.7
+[v0.5.6]: https://github.com/piotrmurach/github_cli/compare/v0.5.5...v0.5.6
+
+[v0.2.1]: https://github.com/piotrmurach/github_cli/compare/v0.2.0...v0.2.1
+[v0.2.0]: https://github.com/piotrmurach/github_cli/compare/v0.1.3...v0.2.0
+[v0.1.0]: https://github.com/piotrmurach/github_cli/compare/v0.1.0
