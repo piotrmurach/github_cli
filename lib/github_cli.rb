@@ -19,7 +19,6 @@ module GithubCLI
   autoload :Terminal,  'github_cli/terminal'
   autoload :Manpage,   'github_cli/manpage'
   autoload :Commands,  'github_cli/commands'
-  autoload :Helpers,   'github_cli/helpers'
   autoload :Formatter, 'github_cli/formatter'
   autoload :Formatters,'github_cli/formatters'
   autoload :UI,        'github_cli/ui'
@@ -43,14 +42,6 @@ module GithubCLI
 
     def executable_name
       File.basename($PROGRAM_NAME)
-    end
-
-    def default_configfile
-      Helpers.default_configfile
-    end
-
-    def root
-      default_configfile.expand_path
     end
 
     # Configuration defaults
