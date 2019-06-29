@@ -65,11 +65,10 @@ $ gcli
 The first step is to create a configuration file, either global in home directory or local inside the project:
 
 ```shell
-$ gcli init [--local] [filename]
+$ gcli init [--local|-l]
 ```
 
-Without any options this command will setup a `.githubrc` configuration file in
-your home directory with all the global settings. By passing `--local` option the config file will be created locally in the execution directory. Further, by default `.githubrc` name is used which can be changed by passing the `filename`.
+Without any options this command will setup a `.gcliconfig` configuration file in your home directory with all the global settings. By passing `--local` option the config file will be created locally in the current directory.
 
 Main configuration options are:
 
@@ -95,19 +94,19 @@ Moreover, `gcli config` command allows you to set/get any configuration option s
 For instance, to check value for your `authentication token` do
 
 ```shell
-$ gcli config [--local] user.token
+$ gcli config user.token
 ```
 
-and to set the value do
+And to set the value do
 
 ```shell
-$ gcli config [--local] user.token lh23l4kj234....
+$ gcli config user.token lh23l4kj234....
 ```
 
 To list specific options
 
 ```shell
-$ gcli config [--local] --list [regex]
+$ gcli config --list [regex]
 ```
 
 To edit config in your favourite editor:
@@ -222,7 +221,7 @@ $ gcli repo
 
 ### 2.5. Output formatting
 
-The API responses can be formatted as `csv`, `json`, `pretty`, `table`.
+The API responses can be formatted as `csv` or `table`.
 
 By default responses are in tabular format. Tables are available in `horizontal` and `vertical` mode. To enforce table display pass `:h` and `:v` respectively. Otherwise a default orientation will be picked depending on the request made and terminal size.
 
