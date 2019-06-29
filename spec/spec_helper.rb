@@ -1,7 +1,20 @@
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
+# frozen_string_literal: true
 
-require 'rspec'
+if ENV['COVERAGE'] || ENV['TRAVIS']
+  require 'simplecov'
+  require 'coveralls'
+
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
+    SimpleCov::Formatter::HTMLFormatter,
+    Coveralls::SimpleCov::Formatter
+  ])
+
+  SimpleCov.start do
+    command_name 'spec'
+    add_filter 'spec'
+  end
+end
+
 require 'github_cli'
 
 module Helpers
@@ -23,8 +36,8 @@ module Helpers
 end
 
 RSpec.configure do |config|
-  config.order = :rand
   config.include(Helpers)
+  config.order = :rand
 end
 
 RSpec::Matchers.define :exit_with_code do |status_code|
@@ -52,6 +65,3 @@ RSpec::Matchers.define :exit_with_code do |status_code|
     "expect block to call exit(#{status_code})"
   end
 end
-
-
-
