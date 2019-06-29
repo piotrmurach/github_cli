@@ -4,13 +4,12 @@ RSpec.describe GithubCLI::API, '#configure' do
   let(:object) { described_class }
 
   before {
-    GithubCLI.stub(:config).and_return(config)
+    allow(GithubCLI).to receive(:config).and_return(config)
   }
-
   subject { object.configure }
 
   context 'with default' do
-    let(:config) { { } }
+    let(:config) { GithubCLI.new_config }
 
     it { expect(subject.adapter).to eql(:net_http) }
 
@@ -25,22 +24,18 @@ RSpec.describe GithubCLI::API, '#configure' do
 
   context 'with config values' do
     let(:config) {
-      {
-       'core.ssl' => {"verify" => false},
-       'core.adapter' => :patron,
-       'core.site' => 'http://site.com',
-       'core.endpoint' => 'http://api.com',
-       'user.token' => 'abc1234'
-      }
+      config = GithubCLI.new_config
+      config.read(fixture_path('gcliconfig'), format: 'yml')
+      config
     }
 
     it { expect(subject.adapter).to eql(:patron) }
 
     it { expect(subject.ssl).to eql({"verify" => false}) }
 
-    it { expect(subject.site).to eql('http://site.com') }
+    it { expect(subject.site).to eql('https://test.com') }
 
-    it { expect(subject.endpoint).to eql('http://api.com') }
+    it { expect(subject.endpoint).to eql('https://api.test.com') }
 
     it { expect(subject.oauth_token).to eql('abc1234') }
   end
