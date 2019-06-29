@@ -1,4 +1,7 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative 'manpage'
+require_relative 'terminal'
 
 class Thor
   include Thor::Base
