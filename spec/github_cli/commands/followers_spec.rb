@@ -1,8 +1,6 @@
 # encoding: utf-8
 
-require 'spec_helper'
-
-describe GithubCLI::Commands::Followers do
+RSpec.describe GithubCLI::Commands::Followers do
   let(:format) { { 'format' => 'table' } }
   let(:user)   { 'peter-murach' }
   let(:api_class) { GithubCLI::Follower }

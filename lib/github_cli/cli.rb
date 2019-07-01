@@ -196,102 +196,135 @@ module GithubCLI
       GithubCLI.ui.info "#{GithubCLI.program_name} #{GithubCLI::VERSION}", "\n"
     end
 
+    require_relative 'commands/assignees'
     desc "assignee", "Leverage Assignees API"
     subcommand "assignee", GithubCLI::Commands::Assignees
 
+    require_relative 'commands/authorizations'
     desc "auth", "Leverage Authorizations API"
     subcommand "auth", GithubCLI::Commands::Authorizations
 
+    require_relative 'commands/blobs'
     desc "blob", "Leverage Blobs API"
     subcommand "blob", GithubCLI::Commands::Blobs
 
+    require_relative 'commands/collaborators'
     desc "collab", "Leverage Collaborators API"
     subcommand "collab", GithubCLI::Commands::Collaborators
 
+    require_relative 'commands/commits'
     desc "commit", "Leverage Commits API"
     subcommand "commit", GithubCLI::Commands::Commits
 
+    require_relative 'commands/contents'
     desc "content", "Leverage Contents API"
     subcommand "content", GithubCLI::Commands::Contents
 
+    require_relative 'commands/downloads'
     desc "download", "Leverage Downloads API"
     subcommand "download", GithubCLI::Commands::Downloads
 
+    require_relative 'commands/emails'
     desc "email", "Leverage Emails API"
     subcommand "email", GithubCLI::Commands::Emails
 
+    require_relative 'commands/events'
     desc "event", "Leverage Events API"
     subcommand "event", GithubCLI::Commands::Events
 
+    require_relative 'commands/followers'
     desc "follower", "Leverage Followers API"
     subcommand "follower", GithubCLI::Commands::Followers
 
+    require_relative 'commands/forks'
     desc "fork", "Leverage Forks API"
     subcommand "fork", GithubCLI::Commands::Forks
 
+    require_relative 'commands/gists'
     desc "gist", "Leverage Gists API"
     subcommand "gist", GithubCLI::Commands::Gists
 
+    require_relative 'commands/hooks'
     desc "hook", "Leverage Hooks API"
     subcommand "hook", GithubCLI::Commands::Hooks
 
+    require_relative 'commands/issues'
     desc "issue", "Leverage Issues API"
     subcommand "issue", GithubCLI::Commands::Issues
 
+    require_relative 'commands/keys'
     desc "key", "Leverage Keys API"
     subcommand "key", GithubCLI::Commands::Keys
 
+    require_relative 'commands/labels'
     desc "label", "Leverage Labels API"
     subcommand "label", GithubCLI::Commands::Labels
 
+    require_relative 'commands/members'
     desc "member", "Leverage Members API"
     subcommand "member", GithubCLI::Commands::Members
 
+    require_relative 'commands/merging'
     desc "merge", "Leverage Merging API"
     subcommand "merge", GithubCLI::Commands::Merging
 
+    require_relative 'commands/milestones'
     desc "milestone", "Leverage Milestones API"
     subcommand "milestone", GithubCLI::Commands::Milestones
 
+    require_relative 'commands/notifications'
     desc "notify", "Leverage Notifications API"
     subcommand "notify", GithubCLI::Commands::Notifications
 
+    require_relative 'commands/organizations'
     desc "org", "Leverage Organizations API"
     subcommand "org", GithubCLI::Commands::Organizations
 
+    require_relative 'commands/pull_requests'
     desc "pull", "Leverage Pull Requests API"
     subcommand "pull", GithubCLI::Commands::PullRequests
 
+    require_relative 'commands/references'
     desc "ref", "Leverage References API"
     subcommand "ref", GithubCLI::Commands::References
 
+    require_relative 'commands/repositories'
     desc "repo", "Leverage Repositories API"
     subcommand "repo", GithubCLI::Commands::Repositories
 
+    require_relative 'commands/search'
     desc "search", "Leverage Search API"
     subcommand "search", GithubCLI::Commands::Search
 
+    require_relative 'commands/starring'
     desc "star", "Leverage Starring API"
     subcommand "star", GithubCLI::Commands::Starring
 
+    require_relative 'commands/statistics'
     desc "stat", "Leverage Statistics API"
     subcommand "stat", GithubCLI::Commands::Statistics
 
+    require_relative 'commands/statuses'
     desc "status", "Leverage Statuses API"
     subcommand "status", GithubCLI::Commands::Statuses
 
+    require_relative 'commands/tags'
     desc "tag", "Leverage Tags API"
     subcommand "tag", GithubCLI::Commands::Tags
 
+    require_relative 'commands/teams'
     desc "team", "Leverage Teams API"
     subcommand "team", GithubCLI::Commands::Teams
 
+    require_relative 'commands/trees'
     desc "tree", "Leverage Trees API"
     subcommand "tree", GithubCLI::Commands::Trees
 
+    require_relative 'commands/users'
     desc "user", "Leverage Users API"
     subcommand "user", GithubCLI::Commands::Users
 
+    require_relative 'commands/watching'
     desc "watch", "Leverage Watching API"
     subcommand "watch", GithubCLI::Commands::Watching
   end # CLI

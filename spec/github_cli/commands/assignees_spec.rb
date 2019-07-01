@@ -1,8 +1,6 @@
 # encoding: utf-8
 
-require 'spec_helper'
-
-describe GithubCLI::Commands::Assignees do
+RSpec.describe GithubCLI::Commands::Assignees do
   let(:format) { {'format' => 'table'} }
   let(:user)   { 'peter-murach' }
   let(:repo)   { 'github_cli' }

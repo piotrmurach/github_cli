@@ -1,8 +1,6 @@
 # encoding: utf-8
 
-require 'spec_helper'
-
-describe GithubCLI::Commands::Authorizations do
+RSpec.describe GithubCLI::Commands::Authorizations do
   let(:format) { {'format' => 'table'} }
   let(:id) { 1 }
   let(:api_class) { GithubCLI::Authorization }

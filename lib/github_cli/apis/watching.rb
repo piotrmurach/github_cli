@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require_relative '../api'
+
 module GithubCLI
   class Watching < API
 
@@ -35,6 +37,5 @@ module GithubCLI
         end
       end
     end
-
   end # Watching
 end # GithubCLI
