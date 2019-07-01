@@ -4,6 +4,7 @@ require 'pp'
 require 'tty-screen'
 
 require_relative 'command'
+require_relative 'command/usage'
 
 module GithubCLI
   # Responsible for display and size detection.

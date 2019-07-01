@@ -1,5 +1,6 @@
 require_relative 'manpage'
 require_relative 'terminal'
+require_relative 'command/completion'
 
 class Thor
   include Thor::Base

@@ -1,4 +1,9 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/label'
+require_relative '../util'
+require_relative '../command'
+require_relative '../command/arguments'
 
 module GithubCLI
   class Commands::Labels < Command
