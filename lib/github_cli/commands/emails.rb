@@ -1,4 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/email'
+require_relative '../util'
+require_relative '../command'
 
 module GithubCLI
   class Commands::Emails < Command
@@ -34,6 +38,5 @@ module GithubCLI
       Util.hash_without!(global_options, params.keys + ['params'])
       Email.delete emails, params, global_options
     end
-
   end # Emails
 end # GithubCLI

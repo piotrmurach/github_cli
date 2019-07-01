@@ -1,4 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/blob'
+require_relative '../util'
+require_relative '../command'
 
 module GithubCLI
   class Commands::Blobs < Command
@@ -33,6 +37,5 @@ module GithubCLI
 
       Blob.create user, repo, params, global_options
     end
-
   end # Blobs
 end # GithubCLI

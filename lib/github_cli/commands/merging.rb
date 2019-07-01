@@ -1,4 +1,9 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/merging'
+require_relative '../util'
+require_relative '../command'
+require_relative '../command/arguments'
 
 module GithubCLI
   class Commands::Merging < Command
@@ -28,6 +33,5 @@ module GithubCLI
       Util.hash_without!(global_options, params.keys + ['params', 'commit_message'])
       Merging.merge user, repo, params, global_options
     end
-
   end # Merging
 end # GithubCLI

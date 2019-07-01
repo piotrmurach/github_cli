@@ -1,4 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/milestone'
+require_relative '../util'
+require_relative '../command'
 
 module GithubCLI
   class Commands::Milestones < Command
@@ -102,6 +106,5 @@ module GithubCLI
       Util.hash_without!(global_options, params.keys + ['params'])
       Milestone.delete user, repo, number, params, global_options
     end
-
   end # Milestones
 end # GithubCLI

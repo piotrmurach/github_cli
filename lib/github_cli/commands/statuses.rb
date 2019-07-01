@@ -1,4 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/status'
+require_relative '../util'
+require_relative '../command'
 
 module GithubCLI
   class Commands::Statuses < Command
@@ -36,6 +40,5 @@ module GithubCLI
       Util.hash_without!(global_options, params.keys + ['params', 'target'])
       Status.create user, repo, sha, params, global_options
     end
-
   end # Statuses
 end # GithubCLI

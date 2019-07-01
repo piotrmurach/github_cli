@@ -1,4 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/issue'
+require_relative '../util'
+require_relative '../command'
 
 module GithubCLI
   class Commands::Issues < Command
@@ -161,6 +165,5 @@ module GithubCLI
 
       Issue.edit user, repo, number, params, global_options
     end
-
   end # Issues
 end # GithubCLI

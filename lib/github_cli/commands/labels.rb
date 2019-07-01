@@ -3,7 +3,6 @@
 require_relative '../apis/label'
 require_relative '../util'
 require_relative '../command'
-require_relative '../command/arguments'
 
 module GithubCLI
   class Commands::Labels < Command
@@ -106,6 +105,5 @@ module GithubCLI
       Util.hash_without!(global_options, params.keys + ['params'])
       Label.replace user, repo, number, args, params, global_options
     end
-
   end # Labels
 end # GithubCLI

@@ -1,4 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/assignee'
+require_relative '../util'
+require_relative '../command'
 
 module GithubCLI
   class Commands::Assignees < Command
@@ -23,6 +27,5 @@ module GithubCLI
       Util.hash_without!(global_options, params.keys + ['params'])
       Assignee.check user, repo, assignee, params, global_options
     end
-
   end # Assignees
 end # GithubCLI

@@ -1,4 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/member'
+require_relative '../util'
+require_relative '../command'
 
 module GithubCLI
   class Commands::Members < Command
@@ -74,6 +78,5 @@ module GithubCLI
       Util.hash_without!(global_options, params.keys + ['params'])
       Member.conceal org, user, params, global_options
     end
-
   end # Members
 end # GithubCLI

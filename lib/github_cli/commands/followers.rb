@@ -1,4 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/follower'
+require_relative '../util'
+require_relative '../command'
 
 module GithubCLI
   class Commands::Followers < Command

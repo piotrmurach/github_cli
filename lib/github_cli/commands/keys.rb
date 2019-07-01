@@ -1,4 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/key'
+require_relative '../util'
+require_relative '../command'
 
 module GithubCLI
   class Commands::Keys < Command
@@ -56,6 +60,5 @@ module GithubCLI
       Util.hash_without!(global_options, params.keys + ['params'])
       Key.delete user, repo, id, params, global_options
     end
-
   end # Keys
 end # GithubCLI

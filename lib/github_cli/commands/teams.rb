@@ -1,4 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/team'
+require_relative '../util'
+require_relative '../command'
 
 module GithubCLI
   class Commands::Teams < Command
@@ -166,6 +170,5 @@ module GithubCLI
       Util.hash_without!(global_options, params.keys + ['params'])
       Team.remove_repo id, user, repo, params, global_options
     end
-
   end # Teams
 end # GithubCLI

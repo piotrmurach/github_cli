@@ -1,4 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/pull_request'
+require_relative '../util'
+require_relative '../command'
 
 module GithubCLI
   class Commands::PullRequests < Command
@@ -88,6 +92,5 @@ module GithubCLI
       Util.hash_without!(global_options, params.keys + ['params'])
       PullRequest.merge user, repo, number, params, global_options
     end
-
   end # PullRequests
 end # GithubCLI

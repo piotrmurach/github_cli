@@ -1,4 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../apis/reference'
+require_relative '../util'
+require_relative '../command'
 
 module GithubCLI
   class Commands::References < Command
@@ -72,6 +76,5 @@ module GithubCLI
       Util.hash_without!(global_options, params.keys + ['params'])
       Reference.delete user, repo, ref, params, global_options
     end
-
   end # References
 end # GithubCLI
