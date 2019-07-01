@@ -1,7 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 module GithubCLI
-
   class GithubCLIError < StandardError
     def self.status_code(code)
       define_method(:status_code) { code }
@@ -41,6 +40,4 @@ module GithubCLI
       super %{Unrecognized formatting options: #{format}}
     end
   end
-
-
 end # GithubCLI

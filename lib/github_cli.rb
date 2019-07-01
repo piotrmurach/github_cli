@@ -5,22 +5,21 @@ require 'pathname'
 require 'tty-config'
 require 'yaml'
 
+require_relative 'github_cli/dsl'
 require_relative 'github_cli/errors'
 require_relative 'github_cli/formatter'
+require_relative 'github_cli/ui'
 require_relative 'github_cli/version'
 require_relative 'github_cli/vendor'
 require_relative 'github_cli/thor_ext'
 
 # Base module which adds Github API to the command line
 module GithubCLI
-  autoload :DSL,       'github_cli/dsl'
   autoload :CLI,       'github_cli/cli'
   autoload :Command,   'github_cli/command'
   autoload :API,       'github_cli/api'
   autoload :Terminal,  'github_cli/terminal'
   autoload :Commands,  'github_cli/commands'
-  autoload :UI,        'github_cli/ui'
-  autoload :Util,      'github_cli/util'
 
   require 'github_cli/apis'
   require 'github_cli/command/completion'

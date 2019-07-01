@@ -3,6 +3,8 @@
 require 'pp'
 require 'tty-screen'
 
+require_relative 'command'
+
 module GithubCLI
   # Responsible for display and size detection.
   class Terminal

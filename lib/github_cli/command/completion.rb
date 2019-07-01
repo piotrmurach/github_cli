@@ -1,4 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../util'
 
 module GithubCLI
   # Provides command completion/suggestion for mistyped command or subcommand.

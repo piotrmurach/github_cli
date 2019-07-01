@@ -2,6 +2,7 @@
 
 require 'tty-pager'
 
+require_relative 'errors'
 require_relative 'formatters/csv'
 require_relative 'formatters/table'
 

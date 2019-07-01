@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'formatter'
+
 module GithubCLI
   # The API class is the main entry point for creating GithubCLI APIs.
   class API

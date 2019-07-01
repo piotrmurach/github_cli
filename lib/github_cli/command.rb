@@ -1,7 +1,6 @@
-# encoding: utf-8
+require_relative 'vendor'
 
 module GithubCLI
-
   # Main class with utility methods for building commands.
   class Command < Thor
     include Thor::Actions
@@ -75,6 +74,5 @@ module GithubCLI
       end
       command_token ? command_token.namespace : '<command>'
     end
-
   end # Command
 end # GithubCLI

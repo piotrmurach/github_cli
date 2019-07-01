@@ -2,6 +2,8 @@
 
 require 'tty-editor'
 
+require_relative 'vendor'
+
 module GithubCLI
   # Main command line interface
   class CLI < Thor
