@@ -1,28 +1,27 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../api'
 
 module GithubCLI
-  class User < API
+  class User
+    extend API
 
-    class << self
-
-      def all(params, options)
-        output options do
-          github_api(options).users.all params
-        end
-      end
-
-      def get(params, options)
-        output options do
-          github_api(options).users.get params
-        end
-      end
-
-      def update(params, options)
-        output options do
-          github_api(options).users.update params
-        end
+    def self.all(params, options)
+      output options do
+        github_api(options).users.all params
       end
     end
 
+    def self.get(params, options)
+      output options do
+        github_api(options).users.get params
+      end
+    end
+
+    def self.update(params, options)
+      output options do
+        github_api(options).users.update params
+      end
+    end
   end # User
 end # GithubCLI

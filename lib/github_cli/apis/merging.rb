@@ -1,15 +1,14 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 require_relative '../api'
 
 module GithubCLI
-  class Merging < API
+  class Merging
+    extend API
 
-    class << self
-      def merge(user, repo, params, options)
-        output options do
-          github_api(options).repos.merging.merge user, repo, params
-        end
+    def self.merge(user, repo, params, options)
+      output options do
+        github_api(options).repos.merging.merge user, repo, params
       end
     end
   end # Merging

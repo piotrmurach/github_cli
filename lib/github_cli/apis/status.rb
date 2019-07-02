@@ -1,22 +1,21 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../api'
 
 module GithubCLI
-  class Status < API
+  class Status
+    extend API
 
-    class << self
-
-      def all(user, repo, sha, params, options)
-        output options do
-          github_api(options).repos.statuses.list user, repo, sha, params
-        end
-      end
-
-      def create(user, repo, sha, params, options)
-        output options do
-          github_api(options).repos.statuses.create user, repo, sha, params
-        end
+    def self.all(user, repo, sha, params, options)
+      output options do
+        github_api(options).repos.statuses.list user, repo, sha, params
       end
     end
 
+    def self.create(user, repo, sha, params, options)
+      output options do
+        github_api(options).repos.statuses.create user, repo, sha, params
+      end
+    end
   end # Status
 end # GithubCLI

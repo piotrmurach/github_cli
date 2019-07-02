@@ -1,28 +1,27 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../api'
 
 module GithubCLI
-  class Email < API
+  class Email
+    extend API
 
-    class << self
-
-      def all(params, options)
-        output options do
-          github_api(options).users.emails.list params
-        end
-      end
-
-      def add(emails, params, options)
-        output options do
-          github_api(options).users.emails.add emails, params
-        end
-      end
-
-      def delete(emails, params, options)
-        output options do
-          github_api(options).users.emails.delete emails, params
-        end
+    def self.all(params, options)
+      output options do
+        github_api(options).users.emails.list params
       end
     end
 
+    def self.add(emails, params, options)
+      output options do
+        github_api(options).users.emails.add emails, params
+      end
+    end
+
+    def self.delete(emails, params, options)
+      output options do
+        github_api(options).users.emails.delete emails, params
+      end
+    end
   end # Email
 end # GithubCLI

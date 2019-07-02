@@ -1,40 +1,38 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
 require_relative '../api'
 
 module GithubCLI
-  class Watching < API
+  class Watching
+    extend API
 
-    class << self
-
-      def list(user, repo, params, options)
-        output options do
-          github_api(options).activity.watching.list user, repo, params
-        end
+    def self.list(user, repo, params, options)
+      output options do
+        github_api(options).activity.watching.list user, repo, params
       end
+    end
 
-      def watched(params, options)
-        output options do
-          github_api(options).activity.watching.watched params
-        end
+    def self.watched(params, options)
+      output options do
+        github_api(options).activity.watching.watched params
       end
+    end
 
-      def watching?(user, repo, params, options)
-        output options do
-          github_api(options).activity.watching.watching? user, repo, params
-        end
+    def self.watching?(user, repo, params, options)
+      output options do
+        github_api(options).activity.watching.watching? user, repo, params
       end
+    end
 
-      def start(user, repo, params, options)
-        output options do
-          github_api(options).activity.watching.watch user, repo, params
-        end
+    def self.start(user, repo, params, options)
+      output options do
+        github_api(options).activity.watching.watch user, repo, params
       end
+    end
 
-      def stop(user, repo, params, options)
-        output options do
-          github_api(options).activity.watching.unwatch user, repo, params
-        end
+    def self.stop(user, repo, params, options)
+      output options do
+        github_api(options).activity.watching.unwatch user, repo, params
       end
     end
   end # Watching

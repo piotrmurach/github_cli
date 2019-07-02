@@ -1,8 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-require 'spec_helper'
-
-describe GithubCLI::Commands::Gists do
+RSpec.describe GithubCLI::Commands::Gists do
   let(:format) { {'format' => 'table'} }
   let(:user)   { 'peter-murach' }
   let(:id)    { 1 }

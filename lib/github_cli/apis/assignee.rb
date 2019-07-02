@@ -1,22 +1,21 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../api'
 
 module GithubCLI
-  class Assignee < API
+  class Assignee
+    extend GithubCLI::API
 
-    class << self
-
-      def all(user, repo, params, options)
-        output options do
-          github_api(options).issues.assignees.list user, repo, params
-        end
-      end
-
-      def check(user, repo, assignee, params, options)
-        output options do
-          github_api(options).issues.assignees.check user, repo, assignee, params
-        end
+    def self.all(user, repo, params, options)
+      output options do
+        github_api(options).issues.assignees.list user, repo, params
       end
     end
 
+    def self.check(user, repo, assignee, params, options)
+      output options do
+        github_api(options).issues.assignees.check user, repo, assignee, params
+      end
+    end
   end # Assignee
 end # GithubCLI

@@ -1,7 +1,10 @@
-# encoding: utf-8
+# frozen_string_literal: true
+
+require_relative '../api'
 
 module GithubCLI
-  class Statistics < API
+  class Statistics
+    extend API
 
     def self.contributors(user, repo, params, options)
       output options do
@@ -32,6 +35,5 @@ module GithubCLI
         github_api(options).repos.stats.punch_card user, repo, params
       end
     end
-
   end # Statistics
 end # GithubCLI

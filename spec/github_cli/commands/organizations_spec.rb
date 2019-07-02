@@ -1,8 +1,6 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-require 'spec_helper'
-
-describe GithubCLI::Commands::Organizations do
+RSpec.describe GithubCLI::Commands::Organizations do
   let(:format) { {'format' => 'table'} }
   let(:user)   { 'peter-murach' }
   let(:org)    { 'github' }
