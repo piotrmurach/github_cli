@@ -1,21 +1,24 @@
 # frozen_string_literal: true
 
+require 'github_api'
+
 require_relative 'formatter'
 
 module GithubCLI
   # The API class is the main entry point for creating GithubCLI APIs.
-  class API
+  module API
     # Access or initialize Github API client
     #
     # @api public
-    def self.github_api(options = {})
+    def github_api(options = {})
       @github_api ||= configure(options)
     end
+    module_function :github_api
 
     # Configures api options if provided in the configuration file
     #
     # @api public
-    def self.configure(options = {})
+    def configure(options = {})
       api    = Github.new
       config = GithubCLI.config
 
@@ -38,11 +41,12 @@ module GithubCLI
       end
       api
     end
+    module_function :configure
 
     # Set user basic authentication
     #
     # @api public
-    def self.set_basic_auth(config, options)
+    def set_basic_auth(config, options)
       if (login = options['login']) && (password = options['password'])
         "#{login}:#{password}"
       elsif (login = config.fetch('user.login') && (password = config.fetch('user.password')))
@@ -51,6 +55,7 @@ module GithubCLI
         nil
       end
     end
+    module_function :set_basic_auth
 
     # Procoess response and output to shell
     #
@@ -61,7 +66,7 @@ module GithubCLI
     #   The flag for reducing the output
     #
     # @api public
-    def self.output(options, &block)
+    def output(options, &block)
       config = GithubCLI.config
       format = options.fetch(:format) {
         options["format"] || config.fetch('core.format') || :table }
@@ -78,5 +83,6 @@ module GithubCLI
         response
       end
     end
+    module_function :output
   end # API
 end # GithubCLI
