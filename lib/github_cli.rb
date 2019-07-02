@@ -1,11 +1,9 @@
 # frozen_string_literal: true
 
-require 'github_api'
 require 'pathname'
 require 'tty-config'
 require 'yaml'
 
-require_relative 'github_cli/api'
 require_relative 'github_cli/cli'
 require_relative 'github_cli/dsl'
 require_relative 'github_cli/errors'
