@@ -3,7 +3,6 @@ require_relative 'vendor'
 module GithubCLI
   # Main class with utility methods for building commands.
   class Command < Thor
-    include Thor::Actions
 
     HELP_COMMAND = 'help'
 

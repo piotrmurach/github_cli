@@ -7,8 +7,6 @@ require_relative 'vendor'
 module GithubCLI
   # Main command line interface
   class CLI < Thor
-    include Thor::Actions
-
     def initialize(*args)
       super
       prompt = TTY::Prompt.new(enabled_color: !options["no-color"])
