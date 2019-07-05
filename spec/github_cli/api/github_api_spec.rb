@@ -1,13 +1,14 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe GithubCLI::API, '#gihtub_api' do
+RSpec.describe GithubCLI::API, '#gihtub_api' do
   before {
     described_class.send(:instance_variable_set, :@github_api, nil)
   }
 
   it 'sets up github api connection' do
-    github_instance = stub.as_null_object
-    Github.should_receive(:new).and_return github_instance
+    github_instance = double.as_null_object
+    allow(Github).to receive(:new).and_return(github_instance)
+
     expect(described_class.github_api).to eql(github_instance)
   end
 

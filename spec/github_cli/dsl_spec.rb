@@ -1,19 +1,17 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-require 'spec_helper'
-
-describe GithubCLI, 'dsl' do
+RSpec.describe GithubCLI, 'dsl' do
   let(:object)    { described_class }
   let(:error_cli) { GithubCLI::GitHubError }
 
   before {
-    GithubCLI.ui.stub(:error)
-    GithubCLI.ui.stub(:debug)
+    allow(GithubCLI.ui).to receive(:error)
+    allow(GithubCLI.ui).to receive(:debug)
   }
 
   after {
-    GithubCLI.ui.unstub(:error)
-    GithubCLI.ui.unstub(:debug)
+    allow(GithubCLI.ui).to receive(:error)
+    allow(GithubCLI.ui).to receive(:debug)
   }
 
   context 'on_error' do
