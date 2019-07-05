@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-Rspec.describe GithubCLI::Commands::PullRequests do
+RSpec.describe GithubCLI::Commands::PullRequests do
   let(:format) { {'format' => 'table'} }
   let(:user)   { 'peter-murach' }
   let(:repo)   { 'github_cli' }
