@@ -1,28 +1,26 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-require 'spec_helper'
-
-Shell = Class.new do
-  def say(*args)
-    args.first
-  end
-end
-
-describe GithubCLI::UI do
-  let(:shell)   { Shell.new }
-  let(:message) { "error" }
-  let(:object)  { described_class.new(shell) }
-
-  subject { object }
+RSpec.describe GithubCLI::UI do
+  let(:prompt) { double(:prompt) }
 
   it "confirms message" do
-    expect(object.confirm(message)).to eql(message)
+    allow(prompt).to receive(:ok)
+    ui = GithubCLI::UI.new(prompt)
+
+    ui.confirm("done")
+
+    expect(prompt).to have_received(:ok).with("done")
   end
 
   it "debugs the error message" do
-    error = double(:error, message: message,
+    error = double(:error, message: "error",
                            class: 'Exception',
                            backtrace: ['line1', 'line2'])
-    expect(object.debug(error)).to eql("Exception: error\nline1\nline2")
+    allow(prompt).to receive(:say)
+    ui = GithubCLI::UI.new(prompt)
+
+    ui.debug(error)
+
+    expect(prompt).to have_received(:say).with("Exception: error\nline1\nline2")
   end
 end

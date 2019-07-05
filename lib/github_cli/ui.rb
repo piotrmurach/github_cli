@@ -1,35 +1,40 @@
 # frozen_string_literal: true
 
+require 'forwardable'
+
 module GithubCLI
   # Class responsible for displaying different level information
   class UI
-    attr_writer :shell
+    extend Forwardable
 
-    def initialize(shell)
-      @shell = shell
+    def_delegators :@prompt, :ask, :mask
+
+    def initialize(prompt)
+      @prompt = prompt
       @quite = false
       @debug = ENV['DEBUG']
+      @shell = Thor::Shell::Basic.new
     end
 
-    def confirm(message, newline = nil)
-      @shell.say message, :green, newline
+    def confirm(message)
+      @prompt.ok(message)
     end
 
-    def info(message, newline = nil)
-      @shell.say message, nil, newline
+    def info(message)
+      @prompt.say(message)
     end
 
-    def warn(message, newline = nil)
-      @shell.say message, :yellow, newline
+    def warn(messag)
+      @prompt.warn(message)
     end
 
-    def error(message, newline = nil)
-      @shell.say message, :red, newline
+    def error(message)
+      @prompt.error(message)
     end
 
     def debug(error, newline = nil)
       message = ["#{error.class}: #{error.message}", *error.backtrace]
-      @shell.say message.join("\n"), nil, newline
+      @prompt.say(message.join("\n"))
     end
 
     def quite!
@@ -42,10 +47,6 @@ module GithubCLI
 
     def print_table(table, options = {})
       @shell.print_table table, options
-    end
-
-    def print_wrapped(message, options = {})
-      @shell.print_wrapped message, options
     end
   end # UI
 end # GithubCLI
