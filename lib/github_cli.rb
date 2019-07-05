@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'pathname'
+require 'tty-prompt'
 require 'tty-config'
 require 'yaml'
 
@@ -23,7 +24,7 @@ module GithubCLI
     attr_writer :ui
 
     def ui
-      @ui ||= UI.new Thor::Shell::Basic.new
+      @ui ||= UI.new(TTY::Prompt.new)
     end
 
     def executable_name

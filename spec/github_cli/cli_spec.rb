@@ -18,7 +18,7 @@ RSpec.describe GithubCLI::CLI do
 
       subject.invoke 'whoami', []
 
-      expect(ui).to have_received(:info).with(/Not authed/, "\n")
+      expect(ui).to have_received(:info).with(/Not authed/)
     end
   end
 
@@ -29,7 +29,7 @@ RSpec.describe GithubCLI::CLI do
 
       subject.invoke "init", []
 
-      expect(ui).to have_received(:confirm).with(/Writing new configuration file/, "\n")
+      expect(ui).to have_received(:confirm).with(/Writing new configuration file/)
     end
 
     it 'aborts if config already exists' do
@@ -37,7 +37,7 @@ RSpec.describe GithubCLI::CLI do
       allow(File).to receive(:exists?).and_return(true)
 
       expect { subject.invoke "init", [] }.to raise_error(SystemExit)
-      expect(ui).to have_received(:error).with(/Not overwritting existing/, "\n")
+      expect(ui).to have_received(:error).with(/Not overwritting existing/)
     end
 
     it 'allows to overwrite existing config' do
@@ -46,7 +46,7 @@ RSpec.describe GithubCLI::CLI do
 
       subject.invoke "init", [], {:force => true}
 
-      expect(ui).to have_received(:confirm).with(/Writing new configuration file/, "\n")
+      expect(ui).to have_received(:confirm).with(/Writing new configuration file/)
     end
   end
 

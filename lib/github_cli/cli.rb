@@ -9,13 +9,10 @@ module GithubCLI
   class CLI < Thor
     include Thor::Actions
 
-    attr_reader :prompt
-
     def initialize(*args)
       super
-      @prompt = TTY::Prompt.new
-      the_shell = (options["no-color"] ? Thor::Shell::Basic.new : shell)
-      GithubCLI.ui = UI.new(the_shell)
+      prompt = TTY::Prompt.new(enabled_color: !options["no-color"])
+      GithubCLI.ui = UI.new(prompt)
       GithubCLI.ui.debug! if options["verbose"]
       #options["no-pager"] ? Pager.disable : Pager.enable
     end
@@ -77,8 +74,8 @@ module GithubCLI
       params['note_url'] = options[:note_url] || 'https://github.com/peter-murach/github_cli'
       global_options[:params] = params
       # Need to configure client with login and password
-      login    = prompt.ask("login:").strip!
-      password = prompt.mask("password:").strip!
+      login    = GithubCLI.ui.ask("login:").strip!
+      password = GithubCLI.ui.mask("password:").strip!
 
       global_options['login']    = login
       global_options['password'] = password
@@ -99,8 +96,7 @@ module GithubCLI
       config.write(::File.join(path, config_filename),
                    force: options[:force], format: 'yml')
 
-      GithubCLI.ui.warn <<-EOF
-        \nYour #{fullpath} configuration file has been overwritten!
+      GithubCLI.ui.warn("\nYour #{fullpath} configuration file has been overwritten!")
       EOF
     end
 
@@ -108,7 +104,7 @@ module GithubCLI
     def whoami
       config = GithubCLI.config
       who = config.fetch('user.login') || "Not authed. Run 'gcli authorize'"
-      GithubCLI.ui.info(who, "\n")
+      GithubCLI.ui.info(who)
     end
 
     option :force, :type => :boolean, :default => false, :aliases => "-f",
@@ -134,14 +130,14 @@ module GithubCLI
       config.append_path(path)
 
       if File.exists?(fullpath) && !options[:force]
-        GithubCLI.ui.error "Not overwritting existing config file #{fullpath}, use --force to override.", "\n"
+        GithubCLI.ui.error("Not overwritting existing config file #{fullpath}, use --force to override.")
         exit 1
       end
 
       config.write(::File.join(path, config.filename),
                    force: options[:force], format: 'yml')
 
-      GithubCLI.ui.confirm "Writing new configuration file to #{fullpath}", "\n"
+      GithubCLI.ui.confirm("Writing new configuration file to #{fullpath}")
     end
 
     option :list, :type => :boolean, :default => false, :aliases => '-l',
@@ -163,7 +159,7 @@ module GithubCLI
       config = GithubCLI.config
 
       if !config.exist?
-        GithubCLI.ui.error "Configuration file does not exist. Please use `#{GithubCLI.executable_name} init` to create one."
+        GithubCLI.ui.error("Configuration file does not exist. Please use `#{GithubCLI.executable_name} init` to create one.")
         exit 1
       end
 
@@ -178,9 +174,9 @@ module GithubCLI
       end
 
       if !value
-        GithubCLI.ui.info config.fetch(name), "\n"
+        GithubCLI.ui.info(config.fetch(name))
       else
-        GithubCLI.ui.info config.set(name, value: value), "\n"
+        GithubCLI.ui.info(config.set(name, value: value))
         config.write(force: true, format: 'yml')
       end
     end
@@ -193,7 +189,7 @@ module GithubCLI
 
     desc 'version', 'Display Github CLI version.'
     def version
-      GithubCLI.ui.info "#{GithubCLI.program_name} #{GithubCLI::VERSION}", "\n"
+      GithubCLI.ui.info("#{GithubCLI.program_name} #{GithubCLI::VERSION}")
     end
 
     require_relative 'commands/assignees'

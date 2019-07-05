@@ -51,7 +51,7 @@ module GithubCLI
         commands = find_commands(pattern).map { |cmd| build_command_output cmd }
 
         if !commands.empty?
-          GithubCLI.ui.info "Commands:"
+          GithubCLI.ui.info("Commands:")
           GithubCLI.ui.print_table commands, :truncate => true
         else
           print_command_not_found pattern.to_s.gsub(/\W|/, '')[3..-1]
@@ -60,7 +60,7 @@ module GithubCLI
 
       def print_command_not_found(cmd)
         exec_name = GithubCLI.executable_name
-        GithubCLI.ui.info "#{exec_name}: '#{cmd}' is not a #{exec_name} command. See '#{exec_name} --help'."
+        GithubCLI.ui.info("#{exec_name}: '#{cmd}' is not a #{exec_name} command. See '#{exec_name} --help'.")
       end
 
       def print_usage(flags, command)
@@ -74,7 +74,7 @@ Usage: #{GithubCLI.executable_name} #{GithubCLI::Command::Usage.new(command, fla
       end
 
       def print_config(config, pattern: nil)
-        GithubCLI.ui.info "Configuration options:\n"
+        GithubCLI.ui.info("Configuration options:")
         pp config.to_h
       end
     end
