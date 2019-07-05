@@ -4,7 +4,7 @@ require_relative '../api'
 
 module GithubCLI
   class Assignee
-    extend GithubCLI::API
+    extend API
 
     def self.all(user, repo, params, options)
       output options do
