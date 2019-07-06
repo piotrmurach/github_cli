@@ -9,49 +9,49 @@ RSpec.describe GithubCLI::Commands::Issues do
   let(:api_class) { GithubCLI::Issue }
 
   it "invokes issue:list" do
-    api_class.should_receive(:all).with(:user, {}, format)
+    expect(api_class).to receive(:all).with(:user, {}, format)
     subject.invoke "issue:list", []
   end
 
   it "invokes issue:list --all" do
-    api_class.should_receive(:all).with([], {}, format)
+    expect(api_class).to receive(:all).with([], {}, format)
     subject.invoke "issue:list", [], :all => true
   end
 
   it "invokes issue:list --org" do
-    api_class.should_receive(:all).with([], {"org" => org}, format)
+    expect(api_class).to receive(:all).with([], {"org" => org}, format)
     subject.invoke "issue:list", [], :org => org
   end
 
   it "invokes issue:list --user --repo" do
-    api_class.should_receive(:all).with([], {"user" => user, "repo" => repo}, format)
+    expect(api_class).to receive(:all).with([], {"user" => user, "repo" => repo}, format)
     subject.invoke "issue:list", [], :user => user, :repo => repo
   end
 
   it "invokes issue:get" do
-    api_class.should_receive(:get).with(user, repo, number, {}, format)
+    expect(api_class).to receive(:get).with(user, repo, number, {}, format)
     subject.invoke "issue:get", [user, repo, number]
   end
 
   it "invokes issue:create --title" do
-    api_class.should_receive(:create).with(user, repo, {"title" => 'new'}, format)
+    expect(api_class).to receive(:create).with(user, repo, {"title" => 'new'}, format)
     subject.invoke "issue:create", [user, repo], :title => 'new'
   end
 
   it "invokes issue:create --title --milestone" do
-    api_class.should_receive(:create).with(user, repo, {"title" => 'new', 
+    expect(api_class).to receive(:create).with(user, repo, {"title" => 'new', 
       'milestone' => 1}, format)
     subject.invoke "issue:create", [user, repo], :title => 'new', :milestone => 1
   end
 
   it "invokes issue:edit --title" do
-    api_class.should_receive(:edit).with(user, repo, number,
+    expect(api_class).to receive(:edit).with(user, repo, number,
       {"title" => 'new'}, format)
     subject.invoke "issue:edit", [user, repo, number], :title => 'new'
   end
 
   it "invokes issue:edit --title --milestone" do
-    api_class.should_receive(:edit).with(user, repo, number, {"title" => 'new',
+    expect(api_class).to receive(:edit).with(user, repo, number, {"title" => 'new',
       'milestone' => number}, format)
     subject.invoke "issue:edit", [user, repo, number], :title => 'new',
        :milestone => number

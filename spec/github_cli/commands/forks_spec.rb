@@ -7,22 +7,22 @@ RSpec.describe GithubCLI::Commands::Forks do
   let(:api_class) { GithubCLI::Fork }
 
   it "invokes fork:list" do
-    api_class.should_receive(:all).with(user, repo, {}, format)
+    expect(api_class).to receive(:all).with(user, repo, {}, format)
     subject.invoke "fork:list", [user, repo]
   end
 
   it "invokes fork:list --sort" do
-    api_class.should_receive(:all).with(user, repo, {'sort' => 'newest'}, format)
+    expect(api_class).to receive(:all).with(user, repo, {'sort' => 'newest'}, format)
     subject.invoke "fork:list", [user, repo], :sort => 'newest'
   end
 
   it "invokes fork:create" do
-    api_class.should_receive(:create).with(user, repo, {}, format)
+    expect(api_class).to receive(:create).with(user, repo, {}, format)
     subject.invoke "fork:create", [user, repo]
   end
 
   it "invokes fork:create --org" do
-    api_class.should_receive(:create).with(user, repo, {'organization' => 'rails'}, format)
+    expect(api_class).to receive(:create).with(user, repo, {'organization' => 'rails'}, format)
     subject.invoke "fork:create", [user, repo], :org => 'rails'
   end
 end

@@ -8,47 +8,47 @@ RSpec.describe GithubCLI::Commands::Events do
   let(:api_class) { GithubCLI::Event }
 
   it "invokes event:public" do
-    api_class.should_receive(:public).with({}, format)
+    expect(api_class).to receive(:public).with({}, format)
     subject.invoke "event:public", []
   end
 
   it "invokes event:repo" do
-    api_class.should_receive(:repository).with(user, repo, {}, format)
+    expect(api_class).to receive(:repository).with(user, repo, {}, format)
     subject.invoke "event:repo", [user, repo]
   end
 
   it "invokes event:issue" do
-    api_class.should_receive(:repository).with(user, repo, {}, format)
+    expect(api_class).to receive(:repository).with(user, repo, {}, format)
     subject.invoke "event:repo", [user, repo]
   end
 
   it "invokes event:network" do
-    api_class.should_receive(:network).with(user, repo, {}, format)
+    expect(api_class).to receive(:network).with(user, repo, {}, format)
     subject.invoke "event:network", [user, repo]
   end
 
   it "invokes event:org" do
-    api_class.should_receive(:organization).with(org, {}, format)
+    expect(api_class).to receive(:organization).with(org, {}, format)
     subject.invoke "event:org", [org]
   end
 
   it "invokes event:received" do
-    api_class.should_receive(:received).with(user, {}, format)
+    expect(api_class).to receive(:received).with(user, {}, format)
     subject.invoke "event:received", [user]
   end
 
   it "invokes event:received --public" do
-    api_class.should_receive(:received).with(user, {'public' => true}, format)
+    expect(api_class).to receive(:received).with(user, {'public' => true}, format)
     subject.invoke "event:received", [user], :public => true
   end
 
   it "invokes event:performed" do
-    api_class.should_receive(:performed).with(user, {}, format)
+    expect(api_class).to receive(:performed).with(user, {}, format)
     subject.invoke "event:performed", [user]
   end
 
   it "invokes event:user_org" do
-    api_class.should_receive(:user_org).with(user, org, {}, format)
+    expect(api_class).to receive(:user_org).with(user, org, {}, format)
     subject.invoke "event:user_org", [user, org]
   end
 end

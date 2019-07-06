@@ -8,17 +8,17 @@ RSpec.describe GithubCLI::Commands::Commits do
   let(:api_class) { GithubCLI::Commit }
 
   it "invokes commit:get" do
-    api_class.should_receive(:get).with(user, repo, sha, {}, format)
+    expect(api_class).to receive(:get).with(user, repo, sha, {}, format)
     subject.invoke "commit:get", [user, repo, sha]
   end
 
   it "invokes commit:create" do
-    api_class.should_receive(:create).with(user, repo, {}, format)
+    expect(api_class).to receive(:create).with(user, repo, {}, format)
     subject.invoke "commit:create", [user, repo]
   end
 
   it "invokes commit:create --tree" do
-    api_class.should_receive(:create).with(user, repo, {"tree" => sha}, format)
+    expect(api_class).to receive(:create).with(user, repo, {"tree" => sha}, format)
     subject.invoke "commit:create", [user, repo], :tree => sha
   end
 end

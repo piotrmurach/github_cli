@@ -6,36 +6,36 @@ RSpec.describe GithubCLI::Commands::Authorizations do
   let(:api_class) { GithubCLI::Authorization }
 
   it "invokes auth:list" do
-    api_class.should_receive(:all).with({}, format)
+    expect(api_class).to receive(:all).with({}, format)
     subject.invoke "auth:list", []
   end
 
   it "invokes auth:get" do
-    api_class.should_receive(:get).with(id, {}, format)
+    expect(api_class).to receive(:get).with(id, {}, format)
     subject.invoke "auth:get", [id]
   end
 
   it "invokes auth:create --scopes --note --note_url" do
-    api_class.should_receive(:create).with({"scopes" => ["repo"],
+    expect(api_class).to receive(:create).with({"scopes" => ["repo"],
       "note" => "github_cli",
       "note_url" => "https://github.com/peter-murach/github_cli"}, format)
     subject.invoke "auth:create", [], :scopes => ["repo"], :note => 'github_cli', :note_url => "https://github.com/peter-murach/github_cli"
   end
 
   it "invokes auth:update" do
-    api_class.should_receive(:update).with(id, {}, format)
+    expect(api_class).to receive(:update).with(id, {}, format)
     subject.invoke "auth:update", [id]
   end
 
   it "invokes auth:update --scopes --note --note_url" do
-    api_class.should_receive(:update).with(id, {"scopes" => ["repo"],
+    expect(api_class).to receive(:update).with(id, {"scopes" => ["repo"],
       "note" => "github_cli",
       "note_url" => "https://github.com/peter-murach/github_cli"}, format)
     subject.invoke "auth:update", [id], :scopes => ["repo"], :note => 'github_cli', :note_url => "https://github.com/peter-murach/github_cli"
   end
 
   it "invokes auth:delete" do
-    api_class.should_receive(:delete).with(id, {}, format)
+    expect(api_class).to receive(:delete).with(id, {}, format)
     subject.invoke "auth:delete", [id]
   end
 end

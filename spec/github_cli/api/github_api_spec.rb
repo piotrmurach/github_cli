@@ -14,7 +14,7 @@ RSpec.describe GithubCLI::API, '#gihtub_api' do
 
   it 'does not instantiate on subsequent calls' do
     described_class.github_api
-    Github.should_receive(:new).exactly(0).times
+    expect(Github).to receive(:new).exactly(0).times
     described_class.github_api
   end
 end # GithubCLI::API

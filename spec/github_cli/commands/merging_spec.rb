@@ -8,7 +8,7 @@ RSpec.describe GithubCLI::Commands::Merging do
   let(:api_class) { GithubCLI::Merging }
 
   it "invokes merge:perform" do
-    api_class.should_receive(:merge).with(user, repo, {'base'=>'master', 'head'=>'feature'}, format)
+    expect(api_class).to receive(:merge).with(user, repo, {'base'=>'master', 'head'=>'feature'}, format)
     subject.invoke "merge:perform", [user, repo], :base => 'master', :head => 'feature'
   end
 end

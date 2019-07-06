@@ -8,17 +8,17 @@ RSpec.describe GithubCLI::Commands::Statuses do
   let(:api_class) { GithubCLI::Status }
 
   it "invokes status:list" do
-    api_class.should_receive(:all).with(user, repo, sha, {}, format)
+    expect(api_class).to receive(:all).with(user, repo, sha, {}, format)
     subject.invoke "status:list", [user, repo, sha]
   end
 
   it "invokes status:create" do
-    api_class.should_receive(:create).with(user, repo, sha, {}, format)
+    expect(api_class).to receive(:create).with(user, repo, sha, {}, format)
     subject.invoke "status:create", [user, repo, sha]
   end
 
   it "invokes status:create --state --target" do
-    api_class.should_receive(:create).with(user, repo, sha,
+    expect(api_class).to receive(:create).with(user, repo, sha,
       {'state' => 'pending', 'target_url' => 'http://ci.example.com'}, format)
     subject.invoke "status:create", [user, repo, sha], :state => 'pending',
       :target => "http://ci.example.com"

@@ -7,22 +7,22 @@ RSpec.describe GithubCLI::Commands::Organizations do
   let(:api_class) { GithubCLI::Organization }
 
   it "invokes org:list" do
-    api_class.should_receive(:list).with({}, format)
+    expect(api_class).to receive(:list).with({}, format)
     subject.invoke "org:list", []
   end
 
   it "invokes org:list --user" do
-    api_class.should_receive(:list).with({'user' => user}, format)
+    expect(api_class).to receive(:list).with({'user' => user}, format)
     subject.invoke "org:list", [], {:user => user}
   end
 
   it "invokes org:get" do
-    api_class.should_receive(:get).with(org, {}, format)
+    expect(api_class).to receive(:get).with(org, {}, format)
     subject.invoke "org:get", [org]
   end
 
   it "invokes org:edit" do
-    api_class.should_receive(:edit).with(org, {'name' => 'new'}, format)
+    expect(api_class).to receive(:edit).with(org, {'name' => 'new'}, format)
     subject.invoke "org:edit", [org], {'name' => 'new'}
   end
 end

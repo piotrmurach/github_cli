@@ -8,17 +8,17 @@ RSpec.describe GithubCLI::Commands::Blobs do
   let(:api_class) { GithubCLI::Blob }
 
   it "invokes blob:get" do
-    api_class.should_receive(:get).with(user, repo, sha, {}, format)
+    expect(api_class).to receive(:get).with(user, repo, sha, {}, format)
     subject.invoke "blob:get", [user, repo, sha]
   end
 
   it "invokes blob:create" do
-    api_class.should_receive(:create).with(user, repo, {}, format)
+    expect(api_class).to receive(:create).with(user, repo, {}, format)
     subject.invoke "blob:create", [user, repo]
   end
 
   it "invokes blob:create --encoding" do
-    api_class.should_receive(:create).with(user, repo, {'encoding'=>'utf-8'}, format)
+    expect(api_class).to receive(:create).with(user, repo, {'encoding'=>'utf-8'}, format)
     subject.invoke "blob:create", [user, repo], :encoding => 'utf-8'
   end
 end

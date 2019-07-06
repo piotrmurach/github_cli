@@ -7,32 +7,32 @@ RSpec.describe GithubCLI::Commands::Starring do
   let(:api_class) { GithubCLI::Starring }
 
   it "invokes star:list" do
-    api_class.should_receive(:list).with(user, repo, {}, format)
+    expect(api_class).to receive(:list).with(user, repo, {}, format)
     subject.invoke "star:list", [user, repo]
   end
 
   it "invokes star:starred" do
-    api_class.should_receive(:starred).with({}, format)
+    expect(api_class).to receive(:starred).with({}, format)
     subject.invoke "star:starred", []
   end
 
   it "invokes star:starred --user" do
-    api_class.should_receive(:starred).with({"user" => user}, format)
+    expect(api_class).to receive(:starred).with({"user" => user}, format)
     subject.invoke "star:starred", [], :user => user
   end
 
   it "invokes star:starring" do
-    api_class.should_receive(:starring?).with(user, repo, {}, format)
+    expect(api_class).to receive(:starring?).with(user, repo, {}, format)
     subject.invoke "star:starring", [user, repo]
   end
 
   it "invokes star:star" do
-    api_class.should_receive(:star).with(user, repo, {}, format)
+    expect(api_class).to receive(:star).with(user, repo, {}, format)
     subject.invoke "star:star", [user, repo]
   end
 
   it "invokes star:star" do
-    api_class.should_receive(:unstar).with(user, repo, {}, format)
+    expect(api_class).to receive(:unstar).with(user, repo, {}, format)
     subject.invoke "star:unstar", [user, repo]
   end
 end

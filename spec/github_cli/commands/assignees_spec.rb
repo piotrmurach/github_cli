@@ -7,12 +7,12 @@ RSpec.describe GithubCLI::Commands::Assignees do
   let(:api_class) { GithubCLI::Assignee }
 
   it "invokes assignee:list" do
-    api_class.should_receive(:all).with(user, repo, {}, format)
+    expect(api_class).to receive(:all).with(user, repo, {}, format)
     subject.invoke "assignee:list", [user, repo]
   end
 
   it "invokes assignee:check" do
-    api_class.should_receive(:check).with(user, repo, 'git', {}, format)
+    expect(api_class).to receive(:check).with(user, repo, 'git', {}, format)
     subject.invoke "assignee:check", [user, repo, 'git']
   end
 end
