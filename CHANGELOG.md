@@ -15,9 +15,12 @@
 * Change configuration format to have nested YAML keys
 * Change config name from .githubrc to .gcliconfig
 * Change Manpage implementation
+* Change UI to use prompt
 * Change to update github_api requirement to latest
+* Change to stop autoloading files and require directly
 * Remove System in favour of TTY::Which dependency
 * Remove Config in favour of TTY::Config dependency
+* Remove Helpers utilities
 * Remove tty dependency
 
 ### Fixed
