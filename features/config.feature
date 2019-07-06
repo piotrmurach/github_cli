@@ -18,7 +18,7 @@ Feature: Configuration file
 
   @ci-run
   Scenario: List global file options
-    Given I run `gcli init`
+    Given I run `gcli init --local`
     When I run `gcli config`
     Then the output should contain:
     """
@@ -37,26 +37,26 @@ Feature: Configuration file
     """
 
   Scenario: Read existing option
-    Given I run `gcli init`
+    Given I run `gcli init --local`
     When I successfully run `gcli config user.token abc123`
     Then the stdout should contain "abc123"
 
   Scenario: Read missing option
-    Given I run `gcli init`
+    Given I run `gcli init --local`
     When I run `gcli config missing.key`
     Then the exit status should be 0
 
   Scenario: Write custom option
-    Given I run `gcli init`
+    Given I run `gcli init --local`
     When I successfully run `gcli config core.host eee555`
     Then the stdout should contain "eee555"
 
   Scenario: Listing all configuration options
-    Given I run `gcli init`
-    When I run `gcli config -l`
-    Then the stdout should contain:
+    Given I run `gcli init --local`
+    When I run `gcli config`
+    Then the output should match:
     """
-    Writing new configuration file to /tmp/fakehome/.gcliconfig
+    Writing new configuration file to (.*)tmp/fakehome/.gcliconfig
     Configuration options:
     {\"core\"=>
       {\"adapter\"=>\"net_http\",

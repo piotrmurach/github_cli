@@ -6,13 +6,13 @@ Feature: Init command
   I have ability to create configuration file
 
   Scenario: Installs global config file
-    When I run `gcli init`
-    Then the output should contain:
+    When I run `gcli init --local`
+    Then the output should match:
       """
-      Writing new configuration file to /tmp/fakehome/.gcliconfig
+      Writing new configuration file to (.*)tmp/fakehome/.gcliconfig
       """
-      And a file named "/tmp/fakehome/.gcliconfig" should exist
-      And the file "/tmp/fakehome/.gcliconfig" should contain "token:"
+      And a file named ".gcliconfig" should exist
+      And the file ".gcliconfig" should contain "token:"
 
   Scenario: Installs local config file
     Given a directory named "piotr"
@@ -22,24 +22,24 @@ Feature: Init command
       And the file ".gcliconfig" should contain "token:"
 
   Scenario: Global config file arleady exists
-    Given an empty file named "/tmp/fakehome/.gcliconfig"
-    When I run `gcli init`
-    Then the output should contain:
+    Given an empty file named ".gcliconfig"
+    When I run `gcli init --local`
+    Then the output should match:
     """
-    Not overwritting existing config file /tmp/fakehome/.gcliconfig, use --force to override.
+    Not overwritting existing config file (.*)tmp/fakehome/.gcliconfig, use --force to override.
     """
 
   Scenario: Force global config file override
-    Given an empty file named "/tmp/fakehome/.gcliconfig"
-    When I run `gcli init --force`
-    Then the output should contain:
+    Given an empty file named ".gcliconfig"
+    When I run `gcli init --force --local`
+    Then the output should match:
     """
-    Writing new configuration file to /tmp/fakehome/.gcliconfig
+    Writing new configuration file to (.*)tmp/fakehome/.gcliconfig
     """
 
   Scenario: Install config file with custom name
-    When I run `gcli init .custom-name`
-    Then the output should contain:
+    When I run `gcli init .custom-name --local`
+    Then the output should match:
       """
-      Writing new configuration file to /tmp/fakehome/.custom-name
+      Writing new configuration file to (.*)tmp/fakehome/.custom-name
       """
