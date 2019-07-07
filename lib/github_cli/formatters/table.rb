@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'ostruct'
 require 'forwardable'
 
@@ -130,7 +128,7 @@ module GithubCLI
       end
 
       def column_width(index)
-        width = column_widths[index] || 0
+        column_widths[index] || 0
       end
 
       def columns
@@ -142,28 +140,31 @@ module GithubCLI
       end
 
       def format
+        output = []
+
         case response
         when Array
-          render_top_line
+          output << render_top_line
           output_array.each_with_index do |row, indx|
-            render_row row
+            output << render_row(row)
             if (output_array.size - 1 != indx) && ((indx + 1) % total_records == 0)
-              render_middle_line
+              output << render_middle_line
             end
           end
-          render_bottom_line
+          output << render_bottom_line
         when Hash
-          render_top_line
+          output << render_top_line
           output_array.each_with_index do |row, indx|
-            render_row row
+            output << render_row(row)
             if transform == :horizontal && output_array.size - 1 != indx
-              render_middle_line
+              output << render_middle_line
             end
           end
-          render_bottom_line
+          output << render_bottom_line
         else
-          Terminal.line "#{response}\n"
+          output << "#{response}\n"
         end
+        output.join
       end
 
       def render_vertical(item)
@@ -196,7 +197,7 @@ module GithubCLI
             line = line[0...width] + right
           end
         end
-        Terminal.line line + "\n"
+        line + "\n"
       end
 
       def render_top_line
@@ -256,7 +257,7 @@ module GithubCLI
         fields.each_with_index do |field, indx|
           columns << render_cell(field, indx)
         end
-        Terminal.line border.left + columns.join + "\n"
+        border.left + columns.join + "\n"
       end
     end # Table
   end # Formatters
