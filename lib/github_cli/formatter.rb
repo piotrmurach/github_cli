@@ -22,23 +22,24 @@ module GithubCLI
     end
 
     def render_output
-      render_status
+      Terminal.line render_status
       return if quiet
-      @pager.page(determine_output_formatter)
-      render_message
+      formatter = determine_output_formatter
+      Terminal.line formatter.format # TODO: page when too much content
+      Terminal.line message if message
     end
 
+    # @api private
     def determine_output_formatter
+      if !(response.body && !response.body.empty?)
+        return
+      end
+
       case format.to_s
       when 'table', /table:v.*/, /table:h.*/
-        if response.body && !response.body.empty?
-          formatter = Formatters::Table.new(response.body,
-                        :transform => format.to_s.split(':').last)
-          formatter.format
-        end
+        Formatters::Table.new(response.body, transform: format.to_s.split(':').last)
       when 'csv'
-        formatter = Formatters::CSV.new(response)
-        formatter.format
+        Formatters::CSV.new(response)
       when 'json'
         'json output'
       else
@@ -49,14 +50,7 @@ module GithubCLI
     # Render status code
     def render_status
       if response.respond_to? :status
-        Terminal.line "Response Status: #{response.status}\n"
-        Terminal.newline
-      end
-    end
-
-    def render_message
-      if message
-        Terminal.line message
+        "Response Status: #{response.status}\n"
       end
     end
   end # Formatter
