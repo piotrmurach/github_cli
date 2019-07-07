@@ -7,16 +7,15 @@ Gem::Specification.new do |spec|
   spec.version       = GithubCLI::VERSION
   spec.authors       = ["Piotr Murach"]
   spec.email         = ["me@piotrmurach.com"]
-  spec.description   = %q{CLI-based access to GitHub API v3}
-  spec.summary       = %q{Full command line access to GitHub API v3}
+  spec.summary       = %q{GitHub on your command line. Use your terminal, not the browser}
+  spec.description   = %q{GitHub on your command line. Use your terminal, not the browser}
   spec.homepage      = "http://github.com/piotrmurach/github_cli"
   spec.license       = "MIT"
 
-  man_files          = Dir.glob("lib/github_cli/man/**/*")
+  spec.files         = Dir['lib/**/*']
+  spec.files        += Dir['bin/*', 'github_cli.gemspec']
+  spec.files        += Dir['README.md', 'CHANGELOG.md', 'LICENSE.txt', 'Rakefile']
   spec.executables   = %w(gcli)
-  spec.files         = `git ls-files`.split("\n")
-  spec.files         += man_files
-  spec.test_files    = `git ls-files -- {spec,features}/*`.split("\n")
   spec.require_paths = ["lib"]
 
   spec.required_ruby_version = '>= 2.0.0'
