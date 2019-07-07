@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../terminal'
 require_relative '../util'
 
 module GithubCLI
@@ -14,42 +13,40 @@ module GithubCLI
       end
 
       def format
+        output = []
+
         if response.respond_to?(:to_ary)
-          render_headers(response.first)
+          output << render_headers(response.first)
           response.each_with_index do |item, indx|
-            render_line(indx, item)
-            Terminal.newline
+            output << "%d,%s" % [indx, render_line(item)]
+            output << "\n"
           end
         elsif response.respond_to?(:keys)
-          render_headers(response)
-          render_line(1, response)
+          output << render_headers(response)
+          output << "%d,%s" % [1, render_line(item)]
         else
-          Terminal.line "#{response}\n"
+          output << "#{response}\n"
         end
+
+        output.join
       end
 
       def render_headers(header)
-        output = header
         if header.respond_to?(:to_hash)
-          output = GithubCLI::Util.flatten_hash(header.to_hash)
-          output = "Index,#{output.keys.join(',')}\n"
+          data = GithubCLI::Util.flatten_hash(header.to_hash)
+          "Index,#{data.keys.join(',')}\n"
         elsif header.respond_to?(:to_ary)
-          output = "Index,#{header.join(',')}\n"
+          "Index,#{header.join(',')}\n"
         end
-
-        Terminal.line output
       end
 
-      def render_line(index, item)
-        output = item
+      def render_line(item)
         if item.respond_to?(:to_hash)
-          output = GithubCLI::Util.flatten_hash(item.to_hash)
-          output = output.values.join(',')
+          data = GithubCLI::Util.flatten_hash(item.to_hash)
+          data.values.join(',')
         elsif item.respond_to?(:to_ary)
-          output = item.join(',')
+          item.join(',')
         end
-
-        $stdout.printf "%d,%s", index, output
       end
     end # CSV
   end # Formatters
