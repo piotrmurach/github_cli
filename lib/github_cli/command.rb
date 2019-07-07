@@ -7,7 +7,7 @@ module GithubCLI
     HELP_COMMAND = 'help'
 
     # Internally used command representation
-    class Comm < Struct.new(:namespace, :name, :desc, :usage); end
+    class Cmd < Struct.new(:namespace, :name, :desc, :usage); end
 
     def self.output_formats
       {
@@ -57,7 +57,7 @@ module GithubCLI
           last_task = task.last
           name = last_task.name
           next if name.index HELP_COMMAND
-          commands << Comm.new(namespace, name, last_task.description, last_task.usage)
+          commands << Cmd.new(namespace, name, last_task.description, last_task.usage)
         end
       end
       commands
