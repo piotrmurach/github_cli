@@ -12,8 +12,6 @@ module GithubCLI
     def self.output_formats
       {
         'csv' => nil,
-        'json' => nil,
-        'pretty' => nil,
         'table' => nil
       }
     end
