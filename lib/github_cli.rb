@@ -17,7 +17,7 @@ require_relative 'github_cli/version'
 module GithubCLI
   extend DSL
 
-  program_name 'GitHub API v3 CLI client'
+  program_name 'GitHub API console client'
 
   class << self
     attr_writer :ui
