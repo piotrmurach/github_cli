@@ -9,12 +9,7 @@ module GithubCLI
     # Internally used command representation
     class Cmd < Struct.new(:namespace, :name, :desc, :usage); end
 
-    def self.output_formats
-      {
-        'csv' => nil,
-        'table' => nil
-      }
-    end
+    OUTPUT_FORMATS = [:csv, :table, :raw]
 
     ALIASES = {
       "ls"  => :list,
@@ -28,7 +23,7 @@ module GithubCLI
 
     class_option :format, :type => :string, :aliases => '-f',
                  :default => 'table',
-                 :banner => output_formats.keys.join('|'),
+                 :banner => OUTPUT_FORMATS.join('|'),
                  :desc => "Format of the output. Type table:h to display table horizontally."
     class_option :quiet, :type => :boolean, :aliases => "-q",
                  :desc => "Suppress response output"
