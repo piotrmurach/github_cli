@@ -13,7 +13,7 @@ RSpec.describe GithubCLI::API, '#configure' do
 
     it { expect(subject.adapter).to eql(:net_http) }
 
-    it { expect(subject.ssl).to eql({}) }
+    it { expect(subject.ssl).to include(:ca_file) }
 
     it { expect(subject.site).to eql('https://github.com') }
 
