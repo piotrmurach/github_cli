@@ -83,11 +83,5 @@ module GithubCLI
       end
       string
     end
-
-    # Compares two strings to find common prefix
-    #
-    def longest_common_prefix(string_1, string_2)
-      ("#{string_1}\0#{string_2}").match(/^(.*).*\0\1/i).to_a[1]
-    end
-  end
+  end # Util
 end # GithubCLI
