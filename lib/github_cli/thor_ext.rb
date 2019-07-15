@@ -1,6 +1,5 @@
 require_relative 'manpage'
 require_relative 'terminal'
-require_relative 'command/completion'
 
 class Thor
   include Thor::Base
@@ -56,13 +55,14 @@ class Thor
       RUBY
     end
 
-    def handle_no_task_error(cmd, has_namespace = $thor_runner) #:nodoc:
-      possibilities = "#{GithubCLI::Command::Completion.new(cmd).format_command_possibilities}"
+    def handle_no_command_error(cmd, has_namespace = $thor_runner)
       if has_namespace
-        raise UndefinedTaskError, "Could not find task #{cmd.inspect} in #{namespace.inspect} namespace. " + possibilities
+        GithubCLI.ui.error "Could not find task #{cmd.inspect} in #{namespace.inspect} namespace.\n"
       else
-        raise UndefinedTaskError, "Could not find command #{cmd.inspect}. " + possibilities
+        GithubCLI.ui.error "Could not find command #{cmd.inspect}.\n"
       end
+      GithubCLI.ui.suggest(cmd, all_commands.keys)
+      exit 1
     end
   end
 
