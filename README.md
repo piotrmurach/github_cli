@@ -18,7 +18,7 @@
 [coverage]: https://coveralls.io/github/piotrmurach/github_cli
 [inchpages]: http://inch-ci.org/github/piotrmurach/github_cli
 
-> Command line interface for GitHub API that works hand-in-hand with `github_api` gem.
+> GitHub on your command line. User your terminal, not the browser. Works hand-in-hand with `github_api` gem.
 
 ![Interface](https://github.com/piotrmurach/github_cli/raw/master/assets/interface.png)
 
