@@ -7,7 +7,7 @@ module GithubCLI
   class UI
     extend Forwardable
 
-    def_delegators :@prompt, :ask, :mask
+    def_delegators :@prompt, :ask, :mask, :suggest
 
     def initialize(prompt)
       @prompt = prompt
