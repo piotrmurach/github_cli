@@ -12,7 +12,6 @@ require_relative 'github_cli/formatter'
 require_relative 'github_cli/terminal'
 require_relative 'github_cli/ui'
 require_relative 'github_cli/version'
-require_relative 'github_cli/thor_ext'
 
 # Base module which adds Github API to the command line
 module GithubCLI

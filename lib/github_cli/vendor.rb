@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 if defined?(Thor)
   GithubCLI.ui.warn "Thor has already been required. "
 end
@@ -10,3 +8,5 @@ $:.unshift(vendor_dir) unless $:.include?(vendor_dir)
 require 'thor'
 require 'thor/group'
 require 'thor/actions'
+
+require_relative 'thor_ext'
