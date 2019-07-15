@@ -7,6 +7,7 @@ Feature: gcli content
     Then the exit status should be 0
       And the output should contain "content get"
       And the output should contain "content create"
+      And the output should contain "content delete"
       And the output should contain "content readme"
       And the output should contain "content archive"
 

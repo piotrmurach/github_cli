@@ -18,6 +18,12 @@ module GithubCLI
       end
     end
 
+    def self.delete(user, repo, path, params, options)
+      output options do
+        github_api(options).repos.contents.delete(user, repo, path, params)
+      end
+    end
+
     def self.readme(user, repo, params, options)
       output options do
         github_api(options).repos.contents.readme user, repo, params

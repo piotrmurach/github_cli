@@ -32,6 +32,11 @@ RSpec.describe GithubCLI::Commands::Contents do
     subject.invoke "content:create", [user, repo, path], {:path => path, :message => 'commit', :content => 'puts'}
   end
 
+  it "invokes content:delete" do
+    expect(api_class).to receive(:delete).with(user, repo, path, {"message" => "delete", "sha" => "123abc"}, format)
+    subject.invoke "content:delete", [user, repo, path], :message => "delete", :sha => "123abc"
+  end
+
   it "invokes content:archive" do
     expect(api_class).to receive(:archive).with(user, repo, {}, format)
     subject.invoke "content:archive", [user, repo]

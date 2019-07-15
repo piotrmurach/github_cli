@@ -79,6 +79,28 @@ module GithubCLI
         Content.create user, repo, path, params, global_options
       end
 
+      option :message, :type => :string, :required => true, :banner => "",
+             :desc => "the commit message"
+      option :sha, :type => :string, :required => true, :banner => "",
+             :desc => "The blob SHA of the file being replaced."
+      option :branch, :type => :string, :banner => "", :desc => "the branch name"
+      option :"committer-name", :type => :string,
+            :desc => "the name of the committer of the commit"
+      option :"committer-email", :type => :string,
+            :desc => "the email of the committer of the commit"
+      desc "delete <user> <repo> <path>", "Deletes a file in a repository."
+      def delete(user, repo, path)
+        global_options = options.dup
+        params = options[:params].dup
+        params['message'] = options[:message]
+        params['sha']     = options[:sha]
+        params['branch']  = options[:branch]  if options[:branch]
+        params['committer.name']  = options['committer-name'] if options['committer-name']
+        params['committer.email'] = options['committer-email'] if options['committer-email']
+        Util.hash_without!(global_options, params.keys + ['committer-name', 'committer-email', 'params'])
+        Content.delete(user, repo, path, params, global_options)
+      end
+
       option :ref, :type => :string,
             :desc => "The String name of the Commit/Branch/Tag. Defaults to master."
       desc 'readme <user> <repo>', 'Get the README'
