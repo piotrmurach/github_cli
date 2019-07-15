@@ -1,4 +1,3 @@
-@ci-run
 Feature: Command Completion
 
   Scenario: Suggest alternative
