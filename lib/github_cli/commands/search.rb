@@ -10,52 +10,43 @@ module GithubCLI
 
       namespace :search
 
-      option :state, :type => :string, :aliases => ["-s"], :desc => 'Repository name'
-      desc 'issue <owner> <repo> <keyword>', 'Search issues'
+      desc "issue <query>", "Search issues"
+      def issue(query)
+        global_options = options.dup
+        params = options[:params].dup
+        params["q"] = query
+        Util.hash_without!(global_options, params.keys + ["params"])
+        GithubCLI::Search.issue(params, global_options)
+      end
+
+      desc "repo <query>", "Search repositories"
       long_desc <<-DESC
-        Search issues
-
-        Parameters
-
-        state - open or closed. \n
-        keyword - search term
+        search repo "tetris+language:assembly"
       DESC
-      def issue(owner, repo, keyword)
+      def repo(query)
         global_options = options.dup
         params = options[:params].dup
-        params['owner']   = owner
-        params['repo']    = repo
-        params['keyword'] = keyword
-        params['state']   = options[:state] if options[:state]
-        Util.hash_without!(global_options, params.keys + ['params'])
-        Search.issue params, global_options
+        params["q"] = query
+        Util.hash_without!(global_options, params.keys + ["params"])
+        GithubCLI::Search.repo(params, global_options)
       end
 
-      desc 'repo <keyword>', 'Repository search'
-      def repo(keyword)
+      desc "user <query>", "Search users"
+      def user(query)
         global_options = options.dup
         params = options[:params].dup
-        params['keyword'] = keyword
-        Util.hash_without!(global_options, params.keys + ['params'])
-        Search.repo params, global_options
+        params["q"] = query
+        Util.hash_without!(global_options, params.keys + ["params"])
+        GithubCLI::Search.user(params, global_options)
       end
 
-      desc 'user <keyword>', 'User search'
-      def user(keyword)
+      desc "code <query>", "Search code"
+      def code(query)
         global_options = options.dup
         params = options[:params].dup
-        params['keyword'] = keyword
-        Util.hash_without!(global_options, params.keys + ['params'])
-        Search.user params, global_options
-      end
-
-      desc 'email <email>', 'Email search'
-      def email(email)
-        global_options = options.dup
-        params = options[:params].dup
-        params['email'] = email
-        Util.hash_without!(global_options, params.keys + ['params'])
-        Search.email params, global_options
+        params["q"] = query
+        Util.hash_without!(global_options, params.keys + ["params"])
+        GithubCLI::Search.code(params, global_options)
       end
     end # Search
   end # Commands

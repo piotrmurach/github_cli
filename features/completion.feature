@@ -36,9 +36,6 @@ Feature: Command Completion
     And the output should contain:
     """
     Could not find command "kode".
-    Did you mean one of these?
-            help
-            issue
-            repo
-            user
+    Did you mean this?
+            code
     """

@@ -6,27 +6,27 @@ module GithubCLI
   class Search
     extend API
 
-    def issue(params, options)
+    def self.issue(params, options)
       output options do
-        github_api(options).search.issues params
+        github_api(options).search.issues(params)
       end
     end
 
-    def repo(params, options)
+    def self.repo(params, options)
       output options do
-        github_api(options).search.repos params
+        github_api(options).search.repos(params)
       end
     end
 
-    def user(params, options)
+    def self.user(params, options)
       output options do
-        github_api(options).search.users params
+        github_api(options).search.users(params)
       end
     end
 
-    def email(params, options)
+    def self.code(params, options)
       output options do
-        github_api(options).search.email params
+        github_api(options).search.code(params)
       end
     end
   end # Search
