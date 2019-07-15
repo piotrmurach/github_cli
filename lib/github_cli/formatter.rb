@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
-require 'tty-pager'
+require "tty-pager"
 
-require_relative 'errors'
-require_relative 'formatters/csv'
-require_relative 'formatters/table'
+require_relative "errors"
+require_relative "formatters/csv"
+require_relative "formatters/table"
+require_relative "formatters/raw"
 
 module GithubCLI
   # This is the main entry point for formatting output.
@@ -25,7 +26,7 @@ module GithubCLI
       Terminal.line render_status
       return if quiet
       formatter = determine_output_formatter
-      Terminal.line formatter.format # TODO: page when too much content
+      Terminal.line formatter.format if formatter # TODO: page when too much content
       Terminal.line message if message
     end
 
@@ -36,12 +37,14 @@ module GithubCLI
       end
 
       case format.to_s
-      when 'table', /table:v.*/, /table:h.*/
-        Formatters::Table.new(response.body, transform: format.to_s.split(':').last)
-      when 'csv'
+      when "table", /table:v.*/, /table:h.*/
+        Formatters::Table.new(response.body, transform: format.to_s.split(":").last)
+      when "csv"
         Formatters::CSV.new(response)
-      when 'json'
-        'json output'
+      when "raw"
+        Formatters::Raw.new(response)
+      when "json"
+        Formatters::Raw.new("json output")
       else
         raise UnknownFormatError, format
       end
