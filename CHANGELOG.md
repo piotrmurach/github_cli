@@ -8,6 +8,9 @@
 * Add tty-pager
 * Add tty-screen
 * Add tty-which
+* Add assignee add/delete subcommands
+* Add content delete subcommand
+* Add release command
 
 ### Changed
 * Change Editor with TTY::Editor
