@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Contents do
-  let(:format) { {'format' => 'table'} }
-  let(:user)   { 'peter-murach' }
-  let(:repo)   { 'github_cli' }
-  let(:path)   { 'README.md' }
+  let(:format) { {"format" => "table"} }
+  let(:user)   { "piotrmurach" }
+  let(:repo)   { "github_cli" }
+  let(:path)   { "README.md" }
   let(:api_class) { GithubCLI::Content }
 
   it "invokes content:readme" do
@@ -13,7 +13,7 @@ RSpec.describe GithubCLI::Commands::Contents do
   end
 
   it "invokes content:readme --ref" do
-    expect(api_class).to receive(:readme).with(user, repo, {'ref'=>'master'}, format)
+    expect(api_class).to receive(:readme).with(user, repo, {"ref"=>"master"}, format)
     subject.invoke "content:readme", [user, repo], :ref => "master"
   end
 
@@ -23,13 +23,13 @@ RSpec.describe GithubCLI::Commands::Contents do
   end
 
   it "invokes content:get --ref" do
-    expect(api_class).to receive(:get).with(user, repo, path,{'ref'=>'master'},format)
+    expect(api_class).to receive(:get).with(user, repo, path,{"ref"=>"master"},format)
     subject.invoke "content:get", [user, repo, path], :ref => "master"
   end
 
   it "invokes content:create" do
-    expect(api_class).to receive(:create).with(user, repo, path, {'path' => path, 'message' => 'commit', 'content' => 'puts'}, format)
-    subject.invoke "content:create", [user, repo, path], {:path => path, :message => 'commit', :content => 'puts'}
+    expect(api_class).to receive(:create).with(user, repo, path, {"path" => path, "message" => "commit", "content" => "puts"}, format)
+    subject.invoke "content:create", [user, repo, path], {:path => path, :message => "commit", :content => "puts"}
   end
 
   it "invokes content:delete" do
@@ -43,7 +43,7 @@ RSpec.describe GithubCLI::Commands::Contents do
   end
 
   it "invokes content:archive --ref" do
-    expect(api_class).to receive(:archive).with(user, repo, {'ref'=>'master'}, format)
-    subject.invoke "content:archive", [user, repo], :ref => 'master'
+    expect(api_class).to receive(:archive).with(user, repo, {"ref"=>"master"}, format)
+    subject.invoke "content:archive", [user, repo], :ref => "master"
   end
 end

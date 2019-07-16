@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Collaborators do
-  let(:format) { {'format' => 'table'} }
-  let(:owner)  { 'peter-murach' }
-  let(:repo)   { 'github_cli' }
-  let(:user)   { 'github' }
+  let(:format) { {"format" => "table"} }
+  let(:owner)  { "peter-murach" }
+  let(:repo)   { "github_cli" }
+  let(:user)   { "github" }
   let(:api_class) { GithubCLI::Collaborator }
 
   it "invokes collab:list" do

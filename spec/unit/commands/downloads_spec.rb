@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Downloads do
-  let(:format) { {'format' => 'table'} }
-  let(:user)   { 'peter-murach' }
-  let(:repo)   { 'github_cli' }
+  let(:format) { {"format" => "table"} }
+  let(:user)   { "piotrmurach" }
+  let(:repo)   { "github_cli" }
   let(:api_class) { GithubCLI::Download }
 
   it "invokes download:list" do
@@ -17,8 +17,8 @@ RSpec.describe GithubCLI::Commands::Downloads do
   end
 
   it "invokes download:create --name --size" do
-    expect(api_class).to receive(:create).with(user, repo, {"name" => 'file.png', "size" => 12345}, format)
-    subject.invoke "download:create", [user, repo], :name => 'file.png', :size => 12345
+    expect(api_class).to receive(:create).with(user, repo, {"name" => "file.png", "size" => 12345}, format)
+    subject.invoke "download:create", [user, repo], :name => "file.png", :size => 12345
   end
 
   it "invokes download:upload" do
