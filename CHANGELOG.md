@@ -11,6 +11,8 @@
 * Add assignee add/delete subcommands
 * Add content delete subcommand
 * Add release command
+* Add watch create/get/delete subcommands
+* Add hook ping subcommand
 
 ### Changed
 * Change Editor with TTY::Editor
@@ -20,14 +22,14 @@
 * Change Manpage implementation
 * Change UI to use prompt
 * Change to update github_api requirement to latest
-* Change to stop autoloading files and require directly
+* Change to stop auto loading files and require directly
 * Remove System in favour of TTY::Which dependency
 * Remove Config in favour of TTY::Config dependency
 * Remove Helpers utilities
 * Remove tty dependency
 
 ### Fixed
-* Fixed to use --format option value
+* Fixed use of --format option
 
 ## [v0.6.2] - 2013-10-06
 
