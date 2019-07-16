@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Repositories do
-  let(:format) { {'format' => 'table'} }
-  let(:user)   { 'peter-murach' }
-  let(:repo)   { 'github_cli' }
-  let(:org)    { 'rails' }
+  let(:format) { {"format" => "table"} }
+  let(:user)   { "piotrmurach" }
+  let(:repo)   { "github_cli" }
+  let(:org)    { "rails" }
   let(:api_class) { GithubCLI::Repository }
 
   it "invokes repo:list" do
@@ -13,7 +13,7 @@ RSpec.describe GithubCLI::Commands::Repositories do
   end
 
   it "invokes repo:list --every" do
-    expect(api_class).to receive(:all).with({}, format.merge('every' => true))
+    expect(api_class).to receive(:all).with({}, format.merge("every" => true))
     subject.invoke "repo:list", [], {:every => true}
   end
 
@@ -40,47 +40,65 @@ RSpec.describe GithubCLI::Commands::Repositories do
   end
 
   it "invokes repo:create name" do
-    expect(api_class).to receive(:create).with({
-      'name' => repo, 'private' => nil, 'has_issues' => nil,
-      'has_wiki' => nil, 'has_downloads' => nil, 'auto_init' => nil}, format)
-    subject.invoke "repo:create", [repo]
+    opts = {
+      "name" => "github_cli",
+      "desc" => "This is your first repository",
+      "homepage" => "https://github.com",
+      "private" => false,
+      "issues" => true,
+      "projects" => true,
+      "wiki" => true
+    }
+    copy_opts = opts.dup
+    copy_opts["description"] = copy_opts.delete("desc")
+    copy_opts["has_projects"] = copy_opts.delete("projects")
+    copy_opts["has_issues"] = copy_opts.delete("issues")
+    copy_opts["has_wiki"] = copy_opts.delete("wiki")
+    expect(api_class).to receive(:create).with(copy_opts, format)
+    subject.invoke "repo:create", [repo], opts
   end
 
   it "invokes repo:create org/name" do
-    expect(api_class).to receive(:create).with({
-      'name' => repo, 'org' => org, 'private' => nil, 'has_issues' => nil,
-      'has_wiki' => nil, 'has_downloads' => nil, 'auto_init' => nil}, format)
+    expect(api_class).to receive(:create).with({"name" => repo, "org" => org}, format)
     subject.invoke "repo:create", ["#{org}/#{repo}"]
   end
 
   it "invokes repo:create name --org" do
-    expect(api_class).to receive(:create).with({
-      'name' => repo, 'org' => org, 'private' => nil, 'has_issues' => nil,
-      'has_wiki' => nil, 'has_downloads' => nil, 'auto_init' => nil}, format)
+    expect(api_class).to receive(:create).with({"name" => repo, "org" => org}, format)
     subject.invoke "repo:create", [repo], :org => org
   end
 
   it "invokes repo:create name --wiki --issues --downloads --auto_init" do
     expect(api_class).to receive(:create).with({
-     'name' => repo, "has_wiki" => true, 'private' => nil,
-      "has_issues" => true, "has_downloads" => true, "auto_init" => true}, format)
+     "name" => repo, "has_wiki" => true, "has_issues" => true, "has_projects" => true, "auto_init" => true}, format)
     subject.invoke "repo:create", [repo], :wiki => true, :issues => true,
-      :downloads => true, :auto => true
+      :projects => true, :auto => true
   end
 
   it "invokes repo:edit user repo name" do
-    expect(api_class).to receive(:edit).with(user, repo, {
-      'name' => 'new', 'private' => nil,
-      "has_wiki" => nil, "has_issues" => nil, "has_downloads" => nil}, format)
-    subject.invoke "repo:edit", [user, repo, 'new']
+    opts = {
+      "desc" => "This is your first repository",
+      "homepage" => "https://github.com",
+      "private" => false,
+      "issues" => true,
+      "projects" => true,
+      "wiki" => true
+    }
+    copy_opts = opts.dup
+    copy_opts["name"] = "github_cli"
+    copy_opts["description"] = copy_opts.delete("desc")
+    copy_opts["has_projects"] = copy_opts.delete("projects")
+    copy_opts["has_issues"] = copy_opts.delete("issues")
+    copy_opts["has_wiki"] = copy_opts.delete("wiki")
+    expect(api_class).to receive(:edit).with(user, repo, copy_opts, format)
+    subject.invoke "repo:edit", [user, repo, "github_cli"], opts
   end
 
   it "invokes repo:edit user repo name --wiki --issues --downloads --auto_init" do
-    expect(api_class).to receive(:edit).with(user, repo, {
-      'name' => 'new', 'private' => nil,
-      "has_wiki" => true, "has_issues" => true, "has_downloads" => true}, format)
-    subject.invoke "repo:edit", [user, repo, 'new'], :wiki => true,
-      :issues => true, :downloads => true
+    expect(api_class).to receive(:edit).with(user, repo, {"name" => "new",
+      "has_wiki" => true, "has_issues" => true, "has_projects" => true}, format)
+    subject.invoke "repo:edit", [user, repo, "new"], :wiki => true,
+      :issues => true, :projects => true
   end
 
   it "invokes repo:delete user repo" do
@@ -94,8 +112,8 @@ RSpec.describe GithubCLI::Commands::Repositories do
   end
 
   it "invokes repo:branch" do
-    expect(api_class).to receive(:branch).with(user, repo, 'new', {}, format)
-    subject.invoke "repo:branch", [user, repo, 'new']
+    expect(api_class).to receive(:branch).with(user, repo, "new", {}, format)
+    subject.invoke "repo:branch", [user, repo, "new"]
   end
 
   it "invokes repo:contribs" do
