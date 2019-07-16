@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../api'
+require_relative "../api"
 
 module GithubCLI
   class Watching
@@ -15,6 +15,24 @@ module GithubCLI
     def self.watched(params, options)
       output options do
         github_api(options).activity.watching.watched params
+      end
+    end
+
+    def self.subscribed?(user, repo, params, options)
+      output options do
+        github_api(options).activity.watching.subscribed?(user, repo, params)
+      end
+    end
+
+    def self.create(user, repo, params, options)
+      output options do
+        github_api(options).activity.watching.create(user, repo, params)
+      end
+    end
+
+    def self.delete(user, repo, params, options)
+      output options do
+        github_api(options).activity.watching.delete(user, repo, params)
       end
     end
 
