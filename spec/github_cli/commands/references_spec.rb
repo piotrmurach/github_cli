@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::References do
-  let(:format) { {'format' => 'table'} }
-  let(:user)   { 'peter-murach' }
-  let(:repo)   { 'github_cli' }
-  let(:ref)    { 'refs/master' }
-  let(:sha)    { '3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15' }
+  let(:format) { {"format" => "table"} }
+  let(:user)   { "piotrmurach" }
+  let(:repo)   { "github_cli" }
+  let(:ref)    { "refs/master" }
+  let(:sha)    { "3a0f86fb8db8eea7ccbb9a95f325ddbedfb25e15" }
   let(:api_class) { GithubCLI::Reference }
 
   it "invokes ref:list" do
@@ -23,14 +23,22 @@ RSpec.describe GithubCLI::Commands::References do
     subject.invoke "ref:get", [user, repo, ref]
   end
 
-  it "invokes ref:create --ref --sha" do
-    expect(api_class).to receive(:create).with(user, repo, {"ref" => ref, "sha" => sha}, format)
-    subject.invoke "ref:create", [user, repo], :ref => ref, :sha => sha
+  it "invokes ref:create" do
+    opts = {
+      "ref" => "refs/heads/featureA",
+      "sha" => "aa218f56b14c9653891f9e74264a383fa43fefbd"
+    }
+    expect(api_class).to receive(:create).with(user, repo, opts, format)
+    subject.invoke "ref:create", [user, repo], opts
   end
 
   it "invokes ref:update --sha -f" do
-    expect(api_class).to receive(:update).with(user, repo, ref, {"sha" => sha, "force" => false}, format)
-    subject.invoke "ref:update", [user, repo, ref], :sha => sha
+    opts = {
+      "sha" => "aa218f56b14c9653891f9e74264a383fa43fefbd",
+      "force" => true
+    }
+    expect(api_class).to receive(:update).with(user, repo, ref, opts, format)
+    subject.invoke "ref:update", [user, repo, ref], opts
   end
 
   it "invokes ref:delete" do
