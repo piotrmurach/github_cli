@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Authorizations do
-  let(:format) { {'format' => 'table'} }
+  let(:format) { {"format" => "table"} }
   let(:id) { 1 }
   let(:api_class) { GithubCLI::Authorization }
 
@@ -15,11 +15,14 @@ RSpec.describe GithubCLI::Commands::Authorizations do
     subject.invoke "auth:get", [id]
   end
 
-  it "invokes auth:create --scopes --note --note_url" do
-    expect(api_class).to receive(:create).with({"scopes" => ["repo"],
+  it "invokes auth:create" do
+    opts = {
+      "scopes" => ["repo"],
       "note" => "github_cli",
-      "note_url" => "https://github.com/peter-murach/github_cli"}, format)
-    subject.invoke "auth:create", [], :scopes => ["repo"], :note => 'github_cli', :note_url => "https://github.com/peter-murach/github_cli"
+      "note_url" => "https://github.com/piotrmurach/github_cli"
+    }
+    expect(api_class).to receive(:create).with(opts, format)
+    subject.invoke "auth:create", [], opts
   end
 
   it "invokes auth:update" do
@@ -31,7 +34,7 @@ RSpec.describe GithubCLI::Commands::Authorizations do
     expect(api_class).to receive(:update).with(id, {"scopes" => ["repo"],
       "note" => "github_cli",
       "note_url" => "https://github.com/peter-murach/github_cli"}, format)
-    subject.invoke "auth:update", [id], :scopes => ["repo"], :note => 'github_cli', :note_url => "https://github.com/peter-murach/github_cli"
+    subject.invoke "auth:update", [id], :scopes => ["repo"], :note => "github_cli", :note_url => "https://github.com/peter-murach/github_cli"
   end
 
   it "invokes auth:delete" do
