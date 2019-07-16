@@ -282,6 +282,10 @@ module GithubCLI
     desc "ref", "Leverage References API"
     subcommand "ref", GithubCLI::Commands::References
 
+    require_relative 'commands/releases'
+    desc "release", "Leverage Releases API"
+    subcommand "release", GithubCLI::Commands::Releases
+
     require_relative 'commands/repositories'
     desc "repo", "Leverage Repositories API"
     subcommand "repo", GithubCLI::Commands::Repositories
