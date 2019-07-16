@@ -78,7 +78,7 @@ module GithubCLI
           formatter = Formatter.new(response, format: format, quiet: quiet)
           formatter.render_output
         else
-          GithubCLI.ui.info response, "\n"
+          GithubCLI.ui.info "#{response}\n"
         end
         response
       end
