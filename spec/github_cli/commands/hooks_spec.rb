@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Hooks do
-  let(:format) { {'format' => 'table'} }
-  let(:user)   { 'peter-murach' }
-  let(:repo)   { 'github_cli' }
+  let(:format) { {"format" => "table"} }
+  let(:user)   { "piotrmurach" }
+  let(:repo)   { "github_cli" }
   let(:id)     { 1 }
   let(:api_class) { GithubCLI::Hook }
 
@@ -18,22 +18,42 @@ RSpec.describe GithubCLI::Commands::Hooks do
   end
 
   it "invokes hook:create --name --config" do
-    expect(api_class).to receive(:create).with(user, repo, {'name' => 'web',
-      "config" => { :url => "http://example.com/webhook" } }, format)
-    subject.invoke "hook:create", [user, repo], :name => 'web',
-      :config => {:url => "http://example.com/webhook" }
+    opts = {
+      "name" => "web",
+      "active" => true,
+      "events" => [
+          "push",
+          "pull_request"
+      ],
+      "config" => {
+        "url" => "https://example.com/webhook",
+        "content_type" => "json",
+        "insecure_ssl" => "0"
+      }
+    }
+    expect(api_class).to receive(:create).with(user, repo, opts, format)
+    subject.invoke "hook:create", [user, repo], opts
   end
 
   it "invokes hook:edit --name --config" do
-    expect(api_class).to receive(:edit).with(user, repo, id, {'name' => 'web',
-      "config" => { :url => "http://example.com/webhook" } }, format)
-    subject.invoke "hook:edit", [user, repo, id], :name => 'web',
-      :config => {:url => "http://example.com/webhook" }
+    opts = {
+      "active" => true,
+      "config" => {
+        "url" => "http://example.com/webhook"
+      }
+    }
+    expect(api_class).to receive(:edit).with(user, repo, id, opts, format)
+    subject.invoke "hook:edit", [user, repo, id], opts
   end
 
   it "invokes hook:test" do
     expect(api_class).to receive(:test).with(user, repo, id, {}, format)
     subject.invoke "hook:test", [user, repo, id]
+  end
+
+  it "invokes hook:ping" do
+    expect(api_class).to receive(:ping).with(user, repo, id, {}, format)
+    subject.invoke "hook:ping", [user, repo, id]
   end
 
   it "invokes hook:delete" do

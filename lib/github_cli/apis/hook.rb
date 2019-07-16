@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../api'
+require_relative "../api"
 
 module GithubCLI
   class Hook
@@ -33,6 +33,12 @@ module GithubCLI
     def self.test(user, repo, id, params, options)
       output options do
         github_api(options).repos.hooks.test user, repo, id, params
+      end
+    end
+
+    def self.ping(user, repo, id, params, options)
+      output options do
+        github_api(options).repos.hooks.ping(user, repo, id, params)
       end
     end
 
