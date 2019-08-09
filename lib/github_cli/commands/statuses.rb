@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../apis/status'
-require_relative '../util'
-require_relative '../command'
+require_relative "../apis/status"
+require_relative "../util"
+require_relative "../command"
 
 module GithubCLI
   module Commands
@@ -10,11 +10,11 @@ module GithubCLI
 
       namespace :status
 
-      desc 'list <user> <repo> <sha>', 'Lists statuses for a <sha>'
+      desc "list <user> <repo> <sha>", "Lists statuses for a <sha>"
       def list(user, repo, sha)
         global_options = options.dup
         params = options[:params].dup
-        Util.hash_without!(global_options, params.keys + ['params'])
+        Util.hash_without!(global_options, params.keys + ["params"])
         Status.all user, repo, sha, params, global_options
       end
 
@@ -24,7 +24,9 @@ module GithubCLI
       option :target, :type => :string, :banner => "url",
             :desc => "Target url to associate with this status"
       option :desc, :type => :string, :desc => "Short description of the status"
-      desc 'create <user> <repo> <sha>', 'Create a status'
+      option :context, :type => :string,
+        desc: "A string label to differentiate this status from the status of other systems."
+      desc "create <user> <repo> <sha>", "Create a status"
       long_desc <<-DESC
         Inputs
 
@@ -35,11 +37,12 @@ module GithubCLI
       def create(user, repo, sha)
         global_options = options.dup
         params = options[:params].dup
-        params['state']       = options[:state]  if options[:state]
-        params['target_url']  = options[:target] if options[:target]
-        params['description'] = options[:desc]   if options[:desc]
-        Util.hash_without!(global_options, params.keys + ['params', 'target'])
-        Status.create user, repo, sha, params, global_options
+        params["state"]       = options[:state]  if options.key?("state")
+        params["target_url"]  = options[:target] if options.key?("target")
+        params["description"] = options[:desc]   if options.key?("desc")
+        params["context"]     = options[:context] if options.key?("context")
+        Util.hash_without!(global_options, params.keys + ["params", "target", "desc"])
+        Status.create(user, repo, sha, params, global_options)
       end
     end # Statuses
   end # Commands
