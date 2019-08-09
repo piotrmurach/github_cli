@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Keys do
-  let(:format) { {'format' => 'table'} }
+  let(:format) { {"format" => "table"} }
   let(:id)     { 1 }
-  let(:user)   { 'peter-murach' }
-  let(:repo)   { 'github' }
+  let(:user)   { "piotrmurach" }
+  let(:repo)   { "github" }
   let(:api_class) { GithubCLI::Key }
 
   it "invokes key:list" do

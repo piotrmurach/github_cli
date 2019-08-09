@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Followers do
-  let(:format) { { 'format' => 'table' } }
-  let(:user)   { 'peter-murach' }
+  let(:format) { { "format" => "table" } }
+  let(:user)   { "piotrmurach" }
   let(:api_class) { GithubCLI::Follower }
 
   it "invokes follower:list with user" do
