@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../apis/statistics'
-require_relative '../util'
-require_relative '../command'
+require_relative "../apis/statistics"
+require_relative "../util"
+require_relative "../command"
 
 module GithubCLI
   module Commands
@@ -10,43 +10,43 @@ module GithubCLI
 
       namespace :stat
 
-      desc 'contribs <user> <repo>', 'Get contributors list with additions, deletions, and commit counts'
+      desc "contribs <user> <repo>", "Get contributors list with additions, deletions, and commit counts"
       def contribs(user, repo)
         global_options = options.dup
         params = options[:params].dup
-        Util.hash_without!(global_options, params.keys + ['params'])
+        Util.hash_without!(global_options, params.keys + ["params"])
         GithubCLI::Statistics.contributors(user, repo, params, global_options)
       end
 
-      desc 'activity <user> <repo>', 'Get the last year of commit activity data'
+      desc "activity <user> <repo>", "Get the last year of commit activity data"
       def activity(user, repo)
         global_options = options.dup
         params = options[:params].dup
-        Util.hash_without!(global_options, params.keys + ['params'])
+        Util.hash_without!(global_options, params.keys + ["params"])
         GithubCLI::Statistics.activity(user, repo, params, global_options)
       end
 
-      desc 'frequency <user> <repo>', 'Get the number of additions and deletions per week'
+      desc "frequency <user> <repo>", "Get the number of additions and deletions per week"
       def frequency(user, repo)
         global_options = options.dup
         params = options[:params].dup
-        Util.hash_without!(global_options, params.keys + ['params'])
+        Util.hash_without!(global_options, params.keys + ["params"])
         GithubCLI::Statistics.frequency(user, repo, params, global_options)
       end
 
-      desc 'participation <user> <repo>', 'Get the weekly commit count for the repo owner and everyone else'
+      desc "participation <user> <repo>", "Get the weekly commit count for the repo owner and everyone else"
       def participation(user, repo)
         global_options = options.dup
         params = options[:params].dup
-        Util.hash_without!(global_options, params.keys + ['params'])
+        Util.hash_without!(global_options, params.keys + ["params"])
         GithubCLI::Statistics.participation(user, repo, params, global_options)
       end
 
-      desc 'card <user> <repo>', 'Get the number of commits per hour in each day'
+      desc "card <user> <repo>", "Get the number of commits per hour in each day"
       def card(user, repo)
         global_options = options.dup
         params = options[:params].dup
-        Util.hash_without!(global_options, params.keys + ['params'])
+        Util.hash_without!(global_options, params.keys + ["params"])
         GithubCLI::Statistics.card(user, repo, params, global_options)
       end
     end # Statistics

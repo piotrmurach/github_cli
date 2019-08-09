@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Statistics do
-  let(:format) { {'format' => 'table'} }
-  let(:user)   { 'peter-murach' }
-  let(:repo)   { 'github_cli' }
+  let(:format) { {"format" => "table"} }
+  let(:user)   { "piotrmurach" }
+  let(:repo)   { "github_cli" }
   let(:api_class) { GithubCLI::Statistics }
 
   it "invokes stat:contribs" do
