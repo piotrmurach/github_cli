@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::PullRequests do
-  let(:format) { {'format' => 'table'} }
-  let(:user)   { 'peter-murach' }
-  let(:repo)   { 'github_cli' }
+  let(:format) { {"format" => "table"} }
+  let(:user)   { "piotrmurach" }
+  let(:repo)   { "github_cli" }
   let(:number) { 1 }
   let(:api_class) { GithubCLI::PullRequest }
 
@@ -17,9 +17,25 @@ RSpec.describe GithubCLI::Commands::PullRequests do
     subject.invoke "pull:get", [user, repo, number]
   end
 
-  it "invokes pull:create --title" do
-    expect(api_class).to receive(:create).with(user, repo, {"title" => 'new'}, format)
-    subject.invoke "pull:create", [user, repo], :title => 'new'
+  it "invokes pull:create" do
+    opts = {
+      "title" => "Amazing new feature",
+      "body" => "Please pull this in!",
+      "head" => "octocat:new-feature",
+      "base" => "master"
+    }
+    expect(api_class).to receive(:create).with(user, repo, opts, format)
+    subject.invoke "pull:create", [user, repo], opts
+  end
+
+  it "invokes pull:create --issue" do
+    opts = {
+      "issue" => 5,
+      "head" => "octocat:new-feature",
+      "base" => "master"
+    }
+    expect(api_class).to receive(:create).with(user, repo, opts, format)
+    subject.invoke "pull:create", [user, repo], opts
   end
 
   it "invokes pull:update" do
@@ -28,9 +44,14 @@ RSpec.describe GithubCLI::Commands::PullRequests do
   end
 
   it "invokes pull:update --title" do
-    expect(api_class).to receive(:update).with(user, repo, number,
-      {'title' => 'new'}, format)
-    subject.invoke "pull:update", [user, repo, number], :title => 'new'
+    opts = {
+      "title" => "new title",
+      "body" => "updated body",
+      "state" => "open",
+      "base" => "master"
+    }
+    expect(api_class).to receive(:update).with(user, repo, number, opts, format)
+    subject.invoke "pull:update", [user, repo, number], opts
   end
 
   it "invokes pull:commits" do
