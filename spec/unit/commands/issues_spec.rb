@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Issues do
-  let(:format) { {'format' => 'table'} }
-  let(:user)   { 'peter-murach' }
-  let(:repo)   { 'github_cli' }
-  let(:org)    { 'github' }
+  let(:format) { {"format" => "table"} }
+  let(:user)   { "piotrmurach" }
+  let(:repo)   { "github_cli" }
+  let(:org)    { "github" }
   let(:number) { 1 }
   let(:api_class) { GithubCLI::Issue }
 
@@ -34,27 +34,31 @@ RSpec.describe GithubCLI::Commands::Issues do
   end
 
   it "invokes issue:create --title" do
-    expect(api_class).to receive(:create).with(user, repo, {"title" => 'new'}, format)
-    subject.invoke "issue:create", [user, repo], :title => 'new'
-  end
-
-  it "invokes issue:create --title --milestone" do
-    expect(api_class).to receive(:create).with(user, repo, {"title" => 'new', 
-      'milestone' => 1}, format)
-    subject.invoke "issue:create", [user, repo], :title => 'new', :milestone => 1
+    opts = {
+      "title" => "Found a bug",
+      "body" => "I'm having a problem with this.",
+      "assignees" => [
+        "octocat"
+      ],
+      "milestone" => 1,
+      "labels" => ["bug"]
+    }
+    expect(api_class).to receive(:create).with(user, repo, opts, format)
+    subject.invoke "issue:create", [user, repo], opts
   end
 
   it "invokes issue:edit --title" do
-    expect(api_class).to receive(:edit).with(user, repo, number,
-      {"title" => 'new'}, format)
-    subject.invoke "issue:edit", [user, repo, number], :title => 'new'
+    opts = {
+      "title" => "Found a bug",
+      "body" => "I'm having a problem with this.",
+      "assignees" => [
+        "octocat"
+      ],
+      "state" => "open",
+      "milestone" => 1,
+      "labels" => ["bug"]
+    }
+    expect(api_class).to receive(:edit).with(user, repo, number, opts, format)
+    subject.invoke "issue:edit", [user, repo, number], opts
   end
-
-  it "invokes issue:edit --title --milestone" do
-    expect(api_class).to receive(:edit).with(user, repo, number, {"title" => 'new',
-      'milestone' => number}, format)
-    subject.invoke "issue:edit", [user, repo, number], :title => 'new',
-       :milestone => number
-  end
-
 end

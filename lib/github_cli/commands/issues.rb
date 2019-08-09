@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../apis/issue'
-require_relative '../util'
-require_relative '../command'
+require_relative "../apis/issue"
+require_relative "../util"
+require_relative "../command"
 
 module GithubCLI
   module Commands
@@ -33,7 +33,7 @@ module GithubCLI
       option :repo, :type => :string, :aliases => ["-r"]
       option :all, :type => :boolean,
             :desc => "List all issues across all the authenticated user’s visible repositories"
-      desc 'list', 'List issues'
+      desc "list", "List issues"
       long_desc <<-DESC
         ghc issue list --filter=assigned --state=open
 
@@ -63,34 +63,33 @@ module GithubCLI
       def list
         global_options = options.dup
         params = options[:params].dup
-        params['org']       = options[:org]       if options[:org]
-        params['user']      = options[:user]      if options[:user]
-        params['repo']      = options[:repo]      if options[:repo]
-        params['filter']    = options[:filter]    if options[:filter]
-        params['milestone'] = options[:milestone] if options[:milestone]
-        params['assignee']  = options[:assignee]  if options[:assignee]
-        params['creator']   = options[:creator]   if options[:creator]
-        params['mentioned'] = options[:mentioned] if options[:mentioned]
-        params['sort']      = options[:sort]      if options[:sort]
-        params['state']     = options[:state]     if options[:state]
-        params['labels']    = options[:labels]    if options[:labels]
-        params['direction'] = options[:direction] if options[:direction]
-        params['since']     = options[:since]     if options[:since]
+        params["org"]       = options[:org]       if options.key?("org")
+        params["user"]      = options[:user]      if options.key?("user")
+        params["repo"]      = options[:repo]      if options.key?("repo")
+        params["filter"]    = options[:filter]    if options.key?("filter")
+        params["milestone"] = options[:milestone] if options.key?("milestone")
+        params["assignee"]  = options[:assignee]  if options.key?("assignee")
+        params["creator"]   = options[:creator]   if options.key?("creator")
+        params["mentioned"] = options[:mentioned] if options.key?("mentioned")
+        params["sort"]      = options[:sort]      if options.key?("sort")
+        params["state"]     = options[:state]     if options.key?("state")
+        params["labels"]    = options[:labels]    if options.key?("labels")
+        params["direction"] = options[:direction] if options.key?("direction")
+        params["since"]     = options[:since]     if options.key?("since")
 
         arg = []
         arg = :user if !options[:all] && !(options[:user] || options[:org])
-        Util.hash_without!(global_options, params.keys + ['params', 'all'])
+        Util.hash_without!(global_options, params.keys + ["params", "all"])
 
         Issue.all arg, params, global_options
       end
 
-      desc 'get <user> <repo> <number>', 'Get a single issue'
+      desc "get <user> <repo> <number>", "Get a single issue"
       def get(user, repo, number)
         global_options = options.dup
         params = options[:params].dup
-        Util.hash_without!(global_options, params.keys + ['params'])
-
-        Issue.get user, repo, number, params, global_options
+        Util.hash_without!(global_options, params.keys + ["params"])
+        Issue.get(user, repo, number, params, global_options)
       end
 
       option :title, :type => :string, :required => true
@@ -101,7 +100,9 @@ module GithubCLI
             :desc => "Milestone to associate this issue with."
       option :labels, :type => :array,
             :desc => "Labels to associate with this issue."
-      desc 'create <user> <repo>', 'Create an issue.'
+      option :assignees, :type => :array,
+            :desc => "Logins for Users to assign to this issue."
+      desc "create <user> <repo>", "Create an issue."
       long_desc <<-DESC
         Parameters
 
@@ -110,6 +111,7 @@ module GithubCLI
           assignee - Optional string - Login for the user that this issue should be assigned to.\n
           milestone - Optional number - Milestone to associate this issue with\n
           labels - Optional array of strings - Labels to associate with this issue
+          assignees - Options array of strings - Logins for Users to assign to this issue
 
         Example
 
@@ -118,27 +120,29 @@ module GithubCLI
       def create(user, repo)
         global_options = options.dup
         params = options[:params].dup
-        params['title']     = options[:title]
-        params['body']      = options[:body]      if options[:body]
-        params['assignee']  = options[:assignee]  if options[:assignee]
-        params['milestone'] = options[:milestone] if options[:milestone]
-        params['labels']    = options[:labels]    if options[:labels]
-        Util.hash_without!(global_options, params.keys + ['params'])
-
-        Issue.create user, repo, params, global_options
+        params["title"]     = options[:title]
+        params["body"]      = options[:body]      if options.key?("body")
+        params["assignee"]  = options[:assignee]  if options.key?("assignee")
+        params["milestone"] = options[:milestone] if options.key?("milestone")
+        params["labels"]    = options[:labels]    if options.key?("labels")
+        params["assignees"]    = options[:assignees] if options.key?("assignees")
+        Util.hash_without!(global_options, params.keys + ["params"])
+        Issue.create(user, repo, params, global_options)
       end
 
       option :title, :type => :string, :required => true
       option :body, :type => :string
       option :assignee, :type => :string,
             :desc => "Login for the user that this issue should be assigned to."
+      option :state, :type => :string, :banner => "open|closed",
+            :desc => "open, closed, default: open"
       option :milestone, :type => :string,
             :desc => "Milestone to associate this issue with."
       option :labels, :type => :array,
             :desc => "Labels to associate with this issue."
-      option :state, :type => :string, :banner => "open|closed",
-            :desc => "open, closed, default: open"
-      desc 'edit <user> <repo> <number>', 'Edit an issue.'
+      option :assignees, :type => :array,
+            :desc => "Logins for Users to assign to this issue."
+      desc "edit <user> <repo> <number>", "Edit an issue."
       long_desc <<-DESC
         Parameters
 
@@ -148,6 +152,7 @@ module GithubCLI
           state - Optional string - State of the issue: open or closed.
           milestone - Optional number - Milestone to associate this issue with\n
           labels - Optional array of strings - Labels to associate with this issue
+          assignees - Options array of strings - Logins for Users to assign to this issue
 
         Example
 
@@ -156,15 +161,15 @@ module GithubCLI
       def edit(user, repo, number)
         global_options = options.dup
         params = options[:params].dup
-        params['title']     = options[:title]
-        params['body']      = options[:body]      if options[:body]
-        params['assignee']  = options[:assignee]  if options[:assignee]
-        params['milestone'] = options[:milestone] if options[:milestone]
-        params['labels']    = options[:labels]    if options[:labels]
-        params['state']     = options[:state]     if options[:state]
-        Util.hash_without!(global_options, params.keys + ['params'])
-
-        Issue.edit user, repo, number, params, global_options
+        params["title"]     = options[:title]
+        params["body"]      = options[:body]      if options.key?("body")
+        params["assignee"]  = options[:assignee]  if options.key?("assignee")
+        params["state"]     = options[:state]     if options.key?("state")
+        params["milestone"] = options[:milestone] if options.key?("milestone")
+        params["labels"]    = options[:labels]    if options.key?("labels")
+        params["assignees"]    = options[:assignees] if options.key?("assignees")
+        Util.hash_without!(global_options, params.keys + ["params"])
+        Issue.edit(user, repo, number, params, global_options)
       end
     end # Issues
   end # Commands
