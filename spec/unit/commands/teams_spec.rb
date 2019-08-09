@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Teams do
-  let(:format) { {'format' => 'table'} }
-  let(:user)   { 'peter-murach' }
-  let(:repo)   { 'github_cli' }
-  let(:org)    { 'rails' }
+  let(:format) { {"format" => "table"} }
+  let(:user)   { "piotrmurach" }
+  let(:repo)   { "github_cli" }
+  let(:org)    { "rails" }
   let(:id)     { 1 }
   let(:api_class) { GithubCLI::Team }
 
@@ -19,13 +19,28 @@ RSpec.describe GithubCLI::Commands::Teams do
   end
 
   it "invokes team:create --name" do
-    expect(api_class).to receive(:create).with(org, {"name" => 'new'}, format)
-    subject.invoke "team:create", [org], :name => 'new'
+    opts = {
+      "name" => "Justice League",
+      "description" => "A great team",
+      "permission" => "admin",
+      "privacy" => "closed"
+    }
+    copy_opts = opts.dup
+    copy_opts["desc"] = copy_opts.delete("description")
+    expect(api_class).to receive(:create).with(org, opts, format)
+    subject.invoke "team:create", [org], copy_opts
   end
 
   it "invokes team:edit --name" do
-    expect(api_class).to receive(:edit).with(id, {"name" => 'new'}, format)
-    subject.invoke "team:edit", [id], :name => 'new'
+    opts = {
+      "name" => "new team name",
+      "description" => "new team description",
+      "privacy" => "closed"
+    }
+    copy_opts = opts.dup
+    copy_opts["desc"] = copy_opts.delete("description")
+    expect(api_class).to receive(:edit).with(id, opts, format)
+    subject.invoke "team:edit", [id], copy_opts
   end
 
   it "invokes team:delete" do
