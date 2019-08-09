@@ -1,8 +1,0 @@
----
-user.token: ad7f9asdf97as98df7as9fd7
-user.login: login
-user.password: password
-commands.issue.list:
-  title: 'ticket'
-commands.issue.get:
-  title: 'ticket'
