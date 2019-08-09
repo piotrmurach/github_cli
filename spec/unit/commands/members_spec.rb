@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Members do
-  let(:format) { {'format' => 'table'} }
-  let(:user)   { 'peter-murach' }
-  let(:repo)   { 'github_cli' }
-  let(:org)    { 'github' }
+  let(:format) { {"format" => "table"} }
+  let(:user)   { "piotrmurach" }
+  let(:repo)   { "github_cli" }
+  let(:org)    { "github" }
   let(:api_class) { GithubCLI::Member }
 
   it "invokes member:list" do
@@ -13,7 +13,7 @@ RSpec.describe GithubCLI::Commands::Members do
   end
 
   it "invokes member:list --public" do
-    expect(api_class).to receive(:all).with(org, {'public' => true}, format)
+    expect(api_class).to receive(:all).with(org, {"public" => true}, format)
     subject.invoke "member:list", [org], {:public => true}
   end
 
