@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe GithubCLI::Commands::Gists do
-  let(:format) { {'format' => 'table'} }
-  let(:user)   { 'peter-murach' }
+  let(:format) { {"format" => "table"} }
+  let(:user)   { "piotrmurach" }
   let(:id)    { 1 }
   let(:api_class) { GithubCLI::Gist }
 
@@ -32,14 +32,14 @@ RSpec.describe GithubCLI::Commands::Gists do
   end
 
   it "invokes gist:create" do
-    expect(api_class).to receive(:create).with({'public' => false}, format)
+    expect(api_class).to receive(:create).with({"public" => false}, format)
     subject.invoke "gist:create", []
   end
 
   it "invokes gist:create --public --desc" do
-    expect(api_class).to receive(:create).with({'public' => true,
-      'description' => 'new'}, format)
-    subject.invoke "gist:create", [], :desc => 'new', :public => true
+    expect(api_class).to receive(:create).with({"public" => true,
+      "description" => "new"}, format)
+    subject.invoke "gist:create", [], :desc => "new", :public => true
   end
 
   it "invokes gist:edit id" do
@@ -48,8 +48,8 @@ RSpec.describe GithubCLI::Commands::Gists do
   end
 
   it "invokes gist:edit id --desc" do
-    expect(api_class).to receive(:edit).with(id, {'description' => 'new'}, format)
-    subject.invoke "gist:edit", [id], :desc => 'new'
+    expect(api_class).to receive(:edit).with(id, {"description" => "new"}, format)
+    subject.invoke "gist:edit", [id], :desc => "new"
   end
 
   it "invokes gist:star id" do
