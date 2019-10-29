@@ -24,7 +24,7 @@ This command line will fail (with the exit code ret) if:
 ## OPTIONS
 
 * `--local`:
-  Writes cofinguration settings inside the current directory to the .githubrc file.
+  Writes cofinguration settings inside the current directory to the .gitconfig file.
 
 * `-l, --list`:
   List all variables set in config file.
